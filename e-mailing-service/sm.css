@@ -1,0 +1,40 @@
+.defaultSkin span.mceIcon, .wp_themeSkin img.mceIcon { width: 40px; }
+
+.sm_table_rouge {
+	border: 1px dashed #cccccc;
+	background-color: #F00;
+	border-radius: 5px 10px 0 5px;
+}
+.sm_table_vert {
+	border: 1px dashed #cccccc;
+	background-color: #0C3;
+	border-radius: 5px 10px 0 5px;
+}
+.sm_table_orange {
+	border: 1px dashed #cccccc;
+	background-color: #F90;
+	border-radius: 5px 10px 0 5px;
+}
+.sm_table_bleu {
+	border: 1px dashed #cccccc;
+	background-color: #39F;
+	border-radius: 5px 10px 0 5px;
+}
+.sm_table_marron {
+	border: 1px dashed #cccccc;
+	background-color: #C60;
+	border-radius: 5px 10px 0 5px;
+}
+.sm_colonne_client {
+	background-color: #FFFFCC;
+}
+.sm_colonne_support {
+	background-color: #CCCC99;
+	font-style: italic;
+	color: #333333;
+}
+.sm_blanc {
+	font-style: normal;
+	color: #FFFFFF;
+	font-weight: bold;
+}
