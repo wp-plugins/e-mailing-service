@@ -123,15 +123,15 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Screenshots ==
 
-1. screenshot-1.png
-2. screenshot-2.png
-3. screenshot-3.png
-4. screenshot-7.png
-5. screenshot-9.png
-6. screenshot-9.png
-7. screenshot-4.png
-8. screenshot-5.png
-9. screenshot-6.png
+1. assets/screenshot-1.png
+2. assets/screenshot-2.png
+3. assets/screenshot-3.png
+4. assets/screenshot-7.png
+5. assets/screenshot-9.png
+6. assets/screenshot-9.png
+7. assets/screenshot-4.png
+8. assets/screenshot-5.png
+9. assets/screenshot-6.png
 
 == Changelog ==
 
