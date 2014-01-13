@@ -19,14 +19,23 @@ Functionality of the plugin :
 Languages : fr_FR, en_US, it_IT, pt_PT, de_DE, es_ES, fr_CA, fr_CH, fr_BE, en_AU, en_CA, en_GB 
 
 Managing contacts (emails)
+
  - Creating mailing lists Unlimited
+
  - Unlimited numbers of recipients
+
  - Creating mailing lists with parameterizable fields
+
  - Import recipients (email)
+
  - Change recipients (email)
+
  - Unsubscribe automatic subscribers (email)
+
  - Export recipients (email) txt, csv or excel file
+
  - Changing subscriber lists
+
  - Removing subscriber lists
  
 Template for newsletter
@@ -135,6 +144,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 1.4 =
+* readme.txt
 = 1.3 =
 * delete double dir
 = 1.2 =
@@ -147,6 +158,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Upgrade Notice ==
 
+= 1.4 =
+* readme.txt
 = 1.3 =
 * delete double dir
 = 1.2 =
