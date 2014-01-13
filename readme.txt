@@ -19,80 +19,80 @@ Functionality of the plugin :
 Languages : fr_FR, en_US, it_IT, pt_PT, de_DE, es_ES, fr_CA, fr_CH, fr_BE, en_AU, en_CA, en_GB 
 
 Managing contacts (emails)
- •Creating mailing lists Unlimited
- •Unlimited numbers of recipients
- •Creating mailing lists with parameterizable fields
- •Import recipients (email)
- •Change recipients (email)
- •Unsubscribe automatic subscribers (email)
- •Export recipients (email) txt, csv or excel file
- •Changing subscriber lists
- •Removing subscriber lists
+ - Creating mailing lists Unlimited
+ - Unlimited numbers of recipients
+ - Creating mailing lists with parameterizable fields
+ - Import recipients (email)
+ - Change recipients (email)
+ - Unsubscribe automatic subscribers (email)
+ - Export recipients (email) txt, csv or excel file
+ - Changing subscriber lists
+ - Removing subscriber lists
  
 Template for newsletter
- •Import template newsletters zip and automatic installation
- •See template of newsletters in an iframe on the editor
- •Button to copy a template automatically in the newsletter editor
- •Editing and deleting templates newsletters
+ - Import template newsletters zip and automatic installation
+ - See template of newsletters in an iframe on the editor
+ - Button to copy a template automatically in the newsletter editor
+ - Editing and deleting templates newsletters
  
 Newsletter
- •Creation from models previewing newsletters
- •Variables (shortcode) Automatic possible on your list, so lets add fields like name and first name automatically in your newsletter.
- •Rewriting links (rewritting) Automatic (on activation of the Free API)
- •Editing and deleting newsletters
+ - Creation from models previewing newsletters
+ - Variables (shortcode) Automatic possible on your list, so lets add fields like name and first name automatically in your newsletter.
+ - Rewriting links (rewritting) Automatic (on activation of the Free API)
+ - Editing and deleting newsletters
  
 UNSUBSCRIBE link and link of the newsletter online
- •Removing subscriber lists
- •Link for viewing the newsletter online
+ - Removing subscriber lists
+ - Link for viewing the newsletter online
  
 Articles and pages
- •Editing and deleting newsletters
- •Integrated model for new links, but changed
+ - Editing and deleting newsletters
+ - Integrated model for new links, but changed
  
 Send newsletter
- •Programming the possible date of shipment
- •Additional tracking can
- •Script for multi-server sending email (on activation of the API commercial)
- •Ability to pause or stop the campaign
- •Followed by the online campaign
+ - Programming the possible date of shipment
+ - Additional tracking can
+ - Script for multi-server sending email (on activation of the API commercial)
+ - Ability to pause or stop the campaign
+ - Followed by the online campaign
 
 SMTP setting
- •Works with all SMTP (gmail …) servers
- •Automatic configuration with our SMTP servers
+ - Works with all SMTP (gmail …) servers
+ - Automatic configuration with our SMTP servers
  
 Management NPAI
- •Optional management bounces can automatically remove invalid email (on activation of the API commercial)
- •View a glance antispam messages or other (on activation of the API commercial)
+ - Optional management bounces can automatically remove invalid email (on activation of the API commercial)
+ - View a glance antispam messages or other (on activation of the API commercial)
  
 Management blacklist
- •Optional management blacklists monitors your or your SMTP server and in case you are on a list you provide the link to unsubscribe (on activation of the API commercial)
- •SpamScore (note notoriety your mailing) important for hotmail updated every 4 hours. (on activation of the API commercial)
+ - Optional management blacklists monitors your or your SMTP server and in case you are on a list you provide the link to unsubscribe (on activation of the API commercial)
+ - SpamScore (note notoriety your mailing) important for hotmail updated every 4 hours. (on activation of the API commercial)
  
 Statistic
- •Statistics sending, email waiting
- •Statistics openings, clicks, unsubscribes by ISP (on activation of the Free API)
- •Statistics openings, clicks, unsubscribes, by country (on activation of the Free API)
- •Statistics openings, clicks Unsubscribe by sending (on activation of the Free API)
- •Statistics openings, clicks, unsubscribes, by tracking (on activation of the Free API)
- •Statistics openings, clicks, unsubscribes, per server (on activation of the Free API)
- •Graphic widget on the dashboard for clicks, smtp, status (on activation of the Free API)
- •SMTP statistics if you have an SMTP server with us (on activation of the API commercial)
+ - Statistics sending, email waiting
+ - Statistics openings, clicks, unsubscribes by ISP (on activation of the Free API)
+ - Statistics openings, clicks, unsubscribes, by country (on activation of the Free API)
+ - Statistics openings, clicks Unsubscribe by sending (on activation of the Free API)
+ - Statistics openings, clicks, unsubscribes, by tracking (on activation of the Free API)
+ - Statistics openings, clicks, unsubscribes, per server (on activation of the Free API)
+ - Graphic widget on the dashboard for clicks, smtp, status (on activation of the Free API)
+ - SMTP statistics if you have an SMTP server with us (on activation of the API commercial)
  
 Widget
- •Subscribe to your recipient list parametrable
+ - Subscribe to your recipient list parametrable
  
 Alerts
- •management of configurable alerts
- •Sending alert newsletter
- •Alert newsletter finished
- •registration alert
- •SMTP alert status (on activation of the Free API)
- •blacklist alert (on activation of the Free API)
- •daily Report (on activation of the Free API)
+ - management of configurable alerts
+ - Sending alert newsletter
+ - Alert newsletter finished
+ - registration alert
+ - SMTP alert status (on activation of the Free API)
+ - blacklist alert (on activation of the Free API)
+ - daily Report (on activation of the Free API)
  
 Faq and support
- •Access to the FAQ and support integrated plugin (on activation of the Free API)
- •http://www.e-mailing-service.net
+ - Access to the FAQ and support integrated plugin (on activation of the Free API)
+ - http://www.e-mailing-service.net
  
 Free API
 You are not forced to activate the free API to send emails and manage your recipients.
@@ -135,11 +135,11 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
-= 4.3 =
+= 1.3 =
 * delete double dir
-= 4.1 =
+= 1.2 =
 * readme encodage.
-= 4.0 =
+= 1.1 =
 * readme encodage.
 = 1.0 =
 * first version.
@@ -147,11 +147,11 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Upgrade Notice ==
 
-= 4.3 =
+= 1.3 =
 * delete double dir
-= 4.1 =
+= 1.2 =
 * readme encodage.
-= 4.0 =
+= 1.1 =
 * readme encodage.
 = 1.0 =
 * first version.
