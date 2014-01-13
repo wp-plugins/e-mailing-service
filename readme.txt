@@ -135,14 +135,18 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 4.0 =
+* readme encodage.
 = 1.0 =
 * first version.
 
 
 == Upgrade Notice ==
 
-= 1.0 =
-* first version.
+= 4.0 =
+* readme encodage.
+= 4.0 =
+* readme encodage.
 
 == Arbitrary section ==
 
