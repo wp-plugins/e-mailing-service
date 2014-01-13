@@ -135,6 +135,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 4.3 =
+* delete double dir
 = 4.1 =
 * readme encodage.
 = 4.0 =
@@ -145,6 +147,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Upgrade Notice ==
 
+= 4.3 =
+* delete double dir
 = 4.1 =
 * readme encodage.
 = 4.0 =
