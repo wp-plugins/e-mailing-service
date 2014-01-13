@@ -107,7 +107,7 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload `e-mailing-service` to the `/wp-content/plugins/e-mailing-service` directory
+1. Upload `sm_v1` to the `/wp-content/plugins/sm_v1` directory
 2. Activate the plugin through the 'E-mailing service' menu in WordPress
 3. SMTP setting  `admin.php?page=e-mailing-service/admin/parametres.php`
 

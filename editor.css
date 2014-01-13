@@ -1,0 +1,29 @@
+table {
+    border: 5px dashed #cccccc;
+}
+
+th,td {
+    border: 5px dashed #cccccc;
+}
+.mceIcon {
+	background:#00F
+	}
+.mce_template{
+	background:#00F
+	}
+	
+
+span.mceIcon{
+	background:#00F
+	}
+ 
+.wp_themeSkin {
+	background:#00F
+	}
+
+img.mceIcon{
+	background:#00F
+	}
+.button_green{
+	background:#00F
+	}
