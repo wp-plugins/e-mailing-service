@@ -127,8 +127,8 @@ function sm_cgi_annonce(){
 		"action" => "annonce"
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_npai.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
+		$xmll = @strstr($fluxl,'</xml>', true);
+		$xml2l = @simplexml_load_string($xmll);
 		$_SESSION['sm_annonce']=$xml2l->annonce; 
 		return $_SESSION['sm_annonce']; 
 		} else {

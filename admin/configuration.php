@@ -79,8 +79,8 @@ elseif($action =="update_info"){
 		); 
 		
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_user.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
+		$xmll = @strstr($fluxl,'</xml>', true);
+		$xml2l = @simplexml_load_string($xmll);
 		if($xml2l->resultat=="1"){
 		$nlic=$xml2l->licence_key;
 		add_option('sm_license_key',''.$nlic.''); 

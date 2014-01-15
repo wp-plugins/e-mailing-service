@@ -541,9 +541,7 @@ add_option('sm_widget_demande_12','non');
 		global $current_user;
         get_currentuserinfo();
 	   	$modele_default_news=file_get_contents(''.smURL.'/include/modele_news_default.txt');
-        $modele_default_news=str_replace("[url]",smURL,$modele_default_news);
-		$modele_default_news=str_replace("e-mailing-service//post/","e-mailing-service/post/", $modele_default_news);
-		$page_modele_news = array( 'post_title'     => ''.__('Test shortcode pour mmr [nom]').'',
+		$page_modele_news = array( 'post_title'     => ''.__('Test shortcode pour mr [nom]').'',
                    'post_type'      => 'newsletter',
                    'post_name'      => 'modele-news',
                    'post_content'   => $modele_default_news,
