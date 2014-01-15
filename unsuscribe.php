@@ -26,11 +26,16 @@ global $wpbd;
   $smemail=str_replace('%5BZ%5D','@',$smemail);
   $smemail=str_replace('[Z]','@',$smemail);
   if($smfree=='1'){
-  $smemail=affiche_mail($smhie,$smemail);
+    $email=affiche_mail($smhie,$smemail);
+  } else {
+	$email_id = $_SESSION["sm_emailid"];
+	$smhie = $_SESSION["sm_hie"];
+	$email = affiche_mail($smhie,$email_id); 
+	$smemail=$email_id;
   }
   if(isset($_POST["action"])){
   if($_POST["action"] == "update_desinscrit"){
-  update_inscrit($_POST["smhie"],$_POST["smemail"]);
+  update_inscrit($_POST["smhie"],$_POST["email"],$_POST["email_id"]);
   if($_POST["valide"]=="oui"){
   echo get_option('sm_udp_merci');
   } 
@@ -38,7 +43,8 @@ global $wpbd;
   } else {
   echo '<br>
   <form action="'.get_option('siteurl').'/upd/'.$smemail.'/'.$smhie.'/" method="post">
-					<input name="smemail" type="hidden" value="'.$smemail.'">
+                    <input name="email" type="hidden" value="'.$email.'">
+					<input name="email_id" type="hidden" value="'.$email_id.'">
 					<input name="smhie" type="hidden" value="'.$smhie.'">
 					<input name="action" type="hidden" value="update_desinscrit">
 					<pre>'.get_option('sm_udp_details').'</pre><br>

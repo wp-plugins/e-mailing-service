@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: jooky
 Donate link: http://www.e-mailing-service.net/
-Tags: emailing, e-mailing, e-mails, e-mail, newsletter, smtp, server smtp, email, mail, smtp server, phpmailer, Rundschreiben, envío por correo electrónico, correo postal, correo electrónico, correo electrónico, boletín de noticias, smtp, servidor SMTP, el correo electrónico, el correo electrónico, direct mailing, email, email marketing, list build, mass mail, subscription
+Tags: send newsletter, emailing, e-mailing, e-mails, e-mail, newsletter, smtp, server smtp, email, mail, smtp server, phpmailer, Rundschreiben, envío por correo electrónico, correo postal, correo electrónico, correo electrónico, boletín de noticias, smtp, servidor SMTP, el correo electrónico, el correo electrónico, direct mailing, email, email marketing, list build, mass mail, subscription, contact
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 4.3
+Stable tag: 1.6
 License: GPLv3
 License URI: http://www.e-mailing-service.net/license.txt
 
@@ -12,7 +12,7 @@ Full plugin management and sending newsletter.The plugin also sending links your
 
 
 == Description ==
-Send newsletters (emails) with wordpress
+Send newsletters (emails) with wordpress and SMTP
  
 Functionality of the plugin :
 
@@ -84,7 +84,7 @@ Send newsletter
 
 SMTP setting
 
- - Works with all SMTP (gmail …) servers
+ - Works with all SMTP (gmail) servers
 
  - Automatic configuration with our SMTP servers
  
@@ -190,6 +190,10 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 1.6 =
+* template with shorcode,
+visualization with shortcode
+Compatible unsubscribe link gmail
 = 1.5 =
 * readme.txt
 = 1.4 =
@@ -206,6 +210,10 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Upgrade Notice ==
 
+= 1.6 =
+* template with shorcode,
+visualization with shortcode
+Compatible unsubscribe link gmail
 = 1.5 =
 * readme.txt
 = 1.4 =

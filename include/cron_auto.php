@@ -73,7 +73,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 		"track2" => ""		
 		); 
 
-        $flux =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api.php',$array);
+        $flux =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_beta.php',$array);
 		$xml = strstr($flux,'</xml>', true);
 			$xml2 = simplexml_load_string($xml);
   	    $result_reponse=$xml2->resultat;
