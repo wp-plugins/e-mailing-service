@@ -66,7 +66,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 		"track2" => $fivesdraft->track2		
 		); 
 
-        $flux =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api.php',$array);
+        $flux =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_beta.php',$array);
 		$xml = strstr($flux,'</xml>', true);
 		$xml2 = simplexml_load_string($xml);
   	    $result_reponse=$xml2->resultat;
@@ -137,8 +137,8 @@ foreach ( $fivesdrafts as $fivesdraft )
 	}
 	//$img_track='<img name="google" src="'.get_option("siteurl").'/?utm_source='.$smemails->email_id.'&utm_campaign='.$fivesdraft->hie.'&ytm_medium=email" width="1" height="1" alt="" />';
 	$contenu .='</body></html>';
-	$contenu=str_replace('[email]',$smemails->email,$contenu);
 	$contenu=str_replace('[email_id]',$smemails->email_id,$contenu);	
+	$contenu=str_replace('[email]',$smemails->email,$contenu);
 	$contenu=str_replace('[nom]',$smemails->nom,$contenu);	
 	$contenu=str_replace('[lg]',$smemails->lg,$contenu);
 	$contenu=str_replace('[ip]',$smemails->ip,$contenu);
@@ -154,8 +154,8 @@ foreach ( $fivesdrafts as $fivesdraft )
 	$contenu=str_replace('[champs9]',$smemails->champs9,$contenu);
 	$contenu=str_replace('[date]',date('Ymshis'),$contenu);
 	
-	$title=str_replace('[email]',$smemails->email,$sujet);
-	$title=str_replace('[email_id]',$smemails->email_id,$title);	
+	$title=str_replace('[email_id]',$smemails->email_id,$sujet);
+	$title=str_replace('[email]',$smemails->email,$title);	
 	$title=str_replace('[nom]',$smemails->nom,$title);	
 	$title=str_replace('[lg]',$smemails->lg,$title);
 	$title=str_replace('[ip]',$smemails->ip,$title);

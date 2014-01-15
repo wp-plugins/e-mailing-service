@@ -11,7 +11,6 @@ Description: Send newsletters (emails) with wordpress. Detailed statistics AND r
 Author URI: http://www.e-mailing-service.net
 
 */
-
 if(!function_exists('wp_get_current_user')) {
     include(ABSPATH . "wp-includes/pluggable.php"); 
 }
@@ -537,6 +536,27 @@ add_option('sm_widget_demande_12','non');
 
        $PageID = wp_insert_post( $page_modele, TRUE );
        add_option('sm_post_id_auto',$PageID); 
+		}
+		if(!get_option('sm_post_id_auto2')) {
+		global $current_user;
+        get_currentuserinfo();
+	   	$modele_default_news=file_get_contents(''.smURL.'/include/modele_news_default.txt');
+        $modele_default_news=str_replace("[url]",smURL,$modele_default_news);
+		$modele_default_news=str_replace("e-mailing-service//post/","e-mailing-service/post/", $modele_default_news);
+		$page_modele_news = array( 'post_title'     => ''.__('Test shortcode pour mmr [nom]').'',
+                   'post_type'      => 'newsletter',
+                   'post_name'      => 'modele-news',
+                   'post_content'   => $modele_default_news,
+                   'post_status'    => 'publish',
+                   'comment_status' => 'closed',
+                   'ping_status'    => 'closed',
+                   'post_author'    => $current_user->ID,
+                   'menu_order'     => 0,
+				   'tags_input'  => 'modele-news'
+                   );
+
+       $PageID2 = wp_insert_post( $page_modele_news, TRUE );
+       add_option('sm_post_id_auto2',$PageID2); 
        }
 	   
 		
@@ -557,7 +577,11 @@ function sm_rule_init() {
   $wp->add_query_var('smnum');
   $wp->add_query_var('smaction');
   $wp->add_query_var('smfree');
+  $wp->add_query_var('smidmp');
+  $wp->add_query_var('smidmd');
   $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]', 'top');
+  $wp_rewrite->add_rule('^outp/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]', 'top');
+  $wp_rewrite->add_rule('^outd/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]', 'top');
   $wp_rewrite->add_rule('^upd/(.*)/(.*)/?','index.php?smemail=$matches[1]&smhie=$matches[2]', 'top');
   $wp_rewrite->flush_rules();
 }
@@ -640,8 +664,18 @@ add_filter('wp_head', 'sm_head' );
 if(!function_exists('sm_head')){
 function sm_head() {
    global $wp_query;
-  if(isset($wp_query->query_vars['smlink'])){
+  if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
   echo sm_stats();
+  }
+  elseif(isset($wp_query->query_vars['smlink']) && isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
+  $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmp'];
+  $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  echo sm_stats_page();  
+  }
+  elseif(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && isset($wp_query->query_vars['smidmd'])){
+  $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmd'];
+  $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+	echo sm_stats_desinscrit();  
   }
 global $wpdb;
 echo @get_option("sm_tracking");
@@ -655,13 +689,6 @@ $smemail= $wp_query->query_vars['smemail'];
 $smdate= $wp_query->query_vars['smdate'];
 $smnum= $wp_query->query_vars['smnum'];
 $email=affiche_mail($smnum,$smemail);
-
-
-/*
-$smemail=str_replace('%5BZ%5D','@',$smemail);
-$smemail=str_replace('%5bZ%5d','@',$smemail);
-$smemail=str_replace('[Z]','@',$smemail);*/
-
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
 		$array =array (
@@ -673,7 +700,47 @@ $smemail=str_replace('[Z]','@',$smemail);*/
   return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
-
+if(!function_exists('sm_stats_page')){
+function sm_stats_page(){
+global $wp_query;
+$smlink= $wp_query->query_vars['smlink'];
+$smidmp= $wp_query->query_vars['smidmp'];
+$smdate= $wp_query->query_vars['smdate'];
+$smnum= $wp_query->query_vars['smnum'];
+$email=affiche_mail($smnum,$smemailid);
+	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
+		$host=str_replace("www.","",$host);
+		$array =array (
+		"domaine_client" => $host,
+		"l" => $smlink,
+		"action" => "page",
+		"smidmp" => $smidmp,
+		"smdate" => $smdate	
+		); 		
+  return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+}
+}
+if(!function_exists('sm_stats_desinscrit')){
+function sm_stats_desinscrit(){
+global $wp_query;
+$smlink= $wp_query->query_vars['smlink'];
+$smidmd= $wp_query->query_vars['smidmd'];
+$smdate= $wp_query->query_vars['smdate'];
+$smnum= $wp_query->query_vars['smnum'];
+$email=affiche_mail($smnum,$smemailid);
+	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
+		$host=str_replace("www.","",$host);
+		$array =array (
+		"domaine_client" => $host,
+		"l" => $smlink,
+		"action" => "desinscrit",
+		"smidmd" => $smidmd,
+		"smemail" => $smidmd,
+		"smdate" => $smdate	
+		); 		
+  return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+}
+}
 if(!function_exists('xml_server_stats')){
 function xml_server_stats($url,$array)
        {
@@ -719,7 +786,10 @@ function xml_server_stats($url,$array)
 
 	if($result_reponse == "1")
 	{
-		    //echo $xml2->lien;
+		if($_SERVER['REMOTE_ADDR']=="88.172.9.115"){
+		    echo $xml2->lien;
+		}
+		
       // echo '<meta http-equiv="refresh" content="0; url='.$xml2->lien.'">';
 	   if(!headers_sent()) {
        //header('Location: '.$xml2->lien.'');
@@ -737,7 +807,7 @@ function xml_server_stats($url,$array)
 	}
 	else
 	{
-		   header('Location: http://www.e-mailing-service.net');
+		   header('Location: '.get_option("blog_url").'');
 		   exit();
 	}
 	
@@ -1160,10 +1230,11 @@ foreach ( $listese as $reslistee )
 {
 $email = $reslistee->email;
 }
-return @$email;
+$_SESSION["sm_email"]=$email;
+return $_SESSION["sm_email"];
 }
 
-function update_inscrit($smhie,$smemail){
+function update_inscrit($smhie,$email,$email_id){
 global $wpdb;
 $table_liste = $wpdb->prefix.'sm_liste';  
 $table_hie = $wpdb->prefix.'sm_historique_envoi';
@@ -1182,7 +1253,7 @@ $liste = $resliste->liste_bd;
     $wpdb->update( 
 	$liste, 
 	array('valide' => '0'), 
-	array( 'email' => $smemail));
+	array( 'id' => $email_id));
 return true;
 }
 
