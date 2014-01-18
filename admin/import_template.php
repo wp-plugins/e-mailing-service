@@ -1,5 +1,32 @@
-<?php
+ <?php
 include(smPATH . '/include/entete.php');
+?>
+
+		<div id="poststuff" class="metabox-holder has-right-sidebar">
+		<div class="inner-sidebar">
+			<div id="side-sortables" class="meta-box-sortabless ui-sortable" style="position:relative;">
+<div id="box" class="postbox">
+       <h3 class="hndle"><span><?php _e('Configuration PHP',"e-mailing-service");?></span></h3>
+			<div class="inside">
+				<?php			
+echo 'upload_max_filesize = ' . ini_get('upload_max_filesize') . '<br>';
+echo 'upload_max_size = ' . ini_get('upload_max_size') . '<br>';
+echo 'post_max_size = ' . ini_get('post_max_size') . '<br>';
+echo 'memory_limit = ' . ini_get('memory_limit') . '<br>';
+				?>
+
+	        </div>
+		</div>
+        
+        
+        
+ 
+</div>
+</div>	
+<div class="has-sidebar sm-padded" >			
+		<div id="post-body-content" class="has-sidebar-content">
+			<div class="meta-box-sortabless">
+<?php
 $dossier_fichier="".smPATH."post/";
 define('FS_CHMOD_FILE', 0664);
 define('FS_CHMOD_DIR', 0775);
@@ -137,5 +164,7 @@ ScanDirectory($dir,$template);
 
 ?>
 
+</div></div></div></div>
 
+</div>
 
