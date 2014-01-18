@@ -12,7 +12,7 @@ $table_log_bounces= $wpdb->prefix.'sm_bounces_log';
 $table_bounces_hard= $wpdb->prefix.'sm_bounces_hard';
 if(cgi_bounces() == 'non'){
 echo "".__("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces, pour ajouter cette option","e-mailing-service")."";
-echo '<a href=\"admin.php?page=e-mailing-service/admin/index.php\" target="_blank">'.__("cliquez ici","e-mailing-service").'</a> .<br>';
+echo '<a href="http://www.e-mailing-service.net/options/?option=opt-npai" target="_blank">'.__("cliquez ici","e-mailing-service").'</a> .<br>';
 echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de serveur SMTP chez nous","e-mailing-service")."";
 } else {
         $i=0;
@@ -31,7 +31,7 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
 	    $listese1 = $wpdb->get_results("SELECT liste_bd FROM `".$table_liste."`");
         foreach ( $listese1 as $reslistee1 ) 
          {
-		 $sqlupdate ="UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE email IN ( SELECT email FROM ".$table_bounces_hard."  )        ";
+		 $sqlupdate ="UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE trim(email) IN ( SELECT trim(email) FROM ".$table_bounces_hard."  )        ";
          $resupdate = $wpdb->query($wpdb->prepare($sqlupdate,true));
 		 
 		 }

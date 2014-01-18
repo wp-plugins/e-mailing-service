@@ -129,7 +129,7 @@ function sm_cgi_annonce(){
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_npai.php',$array);
 		$xmll = @strstr($fluxl,'</xml>', true);
 		$xml2l = @simplexml_load_string($xmll);
-		$_SESSION['sm_annonce']=$xml2l->annonce; 
+		$_SESSION['sm_annonce']= (string) $xml2l->annonce; 
 		return $_SESSION['sm_annonce']; 
 		} else {
 		return $_SESSION['sm_annonce'];	
@@ -151,7 +151,7 @@ function cgi_nlj(){
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
 		$xmll = strstr($fluxl,'</xml>', true);
 		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_nlj']=$xml2l->limite_journaliere; 
+		$_SESSION['sm_nlj']= (string) $xml2l->limite_journaliere; 
 		}
 		return $_SESSION['sm_nlj']; 
 		} else {
@@ -174,7 +174,7 @@ function cgi_bounces(){
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
 		$xmll = strstr($fluxl,'</xml>', true);
 		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_bounces']=$xml2l->bounces;
+		$_SESSION['sm_bounces']= (string) $xml2l->bounces;
 		}
 		return $_SESSION['sm_bounces']; 
 		} else {
@@ -197,7 +197,7 @@ function cgi_blacklist(){
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
 		$xmll = strstr($fluxl,'</xml>', true);
 		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_blacklist']=$xml2l->stats_blacklist; 
+		$_SESSION['sm_blacklist']= (string) $xml2l->stats_blacklist; 
 		}
 		return $_SESSION['sm_blacklist']; 
 		} else {
@@ -220,7 +220,7 @@ function cgi_stats_smtp(){
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
 		$xmll = strstr($fluxl,'</xml>', true);
 		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_stats_smtp']=$xml2l->stats_smtp; 
+		$_SESSION['sm_stats_smtp']= (string) $xml2l->stats_smtp; 
 		}
 		return $_SESSION['sm_stats_smtp']; 
 		} else {

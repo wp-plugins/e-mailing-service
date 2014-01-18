@@ -293,40 +293,40 @@ D&eacute;limiteur : <select name="del">
 	elseif($action =="add_ajout_tab"){
 $champs="";
 if($col1 !='null'){
-$champs .="$col1";	
+$champs .=trim("$col1");	
 }
 if($col2 !='null'){
-$champs .=",$col2";	
+$champs .=",".trim("$col2")."";		
 }
 elseif($col3 !='null'){
-$champs .=",$col3";	
+$champs .=",".trim("$col3")."";		
 }
 elseif($col4 !='null'){
-$champs .=",$col4";	
+$champs .=",".trim("$col4")."";		
 }
 elseif($col5 !='null'){
-$champs .=",$col5";	
+$champs .=",".trim("$col5")."";		
 }
 elseif($col6 !='null'){
-$champs .=",$col6";	
+$champs .=",".trim("$col6")."";		
 }
 elseif($col7 !='null'){
-$champs .=",$col7";	
+$champs .=",".trim("$col7")."";		
 }
 elseif($col8 !='null'){
-$champs .=",$col8";	
+$champs .=",".trim("$col8")."";	
 }
 elseif($col9 !='null'){
-$champs .=",$col9";	
+$champs .=",".trim("$col9")."";	
 }
 elseif($col10 !='null'){
-$champs .=",$col10";	
+$champs .=",".trim("$col10")."";		
 }
 elseif($col11 !='null'){
-$champs .=",$col11";	
+$champs .=",".trim("$col11")."";		
 }
 elseif($col12 !='null'){
-$champs .=",$col12";	
+$champs .=",".trim("$col12")."";		
 }
 $dossier_fichier="".smPATH."post/";
 $aleas=rand(0,99999999);
@@ -461,8 +461,8 @@ $tab_champs ='';
 $tab_champs .="<option value=\"null\">".__("null","e-mailing-service")."</option>";
 $tab_champs .="<option value=\"email\">".__("Email","e-mailing-service")."</option>";
 $tab_champs .="<option value=\"nom\">".__("Nom","e-mailing-service")."</option>";
-$tab_champs .="<option value=\ip\">".__("IP","e-mailing-service")."</option>";
-$tab_champs .="<option value=\lg\">".__("lg","e-mailing-service")."</option>";
+$tab_champs .="<option value=\"ip\">".__("IP","e-mailing-service")."</option>";
+$tab_champs .="<option value=\"lg\">".__("lg","e-mailing-service")."</option>";
 $fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
@@ -519,49 +519,51 @@ Exemple de fichier :  email@fai.com;dupond;","e-mailing-service");?><br />
 	elseif($etape == 3){
 $champs="";
 if($col1 !='null'){
-$champs .="".trim($col1)."";	
+$champs .="$col1";	
 }
 if($col2 !='null'){
-$champs .=",".trim($col2)."";	
+$champs .=",$col2";	
 }
 if($col3 !='null'){
-$champs .=",".trim($col3)."";	
+$champs .=",$col3";	
 }
 if($col4 !='null'){
-$champs .=",".trim($col4)."";	
+$champs .=",$col4";	
 }
 if($col5 !='null'){
-$champs .=",".trim($col5)."";	
+$champs .=",$col5";	
 }
 if($col6 !='null'){
-$champs .=",".trim($col6)."";	
+$champs .=",$col6";	
 }
 if($col7 !='null'){
-$champs .=",".trim($col7)."";	
+$champs .=",$col7";	
 }
 if($col8 !='null'){
-$champs .=",".trim($col8)."";	
+$champs .=",$col8";	
 }
 if($col9 !='null'){
-$champs .=",".trim($col9)."";	
+$champs .=",$col9";	
 }
 if($col10 !='null'){
-$champs .=",".trim($col10)."";	
+$champs .=",$col10";	
 }
 if($col11 !='null'){
-$champs .=",".trim($col11)."";	
+$champs .=",$col11";	
 }
 if($col12 !='null'){
-$champs .=",".trim($col12)."";	
+$champs .=",$col12";	
 }
-
+if(!file_exists("$content_dir$name_file")){
+echo '<br><br><br><span style="color:#00f"><b>'.__("Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier /post","e-mailing-service").'</b></span>';	
+} else {
 $requette ="LOAD DATA LOCAL INFILE '$content_dir$name_file' IGNORE INTO TABLE  `$liste`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 ) ";
-//echo '<textarea name="c" cols="50" rows="5">'.$champs.'<br>'.$requette.'</textarea>';
-$resultat = mysql_query($requette)or die('<br>'.__('Erreur SQL contact support or FAQ').' : '.__LINE__.' '.mysql_error().'');
+$resultat = mysql_query($requette)or die('<br>'.__('Erreur SQL contact support or FAQ',"e-mailing-service").' : '.__LINE__.' '.mysql_error().'');
 unlink("".$content_dir."".$name_file."");
 echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe","e-mailing-service").'</b></span>';
+}
 			}
 }
 

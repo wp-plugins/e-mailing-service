@@ -190,6 +190,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 1.8 =
+* bugs languages
 = 1.7 =
 * news template with shorcode
 = 1.6 =
@@ -212,6 +214,8 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+= 1.8 =
+* bugs languages
 = 1.7 =
 * news template with shorcode
 = 1.6 =
