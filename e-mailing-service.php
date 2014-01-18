@@ -73,7 +73,7 @@ define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
 
 function sm_init() {
-load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/languages/' );
+load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/lang/' );
 }
 add_action('plugins_loaded', 'sm_init');
 
