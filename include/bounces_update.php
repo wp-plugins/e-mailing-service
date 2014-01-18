@@ -22,20 +22,29 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
         $wpdb->replace($table_bounces_hard, array(  
             'email' => $reslistee->email
         )); 
+	    // echo  "".$reslistee->email.";<br>";
 		    $wpdb->update( 
 	        $table_log_bounces, 
 	        array('update' => 1), 
 	        array( 'id' => $reslistee->id ));
 				$i++;	
-		 }	
+	
 	    $listese1 = $wpdb->get_results("SELECT liste_bd FROM `".$table_liste."`");
         foreach ( $listese1 as $reslistee1 ) 
          {
-		 $sqlupdate ="UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE trim(email) IN ( SELECT trim(email) FROM ".$table_bounces_hard."  )        ";
-         $resupdate = $wpdb->query($wpdb->prepare($sqlupdate,true));
-		 
-		 }
+		 //$sqlupdate ="UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE trim(email) IN ( SELECT trim(email) FROM ".$table_bounces_hard."  )        ";
+         //$resupdate = $wpdb->query($wpdb->prepare($sqlupdate,true));
+		 	    $listese2 = $wpdb->get_results("SELECT count(id) AS total FROM `".$reslistee1->liste_bd."` WHERE trim(email) like '".$reslistee->email."' AND bounces='1'");
+                foreach ( $listese2 as $rescount ) 
+                {
+			           if($rescount->total > 0)
+			           {
+		    $resupdate =mysql_query("UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE trim(email) like '".$reslistee->email."' LIMIT 0,1");	
+		               }	
+				}
 
+		 }
+		 }
 		_e(' '.$i.' HARD bounces ont ete insere dans la base de donnee',"e-mailing-service");
 		echo "<br>";
 }

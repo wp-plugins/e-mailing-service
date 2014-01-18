@@ -1106,7 +1106,6 @@ function action_cron15()
 {
 sm_cron_fichier('/include/cron_blocage.php');
 sm_cron_fichier('/include/bounces.php');
-sm_cron_fichier('/include/bounces_update.php');
 }
 add_action('sm_crons15', 'action_cron15');
 
@@ -1120,6 +1119,7 @@ function action_cron_heure4()
 {
 sm_cron_fichier('/include/blacklist.php');
 sm_cron_fichier('/include/spamscore.php');
+sm_cron_fichier('/include/bounces_update.php');
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 
