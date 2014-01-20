@@ -258,6 +258,7 @@ $tbaleau_insert .="<th><blockquote>".__("Email","e-mailing-service")."</blockquo
 $tbaleau_insert .="<th><blockquote>".__("Date inscription","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Nom","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Fiche","e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__("Opt-in","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Inscrit","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Valide","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Action","e-mailing-service")."</blockquote></th>";
@@ -277,6 +278,8 @@ foreach ( $listeemail as $listeemails )
 	<td><blockquote>".$listeemails->nom."</blockquote></td>
 	 <td><blockquote><a href=\"?page=e-mailing-service/admin/emails.php&liste=".$liste."&emailid=".$listeemails->id."&action=fiche\" target=\"_parent\">
 	 <img src=\"".smURL."/img/profile.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Voir la fiche complete","e-mailing-service")."\"/></a></blockquote></td>";
+if($listeemails->optin =='1'){ $tbaleau_insert .="<td><blockquote> <img src=\"".smURL."/img/ok.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Opt-in","e-mailing-service")."\"/></blockquote></td>"; } else { $tbaleau_insert .="<td>
+<blockquote><img src=\"".smURL."/img/x.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Non opt-in","e-mailing-service")."\"/></blockquote></td>"; }
 if($listeemails->valide =='1'){ $tbaleau_insert .="<td><blockquote> <img src=\"".smURL."/img/ok.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Actif","e-mailing-service")."\"/></blockquote></td>"; } else { $tbaleau_insert .="<td>
 <blockquote><img src=\"".smURL."/img/x.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Desinscrit","e-mailing-service")."\"/></blockquote></td>"; }
 if($listeemails->bounces =='1'){ $tbaleau_insert .="<td><blockquote> <img src=\"".smURL."/img/ok.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("valide","e-mailing-service")."\"/></blockquote></td></blockquote></td>"; } else { $tbaleau_insert .="<td>

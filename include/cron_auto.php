@@ -24,14 +24,14 @@ foreach ( $fivesdrafts as $fivesdraft )
 	}
 	
 	if($fivesdraft->status == "En attente"){
-	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie." FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000",true);
-    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie." FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10000,10000000",true);
+	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000",true);
+    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10000,10000000",true);
 	if(get_option('sm_alerte_nl_cours') == 'oui'){
 	sm_alerte_envoi(''.__("Newsletter n ","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'',''.__("Newsletter n ","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'<br>'.date('Y-m-d H:i:s').'');
 	}
 	}
 	elseif($fivesdraft->status == "suite"){
-	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie." FROM `".$table_suite."`  LIMIT 0,10000",true);
+	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_suite."`  LIMIT 0,10000",true);
 	$sqlsuite = "DELETE FROM ".$table_suite." WHERE hie='".$fivesdraft->hie."' LIMIT 10000"; 
     $resultsuite = $wpdb->query($wpdb->prepare($sqlsuite,true));
 	}
@@ -145,7 +145,8 @@ foreach ( $fivesdrafts as $fivesdraft )
     //$img_track='<img name="google" src="'.get_option("siteurl").'/?utm_source='.$smemails->email_id.'&utm_campaign='.$fivesdraft->hie.'&ytm_medium=email" width="1" height="1" alt="google" border="0"/>';
 	$contenu .='</body></html>';
 	$contenu=str_replace('[email]',$smemails->email,$contenu);
-	$contenu=str_replace('[email_id]',$smemails->email_id,$contenu);	
+	$contenu=str_replace('[email_id]',$smemails->email_id,$contenu);
+	$contenu=str_replace('[cle]',$smemails->cle,$contenu);		
 	$contenu=str_replace('[nom]',$smemails->nom,$contenu);	
 	$contenu=str_replace('[lg]',$smemails->lg,$contenu);
 	$contenu=str_replace('[ip]',$smemails->ip,$contenu);
@@ -162,7 +163,8 @@ foreach ( $fivesdrafts as $fivesdraft )
 	$contenu=str_replace('[date]',date('Ymshis'),$contenu);
 	
 	$title=str_replace('[email]',$smemails->email,$sujet);
-	$title=str_replace('[email_id]',$smemails->email_id,$title);	
+	$title=str_replace('[email_id]',$smemails->email_id,$title);
+	$title=str_replace('[cle]',$smemails->cle,$title);			
 	$title=str_replace('[nom]',$smemails->nom,$title);	
 	$title=str_replace('[lg]',$smemails->lg,$title);
 	$title=str_replace('[ip]',$smemails->ip,$title);

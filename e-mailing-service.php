@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 1.0 
+Version: 2.6 
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -67,10 +67,12 @@ function envoi_server($url,$array)
 }
 // our version number. Don't touch this or any line below
 // unless you know exactly what you are doing
-define( 'smVERSION', '1' );
+define( 'smVERSION', '2.7' );
+define( 'smDBVERSION', '2.7' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
+
 
 function sm_init() {
 load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/lang/' );
@@ -245,8 +247,14 @@ function sm_mailing_install()
    $wpdb->query( "  
    CREATE TABLE IF NOT EXISTS `$table_liste` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `liste_bd` varchar(250) NOT NULL,
-  `liste_nom` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL DEFAULT '',
+  `nom` varchar(250) NOT NULL,
+  `ip` varchar(250) NOT NULL,
+  `lg` varchar(250) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
   `champs1` varchar(250) NOT NULL,
   `champs2` varchar(250) NOT NULL,
   `champs3` varchar(250) NOT NULL,
@@ -256,9 +264,12 @@ function sm_mailing_install()
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `liste_bd` (`liste_bd`),
-  KEY `liste_nom` (`liste_nom`)
+  UNIQUE KEY `email` (`email`),
+  KEY `valide` (`valide`),
+  KEY `bounces` (`bounces`),
+  KEY `cle` (`cle`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
  
         $wpdb->query("  
@@ -280,13 +291,16 @@ function sm_mailing_install()
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
+  `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `valide` (`valide`),
-  KEY `bounces` (`bounces`)
+  KEY `bounces` (`bounces`),
+  INDEX (`cle`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;");  
+
  
-          $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_temps` (
+   $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_temps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email_id` int(11) NOT NULL,
   `email` varchar(250) NOT NULL DEFAULT '',
@@ -424,6 +438,7 @@ if($total==0){
 /////////////////////// creation des options //////////////////////////
 
 add_option('sm_version',smVERSION); 
+add_option('sm_db_version',smDBVERSION); 
 add_option('sm_login',str_replace("www.","",$_SERVER['HTTP_HOST'])); 
 add_option('sm_type_envoi','smtp');
 add_option('sm_serveur', 'srv-free');
@@ -577,10 +592,11 @@ function sm_rule_init() {
   $wp->add_query_var('smfree');
   $wp->add_query_var('smidmp');
   $wp->add_query_var('smidmd');
-  $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]', 'top');
-  $wp_rewrite->add_rule('^outp/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]', 'top');
-  $wp_rewrite->add_rule('^outd/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]', 'top');
-  $wp_rewrite->add_rule('^upd/(.*)/(.*)/?','index.php?smemail=$matches[1]&smhie=$matches[2]', 'top');
+  $wp->add_query_var('smcle');
+  $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^outp/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^outd/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^upd/(.*)/(.*)/(.*)/?','index.php?smemail=$matches[1]&smhie=$matches[2]&smcle=$matches[3]', 'top');
   $wp_rewrite->flush_rules();
 }
 }
@@ -663,16 +679,19 @@ if(!function_exists('sm_head')){
 function sm_head() {
    global $wp_query;
   if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
+  $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
   echo sm_stats();
   }
   elseif(isset($wp_query->query_vars['smlink']) && isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmp'];
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
   echo sm_stats_page();  
   }
   elseif(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmd'];
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
 	echo sm_stats_desinscrit();  
   }
 global $wpdb;
@@ -686,6 +705,12 @@ $smlink= $wp_query->query_vars['smlink'];
 $smemail= $wp_query->query_vars['smemail'];
 $smdate= $wp_query->query_vars['smdate'];
 $smnum= $wp_query->query_vars['smnum'];
+$smcle= $wp_query->query_vars['smcle'];
+if($smcle !=' '){
+update_optin($smnum,$smemail,$smcle);
+} else {
+update_optin($smnum,$smemail);
+}
 $email=affiche_mail($smnum,$smemail);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
@@ -693,6 +718,7 @@ $email=affiche_mail($smnum,$smemail);
 		"domaine_client" => $host,
 		"l" => $smlink,
 		"smemail" => $email,
+		"smcle" => $smcle,
 		"smdate" => $smdate	
 		); 		
   return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
@@ -705,6 +731,12 @@ $smlink= $wp_query->query_vars['smlink'];
 $smidmp= $wp_query->query_vars['smidmp'];
 $smdate= $wp_query->query_vars['smdate'];
 $smnum= $wp_query->query_vars['smnum'];
+$smcle= $wp_query->query_vars['smcle'];
+if($smcle !=' '){
+update_optin($smnum,$smidmp,$smcle);
+} else {
+update_optin($smnum,$smidmp);
+}
 $email=affiche_mail($smnum,$smemailid);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
@@ -713,6 +745,7 @@ $email=affiche_mail($smnum,$smemailid);
 		"l" => $smlink,
 		"action" => "page",
 		"smidmp" => $smidmp,
+		"smcle" => $smcle,
 		"smdate" => $smdate	
 		); 		
   return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
@@ -725,6 +758,12 @@ $smlink= $wp_query->query_vars['smlink'];
 $smidmd= $wp_query->query_vars['smidmd'];
 $smdate= $wp_query->query_vars['smdate'];
 $smnum= $wp_query->query_vars['smnum'];
+$smcle= $wp_query->query_vars['smcle'];
+if($smcle !=' '){
+update_optin($smnum,$smidmp,$smcle);
+} else {
+update_optin($smnum,$smidmp);
+}
 $email=affiche_mail($smnum,$smemailid);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
@@ -734,6 +773,7 @@ $email=affiche_mail($smnum,$smemailid);
 		"action" => "desinscrit",
 		"smidmd" => $smidmd,
 		"smemail" => $smidmd,
+		"smcle" => $smcle,
 		"smdate" => $smdate	
 		); 		
   return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
@@ -1232,11 +1272,10 @@ $_SESSION["sm_email"]=$email;
 return $_SESSION["sm_email"];
 }
 
-function update_inscrit($smhie,$email,$email_id){
+function update_inscrit($smhie,$email,$email_id,$cle="Hysmqponisgz564"){
 global $wpdb;
 $table_liste = $wpdb->prefix.'sm_liste';  
 $table_hie = $wpdb->prefix.'sm_historique_envoi';
-$nb=0;
 $fivesdrafts = $wpdb->get_results("SELECT id_liste  FROM `".$table_hie."` WHERE id='$smhie'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
@@ -1247,14 +1286,25 @@ foreach ( $listes as $resliste )
 {
 $liste = $resliste->liste_bd;
 }
-
-    $wpdb->update( 
-	$liste, 
-	array('valide' => '0'), 
-	array( 'id' => $email_id));
+$wpdb->query("UPDATE ".$liste." set valide='0',optin='1' WHERE `id`='".$email_id."' AND `cle`='".$cle."'"); 
 return true;
 }
-
+function update_optin($smhie,$email_id,$cle="Hysmqponisgz564"){
+global $wpdb;
+$table_liste = $wpdb->prefix.'sm_liste';  
+$table_hie = $wpdb->prefix.'sm_historique_envoi';
+$fivesdrafts = $wpdb->get_results("SELECT id_liste  FROM `".$table_hie."` WHERE `id`='".$smhie."'");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+$id_liste =$fivesdraft->id_liste;
+}
+$listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."` WHERE id='$id_liste'");
+foreach ( $listes as $resliste ) 
+{
+mysql_query("UPDATE `".$resliste->liste_bd."` set `optin` = '1' WHERE `id`='".$email_id."' AND `cle`='".$cle."'") or die (mysql_error());
+}
+return true;
+}
 function sm_admin_head(){
 $txt='<script src="'.smURL.'SpryAssets/SpryTooltip.js" type="text/javascript"></script>
 <link href="'.smURL.'SpryAssets/SpryTooltip.css" rel="stylesheet" type="text/css">';
@@ -1315,6 +1365,50 @@ if( !function_exists( 'xml_server_api' )) {
 	$flux = substr($resultat,$debut_flux);
 	return $flux;
 	      }
+}
+//mise à jour 
+
+function sm_update_db(){
+    global $wpdb;  
+    $table_name = $wpdb->prefix.'sm_liste_test';
+	$table_temps = $wpdb->prefix.'sm_temps';
+	$table_liste = $wpdb->prefix.'sm_liste';  
+	$table_log = $wpdb->prefix.'sm_log';
+	$table_log_bounces = $wpdb->prefix.'sm_bounces_log';
+	$table_stats_smtp = $wpdb->prefix.'sm_stats_smtp';
+	$table_blacklist = $wpdb->prefix.'sm_blacklist';
+	$table_spamscore = $wpdb->prefix.'sm_spamscore';
+	$table_suite = $wpdb->prefix.'sm_suite';
+	$table_bounces_hard = $wpdb->prefix.'sm_bounces_hard';
+    $table_envoi_name = $wpdb->prefix.'sm_historique_envoi';  
+if(get_option('sm_db_version') < '2.6'){
+$listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."`");
+foreach ( $listes as $resliste ) 
+{
+$wpdb->query("ALTER TABLE `".$resliste->liste_bd."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+$wpdb->query("ALTER TABLE `".$resliste->liste_bd."` ADD `optin` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `bounces`");
+}
+update_option( 'sm_db_version', '2.6' );
+}
+if(get_option('sm_db_version') >= '2.6' &&  get_option('sm_db_version') < smDBVERSION){
+$wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+$wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+}
+update_option( 'sm_db_version', smDBVERSION );
+_e("mise à jour de la base de donnée du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	
+}
+function sm_update_db_check() {
+	if(!get_option('sm_db_version')){
+	add_option('sm_db_version','1.0'); 	
+	}
+    if (get_option('sm_db_version') < smDBVERSION) {
+        sm_update_db();
+    }
+}
+if ( is_multisite() ) { 
+add_action( 'admin_head', 'sm_update_db_check' ); 
+} else {
+add_action( 'admin_head', 'sm_update_db_check' );		
 }
 
 
