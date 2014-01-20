@@ -5,7 +5,7 @@ function __construct() {
 $options = array("classname" => "sm-widget", "description" => "".__("Formulaire d'inscription a votre newsletter")."");     
 $this->WP_widget("sm-widget", "".__("Inscription Newsletter")."", $options);   
 }
-    
+
 function widget($arguments, $data)    { 
 $defaut = array("titre" => "".__("Inscription newsletter","e-mailing-service")."",
        "description" => "".__("Pour recevoir les dernieres actualites inscrivez vous","e-mailing-service")."",  	   
@@ -38,8 +38,18 @@ if(!function_exists('sm_checkEmail')){
     return '0';
       } 
 	}
-}	
-
+}
+if(!function_exists('key_generate')){	
+function key_generate(){
+$lettre=array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0');
+$m=date('Ymdhis');
+$key=$m;
+for($i=1;$i<5;$i++){
+$key	.= $lettre[rand(1,60)];	
+}
+return $key;	
+} 
+}
 	  if(sm_checkEmail($email)=="1"){
        $wpdb->replace($liste_bd, array(  
             'email' => $email,  
@@ -55,7 +65,8 @@ if(!function_exists('sm_checkEmail')){
 			'champs6' => @$d9,
 			'champs7' => @$d10,
 			'champs8' => @$d11,
-			'champs9' => @$d12			  
+			'champs9' => @$d12,
+			'cle' => key_generate() 			  
        ));	   
 	    echo "".__("Vous etes maintenant inscrit sur notre newsletter","e-mailing-service")."<br>";
 		if(get_option('sm_alerte_inscrit') =='oui'){

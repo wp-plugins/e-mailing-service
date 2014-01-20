@@ -36,7 +36,8 @@ $wpdb->insert($table_liste, array(
   `lg` varchar(250) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
-  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe a 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
   `champs1` varchar(250) NOT NULL,
   `champs2` varchar(250) NOT NULL,
   `champs3` varchar(250) NOT NULL,
@@ -46,10 +47,12 @@ $wpdb->insert($table_liste, array(
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `valide` (`valide`),
-  KEY `bounces` (`bounces`)
+  KEY `bounces` (`bounces`),
+  KEY `cle` (`cle`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 PACK_KEYS=0 AUTO_INCREMENT=0 ;");  
 	}
 	elseif($action =="truncate"){
@@ -150,7 +153,8 @@ echo '<tr><td></td><td><input value="'.__("Modifier les champs de votre liste","
 			'champs6' => $champs6,
 			'champs7' => $champs7,
 			'champs8' => $champs8,
-			'champs9' => $champs9
+			'champs9' => $champs9,
+			'cle' => key_generate()
 			  
        ));
 	 echo "<br><br><h2>".__("L'email $email a bien ete ajoute","e-mailing-service")."</h2>";  
@@ -343,6 +347,11 @@ $champs
 )";
 
 $resultat = mysql_query($requette)or die('<br>Erreur SQL : '.__LINE__.' '.$requette.' '.mysql_error().'');
+$sql_liste = $wpdb->get_results("SELECT id FROM `$liste` WHERE `cle` like 'Hysmqponisgz564'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
+foreach ( $sql_liste as $req_liste ) 
+{
+mysql_query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'") or die(mysql_error());
+}
 unlink("".$filename."");
 echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe","e-mailing-service").'</b></span>';			
 	}
@@ -561,6 +570,11 @@ $requette ="LOAD DATA LOCAL INFILE '$content_dir$name_file' IGNORE INTO TABLE  `
 $champs 
 ) ";
 $resultat = mysql_query($requette)or die('<br>'.__('Erreur SQL contact support or FAQ',"e-mailing-service").' : '.__LINE__.' '.mysql_error().'');
+$sql_liste = $wpdb->get_results("SELECT id FROM `$liste` WHERE `cle` like 'Hysmqponisgz564'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
+foreach ( $sql_liste as $req_liste ) 
+{
+mysql_query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'") or die(mysql_error());
+}
 unlink("".$content_dir."".$name_file."");
 echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe","e-mailing-service").'</b></span>';
 }
@@ -575,6 +589,7 @@ echo '<table class="widefat">
                          <thead>';
 echo "<tr><td><blockquote><b>".__("Nom de votre liste","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Nb d'emails","e-mailing-service")."</b></blockquote></td>
+<td><blockquote><b><a href=\"#\" title=\"".__("Une adresse courriel Opt In active a fait l'objet d'un consentement préalable par une validation par clic","e-mailing-service")."\">".__("Opt-in","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b>".__("Nb de desinscrits","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Nb Invalide","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Action","e-mailing-service")."</b></blockquote></td>
@@ -593,6 +608,12 @@ foreach ( $fivesdrafts as $fivesdraft )
 	foreach ( $user_count as $user_count ) 
      { 
 	 	 echo "<td><blockquote>".$user_count->total." ".__("emails","e-mailing-service")."</blockquote></td>";
+
+	 }
+	 	$optin_counts = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl." WHERE optin='1'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
+	foreach ( $optin_counts as $optin_count ) 
+     { 
+	 	 echo "<td><blockquote>".$optin_count->total." ".__("emails","e-mailing-service")."</blockquote></td>";
 
 	 }
 	 	$invalid_count = $wpdb->get_results("SELECT COUNT(id) AS total2 FROM ".$bdl." WHERE valide='0'" ) or die("erreur ligne ".__line__." ".mysql_error()."");

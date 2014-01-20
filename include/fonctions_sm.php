@@ -49,6 +49,17 @@ function nettoie($str, $charset='utf-8')
     return stripslashes($str);
 }
 }
+if( !function_exists( 'key_generate' )) {
+function key_generate(){
+$lettre=array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0');
+$m=date('Ymdhis');
+$key=$m;
+for($i=1;$i<5;$i++){
+$key	.= $lettre[rand(1,60)];	
+}
+return $key;	
+}
+}
 if( !function_exists( 'envoi_server' )) {
 function envoi_server($url,$array)
 {
@@ -298,12 +309,25 @@ global $wpdb;
 $nb=0;
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $nb_attente=0;
-$fivesdrafts = $wpdb->get_results("SELECT nb_attente FROM `".$table_envoi."` WHERE hie='$hie'");
+$fivesdrafts = $wpdb->get_results("SELECT nb_attente FROM `".$table_envoi."` WHERE id='$hie'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $nb_attente=$fivesdraft->nb_attente;
 }
 return $nb_attente;
+}
+}
+if( !function_exists( 'nb_envoi_in' )) {
+function nb_envoi_in($hie){
+global $wpdb;
+$table_envoi= $wpdb->prefix.'sm_historique_envoi';
+$nb_envoi=0;
+$fivesdrafts = $wpdb->get_results("SELECT nb_envoi FROM `".$table_envoi."` WHERE id='$hie'");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+$nb_envoi=$fivesdraft->nb_envoi;
+}
+return $nb_envoi;
 }
 }
 if( !function_exists( 'sm_schortode' )) {
@@ -332,7 +356,7 @@ function sm_schortode_txt($txt,$idn=0,$hie){
 global $wpdb;
 $txt=str_replace('[lien_affiliation]','http://www.e-mailing-service.net?aff_id='.get_option('sm_login').'',$txt);
 $txt=str_replace('[lien_page]',''.get_option('siteurl').'/?p='.$idn.'',$txt);
-$txt=str_replace('[lien_desabo]',''.get_option('siteurl').'/index.php?smemail=[email_id]&smhie='.$hie.'&smfree=1',$txt);
+$txt=str_replace('[lien_desabo]',''.get_option('siteurl').'/index.php?smemail=[email_id]&smhie='.$hie.'&smfree=1&smcle=[cle]',$txt);
 return $txt;
 }
 }

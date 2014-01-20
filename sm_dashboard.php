@@ -86,7 +86,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->status."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".nbenvoyer($fivesdraft->id)."</blockquote></td>";	
+$tbaleau_insert .="<td><blockquote>".nb_envoi_in($fivesdraft->id)."</blockquote></td>";	
 $tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
 $tbaleau_insert .="</tr>";	
 }
