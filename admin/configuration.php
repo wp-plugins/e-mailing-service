@@ -50,6 +50,9 @@ $manuel="auto";
 			<div class="meta-box-sortabless">
 <?php
 echo "<h1>".__("License et options","e-mailing-service")."</h1>";
+if (!extension_loaded('libxml')) {
+load_lib('libxml');
+}
 if(isset($action)){
 	if($action =="update"){	
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$sm_login."' WHERE `option_name`='sm_login'");
@@ -70,17 +73,23 @@ _e("Votre license a ete supprime, il n' y a donc plus d'interaction avec nos ser
 elseif($action =="update_info"){
 		$affiliate_default=file_get_contents(''.smURL.'/include/affiliate_default.txt');	
        $array =array (
+	    "action" => "create_membre",
 		"login" => $sm_login,
 		"email" => $email,
 		"url" => str_replace("www.","",$_SERVER['HTTP_HOST']),
 		"url_base" => get_option('siteurl'),
 		"ip" => $_SERVER['REMOTE_ADDR'],
 		"affiliate" => $affiliate_default,
+		"lang" => WPLANG
 		); 
 		
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_user.php',$array);
 		$xmll = @strstr($fluxl,'</xml>', true);
 		$xml2l = @simplexml_load_string($xmll);
+		if(!isset($xml2l->resultat)){
+		_e("probleme avec l'extension libxml de votre serveur, contact support","e-mailing-service");
+		echo '<br><a href="?page=e-mailing-service/admin/configuration.php">'.__("retour","e-mailing-service").'</a>';	
+		} else {
 		if($xml2l->resultat=="1"){
 		$nlic=$xml2l->licence_key;
 		add_option('sm_license_key',''.$nlic.''); 
@@ -89,7 +98,42 @@ elseif($action =="update_info"){
 		_e("Vos autorisation ont bien ete prises en compte","e-mailing-service");
 		} else {
 		_e("pseudo deja pris, merci de choisir un autre pseudo","e-mailing-service");
+		echo '<br><a href="?page=e-mailing-service/admin/configuration.php">'.__("retour","e-mailing-service").'</a>';
+		} 
+		}
+		}
+elseif($action =="update_membre"){
+		$affiliate_default=file_get_contents(''.smURL.'/include/affiliate_default.txt');	
+        $array =array (
+		"action" => "update_membre",
+		"login" => $sm_login,
+		"email" => $email,
+		"pass" => $pass,
+		"url" => str_replace("www.","",$_SERVER['HTTP_HOST']),
+		"url_base" => get_option('siteurl'),
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"affiliate" => $affiliate_default,
+		"lang" => WPLANG
+		); 
+		
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_user.php',$array);
+		$xmll = @strstr($fluxl,'</xml>', true);
+		$xml2l = @simplexml_load_string($xmll);
+		echo '<textarea name="" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if(!isset($xml2l->resultat)){
+		_e("probleme avec l'extension libxml de votre serveur, contact support","e-mailing-service");
 		echo '<br><a href="?page=e-mailing-service/admin/configuration.php">'.__("retour","e-mailing-service").'</a>';	
+		} else {
+		if($xml2l->resultat=="1"){
+		$nlic=$xml2l->licence_key;
+		add_option('sm_license_key',''.$nlic.''); 
+		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='api-free' WHERE `option_name`='sm_license'");
+		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_login' WHERE `option_name`='sm_login'");
+		_e("Vos autorisation ont bien ete prises en compte","e-mailing-service");
+		} else {
+		_e("pseudo ou mot de passe invalide","e-mailing-service");
+		echo '<br><a href="?page=e-mailing-service/admin/configuration.php">'.__("retour","e-mailing-service").'</a>';
+		} 
 		}
 		} 
 } else {
@@ -101,10 +145,8 @@ echo "<p>".__("Cela permettra seulement de connaire l'url de votre site internet
 <form action="?page=e-mailing-service/admin/configuration.php" method="post">
 <input type="hidden" name="action" value="update_info" />
 <table>
-<tr>
-  <td><?php _e("Choisissez un pseudo ( pas d'espace , ni de caractere speciales )","e-mailing-service");?></td></tr>
-<tr>  <td><input type="text" name="sm_login" value="<?php echo get_option('sm_login');?>" size="75" /></td>
-</tr>
+<tr><td><?php _e("Choisissez un pseudo ( pas d'espace , ni de caractere speciales )","e-mailing-service");?></td></tr>
+<tr><td><input type="text" name="sm_login" value="<?php echo get_option('sm_login');?>" size="75" /></td></tr>
 <tr>
   <td><?php _e("Votre email (seulement pour vous tenir informes des options ou modifications sur votre compte et pugin e-mailing-service)","e-mailing-service");?></td>
  </tr><tr> <td><input type="text" name="email" value="<?php echo get_option('admin_email');?>" size="75" /></td>
@@ -112,6 +154,20 @@ echo "<p>".__("Cela permettra seulement de connaire l'url de votre site internet
 <tr>
   <td><input name="submit" value="<?php _e("Oui j'utorise E-mailing Service a interagir avec mon site","e-mailing-service");?>" type="submit" size="75" /></td>
 </tr>
+</table>
+</form>
+<?php echo "<br><p>".__("Si vous avez deja un compte (e-mailing-service ou serveurs-mail.net et que vous voulez regrouper vos statistiques, choisissez ce formulaire","e-mailing-service")."</p>";?>		
+
+<form action="?page=e-mailing-service/admin/configuration.php" method="post">
+<input type="hidden" name="action" value="update_membre" />
+<table>
+<tr><td><?php _e("Pseudo","e-mailing-service");?></td></tr>
+<tr><td><input type="text" name="sm_login" value="" size="75" /></td></tr>
+<tr><td><?php _e("Mot de passe","e-mailing-service");?></td></tr>
+<tr><td><input type="password" name="pass" value="" size="75" /></td></tr>
+<tr><td><?php _e("Email","e-mailing-service");?></td></tr>
+<tr><td><input type="text" name="email" value="<?php echo get_option('admin_email');?>" size="75" /></td></tr>
+<tr><td><input name="submit" value="<?php _e("Oui j'utorise E-mailing Service a interagir avec mon site","e-mailing-service");?>" type="submit" size="75" /></td></tr>
 </table>
 </form>
 <?php

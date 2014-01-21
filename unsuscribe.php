@@ -48,7 +48,7 @@ global $wpbd;
   } 
   } else {
   echo '<br>
-  <form action="'.get_option('siteurl').'/upd/'.$smemail.'/'.$smhie.'/" method="post">
+  <form action="'.get_option('siteurl').'/upd/'.$smemail.'/'.$smhie.'/'.$smcle.'/" method="post">
                     <input name="email" type="hidden" value="'.$email.'">
 					<input name="email_id" type="hidden" value="'.$email_id.'">
 					<input name="smcle" type="hidden" value="'.$smcle.'">
