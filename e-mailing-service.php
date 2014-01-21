@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 2.6 
+Version: 2.8 
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -25,6 +25,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
+
 if( !function_exists( 'envoi_server' )) {
 function envoi_server($url,$array)
 {
@@ -680,6 +681,7 @@ function sm_head() {
    global $wp_query;
   if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
   echo sm_stats();
   }
   elseif(isset($wp_query->query_vars['smlink']) && isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
