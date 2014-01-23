@@ -87,7 +87,7 @@ elseif($action =="update_info"){
 		$xmll = @strstr($fluxl,'</xml>', true);
 		$xml2l = @simplexml_load_string($xmll);
 		if(!isset($xml2l->resultat)){
-		_e("probleme avec l'extension libxml de votre serveur, contact support","e-mailing-service");
+		_e("contact support, probleme avec l'extension libxml de votre serveur ou indisponibilite de nos serveurs","e-mailing-service");
 		echo '<br><a href="?page=e-mailing-service/admin/configuration.php">'.__("retour","e-mailing-service").'</a>';	
 		} else {
 		if($xml2l->resultat=="1"){
