@@ -107,19 +107,19 @@ echo "<h1>". __('Support',"e-mailing-service")."</h1>";
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=e-mailing-service/admin/support.php&section=faq" class="nav-tab <?php if ($_REQUEST['section'] == 'faq' || empty($_REQUEST['section'])) echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/support.php&section=faq" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'faq' || empty($_REQUEST['section'])) echo 'nav-tab-active';} ?>">
 			<?php _e('FAQ',"e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/support.php&section=faq_question" class="nav-tab <?php if ($_REQUEST['section'] == 'faq_question') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/support.php&section=faq_question" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'faq_question') echo 'nav-tab-active'; }?>">
 			<?php _e("Posez une question public", "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/support.php&section=ticket_liste" class="nav-tab <?php if ($_REQUEST['section'] == 'ticket_liste') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/support.php&section=ticket_liste" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'ticket_liste') echo 'nav-tab-active'; }?>">
 			<?php _e('Liste des tickets',"e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/support.php&section=ticket" class="nav-tab <?php if ($_REQUEST['section'] == 'ticket') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/support.php&section=ticket" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'ticket') echo 'nav-tab-active'; } ?>">
 			<?php _e("Contacter le support technique", "e-mailing-service"); ?>
 		</a>
-      <a href="?page=e-mailing-service/admin/support.php&section=suggestion" class="nav-tab <?php if ($_REQUEST['section'] == 'suggestion') echo 'nav-tab-active'; ?>">
+      <a href="?page=e-mailing-service/admin/support.php&section=suggestion" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'suggestion') echo 'nav-tab-active'; }?>">
 			<?php _e("Suggestion", "e-mailing-service"); ?>
 		</a>		
 	</h2><h2>

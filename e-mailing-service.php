@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 2.8 
+Version: 2.9 
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -26,50 +26,8 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	exit($exit_msg);
 }
 
-if( !function_exists( 'envoi_server' )) {
-function envoi_server($url,$array)
-{
-	$args	=	http_build_query($array);
-	$url	=	parse_url($url);
-
-	if(isset($url['scheme']) && ($url['scheme'] == "https" || $url['scheme'] == "ssl"))
-	{
-		$scheme = "ssl://";
-		$port='443';
-	}
-	else
-	{
-		$scheme = "";
-		$port='80';
-	}
-	
-		
-	if(!$fp=fsockopen($scheme.$url['host'], $port, $errno, $errstr))
-	{
-		echo "non";
-	}
-	else
-	{
-		$size = strlen($args);
-		$request = "POST ".$url['path']." HTTP/1.1\n";
-		$request .= "Host: ".$url['host']."\n";
-		$request .= "Connection: Close\r\n";
-		$request .= "Content-type: application/x-www-form-urlencoded\n";
-		$request .= "Content-length: ".$size."\n\n";
-		$request .= $args."\n";
-	    $fput = fputs($fp, $request);
-		fclose ($fp);
-		$out = true;
-	}
-
-	return $out;
-
-}
-}
-// our version number. Don't touch this or any line below
-// unless you know exactly what you are doing
-define( 'smVERSION', '2.7' );
-define( 'smDBVERSION', '2.7' );
+define( 'smVERSION', '2.9' );
+define( 'smDBVERSION', '2.8' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
@@ -110,6 +68,7 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug bounces', 'e-mailing-service'), __('Debug bounces', 'e-mailing-service'), 'manage_options',  smPATH . 'include/bounces_update.php', NULL);
+      add_submenu_page( 'e-mailing-service/admin/index.php', __('Update bounces', 'e-mailing-service'), __('Update bounces', 'e-mailing-service'), 'manage_options',  smPATH . 'include/bounces_update_liste.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL);  
@@ -208,7 +167,7 @@ function sm_mailing_install()
   `date_demarrage` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `pause` varchar(250) NOT NULL DEFAULT '10',
-  `status` enum('En attente','En cours','Terminer','Limite','pause','reactiver','stop','erreur_flux','erreur_license','suite') NOT NULL DEFAULT 'En attente',
+  `status` enum('En attente','En cours','Terminer','Limite','pause','reactiver','stop','erreur_flux','erreur_license') NOT NULL DEFAULT 'En attente',
   `nb_envoi` int(11) NOT NULL,
   `nb_attente` int(11) NOT NULL,
   `type` enum('newsletter','post','page') NOT NULL DEFAULT 'newsletter',
@@ -282,7 +241,8 @@ function sm_mailing_install()
   `lg` varchar(250) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
-  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe a 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
   `champs1` varchar(250) NOT NULL,
   `champs2` varchar(250) NOT NULL,
   `champs3` varchar(250) NOT NULL,
@@ -292,12 +252,12 @@ function sm_mailing_install()
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
-  `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564',
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `valide` (`valide`),
   KEY `bounces` (`bounces`),
-  INDEX (`cle`)
+  KEY `cle` (`cle`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;");  
 
  
@@ -320,8 +280,10 @@ function sm_mailing_install()
   `champs9` varchar(250) NOT NULL,
   `hie` int(11) NOT NULL,
   `status` enum('pause','actif') NOT NULL DEFAULT 'actif',
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`,`hie`)
+  UNIQUE KEY `email` (`email`,`hie`),
+  KEY `cle` (`cle`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
 
           $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_suite` (
@@ -343,8 +305,10 @@ function sm_mailing_install()
   `champs9` varchar(250) NOT NULL,
   `hie` int(11) NOT NULL,
   `status` enum('pause','actif') NOT NULL DEFAULT 'actif',
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`,`hie`)
+  UNIQUE KEY `email` (`email`,`hie`),
+  KEY `cle` (`cle`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
 
 $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_log` (
@@ -381,6 +345,7 @@ $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_log_bounces` (
 $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_hard` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(250) NOT NULL,
+  `update` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
@@ -1162,6 +1127,7 @@ function action_cron_heure4()
 sm_cron_fichier('/include/blacklist.php');
 sm_cron_fichier('/include/spamscore.php');
 sm_cron_fichier('/include/bounces_update.php');
+sm_cron_fichier('/include/bounces_update_liste.php');
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 
@@ -1323,6 +1289,47 @@ function add_custom_post_type_to_query( $query ) {
 }
 add_action( 'pre_get_posts', 'add_custom_post_type_to_query' );
 */
+if( !function_exists( 'envoi_server' )) {
+function envoi_server($url,$array)
+{
+	$args	=	http_build_query($array);
+	$url	=	parse_url($url);
+
+	if(isset($url['scheme']) && ($url['scheme'] == "https" || $url['scheme'] == "ssl"))
+	{
+		$scheme = "ssl://";
+		$port='443';
+	}
+	else
+	{
+		$scheme = "";
+		$port='80';
+	}
+	
+		
+	if(!$fp=fsockopen($scheme.$url['host'], $port, $errno, $errstr))
+	{
+		echo "non";
+	}
+	else
+	{
+		$size = strlen($args);
+		$request = "POST ".$url['path']." HTTP/1.1\n";
+		$request .= "Host: ".$url['host']."\n";
+		$request .= "Connection: Close\r\n";
+		$request .= "Content-type: application/x-www-form-urlencoded\n";
+		$request .= "Content-length: ".$size."\n\n";
+		$request .= $args."\n";
+	    $fput = fputs($fp, $request);
+		fclose ($fp);
+		$out = true;
+	}
+
+	return $out;
+
+}
+}
+
 if( !function_exists( 'xml_server_api' )) {
       function xml_server_api($url,$array)
        {
@@ -1392,7 +1399,13 @@ $wpdb->query("ALTER TABLE `".$resliste->liste_bd."` ADD `optin` ENUM('0','1') NO
 }
 update_option( 'sm_db_version', '2.6' );
 }
-if(get_option('sm_db_version') >= '2.6' &&  get_option('sm_db_version') < smDBVERSION){
+if(get_option('sm_db_version') >= '2.6' &&  get_option('sm_db_version') < '2.7'){
+$wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+$wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+}
+if(get_option('sm_db_version') >= '2.7' &&  get_option('sm_db_version') < smDBVERSION){
+$wpdb->query("ALTER TABLE `".$table_bounces_hard."` ADD `update` ENUM('0','1') NOT NULL DEFAULT '0' ");
+$wpdb->query("ALTER TABLE `".$wpdb->prefix."sm_liste_test` ADD `optin` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `bounces`");
 $wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 $wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 }
