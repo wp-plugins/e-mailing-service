@@ -25,7 +25,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	
 	if($fivesdraft->status == "En attente"){
 	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000",true);
-    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10000,10000000",true);
+    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10000,10000000",true);
 	if(get_option('sm_alerte_nl_cours') == 'oui'){
 	sm_alerte_envoi(''.__("Newsletter n ","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'',''.__("Newsletter n ","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'<br>'.date('Y-m-d H:i:s').'');
 	}

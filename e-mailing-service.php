@@ -25,7 +25,6 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-
 define( 'smVERSION', '2.9' );
 define( 'smDBVERSION', '2.8' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
