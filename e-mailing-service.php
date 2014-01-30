@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 2.9 
+Version: 3.2
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -25,7 +25,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '2.9' );
+define( 'smVERSION', '3.2' );
 define( 'smDBVERSION', '2.8' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -746,76 +746,29 @@ $email=affiche_mail($smnum,$smemailid);
 }
 }
 if(!function_exists('xml_server_stats')){
-function xml_server_stats($url,$array)
-       {
-	$args	=	http_build_query($array);
-	$url	=	parse_url($url);
-
-	if(isset($url['port']))
-	{
-		$port=$url['port'];
-	}
-	else
-	{
-		$port='80';
-	}
-	if(!$fp=fsockopen($url['host'], $port, $errno, $errstr))
-	{
-		$out = false;
-	}
-	else
-	{
-		$size = strlen($args);
-		$request = "POST ".$url['path']." HTTP/1.1\n";
-		$request .= "Host: ".$url['host']."\n";
-		$request .= "Connection: Close\r\n";
-		$request .= "Content-type: application/x-www-form-urlencoded\n";
-		$request .= "Content-length: ".$size."\n\n";
-		$request .= $args."\n";
-		$fput = fputs($fp, $request);
-	        $resultat ="";
-
-		while (!feof($fp))
-		{
-			$resultat .= fgets($fp, 512);
-		}
-
-		fclose($fp);
-		$out = true;
-	}
-	$debut_flux = strpos($resultat,'<?xml version="1.0" encoding="UTF-8"?>');
-	$flux = substr($resultat,$debut_flux);
-	$xml2 = simplexml_load_string($flux);
-  	$result_reponse=$xml2->resultat;
-
-	if($result_reponse == "1")
-	{
-		if($_SERVER['REMOTE_ADDR']=="88.172.9.115"){
-		    echo $xml2->lien;
-		}
-		
-      // echo '<meta http-equiv="refresh" content="0; url='.$xml2->lien.'">';
-	   if(!headers_sent()) {
-       //header('Location: '.$xml2->lien.'');
-	   wp_redirect( $xml2->lien );
-       exit();
-      } 
-	  
-	  else {
-      echo '<meta http-equiv="refresh" content="0; url='.$xml2->lien.'">';
-	  exit();
-      }
-
-
-				
-	}
-	else
-	{
+function xml_server_stats($url,$array){	   
+	   $flux1= xml_server_api($url,$array);
+       $xml2l =post_xml_data(addslashes($flux1),'item',array('resultat','lien'));
+		if($xml2l ==''){
 		   header('Location: '.get_option("blog_url").'');
-		   exit();
-	}
-	
-	      }
+		   exit();	
+		}
+		foreach($xml2l as $row) {
+		if($row[0] == 1)
+		{
+	            if(!headers_sent()) {
+	            wp_redirect( $row[1] );
+                exit();
+                } else {
+                echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
+	            exit();
+                }		
+		} else {
+		   header('Location: '.get_option("blog_url").'');
+		   exit();					
+		}
+		}
+}
 }
 /////SMTP //////
 function sm_smtp_choix($phpmailer){

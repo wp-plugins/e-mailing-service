@@ -196,6 +196,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 3.2 =
+* exchange xml library for compatibility with all hostings
 = 3.0 =
 * fix cron automatic post
 = 2.9 =
@@ -232,6 +234,8 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+= 3.2 =
+* exchange xml library for compatibility with all hostings
 = 3.0 =
 * fix cron automatic post
 = 2.9 =

@@ -6,11 +6,13 @@ if( !function_exists( 'nettoie' )) {
 function nettoie($str, $charset='utf-8')
 {
 	$str=strtolower($str);
-	$str = str_replace('.','-',$str);
 	$str = str_replace('/','',$str);
 	$str = str_replace('\'','',$str);
 	$str = str_replace('+','plus',$str);
 	$str = str_replace('@','-',$str);
+	$str = str_replace(' ','-',$str);
+	$str = str_replace(' ','-',$str);
+	$str = str_replace(' ','-',$str);
 	$str = str_replace(' ','-',$str);
 	$str = str_replace("(","-",$str);
 	$str = str_replace(")","",$str);
@@ -22,14 +24,12 @@ function nettoie($str, $charset='utf-8')
 	$str = str_replace("'","-",$str);
 	$str = str_replace(",","-",$str);
 	$str = str_replace(":","-",$str);
-	$str = str_replace("-","_",$str);
 	$str = str_replace("__","_",$str);
 	$str = str_replace("__","_",$str);
 	$str = str_replace("--","_",$str);
 	$str = str_replace("--","_",$str);
 	$str = str_replace("--","_",$str);
 	$str = str_replace("--","_",$str);
-	$str = str_replace("-","_",$str);
     $str = htmlentities($str, ENT_NOQUOTES, $charset);
     
     $str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);
@@ -96,21 +96,44 @@ function envoi_server($url,$array)
 	return $out;
 }
 }
+if( !function_exists( 'post_xml' )) {
+function post_xml($fichier,$item,$champs) {
+   $chaine = $fichier;
+      $tmp = preg_split("/<\/?".$item.">/",$chaine);
+      for($i=1;$i<sizeof($tmp)-1;$i+=2)
+         foreach($champs as $champ) {
+            $tmp2 = preg_split("/<\/?".$champ.">/",$tmp[$i]);
+            $tmp3[$i-1][] = @$tmp2[1];
+         }
+      return @$tmp3;
+   }
+}
 if( !function_exists( 'lit_xml' )) {
 function lit_xml($fichier,$item,$champs) {
    if($chaine = @implode("",@file($fichier))) {
       $tmp = preg_split("/<\/?".$item.">/",$chaine);
       for($i=1;$i<sizeof($tmp)-1;$i+=2)
-         // on lit les champs demandes <champ>
          foreach($champs as $champ) {
             $tmp2 = preg_split("/<\/?".$champ.">/",$tmp[$i]);
-            // on ajoute au tableau
             $tmp3[$i-1][] = @$tmp2[1];
          }
-      // et on retourne le tableau
       return @$tmp3;
    }
 }
+}
+if( !function_exists( 'post_xml_data' )) {
+function post_xml_data($fichier,$item,$champs) {
+   $chaine = $fichier;
+      $tmp = preg_split("/<\/?".$item.">/",$chaine);
+      for($i=1;$i<sizeof($tmp)-1;$i+=2)
+         foreach($champs as $champ) {
+            $tmp2 = preg_split("/<\/?".$champ.">/",$tmp[$i]);
+            $tmp[$i]=str_replace("<![CDATA[","",$tmp[$i]);
+			$tmp[$i]=str_replace("]]>","",$tmp[$i]);
+            $tmp3[$i-1][] = @$tmp2[1];
+         }
+      return @$tmp3;
+   }
 }
 if( !function_exists( 'lit_xml_data' )) {
 function lit_xml_data($fichier,$item,$champs) {
@@ -138,9 +161,10 @@ function sm_cgi_annonce(){
 		"action" => "annonce"
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_npai.php',$array);
-		$xmll = @strstr($fluxl,'</xml>', true);
-		$xml2l = @simplexml_load_string($xmll);
-		$_SESSION['sm_annonce']= (string) $xml2l->annonce; 
+				$xml2l =post_xml_data($fluxl,'item',array('annonce'));
+          foreach($xml2l as $row) {
+		$_SESSION['sm_annonce']= $row[0] ; 
+           } 
 		return $_SESSION['sm_annonce']; 
 		} else {
 		return $_SESSION['sm_annonce'];	
@@ -160,9 +184,10 @@ function cgi_nlj(){
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_nlj']= (string) $xml2l->limite_journaliere; 
+		   $xml2l =post_xml($fluxl,'item',array('limite_journaliere'));
+          foreach($xml2l as $row) {
+				$_SESSION['sm_nlj']= $row[0]; 
+           } 
 		}
 		return $_SESSION['sm_nlj']; 
 		} else {
@@ -183,9 +208,11 @@ function cgi_bounces(){
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_bounces']= (string) $xml2l->bounces;
+		$xml2l =post_xml($fluxl,'item',array('bounces'));
+          foreach($xml2l as $row) {
+	    	$_SESSION['sm_bounces']= $row[0];
+           } 
+		
 		}
 		return $_SESSION['sm_bounces']; 
 		} else {
@@ -206,9 +233,10 @@ function cgi_blacklist(){
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_blacklist']= (string) $xml2l->stats_blacklist; 
+		$xml2l =post_xml($fluxl,'item',array('stats_backlist'));
+          foreach($xml2l as $row) {
+			  $_SESSION['sm_blacklist']= $row[0]; 
+           } 
 		}
 		return $_SESSION['sm_blacklist']; 
 		} else {
@@ -229,9 +257,10 @@ function cgi_stats_smtp(){
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
-		$xmll = strstr($fluxl,'</xml>', true);
-		$xml2l = simplexml_load_string($xmll);
-		$_SESSION['sm_stats_smtp']= (string) $xml2l->stats_smtp; 
+		  $xml2l =post_xml($fluxl,'item',array('stats_smtp'));
+          foreach($xml2l as $row) {
+$_SESSION['sm_stats_smtp']= $row[0];
+           } 
 		}
 		return $_SESSION['sm_stats_smtp']; 
 		} else {
@@ -250,9 +279,10 @@ function update_license2($url,$array){
   
  $string = curl_exec($ch);
  curl_close($ch);
- 
-$xml = simplexml_load_string($string);
-return $xml["license"];
+  $xml2l =post_xml($string,'item',array('license'));
+  foreach($xml2l as $row) {
+   return $row[0] ;
+  } 
 }
 }
 if( !function_exists( 'update_serveur' )) {
@@ -263,11 +293,12 @@ function update_serveur($url,$array){
                               CURLOPT_POST           => true,
                               CURLOPT_POSTFIELDS     => http_build_query($array)));
   
- $string = curl_exec($ch);
- curl_close($ch);
- 
-$xml = simplexml_load_string($string);
-return $xml["resultat"];
+$string = curl_exec($ch);
+curl_close($ch);
+$xml2l =post_xml($string,'item',array('resultat'));
+    foreach($xml2l as $row) {
+    return $row[0] ;
+    }
 }
 }
 if( !function_exists( 'nbenvoyer' )) {
@@ -554,7 +585,8 @@ if( !function_exists( 'xml_server_api' )) {
 
 		while (!feof($fp))
 		{
-			$resultat .= fgets($fp, 512);
+			$resultat .= fgets($fp,4096);
+ 
 		}
 
 		fclose($fp);

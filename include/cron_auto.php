@@ -12,7 +12,7 @@ $table_suite= $wpdb->prefix.'sm_suite';
 $table_log= $wpdb->prefix.'sm_log';
 
 		
-$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,serveur FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite'  OR  status='reactiver' OR status='suite' OR status='erreur_flux') AND date_envoi < NOW() AND type !='newsletter' ORDER BY id desc");
+$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,serveur FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite'  OR  status='reactiver' OR status='suite' OR status='erreur_flux') AND date_envoi < NOW() AND type !='newsletter' ORDER BY id desc LIMIT 0,1");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 
@@ -73,38 +73,39 @@ foreach ( $fivesdrafts as $fivesdraft )
 		"track2" => ""		
 		); 
 
-        $flux =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_beta.php',$array);
-		$xml = strstr($flux,'</xml>', true);
-			$xml2 = simplexml_load_string($xml);
-  	    $result_reponse=$xml2->resultat;
-			if($result_reponse == "1")
+         $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_beta.php',$array);
+        $xml2l =post_xml_data(addslashes($flux1),'item',array('resultat','txth','sujet','corps','txtb','txta'));
+		foreach($xml2l as $row) {
+		if($row[0] == 1)
 	         {
-		$bug= "<br><br><b><font color=green>Tout s'est bien deroule : ".$result_reponse."</font></b><br><br>";
-		$bug.=  "<textarea name=\"\" cols=\"100\" rows=\"10\">".$xml2->txth."<br>".$xml2->sujet."<br>".$xml2->corps."<br>".$xml2->txtb."<br>".$xml2->txta."</textarea><br>";
+		$bug= "<br><br><b><font color=green>".__("Tout s'est bien deroule","e-mailing-service")." : ".stripslashes($row[0])."</font></b><br><br>";
+		$bug.=  "<textarea name=\"\" cols=\"100\" rows=\"10\">".stripslashes($row[1])."<br>".stripslashes($row[2])."<br>".stripslashes($row[3])."<br>".stripslashes($row[4])."<br>".stripslashes($row[5])."</textarea><br>";
 	         }
 	         else
 	         {
-		$bug=  "<textarea name=\"\" cols=\"100\" rows=\"10\">".$flux."</textarea><br>";
+		$bug=  "<textarea name=\"\" cols=\"100\" rows=\"10\">".$flux1."</textarea><br>";
 	         }
+		}
+
     if(get_option('sm_debug')=="oui")
     {
      echo $bug;
 	}
-	if($flux == ''){
+	if($flux1 == ''){
 	$sql2 ="UPDATE `".$table_envoi."` SET `status`='erreur_flux' WHERE id = '".$fivesdraft->hie."'";
     $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
 	exit();	
 	}
-	elseif($result_reponse == 0){
+	elseif($row[0] == 0){
 	$sql2 ="UPDATE `".$table_envoi."` SET `status`='erreur_license' WHERE id = '".$fivesdraft->hie."'";
     $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
 	exit();	
 	}	
-	$txth=$xml2->txth;
-	$sujet=$xml2->sujet;
-	$corps=$xml2->corps;
-	$txtb=$xml2->txtb;
-	$txta=$xml2->txta;
+	$txth=stripslashes($row[1]);
+	$sujet=stripslashes($row[2]);
+	$corps=stripslashes($row[3]);
+	$txtb=stripslashes($row[4]);
+	$txta=stripslashes($row[5]);
 	}
 
 	$n=1;
