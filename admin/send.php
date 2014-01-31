@@ -11,7 +11,8 @@ if(isset($action)){
 			'type' => 'newsletter',
 			'track1' => $track1,
 			'track2' => $track2,
-            'date_envoi' => $date_envoi
+            'date_envoi' => $date_envoi,
+			'mode' => $mode,
        ));
 	    $hie = $wpdb->insert_id;
 		
@@ -28,7 +29,8 @@ if(isset($action)){
 			'type' => $POSTTYPE,
 			'track1' => $track1,
 			'track2' => $track2,
-            'date_envoi' => $date_envoi
+            'date_envoi' => $date_envoi,
+			'mode' => $mode,
        ));
 	    $hie = $wpdb->insert_id;
 		
@@ -46,7 +48,8 @@ if(isset($action)){
 			'track1' => $track1,
 			'track2' => $track2,
             'date_envoi' => $date_envoi,
-			'serveur' => $serveur,			
+			'serveur' => $serveur,
+			'mode' => $mode,			
        ));
 	    $hie = $wpdb->insert_id;
 		
@@ -63,7 +66,8 @@ if(isset($action)){
 			'track1' => $track1,
 			'track2' => $track2,
             'date_envoi' => $date_envoi,
-			'serveur' => $serveur,	
+			'serveur' => $serveur,
+			'mode' => $mode,	
        ));
 	    $hie = $wpdb->insert_id;
 		
@@ -85,7 +89,9 @@ echo "<tr>
 <td><blockquote><b><a href=\"#\" title=\"".__("exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = 8 460 mails par jours )","e-mailing-service")."\">".__("Temps de pause")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos theme par exemple rencontre, commerce, ...","e-mailing-service")."\">".__("Tracking 1","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos clients ou autres)","e-mailing-service")."\">".__("Tracking 2","e-mailing-service")."</a></b></blockquote></td>
-<td></td></tr>";
+<td></td>
+<td></td>
+</tr>";
 
 echo "</thead> <tbody><tr>
 <td><blockquote><select name=\"liste\">";
@@ -108,6 +114,10 @@ echo "</select></blockquote></td>
 <td><input name=\"pause\" type=\"text\" value=\"10\" size=\"4\"/> s </td>
 <td><input name=\"track1\" type=\"text\" value=\"\" size=\"10\"/></td>
 <td><input name=\"track2\" type=\"text\" value=\"\" size=\"10\"/></td>
+<td><blockquote><select name=\"mode\">";
+echo "<option value=\"text/html\" selected=\"selected\">html</option>";
+echo "<option value=\"text/plain\">text</option>";
+echo "</select></blockquote></td>
 <td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer")."\"/></td>
 
 ";
@@ -125,6 +135,7 @@ echo "<tr>
 <td><blockquote><b><a href=\"#\" title=\"".__("exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = 8 460 mails par jours )")."\">".__("Temps de pause","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos theme par exemple rencontre, commerce, ...")."\">".__("Tracking 1","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos clients ou autres)","e-mailing-service")."\">".__("Tracking 2","e-mailing-service")."</a></b></blockquote></td>
+<td></td>
 <td></td></tr>";
 
 echo "</thead> <tbody><tr>
@@ -148,6 +159,10 @@ echo "</select></blockquote></td>
 <td><input name=\"pause\" type=\"text\" value=\"10\" size=\"4\"/> s </td>
 <td><input name=\"track1\" type=\"text\" value=\"\" size=\"10\"/></td>
 <td><input name=\"track2\" type=\"text\" value=\"\" size=\"10\"/></td>
+<td><blockquote><select name=\"mode\">";
+echo "<option value=\"text/html\" selected=\"selected\">html</option>";
+echo "<option value=\"text/plain\">text</option>";
+echo "</select></blockquote></td>
 <td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer","e-mailing-service")."\"/></td>
 
 ";
@@ -166,6 +181,7 @@ echo "<tr>
 <td><blockquote><b><a href=\"#\" title=\"".__("exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = 8 460 mails par jours )","e-mailing-service")."\">".__("Temps de pause","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos theme par exemple rencontre, commerce, ...","e-mailing-service")."\">".__("Tracking 1","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos clients ou autres)","e-mailing-service")."\">".__("Tracking 2","e-mailing-service")."</a></b></blockquote></td>
+<td></td>
 <td></td></tr>";
 
 echo "</thead> <tbody><tr>
@@ -194,6 +210,10 @@ echo "</select></blockquote></td>
 <td><input name=\"pause\" type=\"text\" value=\"10\" size=\"4\"/> s </td>
 <td><input name=\"track1\" type=\"text\" value=\"\" size=\"10\"/></td>
 <td><input name=\"track2\" type=\"text\" value=\"\" size=\"10\"/></td>
+<td><blockquote><select name=\"mode\">";
+echo "<option value=\"text/html\" selected=\"selected\">html</option>";
+echo "<option value=\"text/plain\">text</option>";
+echo "</select></blockquote></td>
 <td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer")."\"/></td>
 
 ";
@@ -211,6 +231,7 @@ echo "<tr>
 <td><blockquote><b><a href=\"#\" title=\"".__("exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = 8 460 mails par jours )","e-mailing-service")."\">".__("Temps de pause","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos theme par exemple rencontre, commerce, ...","e-mailing-service")."\">".__("Tracking 1","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos clients ou autres)","e-mailing-service")."\">".__("Tracking 2","e-mailing-service")."</a></b></blockquote></td>
+<td></td>
 <td></td></tr>";
 
 echo "</thead> <tbody><tr>
@@ -239,6 +260,10 @@ echo "</select></blockquote></td>
 <td><input name=\"pause\" type=\"text\" value=\"10\" size=\"4\"/> s </td>
 <td><input name=\"track1\" type=\"text\" value=\"\" size=\"10\"/></td>
 <td><input name=\"track2\" type=\"text\" value=\"\" size=\"10\"/></td>
+<td><blockquote><select name=\"mode\">";
+echo "<option value=\"text/html\" selected=\"selected\">html</option>";
+echo "<option value=\"text/plain\">text</option>";
+echo "</select></blockquote></td>
 <td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer","e-mailing-service")."\"/></td>
 
 ";
