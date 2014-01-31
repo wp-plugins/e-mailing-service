@@ -12,7 +12,7 @@ $table_suite= $wpdb->prefix.'sm_suite';
 $table_log= $wpdb->prefix.'sm_log';
 
 
-$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux')  AND type ='newsletter' ORDER BY id desc LIMIT 0,1");
+$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux')  AND type ='newsletter' ORDER BY id desc LIMIT 0,1");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 
@@ -119,12 +119,16 @@ foreach ( $fivesdrafts as $fivesdraft )
 	break;
 	}
 	}
+	if($fivesdraft->mode == "text/html"){
 	$contenu ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>';
+	} else {
+	$contenu = "";
+	}
     if(get_option('sm_affiche_txt_haut')=="oui"){
 	$contenu .=$txth;
 	}
@@ -136,7 +140,9 @@ foreach ( $fivesdrafts as $fivesdraft )
 	$contenu .=$txta;
 	}
 	//$img_track='<img name="google" src="'.get_option("siteurl").'/?utm_source='.$smemails->email_id.'&utm_campaign='.$fivesdraft->hie.'&ytm_medium=email" width="1" height="1" alt="" />';
+	if($fivesdraft->mode == "text/html"){
 	$contenu .='</body></html>';
+	}
 	$contenu=str_replace('[email_id]',$smemails->email_id,$contenu);
 	$contenu=str_replace('[cle]',$smemails->cle,$contenu);	
 	$contenu=str_replace('[email]',$smemails->email,$contenu);
@@ -181,12 +187,12 @@ if($fivesdraft->serveur !='auto'){
 	 if(!isset($_SESSION['sm_email_ret'])){
      $_SESSION['sm_email_ret'] = get_option('sm_email_ret_'.$num.'');
      }
-	 $header = sm_optimisation_fai($smemails->email,$title,$num);
+	 $header = sm_optimisation_fai($smemails->email,$title,$num,$fivesdraft->mode);	
      } else {
      if(!isset($_SESSION['sm_email_ret'])){
      $_SESSION['sm_email_ret'] = get_option('sm_email_ret_1');
      }
-     $header = sm_optimisation_fai($smemails->email,$title,$_SESSION['sm_num']); 		
+     $header = sm_optimisation_fai($smemails->email,$title,$_SESSION['sm_num'],$fivesdraft->mode);	
 }
  
 
@@ -214,7 +220,11 @@ if($fivesdraft->serveur !='auto'){
 	$_SESSION['sm_choix'] =$fivesdraft->serveur;
 	add_action('phpmailer_init','sm_smtp_choix');	
 	}
-	$res=wp_mail(trim($smemails->email), $title, $contenu, $header, '');
+	if($fivesdraft->mode == "text/html"){
+	$res=wp_mail( $smemails->email, $title, $contenu, $header, "");
+	} else {
+	$res=wp_mail( $smemails->email, $title, strip_tags($contenu), $header, "");	
+	}	
 	$sql ="DELETE FROM `".$table_temps."` WHERE id = '".$smemails->id."'";
     $result = $wpdb->query($wpdb->prepare($sql,true));
 	//add_action('phpmailer_init','sm_smtp_multi_remove');

@@ -340,7 +340,9 @@ $inF = fopen($filename,"w+");
 fwrite($inF,$tab);
 fclose($inF);
 
-
+$wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
+$wpdb->query( "SET GLOBAL local_infile = 'ON';");
+$wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 		
 $requette ="LOAD DATA LOCAL INFILE '$filename' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
@@ -566,6 +568,10 @@ $champs .=",$col12";
 if(!file_exists("$content_dir$name_file")){
 echo '<br><br><br><span style="color:#00f"><b>'.__("Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier /post","e-mailing-service").'</b></span>';	
 } else {
+$wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
+$wpdb->query( "SET GLOBAL local_infile = 'ON';");
+$wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
+
 $requette ="LOAD DATA LOCAL INFILE '$content_dir$name_file' IGNORE INTO TABLE  `$liste`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 ) ";

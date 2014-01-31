@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 3.2
+Version: 3.3
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -25,8 +25,8 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '3.2' );
-define( 'smDBVERSION', '2.8' );
+define( 'smVERSION', '3.3' );
+define( 'smDBVERSION', '2.9' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
@@ -154,8 +154,6 @@ function sm_mailing_install()
 	$table_spamscore = $wpdb->prefix.'sm_spamscore';
 	$table_suite = $wpdb->prefix.'sm_suite';
 	$table_bounces_hard = $wpdb->prefix.'sm_bounces_hard';
-	
-	@chmod("".smPATH."post/", 0777);
     $table_envoi_name = $wpdb->prefix.'sm_historique_envoi';  
  
     $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_envoi_name` (
@@ -173,6 +171,7 @@ function sm_mailing_install()
   `track1` varchar(250) NOT NULL,
   `track2` varchar(250) NOT NULL,
   `serveur` varchar(250) NOT NULL DEFAULT 'auto',
+  `mode` ENUM('text/plain','text/html') NOT NULL DEFAULT 'text/html',
   PRIMARY KEY (`id`),
   KEY `id_newsletter` (`id_newsletter`),
   KEY `type` (`type`)
@@ -397,7 +396,8 @@ if($total==0){
             'liste_bd' => $table_name,  
             'liste_nom' => 'test',
        ));  
-	   
+	  	
+	@chmod("".smPATH."post/", 0777); 
 }
 
 /////////////////////// creation des options //////////////////////////
@@ -829,8 +829,10 @@ function sm_smtp_choix($phpmailer){
 	
 
 }
+
 function sm_smtp_multi($phpmailer){
 	global $wdpd;
+	//fix_phpmailer_messageid( $phpmailer );
 	if(!isset($_SESSION['sm_license'])){
 	$_SESSION['sm_license']=get_option('sm_license');
     }
@@ -902,6 +904,8 @@ function sm_smtp_multi($phpmailer){
 		$phpmailer->Password = get_option('sm_smtp_pass');
 	}	
 	}
+	//$phpmailer->XPriority = '';
+	//$phpmailer->XMailer = '';
 	$phpmailer->IsSMTP();
     if(get_option('sm_debug')=="oui")
     {
@@ -1232,15 +1236,10 @@ echo $txt;
 }
 add_action('admin_head', 'sm_admin_head');
 
-	
-/*
-function add_custom_post_type_to_query( $query ) {
-	if ( is_home() & $query->is_main_query() )
-		$query->set( 'post_type', array( 'post', 'page', 'sm_modeles' ) );
-	return $query;
-}
-add_action( 'pre_get_posts', 'add_custom_post_type_to_query' );
-*/
+
+function sm_no_generator() { return ''; }
+add_filter('the_generator', 'sm_no_generator');
+
 if( !function_exists( 'envoi_server' )) {
 function envoi_server($url,$array)
 {
@@ -1360,6 +1359,9 @@ $wpdb->query("ALTER TABLE `".$table_bounces_hard."` ADD `update` ENUM('0','1') N
 $wpdb->query("ALTER TABLE `".$wpdb->prefix."sm_liste_test` ADD `optin` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `bounces`");
 $wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 $wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
+}
+if(get_option('sm_db_version') >= '2.8' &&  get_option('sm_db_version') < smDBVERSION){
+$wpdb->query("ALTER TABLE `".$table_envoi_name."` ADD `mode` ENUM('text/plain','text/html') NOT NULL DEFAULT 'text/html'");
 }
 update_option( 'sm_db_version', smDBVERSION );
 _e("mise à jour de la base de donnée du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	

@@ -196,6 +196,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 3.3 =
+* add mod text or html, optimisation gmail.com, orange.fr, yahoo.com
 = 3.2 =
 * exchange xml library for compatibility with all hostings
 = 3.0 =
@@ -234,6 +236,9 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+
+= 3.3 =
+* add mod text or html, optimisation gmail.com, orange.fr, yahoo.com
 = 3.2 =
 * exchange xml library for compatibility with all hostings
 = 3.0 =

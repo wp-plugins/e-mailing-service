@@ -525,25 +525,48 @@ $ip = gethostbyname($smtp);
 }
 }
 if(!function_exists('sm_optimisation_fai' )) { 
-function sm_optimisation_fai($email,$sujet,$num=1){
+function sm_optimisation_fai($email,$sujet,$num=1,$mode="text/html"){
 @list($nameemail,$faiemail)=explode('@',$email);
 if($faiemail == "yahoo.com"){
 $header = "Reply-to: ".$_SESSION['sm_email_ret']."
 Subject: ".$sujet."
-Content-Type: text/html; charset=utf-8; format=flowed;
+Content-Type: ".$mode."; charset=utf-8; format=flowed;
 Errors-To: ".$_SESSION['sm_email_ret']."
-X-Newsletter-Reference-Tag: ".$email."
 List-Unsubscribe: <mailto: ".$_SESSION['sm_email_ret'].">
 Precedence: bulk
 
 
 
 ";
-} else {
+} 
+if($faiemail == "orange.fr"){
 $header = "Reply-to: ".$_SESSION['sm_email_ret']."
 Subject: ".$sujet."
-Content-Type: text/html; charset=utf-8; format=flowed;
+Content-Type: ".$mode."; charset=utf-8; format=flowed;
 Errors-To: ".$_SESSION['sm_email_ret']."
+List-Unsubscribe: <mailto: ".$_SESSION['sm_email_ret'].">
+
+
+
+";
+} 
+if($faiemail == "gmail.com"){
+$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+Subject: ".$sujet."
+Content-Type: ".$mode."; charset=utf-8; format=flowed;
+Errors-To: ".$_SESSION['sm_email_ret']."
+Precedence: bulk
+
+
+
+";
+}
+else {
+$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+Subject: ".$sujet."
+Content-Type: ".$mode."; charset=utf-8; format=flowed;
+Errors-To: ".$_SESSION['sm_email_ret']."
+
 
 
 
