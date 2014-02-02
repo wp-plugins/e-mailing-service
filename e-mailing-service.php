@@ -1,15 +1,10 @@
 <?php
 /*
 Plugin Name: e-mailing service
-
-Version: 3.4
-
+Version: 3.5
 Plugin URI: http://www.e-mailing-service.net
-
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
-
 Author URI: http://www.e-mailing-service.net
-
 */
 if(!function_exists('wp_get_current_user')) {
     include(ABSPATH . "wp-includes/pluggable.php"); 
@@ -25,7 +20,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '3.4' );
+define( 'smVERSION', '3.5' );
 define( 'smDBVERSION', '2.9' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
