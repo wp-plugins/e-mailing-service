@@ -2,7 +2,7 @@
 /*
 Plugin Name: e-mailing service
 
-Version: 3.3
+Version: 3.4
 
 Plugin URI: http://www.e-mailing-service.net
 
@@ -25,7 +25,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '3.3' );
+define( 'smVERSION', '3.4' );
 define( 'smDBVERSION', '2.9' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
