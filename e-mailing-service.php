@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 5.1
+Version: 5.3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -20,12 +20,11 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '3.5' );
-define( 'smDBVERSION', '2.9' );
+define( 'smVERSION', '5.3' );
+define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
-
 
 function sm_init() {
 load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/lang/' );
@@ -200,14 +199,8 @@ function sm_mailing_install()
    $wpdb->query( "  
    CREATE TABLE IF NOT EXISTS `$table_liste` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(250) NOT NULL DEFAULT '',
-  `nom` varchar(250) NOT NULL,
-  `ip` varchar(250) NOT NULL,
-  `lg` varchar(250) NOT NULL,
-  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
-  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
-  `optin` enum('0','1') NOT NULL DEFAULT '0',
+  `liste_bd` varchar(250) NOT NULL,
+  `liste_nom` varchar(250) NOT NULL,
   `champs1` varchar(250) NOT NULL,
   `champs2` varchar(250) NOT NULL,
   `champs3` varchar(250) NOT NULL,
@@ -217,13 +210,11 @@ function sm_mailing_install()
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
-  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  KEY `valide` (`valide`),
-  KEY `bounces` (`bounces`),
-  KEY `cle` (`cle`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
+  UNIQUE KEY `liste_bd` (`liste_bd`),
+  KEY `liste_nom` (`liste_nom`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;   
+"); 
  
         $wpdb->query("  
    CREATE TABLE IF NOT EXISTS `$table_name` (
@@ -1357,6 +1348,32 @@ $wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DE
 }
 if(get_option('sm_db_version') >= '2.8' &&  get_option('sm_db_version') < smDBVERSION){
 $wpdb->query("ALTER TABLE `".$table_envoi_name."` ADD `mode` ENUM('text/plain','text/html') NOT NULL DEFAULT 'text/html'");
+}
+if(get_option('sm_db_version') >= '2.9' &&  get_option('sm_db_version') < smDBVERSION){
+$wpdb->query( "DROP TABLE `$table_liste`"); 
+$wpdb->query( "  
+   CREATE TABLE IF NOT EXISTS `$table_liste` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `liste_bd` varchar(250) NOT NULL,
+  `liste_nom` varchar(250) NOT NULL,
+  `champs1` varchar(250) NOT NULL,
+  `champs2` varchar(250) NOT NULL,
+  `champs3` varchar(250) NOT NULL,
+  `champs4` varchar(250) NOT NULL,
+  `champs5` varchar(250) NOT NULL,
+  `champs6` varchar(250) NOT NULL,
+  `champs7` varchar(250) NOT NULL,
+  `champs8` varchar(250) NOT NULL,
+  `champs9` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `liste_bd` (`liste_bd`),
+  KEY `liste_nom` (`liste_nom`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;   
+");
+	   $wpdb->insert($table_liste, array(  
+            'liste_bd' => $table_name,  
+            'liste_nom' => 'test',
+       )); 
 }
 update_option( 'sm_db_version', smDBVERSION );
 _e("mise à jour de la base de donnée du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	
