@@ -14,7 +14,8 @@
         $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
 		$xml2l = post_xml($fluxl,'item',array('resultat','license','stats_smtp','limite_journaliere','limite_mensuel','stats_blacklist','blacklist','alias_multi','mass_mailing_nb','bounces','alerte','date_inscription','date_validite','date_renouvellement','licence_key'));		
 		foreach($xml2l as $row) {
-		if($row[0] == 1){ 
+		if($row[0] == 1){
+		$licen=$row[2]; 
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[1]."' WHERE `option_name`='sm_license'");
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[9]."' WHERE `option_name`='sm_bounces'");
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[5]."' WHERE `option_name`='sm_blacklist'");
