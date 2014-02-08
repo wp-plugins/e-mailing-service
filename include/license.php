@@ -2,8 +2,10 @@
 
        if(!get_option('sm_license_key')) {
 		echo "<br><br>".__("Vous n'avez pas de license, vous utilisez la version gratuite","e-mailing-service")."";	
+		$licen="free";
 		} else {
         global $wpdb;
+		$licen=get_option('sm_license');
         $table_options = $wpdb->prefix.'options';
 		$array =array (
 		"site" => str_replace("www.","",$_SERVER['HTTP_HOST']),
