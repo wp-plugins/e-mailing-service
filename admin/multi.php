@@ -71,7 +71,7 @@ $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".trim($_POST['sm_
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_txt_affiliation' WHERE `option_name`='sm_txt_affiliation'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_affiche_txt_haut' WHERE `option_name`='sm_affiche_txt_haut'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_affiche_txt_bas' WHERE `option_name`='sm_affiche_txt_bas'");
-if($xml2l->bounces == "oui" || $xml2l->blacklist == "oui"){
+if(get_option('sm_blacklist') == "oui" || get_option('sm_bounces') == "oui"){
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
 		$array =array (
