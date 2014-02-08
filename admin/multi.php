@@ -120,7 +120,9 @@ _e("Vos informations ont bien ete mis a jour","e-mailing-service");
 
 echo "<h1>".__("Parametres Mass Mailing","e-mailing-service")."</h1>";
 
-
+if(!isset($licen)){
+$licen="free";	
+}
 if($licen =="mass-mailing"){
 ?>
 <form action="admin.php?page=e-mailing-service/admin/multi.php" method="post">
