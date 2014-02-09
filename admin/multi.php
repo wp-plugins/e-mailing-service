@@ -120,12 +120,12 @@ _e("Vos informations ont bien ete mis a jour","e-mailing-service");
 
 echo "<h1>".__("Parametres Mass Mailing","e-mailing-service")."</h1>";
 
-if(get_option('sm_license') =="mass-mailing"){
+if(get_option('sm_license') == "mass-mailing"){
 ?>
 <form action="admin.php?page=e-mailing-service/admin/multi.php" method="post">
 <input type="hidden" name="action" value="update" />
 <input type="hidden" name="sm_typ_eenvoi" value="smtp" />
-<input type="hidden" name="sm_license" value="<?php echo "$licen"; ?>" />
+<input type="hidden" name="sm_license" value="<?php echo get_option('sm_license'); ?>" />
 <?php 
 $xml=lit_xml('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_multi.php?login='.get_option('sm_login').'&url='.$host.'&licence_key='.get_option('sm_license_key').'','item',array('resultat','numero','serveur','smtp','authentification','port','email','login','pass','version','status','email_retour','npai_serveur','npai_port','npai_login','npai_pass'));
 if ($xml!='') {

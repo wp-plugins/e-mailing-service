@@ -22,7 +22,9 @@ global $wpbd;
   global $wp_query;
   $smhie= $wp_query->query_vars['smhie'];
   $smemail= $wp_query->query_vars['smemail'];
+  if(isset($wp_query->query_vars['smfree'])){
   $smfree= $wp_query->query_vars['smfree'];
+  } else { $smfree=0; }
   $smcle= $wp_query->query_vars['smcle'];
   $smemail=str_replace('%5BZ%5D','@',$smemail);
   $smemail=str_replace('[Z]','@',$smemail);
