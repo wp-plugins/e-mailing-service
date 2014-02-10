@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 5.7
+Version: 5.9
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -21,7 +21,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '5.7' );
+define( 'smVERSION', '5.9' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -62,7 +62,6 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug bounces', 'e-mailing-service'), __('Debug bounces', 'e-mailing-service'), 'manage_options',  smPATH . 'include/bounces_update.php', NULL);
-      add_submenu_page( 'e-mailing-service/admin/index.php', __('Update bounces', 'e-mailing-service'), __('Update bounces', 'e-mailing-service'), 'manage_options',  smPATH . 'include/bounces_update_liste.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL);  
@@ -1046,38 +1045,38 @@ function sm_cron_unschedule_jours1() {
 function action_cron_minutes() 
 {
 //include(''.smPATH.'/include/cron.php');
-sm_cron_fichier('/include/cron.php');
-sm_cron_fichier('/include/cron_auto.php');
+sm_cron_fichier('include/cron.php');
+sm_cron_fichier('include/cron_auto.php');
 //
 }
 add_action('sm_crons', 'action_cron_minutes');
 
 function action_cron15()
 {
-sm_cron_fichier('/include/cron_blocage.php');
-sm_cron_fichier('/include/bounces.php');
+sm_cron_fichier('include/cron_blocage.php');
+sm_cron_fichier('include/bounces.php');
 }
 add_action('sm_crons15', 'action_cron15');
 
 function action_cron_heure()
 {
-sm_cron_fichier('/include/bounces_delete.php');
+sm_cron_fichier('include/bounces_delete.php');
 }
 add_action('sm_crons_heure1', 'action_cron_heure');
 
 function action_cron_heure4()
 {
-sm_cron_fichier('/include/blacklist.php');
-sm_cron_fichier('/include/spamscore.php');
-sm_cron_fichier('/include/bounces_update.php');
-sm_cron_fichier('/include/bounces_update_liste.php');
+sm_cron_fichier('include/blacklist.php');
+sm_cron_fichier('include/spamscore.php');
+sm_cron_fichier('include/bounces_update.php');
+sm_cron_fichier('include/bounces_update_liste.php');
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 
 function action_cron24()
 {
-sm_cron_fichier('/include/bounces_delete.php');
-sm_cron_fichier('/include/cron_license.php');
+sm_cron_fichier('include/bounces_delete.php');
+sm_cron_fichier('include/cron_license.php');
 }
 add_action('sm_crons_jours1', 'action_cron24');
 
@@ -1087,7 +1086,11 @@ add_action('sm_crons_jours1', 'action_cron24');
 if(!function_exists('sm_cron_fichier')){
 function sm_cron_fichier($fichier)
 {
+	if(file_exists(''.smPATH.''.$fichier.'')){
 include(''.smPATH.''.$fichier.'');
+	} else {
+include(''.smPATH.'/'.$fichier.'');		
+	}
 }
 }
 
