@@ -192,6 +192,7 @@ if($fivesdraft->serveur !='auto'){
      if(!isset($_SESSION['sm_email_ret'])){
      $_SESSION['sm_email_ret'] = get_option('sm_email_ret_1');
      }
+	 if(!isset($_SESSION['sm_num'])){ $_SESSION['sm_num']=1; }
      $header = sm_optimisation_fai($smemails->email,$title,$_SESSION['sm_num'],$fivesdraft->mode);	
 }
  

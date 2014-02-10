@@ -23,7 +23,7 @@ $table_liste= $wpdb->prefix.'sm_liste';
     foreach ( $smemail as $smemails ) 
 	{
 	$contenu=str_replace('[email]',$smemails->email,$contenu);
-	$contenu=str_replace('[email_id]',$smemails->email_id,$contenu);	
+	$contenu=str_replace('[email_id]',$smemails->id,$contenu);	
 	$contenu=str_replace('[nom]',$smemails->nom,$contenu);	
 	$contenu=str_replace('[lg]',$smemails->lg,$contenu);
 	$contenu=str_replace('[ip]',$smemails->ip,$contenu);
@@ -40,7 +40,7 @@ $table_liste= $wpdb->prefix.'sm_liste';
 	$contenu=str_replace('[date]',date('Ymshis'),$contenu);
 	
 	$title=str_replace('[email]',$smemails->email,$sujet);
-	$title=str_replace('[email_id]',$smemails->email_id,$title);	
+	$title=str_replace('[email_id]',$smemails->id,$title);	
 	$title=str_replace('[nom]',$smemails->nom,$title);	
 	$title=str_replace('[lg]',$smemails->lg,$title);
 	$title=str_replace('[ip]',$smemails->ip,$title);
