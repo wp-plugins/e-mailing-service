@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 6.2
+Version: 6.3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -25,7 +25,7 @@ $upload_dir_name = false;
 if ( !defined( 'UPLOADS' ) ){
 define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
 }
-define( 'smVERSION', '6.2' );
+define( 'smVERSION', '6.3' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -721,9 +721,9 @@ $smdate= $wp_query->query_vars['smdate'];
 $smnum= $wp_query->query_vars['smnum'];
 $smcle= $wp_query->query_vars['smcle'];
 if($smcle !=' '){
-update_optin($smnum,$smidmp,$smcle);
+update_optin($smnum,$smidmd,$smcle);
 } else {
-update_optin($smnum,$smidmp);
+update_optin($smnum,$smidmd);
 }
 $email=affiche_mail($smnum,$smemailid);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
@@ -1185,6 +1185,7 @@ foreach ( $listese as $reslistee )
 {
 $email = $reslistee->email;
 }
+if(!isset($email)){ $email=""; }
 $_SESSION["sm_email"]=$email;
 return $_SESSION["sm_email"];
 }
