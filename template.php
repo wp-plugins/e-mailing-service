@@ -39,7 +39,7 @@ $table_liste= $wpdb->prefix.'sm_liste';
 	$contenu=str_replace('[champs9]',$smemails->champs9,$contenu);
 	$contenu=str_replace('[date]',date('Ymshis'),$contenu);
 	
-	$title=str_replace('[email]',$smemails->email,$sujet);
+	$title=str_replace('[email]',$smemails->email,$title);
 	$title=str_replace('[email_id]',$smemails->id,$title);	
 	$title=str_replace('[nom]',$smemails->nom,$title);	
 	$title=str_replace('[lg]',$smemails->lg,$title);

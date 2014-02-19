@@ -44,8 +44,71 @@ foreach ( $fivesdrafts as $fivesdraft )
 	    $titre=get_post_field('post_title', $fivesdraft->id_newsletter);
 		$lien=get_post_field('guid', $fivesdraft->id_newsletter);
 		$title=sm_schortode($titre);
-	    $contenu=sm_schortode(sm_affiche_template($titre,$lien));
-      
+	    $post_content =sm_schortode(sm_affiche_template($titre,$lien));
+		
+    $post_id=$fivesdraft->id_newsletter;
+	global $current_blog;
+if ( is_multisite() ) {
+$repertoire = ''.smPOSTURL.''.$current_blog->blog_id.'/img/'.$post_id.'';
+$repertoire_path= ''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'';
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'', 0777);
+		   }
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'/img', 0777);
+		   }
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'', 0777);
+		   }
+	
+} else {
+$repertoire = ''.smPOSTURL.'1/img/'.$post_id.'';
+$repertoire_path = ''.smPOST.'1/img/'.$post_id.'';
+if(!is_dir(''.smPOST.'1')){
+mkdir(''.smPOST.'1', 0777);
+		   }
+if(!is_dir(''.smPOST.'1/img')){
+mkdir(''.smPOST.'1/img', 0777);
+		   }
+if(!is_dir(''.smPOST.'1/img/'.$post_id.'')){
+mkdir(''.smPOST.'1/img/'.$post_id.'', 0777);
+		   }
+		
+}
+
+  
+		   
+
+	preg_match_all("/<img .*?(?=src)src=\"([^\"]+)\"/si", $post_content, $images); 
+    $xx=count($images[1]); 
+	for($i=0; $i < $xx; $i++){
+     $size = @getimagesize($images[1][$i]); 
+switch ($size['mime']) { 
+    case "image/gif": 
+$extension=".gif"; 
+        break; 
+    case "image/jpeg": 
+$extension=".jpg";
+        break; 
+    case "image/png": 
+$extension=".png";
+        break; 
+    case "image/bmp": 
+$extension=".bmp"; 
+        break; 
+}
+
+ if($extension == ".gif" || $extension == ".jpg" || $extension == ".bmp" || $extension == ".png"){
+@file_put_contents(''.$repertoire_path.'/'.$i.''.$extension.'', file_get_contents($images[1][$i]));
+@chmod(''.$repertoire_path.'/'.$i.''.$extension.'',0644);
+$post_content=str_replace($images[1][$i],''.$repertoire.'/'.$i.''.$extension.'',$post_content);
+ if(get_option('sm_debug')=="oui")
+    {
+echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';		
+	}
+}
+	}
+    $contenu =$post_content;
     if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 	$txth=sm_schortode_txt(get_option('sm_txt_haut'),$fivesdraft->id_newsletter,$fivesdraft->hie);
 	$sujet=sm_schortode_txt($titre,$fivesdraft->id_newsletter,$fivesdraft->hie);

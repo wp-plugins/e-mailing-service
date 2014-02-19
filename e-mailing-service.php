@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 5.9
+Version: 6.2
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
 */
-if(!isset($_SESSION)){session_start();}
+if(!isset($_SESSION)){ session_start(); }
 if(!function_exists('wp_get_current_user')) {
     include(ABSPATH . "wp-includes/pluggable.php"); 
 }
@@ -21,11 +21,17 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '5.9' );
+$upload_dir_name = false;
+if ( !defined( 'UPLOADS' ) ){
+define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
+}
+define( 'smVERSION', '6.2' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
+define( 'smPOST', ''.UPLOADS.'/sm-post/');
+define( 'smPOSTURL', ''.get_option('siteurl').'/wp-content/uploads/sm-post/'); 
 
 function sm_init() {
 load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/lang/' );
@@ -61,8 +67,7 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Update license', 'e-mailing-service'), __('Update license', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_license.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug bounces', 'e-mailing-service'), __('Debug bounces', 'e-mailing-service'), 'manage_options',  smPATH . 'include/bounces_update.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
+     add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL);  
    }
@@ -382,8 +387,12 @@ if($total==0){
             'liste_bd' => $table_name,  
             'liste_nom' => 'test',
        ));  
-	  	
-	@chmod("".smPATH."post/", 0777); 
+	 
+	 if(!is_dir(smPOST)){
+    @mkdir(smPOST, 0777);
+	@chmod(smPOST, 0777); 
+		   }	
+
 }
 
 /////////////////////// creation des options //////////////////////////
@@ -765,7 +774,7 @@ function sm_smtp_choix($phpmailer){
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
 	$_SESSION['sm_from']= '##'.get_option('sm_from_'.$num.'').'##';
 	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp_'.$num.'').'##';
-	$_SESSION['sm_email_ret']= '##'.get_option('sm_email_ret_'.$num.'').'##';
+	$_SESSION['sm_email_ret']= get_option('sm_email_ret_'.$num.'');
 	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port_'.$num.'').'##';
 	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification_'.$num.'').'##';
 	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login_'.$num.'').'##';
@@ -869,26 +878,28 @@ function sm_smtp_multi($phpmailer){
 	
 	} else {
 	//session pour debug//
-	$_SESSION['sm_num']=1;
-	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server').'##';
-	$_SESSION['sm_from']= '##'.get_option('sm_from').'##';
-	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp').'##';
-	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port').'##';
-	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification').'##';
-	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login').'##';
-	$_SESSION['sm_smtp_pass']= '##'.get_option('sm_smtp_pass').'##';
-	$_SESSION['sm_email_ret']= ''.get_option('sm_email_ret').'';
-	$phpmailer->Sender = get_option('sm_email_exp');
-	$phpmailer->From = get_option('sm_email_exp');
-	$phpmailer->FromName = get_option('sm_from');
-	$phpmailer->AddReplyTo = get_option('sm_email_ret');
-	$phpmailer->Host = get_option('sm_smtp_server');
-	$phpmailer->Port = get_option('sm_smtp_port');
-	$phpmailer->SMTPAuth = (get_option('sm_smtp_authentification')=="oui") ? TRUE : FALSE;
+	$num=1;
+	//session pour debug//
+	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
+	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
+	$_SESSION['sm_from']= '##'.get_option('sm_from_'.$num.'').'##';
+	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp_'.$num.'').'##';
+	$_SESSION['sm_email_ret']= '##'.get_option('sm_email_ret_'.$num.'').'##';
+	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port_'.$num.'').'##';
+	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification_'.$num.'').'##';
+	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login_'.$num.'').'##';
+	$_SESSION['sm_smtp_pass']= '##'.get_option('sm_smtp_pass_'.$num.'').'##';
+	$phpmailer->Sender = get_option('sm_email_exp_'.$num.'');
+	$phpmailer->From = get_option('sm_email_exp_'.$num.'');
+	$phpmailer->FromName = get_option('sm_from_'.$num.'');
+	$phpmailer->AddReplyTo = get_option('sm_email_ret_'.$num.'');
+	$phpmailer->Host = get_option('sm_smtp_server_'.$num.'');
+	$phpmailer->Port = get_option('sm_smtp_port_'.$num.'');
+	$phpmailer->SMTPAuth = (get_option('sm_smtp_authentification_'.$num.'')=="oui") ? TRUE : FALSE;
 	if($phpmailer->SMTPAuth){
-		$phpmailer->Username = get_option('sm_smtp_login');
-		$phpmailer->Password = get_option('sm_smtp_pass');
-	}	
+		$phpmailer->Username =  get_option('sm_smtp_login_'.$num.'');
+		$phpmailer->Password = get_option('sm_smtp_pass_'.$num.'');
+	}
 	}
 	//$phpmailer->XPriority = '';
 	//$phpmailer->XMailer = '';
@@ -929,7 +940,7 @@ function sm_smtp_multi($phpmailer){
 
 ////////cron ////////////////
 add_filter('cron_schedules', 'minutes');
-if(!file_exists('minutes')){
+if(!function_exists('minutes')){
 function minutes( $schedules )
 {
     $schedules['minutes'] = array(
@@ -1044,10 +1055,8 @@ function sm_cron_unschedule_jours1() {
 
 function action_cron_minutes() 
 {
-//include(''.smPATH.'/include/cron.php');
 sm_cron_fichier('include/cron.php');
 sm_cron_fichier('include/cron_auto.php');
-//
 }
 add_action('sm_crons', 'action_cron_minutes');
 
@@ -1081,16 +1090,10 @@ sm_cron_fichier('include/cron_license.php');
 add_action('sm_crons_jours1', 'action_cron24');
 
 
-
-
 if(!function_exists('sm_cron_fichier')){
 function sm_cron_fichier($fichier)
 {
-	if(file_exists(''.smPATH.''.$fichier.'')){
 include(''.smPATH.''.$fichier.'');
-	} else {
-include(''.smPATH.'/'.$fichier.'');		
-	}
 }
 }
 
@@ -1380,7 +1383,7 @@ $wpdb->query( "
        )); 
 }
 update_option( 'sm_db_version', smDBVERSION );
-_e("mise à jour de la base de donnée du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	
+_e("mise a jour de la base de donnee du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	
 }
 function sm_update_db_check() {
 	if(!get_option('sm_db_version')){

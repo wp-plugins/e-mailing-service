@@ -10,7 +10,6 @@ include(smPATH . '/include/entete.php');
 			<div class="inside">
 				<?php			
 echo 'upload_max_filesize = ' . ini_get('upload_max_filesize') . '<br>';
-echo 'upload_max_size = ' . ini_get('upload_max_size') . '<br>';
 echo 'post_max_size = ' . ini_get('post_max_size') . '<br>';
 echo 'memory_limit = ' . ini_get('memory_limit') . '<br>';
 				?>
@@ -27,7 +26,7 @@ echo 'memory_limit = ' . ini_get('memory_limit') . '<br>';
 		<div id="post-body-content" class="has-sidebar-content">
 			<div class="meta-box-sortabless">
 <?php
-$dossier_fichier="".smPATH."post/";
+$dossier_fichier=smPOST;
 define('FS_CHMOD_FILE', 0664);
 define('FS_CHMOD_DIR', 0775);
 ini_set( "upload_max_filesize", "100M" );
@@ -59,9 +58,9 @@ $i=1;
 function sm_copy_template($Directory,$Entry,$template){
 $Directory=str_replace('//','/',$Directory);	
 $fichier=''.$Directory.'/'.$Entry.'';
-$dossier_fichier="".smPATH."post/";
+$dossier_fichier=smPOST;
 $dossier=str_replace($dossier_fichier,"",$Directory);
-$site="".smURL."post/".$dossier."";
+$site="".smPOSTURL."".$dossier."";
 //$site=str_replace(get_site_url(),'',$lien);
 $code = file_get_contents($fichier);  
 $code = preg_replace('!'.$fichier.'!isU', '', $code); 
@@ -147,7 +146,6 @@ $extensions_valides = array( 'zip');
 	  }
 ?>
 <form action="<?php $_SERVER['PHP_SELF'];?>" name="form_bdd" id="form_bdd" method="post" enctype="multipart/form-data">
-<input type="hidden" name="table" value="<?php echo $liste;?>">
 <input type="hidden" name="dossier"value="<?php echo ''.$dossier_fichier.''.$nomf.'';?>">
 <input type="hidden" name="action" value="import">
 <input type="hidden" name="template" value="<?php echo ''.$nomf.'';?>">

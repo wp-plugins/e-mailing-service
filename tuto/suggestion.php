@@ -57,7 +57,6 @@ echo "<a href=\"?page=e-mailing-service/admin/configuration.php\">".__("License 
 	?>
 <form action="?page=e-mailing-service/admin/support.php&section=suggestion" method="post">
 <input type="hidden" name="action" value="suggestion" />
-<input type="hidden" name="ticket_id" value="<?php echo $_GET["id"];?>" />
 <input type="hidden" name="email" value="<?php echo get_option('email_admin');?>" />
 <table>
         <tbody>

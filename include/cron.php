@@ -39,10 +39,74 @@ foreach ( $fivesdrafts as $fivesdraft )
     $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
 	echo "######### ".__("envoi newsletter n ","e-mailing-service")." ".$fivesdraft->id_newsletter." ##############<br>";
 	echo "######### ".__("liste n ","e-mailing-service")." ".$fivesdraft->id_liste." ##############<br>";
+	$post_content = get_post_field('post_content', $fivesdraft->id_newsletter);
+    $post_id=$fivesdraft->id_newsletter;
+	global $current_blog;
+if ( is_multisite() ) {
+$repertoire = ''.smPOSTURL.''.$current_blog->blog_id.'/img/'.$post_id.'';
+$repertoire_path= ''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'';
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'', 0777);
+		   }
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'/img', 0777);
+		   }
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'')){
+mkdir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'', 0777);
+		   }
+	
+} else {
+$repertoire = ''.smPOSTURL.'1/img/'.$post_id.'';
+$repertoire_path = ''.smPOST.'1/img/'.$post_id.'';
+if(!is_dir(''.smPOST.'1')){
+mkdir(''.smPOST.'1', 0777);
+		   }
+if(!is_dir(''.smPOST.'1/img')){
+mkdir(''.smPOST.'1/img', 0777);
+		   }
+if(!is_dir(''.smPOST.'1/img/'.$post_id.'')){
+mkdir(''.smPOST.'1/img/'.$post_id.'', 0777);
+		   }
+		
+}
+  
+		   
+
+	preg_match_all("/<img .*?(?=src)src=\"([^\"]+)\"/si", $post_content, $images); 
+    $xx=count($images[1]); 
+	for($i=0; $i < $xx; $i++){
+     $size = @getimagesize($images[1][$i]); 
+switch ($size['mime']) { 
+    case "image/gif": 
+$extension=".gif"; 
+        break; 
+    case "image/jpeg": 
+$extension=".jpg";
+        break; 
+    case "image/png": 
+$extension=".png";
+        break; 
+    case "image/bmp": 
+$extension=".bmp"; 
+        break; 
+}
+
+ if($extension == ".gif" || $extension == ".jpg" || $extension == ".bmp" || $extension == ".png"){
+@file_put_contents(''.$repertoire_path.'/'.$i.''.$extension.'', file_get_contents($images[1][$i]));
+@chmod(''.$repertoire_path.'/'.$i.''.$extension.'',0644);
+$post_content=str_replace($images[1][$i],''.$repertoire.'/'.$i.''.$extension.'',$post_content);
+ if(get_option('sm_debug')=="oui")
+    {
+echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';		
+	}
+}
+	}
+
+
     if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 	$txth=sm_schortode_txt(get_option('sm_txt_haut'),$fivesdraft->id_newsletter,$fivesdraft->hie);
 	$sujet=sm_schortode_txt(get_post_field('post_title', $fivesdraft->id_newsletter),$fivesdraft->id_newsletter,$fivesdraft->hie);
-	$corps=sm_schortode_txt(get_post_field('post_content', $fivesdraft->id_newsletter),$fivesdraft->id_newsletter,$fivesdraft->hie);
+	$corps=sm_schortode_txt($post_content,$fivesdraft->id_newsletter,$fivesdraft->hie);
 	$txtb=sm_schortode_txt(get_option('sm_txt_bas'),$fivesdraft->id_newsletter,$fivesdraft->hie);
 	$txta=sm_schortode_txt(get_option('sm_txt_affiliation'),$fivesdraft->id_newsletter,$fivesdraft->hie);
 	} else {
@@ -55,7 +119,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 		"sm_smtp_server" => get_option('sm_smtp_server'),
 		"sm_serveur" => get_option('sm_serveur'),
 		"sm_license" => get_option('sm_license'),  
-		"corps" =>get_post_field('post_content', $fivesdraft->id_newsletter),
+		"corps" => $post_content,
 		"sujet" => get_post_field('post_title', $fivesdraft->id_newsletter),
 		"post_id" => $fivesdraft->id_newsletter,
 		"hie" => $fivesdraft->hie,
@@ -66,7 +130,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 		"track2" => $fivesdraft->track2		
 		); 
 
-        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_beta.php',$array);
+        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_v2.php',$array);
         $xml2l =post_xml_data(addslashes($flux1),'item',array('resultat','txth','sujet','corps','txtb','txta'));
 		foreach($xml2l as $row) {
 		if($row[0] == 1)
@@ -215,11 +279,13 @@ if($fivesdraft->serveur !='auto'){
 	print_r($_SESSION);
 	echo "<br>".__("Reponse","e-mailing-service")." :<br>";
 	}
+	echo "##server : ".$fivesdraft->serveur."<br>";
 	if($fivesdraft->serveur =='auto'){
 	add_action('phpmailer_init','sm_smtp_multi');
 	} else {
 	$_SESSION['sm_choix'] =$fivesdraft->serveur;
 	add_action('phpmailer_init','sm_smtp_choix');	
+	echo "##server : ".$_SESSION['sm_choix']."<br>";
 	}
 	if($fivesdraft->mode == "text/html"){
 	$res=wp_mail( $smemails->email, $title, $contenu, $header, "");
