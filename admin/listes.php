@@ -700,7 +700,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=truncate\" target=\"_parent\"><img src=\"".smURL."img/doc_delete.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Vider la liste","e-mailing-service")."\"/></a></blockquote></td>
 	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=csv\" target=\"_parent\"><img src=\"".smURL."img/csv.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .csv\"/></a></blockquote></td>
 		 	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=xls\" target=\"_parent\"><img src=\"".smURL."img/xls.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .xls\"/></a></blockquote></td>
-				 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&liste_id=".$fivesdraft->id."&nbm=".$user_count->total."&action=division\" target=\"_parent\"><img src=\"".smURL."img/division.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Diviser votre liste en plusieurs listes","e-mailing-service")."\"/></a></blockquote></td>
+				 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&liste_id=".$fivesdraft->id."&nbm=".$user_count->total."&action=division\" target=\"_parent\"><img src=\"".smURL."division.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Diviser votre liste en plusieurs listes","e-mailing-service")."\"/></a></blockquote></td>
 	 ";
 	 echo "</tr>";
 }
