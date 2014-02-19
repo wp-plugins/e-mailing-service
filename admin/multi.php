@@ -97,7 +97,7 @@ if(get_option('sm_blacklist') == "oui" || get_option('sm_bounces') == "oui"){
 if( get_option('sm_multi_nb') ) {
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$nb' WHERE `option_name`='sm_multi_nb'");
 } else { add_option('sm_multi_nb',''.$nb.'');  }
-$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_typ_eenvoi' WHERE `option_name`='sm_typ_eenvoi'");
+$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_type_envoi' WHERE `option_name`='sm_type_envoi'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='mass-mailing' WHERE `option_name`='sm_license'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_txt_haut' WHERE `option_name`='sm_txt_haut'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_txt_bas' WHERE `option_name`='sm_txt_bas'");
@@ -124,7 +124,7 @@ if(get_option('sm_license') == "mass-mailing"){
 ?>
 <form action="admin.php?page=e-mailing-service/admin/multi.php" method="post">
 <input type="hidden" name="action" value="update" />
-<input type="hidden" name="sm_typ_eenvoi" value="smtp" />
+<input type="hidden" name="sm_type_envoi" value="smtp" />
 <input type="hidden" name="sm_license" value="<?php echo get_option('sm_license'); ?>" />
 <?php 
 $xml=lit_xml('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_multi.php?login='.get_option('sm_login').'&url='.$host.'&licence_key='.get_option('sm_license_key').'','item',array('resultat','numero','serveur','smtp','authentification','port','email','login','pass','version','status','email_retour','npai_serveur','npai_port','npai_login','npai_pass'));

@@ -55,6 +55,64 @@ $wpdb->insert($table_liste, array(
   KEY `cle` (`cle`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 PACK_KEYS=0 AUTO_INCREMENT=0 ;");  
 	}
+	elseif($action =="division"){
+	echo "<br><br><h2>".__('Diviser votre liste en plusieurs listes',"e-mailing-service")."</h2>";  	
+echo '<form action="admin.php?page=e-mailing-service/admin/listes.php" method="post" target="_parent">
+<input type="hidden" name="table_original_id" value="'.$liste_id.'" />
+<input type="hidden" name="table_original" value="'.$liste.'" />
+<input type="hidden" name="nb_total" value="'.$nbm.'" />
+<input type="hidden" name="action" value="division_add" />
+<p> '.__("Nombre de listes ?","e-mailing-service").'
+ <input type="text" name="nb_liste" value="2" />
+</p>
+<p> '.__("prefix de la liste","e-mailing-service").'
+ <input type="text" name="pfix" value="news" />
+</p>
+<input value="'.__("Valider","e-mailing-service").'" type="submit" />
+</fom>';
+	}
+	elseif($action =="division_add"){
+_e("Nombre par liste","e-mailing-service");
+$limit_liste=ceil($nb_total/$nb_liste); 
+echo "".$limit_liste." <br>";
+for($i=0;$i<$nb_liste;$i++){
+$liste=nettoie(''.$pfix.'_'.$i.'');
+$table_name = $wpdb->prefix.'sm_liste_'.$liste.'';
+	$wpdb->query("INSERT IGNORE INTO  `".$table_liste."` (liste_bd ,liste_nom,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9) SELECT '".$table_name ."','".$liste."',champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9 FROM `".$table_liste."` WHERE id='".$table_original_id."'",true);
+ $wpdb->query("  
+   CREATE TABLE IF NOT EXISTS `$table_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) NOT NULL DEFAULT '',
+  `nom` varchar(250) NOT NULL,
+  `ip` varchar(250) NOT NULL,
+  `lg` varchar(250) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
+  `champs1` varchar(250) NOT NULL,
+  `champs2` varchar(250) NOT NULL,
+  `champs3` varchar(250) NOT NULL,
+  `champs4` varchar(250) NOT NULL,
+  `champs5` varchar(250) NOT NULL,
+  `champs6` varchar(250) NOT NULL,
+  `champs7` varchar(250) NOT NULL,
+  `champs8` varchar(250) NOT NULL,
+  `champs9` varchar(250) NOT NULL,
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `valide` (`valide`),
+  KEY `bounces` (`bounces`),
+  KEY `cle` (`cle`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 PACK_KEYS=0 AUTO_INCREMENT=0 ;");  
+if($i==0){
+$debut = 0;	
+}
+	$wpdb->query("INSERT IGNORE INTO `".$table_name."` (id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle FROM `".$table_original."` LIMIT $debut,$limit_liste",true);
+	$debut = $limit_liste + $debut;
+	}
+	}
 	elseif($action =="truncate"){
 	echo "<br><br><h2>".__('Vider la liste',"e-mailing-service")."</h2>";  	
 	echo '<form action="admin.php?page=e-mailing-service/admin/listes.php" method="post" target="_parent">
@@ -332,7 +390,7 @@ $champs .=",".trim("$col11")."";
 elseif($col12 !='null'){
 $champs .=",".trim("$col12")."";		
 }
-$dossier_fichier="".smPATH."post/";
+$dossier_fichier=smPOST;
 $aleas=rand(0,99999999);
 
 $filename = ''.$dossier_fichier.'/import_'.$aleas.'.txt';
@@ -366,7 +424,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	$nomliste=$fivesdraft->liste_nom;
 }
 echo "<h1>".__("Importation d'email dans votre liste","e-mailing-service")." ".$nomliste."</h1>";
-$dossier_fichier="".smPATH."post/";
+$dossier_fichier=smPOST;
 echo "<h3>".__("Attention de verifier que le dossier","e-mailing-service")." ".$dossier_fichier." ".__("est les droits  (CHMOD a 0777)","e-mailing-service")."</h3>";
 
 
@@ -566,7 +624,7 @@ if($col12 !='null'){
 $champs .=",$col12";	
 }
 if(!file_exists("$content_dir$name_file")){
-echo '<br><br><br><span style="color:#00f"><b>'.__("Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier /post","e-mailing-service").'</b></span>';	
+echo '<br><br><br><span style="color:#00f"><b>'.__("Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier","e-mailing-service").' '.smPOST.'</b></span>';	
 } else {
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 $wpdb->query( "SET GLOBAL local_infile = 'ON';");
@@ -595,7 +653,7 @@ echo '<table class="widefat">
                          <thead>';
 echo "<tr><td><blockquote><b>".__("Nom de votre liste","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Nb d'emails","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b><a href=\"#\" title=\"".__("Une adresse courriel Opt In active a fait l'objet d'un consentement préalable par une validation par clic","e-mailing-service")."\">".__("Opt-in","e-mailing-service")."</a></b></blockquote></td>
+<td><blockquote><b><a href=\"#\" title=\"".__("Une adresse courriel Opt-In active a fait l'objet d'un consentement prealable par une validation par clic","e-mailing-service")."\">".__("Opt-in","e-mailing-service")."</a></b></blockquote></td>
 <td><blockquote><b>".__("Nb de desinscrits","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Nb Invalide","e-mailing-service")."</b></blockquote></td>
 <td><blockquote><b>".__("Action","e-mailing-service")."</b></blockquote></td>
@@ -613,25 +671,25 @@ foreach ( $fivesdrafts as $fivesdraft )
 	$user_count = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl."" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $user_count as $user_count ) 
      { 
-	 	 echo "<td><blockquote>".$user_count->total." ".__("emails","e-mailing-service")."</blockquote></td>";
+	 	 echo "<td><blockquote>".$user_count->total."</blockquote></td>";
 
 	 }
 	 	$optin_counts = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl." WHERE optin='1'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $optin_counts as $optin_count ) 
      { 
-	 	 echo "<td><blockquote>".$optin_count->total." ".__("emails","e-mailing-service")."</blockquote></td>";
+	 	 echo "<td><blockquote>".$optin_count->total."</blockquote></td>";
 
 	 }
 	 	$invalid_count = $wpdb->get_results("SELECT COUNT(id) AS total2 FROM ".$bdl." WHERE valide='0'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $invalid_count as $invalid_count ) 
      { 
-	 echo "<td><blockquote>".$invalid_count ->total2." ".__("emails","e-mailing-service")."</blockquote></td>";
+	 echo "<td><blockquote>".$invalid_count ->total2."</blockquote></td>";
 
 	 }
 	 	 	$bounces_count = $wpdb->get_results("SELECT COUNT(id) AS total3 FROM ".$bdl." WHERE bounces='0'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $bounces_count as $bounces_count ) 
      { 
-	 echo "<td><blockquote>".$bounces_count ->total3." ".__("emails","e-mailing-service")."</blockquote></td>";
+	 echo "<td><blockquote>".$bounces_count ->total3."</blockquote></td>";
 
 	 }
 	 echo "
@@ -642,6 +700,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=truncate\" target=\"_parent\"><img src=\"".smURL."/img/doc_delete.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Vider la liste","e-mailing-service")."\"/></a></blockquote></td>
 	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=csv\" target=\"_parent\"><img src=\"".smURL."/img/csv.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .csv\"/></a></blockquote></td>
 		 	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=xls\" target=\"_parent\"><img src=\"".smURL."/img/xls.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .xls\"/></a></blockquote></td>
+				 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&liste_id=".$fivesdraft->id."&nbm=".$user_count->total."&action=division\" target=\"_parent\"><img src=\"".smURL."/img/division.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Diviser votre liste en plusieurs listes","e-mailing-service")."\"/></a></blockquote></td>
 	 ";
 	 echo "</tr>";
 }

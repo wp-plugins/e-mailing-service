@@ -30,6 +30,7 @@ function nettoie($str, $charset='utf-8')
 	$str = str_replace("--","_",$str);
 	$str = str_replace("--","_",$str);
 	$str = str_replace("--","_",$str);
+	$str = str_replace("-","_",$str);
     $str = htmlentities($str, ENT_NOQUOTES, $charset);
     
     $str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);

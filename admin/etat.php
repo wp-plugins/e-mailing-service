@@ -1,6 +1,35 @@
 <?php
 include(smPATH . '/include/entete.php');
-
+extract($_POST);
+extract($_GET);
+if(!isset($action)){
+$action="null";	
+}
+if($action == "send"){
+	$header = sm_optimisation_fai($email,$title,$num,"text/plain");	
+    $_SESSION['sm_choix'] =$num;
+	add_action('phpmailer_init','sm_smtp_choix');	
+	echo "<br>".__("Reponse","e-mailing-service")." :<br>";
+	wp_mail( $email, $title, $contenu, $header, "");
+	echo "##server : ".$num."<br>";
+	print_r($_SESSION);
+} 
+elseif($action == "tester"){
+echo "<h1>".__("Tester votre serveur SMTP","e-mailing-service")."</h1>";
+echo '<form action="?page=e-mailing-service/admin/etat.php" method="post" target="_parent">
+<input type="hidden" name="action" value="send" />
+<input type="hidden" name="num" value="'.$_GET["num"].'" />';
+echo '<table class="widefat">
+                         ';
+echo "
+<tr><td><blockquote><b>".__("Email","e-mailing-service")."</b></blockquote></td><td><input name=\"email\" type=\"text\" value=\"". get_option('admin_email')."\" /></td></tr>
+<tr><td><blockquote><b>".__("Sujet","e-mailing-service")."</b></blockquote></td><td><input name=\"title\" type=\"text\" value=\"".__("test smtp","e-mailing-service")."\" size=\"40\"/></td></tr>
+<tr><td><blockquote><b>".__("Message","e-mailing-service")."</b></blockquote></td><td><textarea name=\"contenu\" cols=\"50\" rows=\"10\">".__("test ok ?","e-mailing-service")."</textarea></td></tr>
+<tr><td></td><td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer")."\"/></td></tr>
+</table>
+";	
+	
+} else {
 echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
     $tbaleau_insert="";
     $tbaleau_insert .= '<table class="widefat">
@@ -8,6 +37,7 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
     $tbaleau_insert .= "<tr>";
 	$tbaleau_insert .= "<th><blockquote>".__('Serveur SMTP',"e-mailing-service")."</blockquote></th>";
 	$tbaleau_insert .= "<th><blockquote>".__('IP',"e-mailing-service")."</blockquote></th>";
+	$tbaleau_insert .= "<th><blockquote>".__('Tester',"e-mailing-service")."</blockquote></th>";
 	$tbaleau_insert .= "<th><blockquote>".__('Port 25',"e-mailing-service")."</blockquote></th>";
 	$tbaleau_insert .= "<th><blockquote>".__('Port 587',"e-mailing-service")."</blockquote></th>";
 	$tbaleau_insert .= "<th><blockquote>".__('Port 80',"e-mailing-service")."</blockquote></th>";
@@ -23,6 +53,7 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
     $tbaleau_insert .= "<tr>
 	<td><blockquote>".get_option('sm_smtp_server_'.$num.'')."</blockquote></td>
 	<td><blockquote>".gethostbyname(get_option('sm_smtp_server_'.$num.''))."</blockquote></td>
+	<td><blockquote><a href=\"?page=e-mailing-service/admin/etat.php&action=tester&num=".$num."\" target=\"_blank\">".__('Tester le serveur','e-mailing-service')."</a></blockquote></td>
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"25")."</blockquote></td>
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"587")."</blockquote></td>
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"80")."</blockquote></td>
@@ -53,5 +84,5 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
 $tbaleau_insert .= '</tbody></table>';
 echo $tbaleau_insert ;
 
-
+}
 ?>
