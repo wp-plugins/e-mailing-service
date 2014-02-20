@@ -83,7 +83,7 @@ if(get_option('sm_blacklist') == "oui" || get_option('sm_bounces') == "oui"){
 		"npai_serveur" => $_POST['sm_npai_serveur_'.$ns.''],
 		"npai_port" => $_POST['sm_npai_port_'.$ns.''],
 		"npai_login" => $_POST['sm_npai_login_'.$ns.''],
-		"npai_pass" => $_POST['sm_smtp_pass_'.$ns.''],
+		"npai_pass" => $_POST['sm_npai_pass_'.$ns.''],
 		"option_blacklist"=> get_option('sm_blacklist'),
 		"option_bounces"=> "oui"
 		); 

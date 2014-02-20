@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 7.0
+Version: 7.1
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -25,7 +25,7 @@ $upload_dir_name = false;
 if ( !defined( 'UPLOADS' ) ){
 define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
 }
-define( 'smVERSION', '7.0' );
+define( 'smVERSION', '7.1' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -69,7 +69,8 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL);  
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL); 
+      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug stats', 'e-mailing-service'), __('Debug stats', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_stats.php', NULL);  
    }
 
 }
@@ -698,7 +699,7 @@ update_optin($smnum,$smidmp,$smcle);
 } else {
 update_optin($smnum,$smidmp);
 }
-$email=affiche_mail($smnum,$smemailid);
+$email=affiche_mail($smnum,$smidmp);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
 		$array =array (
@@ -725,7 +726,7 @@ update_optin($smnum,$smidmd,$smcle);
 } else {
 update_optin($smnum,$smidmd);
 }
-$email=affiche_mail($smnum,$smemailid);
+$email=affiche_mail($smnum,$smidmd);
 	    $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 		$host=str_replace("www.","",$host);
 		$array =array (
@@ -1079,6 +1080,7 @@ sm_cron_fichier('include/blacklist.php');
 sm_cron_fichier('include/spamscore.php');
 sm_cron_fichier('include/bounces_update.php');
 sm_cron_fichier('include/bounces_update_liste.php');
+sm_cron_fichier('include/cron_stats.php');
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 
