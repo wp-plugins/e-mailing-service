@@ -25,7 +25,7 @@ $upload_dir_name = false;
 if ( !defined( 'UPLOADS' ) ){
 define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
 }
-define( 'smVERSION', '7.1' );
+define( 'smVERSION', '7.2' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
