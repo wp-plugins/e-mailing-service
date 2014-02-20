@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: E-mailing services\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-19 16:49+0100\n"
-"PO-Revision-Date: 2014-02-19 16:57+0100\n"
+"POT-Creation-Date: 2014-02-20 15:10+0100\n"
+"PO-Revision-Date: 2014-02-20 15:15+0100\n"
 "Last-Translator: jooky limited <contact@jooky.eu>\n"
 "Language-Team: Jooky limited <contact@jooky.eu>\n"
 "Language: pt\n"
@@ -154,12 +154,12 @@ msgstr ""
 "Você não se inscreveu para a opção que permite que você recupere saltos"
 
 #: admin/blacklist.php:22 admin/emails.php:249 admin/live.php:62
-#: admin/npai.php:53 admin/npai.php:99 admin/npai.php:178 admin/stats.php:19
+#: admin/npai.php:56 admin/npai.php:102 admin/npai.php:181 admin/stats.php:19
 msgid "&laquo;"
 msgstr "&laquo;"
 
 #: admin/blacklist.php:23 admin/emails.php:250 admin/live.php:63
-#: admin/npai.php:54 admin/npai.php:100 admin/npai.php:179 admin/stats.php:20
+#: admin/npai.php:57 admin/npai.php:103 admin/npai.php:182 admin/stats.php:20
 msgid "&raquo;"
 msgstr "&raquo;"
 
@@ -170,8 +170,8 @@ msgstr "&raquo;"
 msgid "IP"
 msgstr "IP"
 
-#: admin/blacklist.php:32 admin/live.php:71 admin/npai.php:113
-#: admin/npai.php:202 admin/stats.php:59 admin/stats.php:82
+#: admin/blacklist.php:32 admin/live.php:71 admin/npai.php:116
+#: admin/npai.php:205 admin/stats.php:59 admin/stats.php:82
 #: admin/stats.php:105
 msgid "Type"
 msgstr "Tipo"
@@ -185,8 +185,8 @@ msgstr "Blacklist"
 msgid "Lien pour se desinscrire"
 msgstr "Link para Baixa"
 
-#: admin/blacklist.php:35 admin/listes.php:696 admin/npai.php:133
-#: admin/npai.php:204 admin/npai.php:218
+#: admin/blacklist.php:35 admin/listes.php:696 admin/npai.php:136
+#: admin/npai.php:207 admin/npai.php:221
 msgid "Details"
 msgstr "Detalhes"
 
@@ -302,8 +302,8 @@ msgstr "Mot de passe"
 #: admin/configuration.php:164 admin/emails.php:50 admin/emails.php:144
 #: admin/emails.php:257 admin/etat.php:25 admin/listes.php:150
 #: admin/listes.php:226 admin/listes.php:285 admin/listes.php:531
-#: admin/listes.php:714 admin/multi.php:146 admin/npai.php:62
-#: admin/npai.php:110 admin/npai.php:199 admin/parametres.php:161
+#: admin/listes.php:714 admin/multi.php:146 admin/npai.php:65
+#: admin/npai.php:113 admin/npai.php:202 admin/parametres.php:161
 #: admin/variables.php:184 tuto/faq_question.php:15 tuto/ticket.php:15
 msgid "Email"
 msgstr "Email"
@@ -422,15 +422,15 @@ msgstr "Você realmente quer deletar o e-mail?"
 #: admin/multi.php:538 admin/multi.php:541 admin/multi.php:553
 #: admin/multi.php:556 admin/multi.php:590 admin/multi.php:597
 #: admin/multi.php:644 admin/multi.php:651 admin/multi.php:662
-#: admin/multi.php:669 admin/npai.php:73 admin/parametres.php:213
+#: admin/multi.php:669 admin/npai.php:76 admin/parametres.php:213
 #: admin/parametres.php:216 admin/parametres.php:228 admin/parametres.php:231
 #: admin/parametres.php:243 admin/parametres.php:246 admin/parametres.php:279
 #: admin/parametres.php:282 admin/parametres.php:326 admin/parametres.php:333
 #: admin/parametres.php:343 admin/parametres.php:347 admin/parametres.php:399
 #: admin/parametres.php:407 admin/parametres.php:555 admin/parametres.php:562
 #: admin/parametres.php:594 admin/parametres.php:601 admin/parametres.php:612
-#: admin/parametres.php:619 e-mailing-service.php:1120
-#: e-mailing-service.php:1126 sm_widget.php:12 sm_widget.php:150
+#: admin/parametres.php:619 e-mailing-service.php:1122
+#: e-mailing-service.php:1128 sm_widget.php:12 sm_widget.php:150
 #: sm_widget.php:175 sm_widget.php:177 sm_widget.php:184 sm_widget.php:186
 #: sm_widget.php:193 sm_widget.php:195 sm_widget.php:202 sm_widget.php:204
 #: sm_widget.php:211 sm_widget.php:213 sm_widget.php:220 sm_widget.php:222
@@ -450,14 +450,14 @@ msgstr "sim"
 #: admin/multi.php:542 admin/multi.php:554 admin/multi.php:557
 #: admin/multi.php:593 admin/multi.php:600 admin/multi.php:647
 #: admin/multi.php:654 admin/multi.php:665 admin/multi.php:672
-#: admin/npai.php:75 admin/parametres.php:214 admin/parametres.php:217
+#: admin/npai.php:78 admin/parametres.php:214 admin/parametres.php:217
 #: admin/parametres.php:229 admin/parametres.php:232 admin/parametres.php:244
 #: admin/parametres.php:247 admin/parametres.php:280 admin/parametres.php:283
 #: admin/parametres.php:329 admin/parametres.php:336 admin/parametres.php:344
 #: admin/parametres.php:349 admin/parametres.php:558 admin/parametres.php:565
 #: admin/parametres.php:597 admin/parametres.php:604 admin/parametres.php:615
-#: admin/parametres.php:622 e-mailing-service.php:1121
-#: e-mailing-service.php:1127 sm_widget.php:13 sm_widget.php:14
+#: admin/parametres.php:622 e-mailing-service.php:1123
+#: e-mailing-service.php:1129 sm_widget.php:13 sm_widget.php:14
 #: sm_widget.php:15 sm_widget.php:16 sm_widget.php:17 sm_widget.php:18
 #: sm_widget.php:19 sm_widget.php:20 sm_widget.php:21 sm_widget.php:151
 #: sm_widget.php:152 sm_widget.php:153 sm_widget.php:154 sm_widget.php:155
@@ -523,7 +523,7 @@ msgstr "Resposta"
 msgid "Tester votre serveur SMTP"
 msgstr "Teste o seu servidor SMTP"
 
-#: admin/etat.php:26 admin/npai.php:114 admin/npai.php:203 tuto/ticket.php:19
+#: admin/etat.php:26 admin/npai.php:117 admin/npai.php:206 tuto/ticket.php:19
 #: tuto/ticket_liste.php:77
 msgid "Sujet"
 msgstr "Assunto"
@@ -1488,55 +1488,105 @@ msgid ""
 msgstr ""
 "Você não se inscreveu para a opção que permite que você recupere saltos"
 
+#: admin/npai.php:15
+msgid "Liste des reponses sur vos envois (NPAI)"
+msgstr "Lista de respostas sobre seus envios (IASP)"
+
 #: admin/npai.php:16
 msgid "Liste des NPAI"
 msgstr "Lista de IASP"
+
+#: admin/npai.php:18
+msgid ""
+"Reponse des FAI sur vos envois (une seule reponse par fai) , pour plus de "
+"visabilite par fai"
+msgstr ""
+"ISPs responder seus envios (um para cada fai) para obter mais visibalité por "
+"fai"
 
 #: admin/npai.php:19
 msgid "Reponses FAI"
 msgstr "Respostas ISP"
 
+#: admin/npai.php:21
+msgid ""
+"Liste detaille des hard bounces (emails invalides) inscrit par l'API sur vos "
+"envois"
+msgstr ""
+"Lista detalhada de saltos difíceis (e-mail inválido) registrado pela API em "
+"seus envios"
+
 #: admin/npai.php:22
 msgid "Hard Bounces "
 msgstr "Hard Bounces "
+
+#: admin/npai.php:24
+msgid ""
+"Une tache planifie effectue deja cette tache , mais si vous voulez verifier "
+"que l'Api a mis a jour vos  bounces, vous pouvez l'appeler manuellement"
+msgstr ""
+"Uma tarefa agendada já realizado esta tarefa, mas se você quiser verificar "
+"se a API atualiza seus saltos, você pode chamar manualmente"
 
 #: admin/npai.php:25
 msgid "Importer NPAI"
 msgstr "Importação IASP"
 
-#: admin/npai.php:28
-msgid "Retirer des listes les Hard bounces"
-msgstr "Retire as listas bounces rígidos"
+#: admin/npai.php:27
+msgid ""
+"Une tache planifie effectue deja cette tache , mais si vous voulez verifier "
+"ou avez besoin de debuger , vous pouvez le declancher manuellement"
+msgstr ""
+"Planos já fez um ponto neste local, mas se você deseja verificar ou precisa "
+"debuger, você pode acionar manualmente"
 
-#: admin/npai.php:63
+#: admin/npai.php:28
+msgid "Retirer des listes les Hard bounces non traites"
+msgstr "Retire as listas rígidos bounces não tratados"
+
+#: admin/npai.php:30
+msgid ""
+"Attention , suivant le nombre de Hard bounces que vous avez dans la table "
+"mysql, cela peu ralentir votre serveur le temps du traitements.Ce lien est "
+"interessant si vous avez importer des nouvelles listes d'emails "
+msgstr ""
+"Atenção para o número de disco salta-lhe na tabela mysql, apenas abrandar o "
+"seu tempo servidor ligação traitements.Ce é interessante se você importar "
+"novas listas de e-mail"
+
+#: admin/npai.php:31
+msgid "Verifier les Hard bounces deja traites"
+msgstr "Verifique os saltos duros já tratados"
+
+#: admin/npai.php:66
 msgid "Retirer des listes"
 msgstr "Remover listas"
 
-#: admin/npai.php:108 admin/npai.php:198
+#: admin/npai.php:111 admin/npai.php:201
 msgid "License NPAI"
 msgstr "Licença NPAI"
 
-#: admin/npai.php:109
+#: admin/npai.php:112
 msgid "FAI"
 msgstr "ISP"
 
-#: admin/npai.php:111 admin/npai.php:200
+#: admin/npai.php:114 admin/npai.php:203
 msgid "Date email"
 msgstr "Data e-mail"
 
-#: admin/npai.php:112 admin/npai.php:201
+#: admin/npai.php:115 admin/npai.php:204
 msgid "Categorie"
 msgstr "categoria"
 
-#: admin/npai.php:115
+#: admin/npai.php:118
 msgid "Lire le mail"
 msgstr "Leia este"
 
-#: admin/npai.php:186
+#: admin/npai.php:189
 msgid "Les NPAI ont bien ete supprimes"
 msgstr "Saltos muito bem ter sido eliminada"
 
-#: admin/npai.php:192
+#: admin/npai.php:195
 msgid "Vider les bounces"
 msgstr "Rejeições vazios"
 
@@ -2197,74 +2247,78 @@ msgstr "Velocidade Debug"
 msgid "Debug vitesse"
 msgstr "Velocidade Debug"
 
-#: e-mailing-service.php:86 e-mailing-service.php:88 e-mailing-service.php:616
+#: e-mailing-service.php:73
+msgid "Debug stats"
+msgstr "Debug stats"
+
+#: e-mailing-service.php:87 e-mailing-service.php:89 e-mailing-service.php:617
 msgid "Newsletter"
 msgstr "Boletim informativo"
 
-#: e-mailing-service.php:89 e-mailing-service.php:91
+#: e-mailing-service.php:90 e-mailing-service.php:92
 msgid "Ajouter une newsletter"
 msgstr "Adicionar boletim"
 
-#: e-mailing-service.php:90
+#: e-mailing-service.php:91
 msgid "Modifier la newsletter"
 msgstr "Boletim de atualização"
 
-#: e-mailing-service.php:92
+#: e-mailing-service.php:93
 msgid "Creation de newsletter"
 msgstr "Neewsletter criar"
 
-#: e-mailing-service.php:93
+#: e-mailing-service.php:94
 msgid "Visualisez la newsletter"
 msgstr "Vista"
 
-#: e-mailing-service.php:94 e-mailing-service.php:95
+#: e-mailing-service.php:95 e-mailing-service.php:96
 msgid "La newsletter n'existe plus"
 msgstr "O boletim não existe"
 
-#: e-mailing-service.php:96
+#: e-mailing-service.php:97
 msgid "Recherche une newsletter"
 msgstr "Pesquisa Newsletter"
 
-#: e-mailing-service.php:108 e-mailing-service.php:110
-#: e-mailing-service.php:616 sm_modeles.php:212 sm_modeles.php:214
+#: e-mailing-service.php:109 e-mailing-service.php:111
+#: e-mailing-service.php:617 sm_modeles.php:212 sm_modeles.php:214
 msgid "Modeles"
 msgstr "Modelo"
 
-#: e-mailing-service.php:111 e-mailing-service.php:114 sm_modeles.php:218
+#: e-mailing-service.php:112 e-mailing-service.php:115 sm_modeles.php:218
 msgid "Nouveau modele"
 msgstr "Novo modelo"
 
-#: e-mailing-service.php:112 sm_modeles.php:216
+#: e-mailing-service.php:113 sm_modeles.php:216
 msgid "Modifier le modele"
 msgstr "Editar Modelo"
 
-#: e-mailing-service.php:113
+#: e-mailing-service.php:114
 msgid "Creer un modele"
 msgstr ""
 "Você pode alterar o modelo ou criar um novo modelo a partir da lista de "
 "modelos"
 
-#: e-mailing-service.php:115
+#: e-mailing-service.php:116
 msgid "Visionner le modele"
 msgstr "Editar Modelo"
 
-#: e-mailing-service.php:116
+#: e-mailing-service.php:117
 msgid "Le modele ne fonctionne pas"
 msgstr "Nenhum modelo"
 
-#: e-mailing-service.php:117
+#: e-mailing-service.php:118
 msgid "Le modele ne fonctionne pas."
 msgstr "Nenhum modelo"
 
-#: e-mailing-service.php:118
+#: e-mailing-service.php:119
 msgid "Rechercher un modele"
 msgstr "novo modelo"
 
-#: e-mailing-service.php:406
+#: e-mailing-service.php:407
 msgid "Lire le mail dans votre navigateur"
 msgstr "Leia o e-mail em seu navegador"
 
-#: e-mailing-service.php:407
+#: e-mailing-service.php:408
 msgid ""
 "Veuillez ne pas repondre a cet email. Cette boite aux lettres n'etant pas "
 "consultee, vous ne recevrez aucune reponse.</h5>\n"
@@ -2273,23 +2327,23 @@ msgstr ""
 "Por favor, não responda a este e-mail. Esta caixa de correio não está sendo "
 "consultada, você não receberá reponse.Pour parar de receber e-mail"
 
-#: e-mailing-service.php:408
+#: e-mailing-service.php:409
 msgid "il suffit de cliquez ICI"
 msgstr "basta clicar AQUI"
 
-#: e-mailing-service.php:409
+#: e-mailing-service.php:410
 msgid "Service de routage d'email fournit par"
 msgstr "Serviço de roteamento por e-mail fornecido "
 
-#: e-mailing-service.php:409
+#: e-mailing-service.php:410
 msgid "service de routage de mail"
 msgstr "Mail Routing"
 
-#: e-mailing-service.php:476
+#: e-mailing-service.php:477
 msgid "Gestion liste de diffusion"
 msgstr "Gerenciamento de lista de discussão"
 
-#: e-mailing-service.php:477
+#: e-mailing-service.php:478
 msgid ""
 "Si vous ne voulez plus recevoir des emails de notre part , valider le "
 "formulaire.<br>Vous ne recevrez plus aucun email de cette liste de diffusion."
@@ -2297,62 +2351,62 @@ msgstr ""
 "Se você não quiser mais receber e-mails de nós, preencha o formulário. <br> "
 "Você não receberá nenhum e-mail desta lista."
 
-#: e-mailing-service.php:478
+#: e-mailing-service.php:479
 msgid "Je confirme ma desinscription"
 msgstr "Confirmo minha unsubscribe"
 
-#: e-mailing-service.php:479
+#: e-mailing-service.php:480
 msgid ""
 "Vous etes bien desinscrit , vous ne recevrez plus d'email de notre liste de "
 "diffusion"
 msgstr "Você está bem retirado, você não receber a nossa lista de e-mails"
 
-#: e-mailing-service.php:500
+#: e-mailing-service.php:501
 msgid "Modele automatique"
 msgstr "Modelo automático"
 
-#: e-mailing-service.php:519
+#: e-mailing-service.php:520
 msgid "Test shortcode pour mr [nom]"
 msgstr "Shortcode Teste para mr [nom]"
 
-#: e-mailing-service.php:616
+#: e-mailing-service.php:617
 msgid "Templates"
 msgstr "Templates"
 
-#: e-mailing-service.php:616
+#: e-mailing-service.php:617
 msgid "sm_modeles"
 msgstr "sm_modeles"
 
-#: e-mailing-service.php:948
+#: e-mailing-service.php:949
 msgid "Toutes les 3 mn"
 msgstr "A cada 1 min"
 
-#: e-mailing-service.php:970
+#: e-mailing-service.php:971
 msgid "Toutes les 15 mn"
 msgstr "A cada 15 min"
 
-#: e-mailing-service.php:990
+#: e-mailing-service.php:991
 msgid "Toutes les heures"
 msgstr "A cada uma hora"
 
-#: e-mailing-service.php:1011
+#: e-mailing-service.php:1012
 msgid "Toutes les 4 heures"
 msgstr "Cada 4 horas"
 
-#: e-mailing-service.php:1032
+#: e-mailing-service.php:1033
 msgid "Tous les jours"
 msgstr "Todos os dias"
 
-#: e-mailing-service.php:1103 e-mailing-service.php:1104
+#: e-mailing-service.php:1105 e-mailing-service.php:1106
 msgid "Envoyer un email a votre liste de destinataires avec le lien de la page"
 msgstr ""
 "Envoyer un email a votre liste de destinataires avec le lien de la page"
 
-#: e-mailing-service.php:1116
+#: e-mailing-service.php:1118
 msgid "Cochez pour envoyer le lien a votre liste de destinataires"
 msgstr "Assinale? Para enviar o link para sua lista de destinatários"
 
-#: e-mailing-service.php:1386
+#: e-mailing-service.php:1389
 msgid "mise a jour de la base de donnee du plugin e-mailing service ("
 msgstr "atualização do banco de dados determinado e-mails serviços plugin ("
 
@@ -2453,7 +2507,7 @@ msgstr "Saltos cuja data é inferior a um"
 msgid " "
 msgstr " "
 
-#: include/bounces_update_liste.php:33 include/bounces_update_liste.php:57
+#: include/bounces_update_liste.php:40 include/bounces_update_liste.php:64
 msgid "update list"
 msgstr "lista de atualização"
 
@@ -2531,6 +2585,14 @@ msgstr "Suas opçães de licença são atuais"
 #: include/license.php:36
 msgid "Votre license comporte une erreur , contacter le support"
 msgstr "Sua licença tem um erro, contate o suporte"
+
+#: include/cron_stats.php:13
+msgid "Statistiques de l'envoi numero :"
+msgstr "Estatísticas envio número:"
+
+#: include/cron_stats.php:13
+msgid "mis a jour"
+msgstr "atualizado"
 
 #: include/entete.php:52
 msgid ""

@@ -12,28 +12,31 @@ _e("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2 class="nav-tab-wrapper">
-    <a href="?page=e-mailing-service/admin/npai.php" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
+    <a href="?page=e-mailing-service/admin/npai.php" title="<?php _e("Liste des reponses sur vos envois (NPAI)", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
 			<?php _e('Liste des NPAI',"e-mailing-service"); ?>
 		</a>
-        <a href="?page=e-mailing-service/admin/npai.php&section=bounces_fai" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_fai') echo 'nav-tab-active'; }?>">
+        <a href="?page=e-mailing-service/admin/npai.php&section=bounces_fai" title="<?php _e("Reponse des FAI sur vos envois (une seule reponse par fai) , pour plus de visabilite par fai", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_fai') echo 'nav-tab-active'; }?>">
 			<?php _e("Reponses FAI", "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=hard_bounces" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'hard_bounces') echo 'nav-tab-active'; }?>">
+		<a href="?page=e-mailing-service/admin/npai.php&section=hard_bounces"  title="<?php _e("Liste detaille des hard bounces (emails invalides) inscrit par l'API sur vos envois", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'hard_bounces') echo 'nav-tab-active'; }?>">
 			<?php _e("Hard Bounces ", "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_import" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
+		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_import" title="<?php _e("Une tache planifie effectue deja cette tache , mais si vous voulez verifier que l'Api a mis a jour vos  bounces, vous pouvez l'appeler manuellement", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
 			<?php _e('Importer NPAI',"e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
-			<?php _e("Retirer des listes les Hard bounces", "e-mailing-service"); ?>
+		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update" title="<?php _e("Une tache planifie effectue deja cette tache , mais si vous voulez verifier ou avez besoin de debuger , vous pouvez le declancher manuellement", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
+			<?php _e("Retirer des listes les Hard bounces non traites", "e-mailing-service"); ?>
 		</a>
-      	
+      	<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update_reset" title="<?php _e("Attention , suivant le nombre de Hard bounces que vous avez dans la table mysql, cela peu ralentir votre serveur le temps du traitements.Ce lien est interessant si vous avez importer des nouvelles listes d'emails ", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
+			<?php _e("Verifier les Hard bounces deja traites", "e-mailing-service"); ?>
+		</a>
 	</h2><h2>
    <?php
  if(isset($_REQUEST['section'])){
 	
 		if ($_REQUEST['section'] == 'bounces_import') include(smPATH.'include/bounces_update.php');
 		if ($_REQUEST['section'] == 'bounces_update') include(smPATH.'include/bounces_update_liste.php');
+		if ($_REQUEST['section'] == 'bounces_update_reset') { $action="reset"; include(smPATH.'include/bounces_update_liste.php');}
 
 		
 /////debut/////			

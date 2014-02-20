@@ -15,7 +15,13 @@ echo "".__("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les
 echo '<a href="http://www.e-mailing-service.net/options/?option=opt-npai" target="_blank">'.__("cliquez ici","e-mailing-service").'</a> .<br>';
 echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de serveur SMTP chez nous","e-mailing-service")."";
 } else {
-	
+if(!isset($action)){
+$action="null";	
+} else {
+if($action =="reset"){
+$wpdb->query("UPDATE `".$table_bounces_hard."` SET `update` ='0'");	
+}
+}
 	     $sqlhard = $wpdb->get_results("SELECT id,email FROM `".$table_bounces_hard."` WHERE `update`='0'");
          foreach (  $sqlhard as $reshard ) 
          {		 
@@ -23,13 +29,14 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
          foreach ( $listese1 as $reslistee1 ) 
          {
 		 echo '#######'.$reslistee1->liste_bd.'#####<br>';
-		 $listese2 = $wpdb->get_results("SELECT count(id) AS total FROM `".$reslistee1->liste_bd."` WHERE email like '".trim(mysql_real_escape_string($reshard->email))."'");
+		 $listese2 = $wpdb->get_results("SELECT count(id) AS total FROM `".$reslistee1->liste_bd."` WHERE trim(email) like '".trim(mysql_real_escape_string($reshard->email))."'");
          foreach ( $listese2 as $rescount ) 
          {
 			           if($rescount->total > 0)
 			           {
-         mysql_query("UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE email like '".trim(mysql_real_escape_string($reshard->email))."' LIMIT 0,1");
          $wpdb->update( $table_bounces_hard, array('update' => 1), array( 'id' => $reshard->id));
+		 $wpdb->query("UPDATE `".$reslistee1->liste_bd."` SET bounces ='0' WHERE trim(email) like '".trim(mysql_real_escape_string($reshard->email))."'");
+
 		 echo ''.$reshard->email.'  '.__('update list','e-mailing-service').'  '.$reslistee1->liste_bd.'';	
 		 echo "<br>";	               
 		                 }	
@@ -47,13 +54,13 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
          foreach ( $listese1 as $reslistee1 ) 
          {
 		 echo '#######'.$reslistee1->liste_bd.'#####<br>';
-		 $listese2 = $wpdb->get_results("SELECT count(id) AS total FROM `".$reslistee1->liste_bd."` WHERE email like '%".trim(mysql_real_escape_string($reshard->email))."%'");
+		 $listese2 = $wpdb->get_results("SELECT count(id) AS total FROM `".$reslistee1->liste_bd."` WHERE trim(email) like '%".trim(mysql_real_escape_string($reshard->email))."%'");
          foreach ( $listese2 as $rescount ) 
          {
 			           if($rescount->total > 0)
 			           {
-         mysql_query("UPDATE ".$reslistee1->liste_bd." SET bounces ='0' WHERE email like '%".trim(mysql_real_escape_string($reshard->email))."%' LIMIT 0,1");
-         $wpdb->update( $table_bounces_hard, array('update' => 1), array( 'id' => $reshard->id));
+		$wpdb->query("UPDATE `".$reslistee1->liste_bd."` SET bounces ='0' WHERE trim(email) like '%".trim(mysql_real_escape_string($reshard->email))."%'");
+        $wpdb->update( $table_bounces_hard, array('update' => 1), array( 'id' => $reshard->id));
 		 echo ''.$reshard->email.'  '.__('update list','e-mailing-service').'  '.$reslistee1->liste_bd.'';	
 		 echo "<br>";	               
 		                 }	
