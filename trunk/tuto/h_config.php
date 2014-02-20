@@ -1,0 +1,41 @@
+<?php
+echo '<h2>'.__("Menu","e-mailing-service").' '.__("Configuration SMTP","e-mailing-service").'</h2><br>';
+_e("Si vous avez louez un servur SMTP chez nous la configuration est automatique , vous avez juste a valider le formulaire avec les options en bas de formulaires qui vous interesse.","e-mailing-service");
+echo '<br>';
+_e("Si vous possedez deja un serveur SMTP, vous devez donc renseigner le formulaire et donc possedez les informations necessaires (serveur, email, port, login et mot de passe)","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Pour les options, ce que vous devez savoir :","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Affichage texte en haut , texte de desabonnement et affiliation servent a parametrer les informations importante de votre newsletter , sans avoir a toujours les indiquer sur votre template","e-mailing-service");
+echo '<br>';
+_e("Attention a la variable [lien_desabo] , si elle n'est pas presente sur votre template et que vous avez desactiver le lien de desabonnement , votre newsletter ne partiras pas, car retirer le lien de desabonnement est considere comme du spam !","e-mailing-service");
+echo '<br>';
+_e("Vous pouvez connaitre facilement toutes les variables disponible dans le menu variables","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Si vous cocher la case 'Envoi automatique des nouveaux posts et nouvelles pages' , a chaque fois que vous publier une nouvelle newsletter ou un nouveau post , le lien est envoye a votre liste par defaut","e-mailing-service");
+echo '<br>';
+_e("Vous pouvez modifier le modele ou creer un nouveau modele a partir de la liste de modeles","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Le temps pause est le delai d'attente entre chaque email envoyes , plus le temps de pause est court plus , votre newsletter sera envoye rapidement.","e-mailing-service");
+echo '<br>';
+_e("Si vous envoyez trop vite , votre serveur pourra etre bloque ou blackliste par les fournisseurs d'email.","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Possibilite de mettre les campagnes en pause : vous pouvez l'activer ou le desactiver en cours d'envoi , pour le mettre en place que si vous en avez vraiment besoin , car sinon ralentit le script","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Changement de configuration en cours d'envoi , il est possible de changer la configuration en cours d'envoi , cela changera votre serveur SMTP sur le script d'envoi","e-mailing-service");
+echo '<br>';
+echo '<br>';
+echo '<h2>'.__("Menu","e-mailing-service").' '.__("Mass Mailing","e-mailing-service").'</h2><br>';
+echo '<br>';
+_e("Le script d'envoi par defaut effectue une rotation entre tous vos serveurs actifs, pour retirer un serveur de la rotation , vous devez le desactiver dans la configuration .","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Vous pourrez envoyer avec vos serveurs desactives a l'aide du formulaire envoyer en choissant votre serveur","e-mailing-service");
+
+?>
