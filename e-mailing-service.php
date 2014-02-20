@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 6.9
+Version: 7.0
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -25,7 +25,7 @@ $upload_dir_name = false;
 if ( !defined( 'UPLOADS' ) ){
 define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
 }
-define( 'smVERSION', '6.9' );
+define( 'smVERSION', '7.0' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
