@@ -332,11 +332,11 @@ if($fivesdraft->serveur !='auto'){
 	if(get_option('sm_license') !="free"){
 	$array =array (
 		"domaine_client" => str_replace("www.","",$_SERVER['HTTP_HOST']),
-		"nb_envoi" => $ie,
-		"action" => "nb_envoi",
+		"nb_envoi" =>  nb_envoi_in($fivesdraft->hie),
+		"action" => "nb_envoi_fin",
 		"hie" => $fivesdraft->hie	
 	); 
-    return xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php',$array);
+    xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php',$array);
 	}
        	}
 
