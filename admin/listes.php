@@ -391,6 +391,9 @@ elseif($col12 !='null'){
 $champs .=",".trim("$col12")."";		
 }
 $dossier_fichier=smPOST;
+if(!is_dir(''.smPOST.'')){
+mkdir(''.smPOST.'', 0777);
+		   }
 $aleas=rand(0,99999999);
 
 $filename = ''.$dossier_fichier.'/import_'.$aleas.'.txt';
