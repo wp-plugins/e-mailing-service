@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 7.1
+Version: 7.3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -25,7 +25,7 @@ $upload_dir_name = false;
 if ( !defined( 'UPLOADS' ) ){
 define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
 }
-define( 'smVERSION', '7.2' );
+define( 'smVERSION', '7.3' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -682,8 +682,8 @@ $email=affiche_mail($smnum,$smemail);
 		"smemail" => $email,
 		"smcle" => $smcle,
 		"smdate" => $smdate	
-		); 		
-  return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+		);
+ xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('sm_stats_page')){
@@ -707,10 +707,11 @@ $email=affiche_mail($smnum,$smidmp);
 		"l" => $smlink,
 		"action" => "page",
 		"smidmp" => $smidmp,
+		"smemail" => $email,
 		"smcle" => $smcle,
 		"smdate" => $smdate	
-		); 		
-  return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+		); 
+  xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('sm_stats_desinscrit')){
@@ -734,11 +735,11 @@ $email=affiche_mail($smnum,$smidmd);
 		"l" => $smlink,
 		"action" => "desinscrit",
 		"smidmd" => $smidmd,
-		"smemail" => $smidmd,
+		"smemail" => $email,
 		"smcle" => $smcle,
 		"smdate" => $smdate	
-		); 		
-  return xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+		); 	
+  xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('xml_server_stats')){
@@ -752,8 +753,10 @@ function xml_server_stats($url,$array){
 		foreach($xml2l as $row) {
 		if($row[0] == 1)
 		{
+			 
 	            if(!headers_sent()) {
-	            wp_redirect( $row[1] );
+	            //wp_redirect( urlencode($row[1]) );
+				@header('Location: '.$row[1].'');
                 exit();
                 } else {
                 echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
@@ -1065,6 +1068,7 @@ function action_cron15()
 {
 sm_cron_fichier('include/cron_blocage.php');
 sm_cron_fichier('include/bounces.php');
+sm_cron_fichier('include/cron_stats.php');
 }
 add_action('sm_crons15', 'action_cron15');
 
@@ -1080,7 +1084,6 @@ sm_cron_fichier('include/blacklist.php');
 sm_cron_fichier('include/spamscore.php');
 sm_cron_fichier('include/bounces_update.php');
 sm_cron_fichier('include/bounces_update_liste.php');
-sm_cron_fichier('include/cron_stats.php');
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 

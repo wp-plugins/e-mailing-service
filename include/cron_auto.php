@@ -299,11 +299,14 @@ if($fivesdraft->serveur !='auto'){
 	
 	sleep($fivesdraft->pause);
 	if($n==100){
+	/*
 	if(get_option('sm_license') !="free"){
 	@file_get_contents("http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php?login=".get_option('sm_login')."&nb_envoi=".$ie."&action=nb_envoi&hie=".$fivesdraft->hie."&key=".get_option('sm_license_key')."");
 	}
+	*/
 	$n=0;	
 	}
+	
 	$n++;
 	$ie++;
 	$wpdb->insert($table_log, array(  
@@ -329,13 +332,7 @@ if($fivesdraft->serveur !='auto'){
 	$sqllog = "DELETE FROM ".$table_log." WHERE hie='".$fivesdraft->hie."'"; 
     $resultlog = $wpdb->query($wpdb->prepare($sqllog,true));
 	if(get_option('sm_license') !="free"){
-	$array =array (
-		"domaine_client" => str_replace("www.","",$_SERVER['HTTP_HOST']),
-		"nb_envoi" =>  nb_envoi_in($fivesdraft->hie),
-		"action" => "nb_envoi_fin",
-		"hie" => $fivesdraft->hie	
-	); 
-    xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php',$array);
+	@file_get_contents("http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php?login=".get_option('sm_login')."&nb_envoi=".nb_envoi_in($fivesdraft->hie)."&action=nb_envoi_fin&hie=".$fivesdraft->hie."");
 	}
        	}
 
