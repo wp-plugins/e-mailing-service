@@ -109,7 +109,7 @@ $table_name = $wpdb->prefix.'sm_liste_'.$liste.'';
 if($i==0){
 $debut = 0;	
 }
-	$wpdb->query("INSERT IGNORE INTO `".$table_name."` (id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle FROM `".$table_original."` LIMIT $debut,$limit_liste",true);
+	$wpdb->query("INSERT IGNORE INTO `".$table_name."` (id,email,nom,ip,lg,date_creation,valide,bounces,optin,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle) SELECT id,email,nom,ip,lg,date_creation,valide,bounces,optin,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle FROM `".$table_original."` LIMIT $debut,$limit_liste",true);
 	$debut = $limit_liste + $debut;
 	}
 	}
