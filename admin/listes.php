@@ -396,7 +396,7 @@ mkdir(''.smPOST.'', 0777);
 		   }
 $aleas=rand(0,99999999);
 
-$filename = ''.$dossier_fichier.'/import_'.$aleas.'.txt';
+$filename = ''.$dossier_fichier.'import_'.$aleas.'.txt';
 $inF = fopen($filename,"w+");
 fwrite($inF,$tab);
 fclose($inF);
