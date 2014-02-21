@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 7.3
+Version: 7.4
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -393,6 +393,7 @@ if($total==0){
     @mkdir(smPOST, 0777);
 	@chmod(smPOST, 0777); 
 		   }	
+		   
 
 }
 
