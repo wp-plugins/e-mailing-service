@@ -1,14 +1,45 @@
 <?php
 include(smPATH . '/include/entete.php');
-extract($_POST);
-extract($_GET);
+?>
+<div class="wrap">
+	<div id="icon-options-general" class="icon32"><br></div>
+	<h2 class="nav-tab-wrapper">
+        <a href="?page=e-mailing-service/admin/debug.php" title="<?php _e("Verifie les serveurs SMTP", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
+			<?php _e('Status serveur SMTP',"e-mailing-service"); ?>
+		</a>
+    <a href="?page=e-mailing-service/admin/debug.php&section=upload" title="<?php _e("Verifie le dossier Upload pour importer les templates et images pour vos newsletters", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
+			<?php _e('Upload',"e-mailing-service"); ?>
+		</a>
+        <a href="?page=e-mailing-service/admin/debug.php&section=envoi_newsletter" title="<?php _e("Faites tourner le cron pour l'envoi de la newsletter manuellement, vous devez avoir programme un envoi avant d'utiliser ce menu", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_fai') echo 'nav-tab-active'; }?>">
+			<?php _e("Envoi de la newsletter", "e-mailing-service"); ?>
+		</a>
+		<a href="?page=e-mailing-service/admin/debug.php&section=envoi_article"  title="<?php _e("Faites tourner le cron pour l'envoi d'un nouvel article ou d'une nouvelle page manuellement, vous devez avoir programme un envoi avant d'utiliser ce menu", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'hard_bounces') echo 'nav-tab-active'; }?>">
+			<?php _e("Envoi d'un article ou d'une page", "e-mailing-service"); ?>
+		</a>
+		<a href="?page=e-mailing-service/admin/debug.php&section=vitesse" title="<?php _e("Verifier la vitesse d'envoi de votre newsletter", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
+			<?php _e("Vitesse d'envoi","e-mailing-service"); ?>
+		</a>
+	</h2><h2>
+   <?php
+ if(isset($_REQUEST['section'])){
+	
+		if ($_REQUEST['section'] == 'upload') include(smPATH.'include/upload.php');
+		if ($_REQUEST['section'] == 'envoi_article') include(smPATH.'include/cron.php');
+		if ($_REQUEST['section'] == 'envoi_newsletter') {  include(smPATH.'include/cron_auto.php');}
+		if ($_REQUEST['section'] == 'vitesse') {  include(smPATH.'include/cron_blocage.php');}
+
+		
+	
+	
+} else {
+	
 if(!isset($action)){
 $action="null";	
 }
 if($action == "send"){
+	$header = sm_optimisation_fai($email,$title,$num,"text/plain");	
     $_SESSION['sm_choix'] =$num;
 	add_action('phpmailer_init','sm_smtp_choix');	
-	$header = sm_optimisation_fai($email,$title,$num,"text/plain");	
 	echo "<br>".__("Reponse","e-mailing-service")." :<br>";
 	wp_mail( $email, $title, $contenu, $header, "");
 	echo "##server : ".$num."<br>";
@@ -29,7 +60,7 @@ echo "
 </table>
 ";	
 	
-} else {
+}
 echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
     $tbaleau_insert="";
     $tbaleau_insert .= '<table class="widefat">
@@ -91,4 +122,7 @@ $tbaleau_insert .= '</tbody></table>';
 echo $tbaleau_insert ;
 
 }
-?>
+ 
+   
+   ?>
+</div>

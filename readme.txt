@@ -4,7 +4,7 @@ Donate link: http://www.e-mailing-service.net/
 Tags: send newsletter, emailing, e-mailing, e-mails, e-mail, newsletter, smtp, server smtp, email, mail, smtp server, phpmailer, Rundschreiben, envío por correo electrónico, correo postal, correo electrónico, correo electrónico, boletín de noticias, smtp, servidor SMTP, el correo electrónico, el correo electrónico, direct mailing, email, email marketing, list build, mass mail, subscription, contact, widget newsletter, plugin newsletter, template newsletter
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 7.4
+Stable tag: 7.5
 License: GPLv3
 License URI: http://www.e-mailing-service.net/license.txt
 
@@ -169,8 +169,7 @@ e.g.
 
 1. Upload `e-mailing-service` to the `/wp-content/plugins/e-mailing-service` directory
 2. Activate the plugin through the 'E-mailing service' menu in WordPress
-3. SMTP setting  `admin.php?page=e-mailing-service/admin/parametres.php`
-4 . chmod 0777 /wp-content/upload/
+3. chmod 0777 /wp-content/upload/
 
 == Frequently Asked Questions ==
 
@@ -196,6 +195,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 7.5 =
+* debug upload , test smtp server, send newsletter
 = 7.4 =
 * Patch import email
 = 7.3 =
@@ -265,6 +266,8 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+= 7.5 =
+* debug upload , test smtp server, send newsletter
 = 7.4 =
 * Patch import email
 = 7.3 =

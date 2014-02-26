@@ -11,11 +11,12 @@ $table_temps= $wpdb->prefix.'sm_temps';
 $table_suite= $wpdb->prefix.'sm_suite';
 $table_log= $wpdb->prefix.'sm_log';
 
-		
+$id=0;
+echo "<h2>".__("Envoi de votre newsletter","e-mailing-service")."</h2>";			
 $fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,serveur,mode FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite'  OR  status='reactiver' OR status='suite' OR status='erreur_flux') AND date_envoi < NOW() AND type !='newsletter' ORDER BY id desc LIMIT 0,1");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
-
+$id=$fivesdraft->hie;
 	$smliste = $wpdb->get_results("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$fivesdraft->id_liste."");
     foreach ( $smliste as $smlistes ) 
     {
@@ -336,5 +337,8 @@ if($fivesdraft->serveur !='auto'){
 	}
        	}
 
+}
+if($id ==0){
+_e("Vous n'avez pas de newsletter qui doit tourner actuellement","e-mailing-service");	
 }
 ?>

@@ -528,6 +528,9 @@ $ip = gethostbyname($smtp);
 if(!function_exists('sm_optimisation_fai' )) { 
 function sm_optimisation_fai($email,$sujet,$num=1,$mode="text/html"){
 @list($nameemail,$faiemail)=explode('@',$email);
+if(!isset($_SESSION['sm_email_ret'])){
+$_SESSION['sm_email_ret']=	get_option('sm_email_ret_'.$num.'');
+}
 if($faiemail == "yahoo.com"){
 $header = "Reply-to: ".$_SESSION['sm_email_ret']."
 Subject: ".$sujet."
