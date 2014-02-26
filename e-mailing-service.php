@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 7.4
+Version: 7.5
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -21,16 +21,13 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-$upload_dir_name = false;
-if ( !defined( 'UPLOADS' ) ){
-define( 'UPLOADS', trailingslashit( WP_CONTENT_DIR ).'uploads' );
-}
-define( 'smVERSION', '7.3' );
+define( 'smVERSION', '7.5' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
-define( 'smPOST', ''.UPLOADS.'/sm-post/');
+define( 'smCONTENT',str_replace('/plugins/e-mailing-service/','',smPATH));
+define( 'smPOST', smCONTENT .'/uploads/sm-post/');
 define( 'smPOSTURL', ''.get_option('siteurl').'/wp-content/uploads/sm-post/'); 
 
 function sm_init() {
@@ -62,10 +59,10 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Status SMTP', 'e-mailing-service'), __('Status SMTP', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/etat.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Aide', 'e-mailing-service'), __('Aide', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/aide.php', NULL); 
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Support', 'e-mailing-service'), __('Support', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/support.php', NULL); 
-     add_submenu_page( 'e-mailing-service/admin/index.php', __('License et option', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);    
+     add_submenu_page( 'e-mailing-service/admin/index.php', __('License et option', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);   
+	    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug', 'e-mailing-service'), __('Debug', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/debug.php', NULL); 
    if(get_option('sm_debug')=='oui'){
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Update license', 'e-mailing-service'), __('Update license', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_license.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
