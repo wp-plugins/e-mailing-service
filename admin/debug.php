@@ -24,8 +24,8 @@ include(smPATH . '/include/entete.php');
  if(isset($_REQUEST['section'])){
 	
 		if ($_REQUEST['section'] == 'upload') include(smPATH.'include/upload.php');
-		if ($_REQUEST['section'] == 'envoi_article') include(smPATH.'include/cron.php');
-		if ($_REQUEST['section'] == 'envoi_newsletter') {  include(smPATH.'include/cron_auto.php');}
+		if ($_REQUEST['section'] == 'envoi_article') include(smPATH.'include/cron_auto.php');
+		if ($_REQUEST['section'] == 'envoi_newsletter') {  include(smPATH.'include/cron.php');}
 		if ($_REQUEST['section'] == 'vitesse') {  include(smPATH.'include/cron_blocage.php');}
 
 		
