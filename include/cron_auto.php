@@ -102,7 +102,9 @@ $extension=".bmp";
  if($extension == ".gif" || $extension == ".jpg" || $extension == ".bmp" || $extension == ".png"){
 @file_put_contents(''.$repertoire_path.'/'.$i.''.$extension.'', file_get_contents($images[1][$i]));
 @chmod(''.$repertoire_path.'/'.$i.''.$extension.'',0644);
+if(file_exists(''.$repertoire_path.'/'.$i.''.$extension.'')){
 $post_content=str_replace($images[1][$i],''.$repertoire.'/'.$i.''.$extension.'',$post_content);
+}
  if(get_option('sm_debug')=="oui")
     {
 echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';		
