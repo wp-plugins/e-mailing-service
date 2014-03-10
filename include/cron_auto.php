@@ -103,14 +103,19 @@ $extension=".bmp";
 @file_put_contents(''.$repertoire_path.'/'.$i.''.$extension.'', file_get_contents($images[1][$i]));
 @chmod(''.$repertoire_path.'/'.$i.''.$extension.'',0644);
 if(file_exists(''.$repertoire_path.'/'.$i.''.$extension.'')){
+	if(filesize(''.$repertoire_path.'/'.$i.''.$extension.'') > 0){
 $post_content=str_replace($images[1][$i],''.$repertoire.'/'.$i.''.$extension.'',$post_content);
+	}
 }
  if(get_option('sm_debug')=="oui")
     {
-echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';		
+echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';
+echo 'size : '.filesize(''.$repertoire_path.'/'.$i.''.$extension.'').'<br>';		
 	}
 }
 	}
+	
+	
     $contenu =$post_content;
     if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 	$txth=sm_schortode_txt(get_option('sm_txt_haut'),$fivesdraft->id_newsletter,$fivesdraft->hie);
