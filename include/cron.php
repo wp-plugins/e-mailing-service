@@ -15,7 +15,10 @@ echo "<h2>".__("Envoi de votre newsletter","e-mailing-service")."</h2>";
 $fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux')  AND date_envoi < NOW() AND type ='newsletter' ORDER BY id desc LIMIT 0,1");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
-$id=$fivesdraft->hie;
+	$sql2 ="UPDATE `".$table_envoi."` SET `status`='En cours', `date_demarrage`=NOW() WHERE id = '".$fivesdraft->hie."'";
+    $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
+	   
+    $id=$fivesdraft->hie;
 	$smliste = $wpdb->get_results("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$fivesdraft->id_liste."");
     foreach ( $smliste as $smlistes ) 
     {
@@ -24,7 +27,7 @@ $id=$fivesdraft->hie;
 	}
 	if($fivesdraft->status == "En attente"){
 	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000",true);
-    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10000,10000000",true);
+    $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10001,10000000",true);
 	if(get_option('sm_alerte_nl_cours') == 'oui'){
 	sm_alerte_envoi(''.__("Newsletter numero").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'',''.__("Newsletter numero","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'<br> '.date('Y-m-d H:i:s').'');
 	}
@@ -35,8 +38,6 @@ $id=$fivesdraft->hie;
     $resultsuite = $wpdb->query($wpdb->prepare($sqlsuite,true));
 	}
 
-	$sql2 ="UPDATE `".$table_envoi."` SET `status`='En cours', `date_demarrage`=NOW() WHERE id = '".$fivesdraft->hie."'";
-    $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
 	echo "######### ".__("envoi newsletter n ","e-mailing-service")." ".$fivesdraft->id_newsletter." ##############<br>";
 	echo "######### ".__("liste n ","e-mailing-service")." ".$fivesdraft->id_liste." ##############<br>";
 	$post_content = get_post_field('post_content', $fivesdraft->id_newsletter);

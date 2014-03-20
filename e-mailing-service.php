@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 7.7
+Version: 7.8
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -21,7 +21,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '7.7' );
+define( 'smVERSION', '7.8' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -775,8 +775,8 @@ function sm_smtp_choix($phpmailer){
 	//session pour debug//
 	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
-	$_SESSION['sm_from']= '##'.get_option('sm_from_'.$num.'').'##';
-	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp_'.$num.'').'##';
+	$_SESSION['sm_from']= get_option('sm_from_'.$num.'');
+	$_SESSION['sm_email_exp']= get_option('sm_email_exp_'.$num.'');
 	$_SESSION['sm_email_ret']= get_option('sm_email_ret_'.$num.'');
 	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port_'.$num.'').'##';
 	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification_'.$num.'').'##';
@@ -800,8 +800,8 @@ function sm_smtp_choix($phpmailer){
             $phpmailer->debug     = 1;
 
 
-    //print htmlspecialchars( var_export( $phpmailer, true ) );
-   
+    print htmlspecialchars( var_export( $phpmailer, true ) );
+     /*
     $error = null;
     try
     {
@@ -824,7 +824,8 @@ function sm_smtp_choix($phpmailer){
             $error->get_error_message()
         );
 	}
-	
+	*/
+}
 
 }
 
@@ -860,9 +861,9 @@ function sm_smtp_multi($phpmailer){
 	//session pour debug//
 	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
-	$_SESSION['sm_from']= '##'.get_option('sm_from_'.$num.'').'##';
-	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp_'.$num.'').'##';
-	$_SESSION['sm_email_ret']= ''.get_option('sm_email_ret_'.$num.'').'';
+	$_SESSION['sm_from']= get_option('sm_from_'.$num.'');
+	$_SESSION['sm_email_exp']= get_option('sm_email_exp_'.$num.'');
+	$_SESSION['sm_email_ret']= get_option('sm_email_ret_'.$num.'');
 	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port_'.$num.'').'##';
 	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification_'.$num.'').'##';
 	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login_'.$num.'').'##';
@@ -885,9 +886,9 @@ function sm_smtp_multi($phpmailer){
 	//session pour debug//
 	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
-	$_SESSION['sm_from']= '##'.get_option('sm_from_'.$num.'').'##';
-	$_SESSION['sm_email_exp']= '##'.get_option('sm_email_exp_'.$num.'').'##';
-	$_SESSION['sm_email_ret']= '##'.get_option('sm_email_ret_'.$num.'').'##';
+	$_SESSION['sm_from']= get_option('sm_from_'.$num.'');
+	$_SESSION['sm_email_exp']= get_option('sm_email_exp_'.$num.'');
+	$_SESSION['sm_email_ret']= get_option('sm_email_ret_'.$num.'');
 	$_SESSION['sm_smtp_port']= '##'.get_option('sm_smtp_port_'.$num.'').'##';
 	$_SESSION['sm_smtp_authentification']= '##'.get_option('sm_smtp_authentification_'.$num.'').'##';
 	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login_'.$num.'').'##';
@@ -913,8 +914,8 @@ function sm_smtp_multi($phpmailer){
             $phpmailer->debug     = 1;
 
 
-    //print htmlspecialchars( var_export( $phpmailer, true ) );
-   
+    print htmlspecialchars( var_export( $phpmailer, true ) );
+    /*
     $error = null;
     try
     {
@@ -937,6 +938,8 @@ function sm_smtp_multi($phpmailer){
             $error->get_error_message()
         );
 	}
+	*/
+    }
 
 }
 
