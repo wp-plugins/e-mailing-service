@@ -144,6 +144,7 @@ echo $tbaleau_insert ;
 
 /////debut/////			
 		if ($_REQUEST['section'] == 'bounces_fai_details'){
+			$tbaleau_insert="";
 $listeemail = $wpdb->get_results("SELECT * FROM `".$table_log_bounces."`  WHERE id ='".$_GET["id"]."'");
 foreach ( $listeemail as $listeemails ) 
 {
