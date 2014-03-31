@@ -21,7 +21,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '7.9' );
+define( 'smVERSION', '8.0' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -828,7 +828,9 @@ function sm_smtp_choix($phpmailer){
 }
 
 }
-
+if(get_option('sm_license') !='api_mass-mailing' ){
+	add_action('phpmailer_init','sm_smtp_multi');
+}
 function sm_smtp_multi($phpmailer){
 	global $wdpd;
 	//fix_phpmailer_messageid( $phpmailer );
