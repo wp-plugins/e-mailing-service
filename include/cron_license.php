@@ -13,8 +13,13 @@ include(smPATH . '/include/fonctions_sm.php');
 		"login" => get_option('sm_login'),
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
-        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
-		$xml2l = post_xml($fluxl,'item',array('resultat','license','stats_smtp','limite_journaliere','limite_mensuel','stats_blacklist','blacklist','alias_multi','mass_mailing_nb','bounces','alerte','date_inscription','date_validite','date_renouvellement','licence_key'));		
+        $fluxl =xml_server_api('http://www.tous1site.name/wp-code/cgi_wordpress_license.php',$array);
+		if(get_option('sm_debug')=="oui")
+         {
+		echo '<textarea name="" cols="150" rows="10">'.$fluxl.'</textarea>';
+	     }
+		$xml2l = post_xml($fluxl,'item',array('resultat','license','stats_smtp','limite_journaliere','limite_mensuel','stats_blacklist','blacklist','alias_multi','mass_mailing_nb','bounces','alerte','date_inscription','date_validite','date_renouvellement','licence_key'));	
+		if($xml2l !=''){	
 		foreach($xml2l as $row) {
 		if($row[0] == 1){ 
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[1]."' WHERE `option_name`='sm_license'");
@@ -33,6 +38,7 @@ include(smPATH . '/include/fonctions_sm.php');
 		echo "<br><br>".__("Les options de votre license sont a jour","e-mailing-service")."";
 		} else {
 		echo "<br><br>".__("Votre license comporte une erreur , contacter le support","e-mailing-service")."";				
+		}
 		}
 		}
 		}

@@ -208,8 +208,9 @@ function cgi_bounces(){
 		"site" => str_replace("www.","",$_SERVER['HTTP_HOST']),
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
-        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
+        $fluxl =xml_server_api('http://www.tous1site.name/wp-code/cgi_wordpress_license.php',$array);
 		$xml2l =post_xml($fluxl,'item',array('bounces'));
+		echo '<textarea name="" cols="150" rows="10">'.$xml2l.'</textarea>';
           foreach($xml2l as $row) {
 	    	$_SESSION['sm_bounces']= $row[0];
            } 
@@ -233,16 +234,21 @@ function cgi_blacklist(){
 		"site" => str_replace("www.","",$_SERVER['HTTP_HOST']),
 		"ip" => $_SERVER['REMOTE_ADDR']
 		); 
-        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_license.php',$array);
+        $fluxl =xml_server_api('http://www.tous1site.name/wp-code/cgi_wordpress_license.php',$array);
 		$xml2l =post_xml($fluxl,'item',array('stats_backlist'));
+		echo '<textarea name="" cols="150" rows="10">'.$xml2l.'</textarea>';
+		if($xml2l !='')
+		{
           foreach($xml2l as $row) {
 			  $_SESSION['sm_blacklist']= $row[0]; 
            } 
-		}
-		return $_SESSION['sm_blacklist']; 
 		} else {
-		return $_SESSION['sm_blacklist'];	
+		$_SESSION['sm_blacklist']='oui';	
 		}
+		} 
+		}
+		return $_SESSION['sm_blacklist'];	
+
 }
 }
 if(!function_exists('cgi_stats_smtp')){
