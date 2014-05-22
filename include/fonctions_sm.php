@@ -236,7 +236,7 @@ function cgi_blacklist(){
 		); 
         $fluxl =xml_server_api('http://www.tous1site.name/wp-code/cgi_wordpress_license.php',$array);
 		$xml2l =post_xml($fluxl,'item',array('stats_backlist'));
-		echo '<textarea name="" cols="150" rows="10">'.$xml2l.'</textarea>';
+		//echo '<textarea name="" cols="150" rows="10">'.$fluxl.'</textarea>';
 		if($xml2l !='')
 		{
           foreach($xml2l as $row) {

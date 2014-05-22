@@ -109,18 +109,11 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"80")."</blockquote></td>
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"53")."</blockquote></td>
 	<td><blockquote>".sm_spamscore(get_option('sm_smtp_server_'.$num.''))."</blockquote></td>
-	<td><blockquote>".sm_blacklist(gethostbyname(get_option('sm_smtp_server_'.$num.'')))."</blockquote></td>";
-	if(get_option('sm_smtp_actif_'.$num.'') =="oui"){
-	$tbaleau_insert .= "<td><blockquote><span class=\"sm_table_vert\">&nbsp;&nbsp;".__("Actif")."&nbsp;&nbsp;</span></blockquote></td>";
-	} else {
-	$tbaleau_insert .= "<td><blockquote><span class=\"sm_table_rouge\">&nbsp;&nbsp;".__("Inactif")."&nbsp;&nbsp;</span></blockquote></td>";	
-	}
-    $tbaleau_insert .= '</tr>';	   
-    }
-
+	<td><blockquote>".sm_blacklist(gethostbyname(get_option('sm_smtp_server_'.$num.'')))."</blockquote></td>
+	<td><blockquote><span class=\"sm_table_vert\">&nbsp;&nbsp;".__("Actif")."&nbsp;&nbsp;</span></blockquote></td></tr>";
 $tbaleau_insert .= '</tbody></table>';
-echo $tbaleau_insert ;
-
+	}
+	echo $tbaleau_insert ;
 }
  
    

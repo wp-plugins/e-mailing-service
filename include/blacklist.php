@@ -16,7 +16,7 @@ _e("L'option est au tarifs de 2 euros / mois si vous ne disposez pas de serveur 
 
 
 		$sql ="DELETE FROM `".$table_blacklist."` WHERE `date` < '".$datelimite."'";
-        $result = $wpdb->query($wpdb->prepare($sql,true)); 
+        $result = $wpdb->query($sql); 
 		$domaine_client= str_replace("www.","",$_SERVER['HTTP_HOST']);
 		if(get_option('sm_debug')=="oui"){
 		echo '<a href="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_blacklist.php?domaine_client='.$domaine_client.'&login='.get_option('sm_login').'&license_key='.get_option('sm_license_key').'">'.__("Verifier le flux","e-mailing-service").'</a>';
