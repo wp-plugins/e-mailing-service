@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 8.3
+Version: 8.4
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -21,7 +21,7 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '8.3' );
+define( 'smVERSION', '8.4' );
 define( 'smDBVERSION', '3.0' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -402,6 +402,7 @@ add_option('sm_db_version',smDBVERSION);
 add_option('sm_login',str_replace("www.","",$_SERVER['HTTP_HOST'])); 
 add_option('sm_type_envoi','smtp');
 add_option('sm_serveur', 'srv-free');
+add_option('sm_domain',str_replace("www.","",$_SERVER['HTTP_HOST'])); 
 
 add_option('sm_txt_haut','<center><a href="[lien_page]">'.__("Lire le mail dans votre navigateur","e-mailing-service").'</a></center>');
 add_option('sm_txt_bas','<center><h5>'.__("Veuillez ne pas repondre a cet email. Cette boite aux lettres n'etant pas consultee, vous ne recevrez aucune reponse.</h5>
@@ -754,8 +755,8 @@ function xml_server_stats($url,$array){
 		{
 			 
 	            if(!headers_sent()) {
-	            //wp_redirect( urlencode($row[1]) );
 				@header('Location: '.$row[1].'');
+				echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
                 exit();
                 } else {
                 echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';

@@ -3,8 +3,8 @@ Contributors: jooky
 Donate link: http://www.e-mailing-service.net/
 Tags: send newsletter, emailing, e-mailing, e-mails, e-mail, newsletter, smtp, server smtp, email, mail, smtp server, phpmailer, Rundschreiben, envío por correo electrónico, correo postal, correo electrónico, correo electrónico, boletín de noticias, smtp, servidor SMTP, el correo electrónico, el correo electrónico, direct mailing, email, email marketing, list build, mass mail, subscription, contact, widget newsletter, plugin newsletter, template newsletter
 Requires at least: 3.0.1
-Tested up to: 3.8
-Stable tag: 8.3
+Tested up to: 3.9
+Stable tag: 8.4
 License: GPLv3
 License URI: http://www.e-mailing-service.net/license.txt
 
@@ -195,6 +195,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 8.4 =
+* improvement crontab and possibility crontab server
 = 8.3 =
 * fix blacklist update
 = 8.2 =
@@ -280,6 +282,8 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+= 8.4 =
+* improvement crontab and possibility crontab server
 = 8.3 =
 * fix blacklist update
 = 8.2 =

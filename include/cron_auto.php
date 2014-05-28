@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 global $wpdb;
 if(!isset($SMINCLUDEOK)){
 include(smPATH . '/include/fonctions_sm.php');
