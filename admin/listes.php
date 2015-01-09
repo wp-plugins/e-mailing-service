@@ -405,7 +405,7 @@ $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 $wpdb->query( "SET GLOBAL local_infile = 'ON';");
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 		
-$requette ="LOAD DATA LOCAL INFILE '$filename' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
+$requette ="LOAD DATA INFILE '$filename' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 )";
 
@@ -633,7 +633,7 @@ $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 $wpdb->query( "SET GLOBAL local_infile = 'ON';");
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 
-$requette ="LOAD DATA LOCAL INFILE '$content_dir$name_file' IGNORE INTO TABLE  `$liste`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
+$requette ="LOAD DATA INFILE '$content_dir$name_file' IGNORE INTO TABLE  `$liste`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 ) ";
 $resultat = mysql_query($requette)or die('<br>'.__('Erreur SQL contact support or FAQ',"e-mailing-service").' : '.__LINE__.' '.mysql_error().'');

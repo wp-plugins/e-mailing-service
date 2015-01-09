@@ -409,14 +409,14 @@ echo "</select>";
 </form>	
 	
 <?php } 
-elseif($licen=='api_mass-mailing'){
+if(get_option('sm_license') =='api_mass-mailing'){
 	?>
 <form action="admin.php?page=e-mailing-service/admin/multi.php" method="post">
 <input type="hidden" name="action" value="update" />
 <input type="hidden" name="sm_typ_eenvoi" value="smtp" />
 <input type="hidden" name="sm_license" value="<?php echo "$licen"; ?>" />
 <?php 
-for($i=1;$i<=$xml2l->mass_mailing_nb;$i++){
+for($i=1;$i<=get_option('sm_multi_nb');$i++){
 ?>
 <input name="sm_version_<?php echo $i;?>" type="hidden" value=""  size="75"  />
 <input name="sm_status_<?php echo $i;?>" type="hidden" value=""  size="75"  />
@@ -510,7 +510,7 @@ for($i=1;$i<=$xml2l->mass_mailing_nb;$i++){
 <?php
 }
 ?>
-<input type="hidden" name="nb" value="<?php echo $xml2l->mass_mailing_nb;?>" />
+<input type="hidden" name="nb" value="<?php echo get_option('sm_multi_nb');?>" />
 <table>
 <tr>
   <td><?php _e("Texte en Haut de la newsletter","e-mailing-service");?></td>

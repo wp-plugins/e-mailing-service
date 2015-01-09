@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 8.4
+Version: 8.5
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -21,8 +21,8 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
-define( 'smVERSION', '8.4' );
-define( 'smDBVERSION', '3.0' );
+define( 'smVERSION', '8.5' );
+define( 'smDBVERSION', '3.1' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
@@ -1344,7 +1344,11 @@ function sm_update_db(){
 	$table_spamscore = $wpdb->prefix.'sm_spamscore';
 	$table_suite = $wpdb->prefix.'sm_suite';
 	$table_bounces_hard = $wpdb->prefix.'sm_bounces_hard';
-    $table_envoi_name = $wpdb->prefix.'sm_historique_envoi';  
+    $table_envoi_name = $wpdb->prefix.'sm_historique_envoi'; 
+if(get_option('sm_db_version') < '3.1'){
+$wpdb->query("ALTER TABLE  `". $table_envoi_name."` CHANGE  `status`  `status` ENUM(  'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license',  'suite',  'suspended' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'"); 
+update_option( 'sm_db_version', '3.1' );
+}
 if(get_option('sm_db_version') < '2.6'){
 $listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."`");
 foreach ( $listes as $resliste ) 

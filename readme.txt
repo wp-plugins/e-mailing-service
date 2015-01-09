@@ -195,6 +195,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 8.5 =
+* fix bug mass mailing
 = 8.4 =
 * improvement crontab and possibility crontab server
 = 8.3 =
@@ -282,6 +284,8 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+= 8.5 =
+* fix bug mass mailing
 = 8.4 =
 * improvement crontab and possibility crontab server
 = 8.3 =
