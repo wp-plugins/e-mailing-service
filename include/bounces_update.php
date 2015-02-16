@@ -16,7 +16,7 @@ echo '<a href="http://www.e-mailing-service.net/options/?option=opt-npai" target
 echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de serveur SMTP chez nous","e-mailing-service")."";
 } else {
         $i=0;
-		$listese = $wpdb->get_results("SELECT id,email FROM `".$table_log_bounces."` WHERE  `bounce_type` ='hard' AND `update`='0'");
+		$listese = $wpdb->get_results("SELECT id,email FROM `".$table_log_bounces."` WHERE  (`bounce_type` ='hard' OR `bounce_type` ='blocked') AND `update`='0'");
         foreach ( $listese as $reslistee ) 
          {	
         $wpdb->replace($table_bounces_hard, array(  

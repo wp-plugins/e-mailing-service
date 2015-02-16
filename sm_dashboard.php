@@ -1,11 +1,14 @@
-<?php 
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
-
+<?php
 if(!function_exists('sm_dashboard_widgets')){
 function sm_dashboard_widgets() {
-	if ( current_user_can('update_core') ){
+$current_user = wp_get_current_user();
+$user_login=$current_user->user_login;
+$user_id=$current_user->ID;
+$user_email=$current_user->email;
+$user_info = get_userdata($current_user->ID);
+$user_role =implode(', ', $user_info->roles);
+/////////////////admin ////////////////////
+if($user_role == 'administrator'){
 	if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 wp_add_dashboard_widget('sm_dashboard_widget1', ''.__('Emailing service','e-mailing-service').' '.__('Status SMTP','e-mailing-service').'', 'sm_widget_dashboardt');
 wp_add_dashboard_widget('sm_dashboard_widget3', ''.__('Emailing service','e-mailing-service').' '.__('E-mailing en cours','e-mailing-service').'', 'dashboard_widget_sm_stats_live');
@@ -16,14 +19,28 @@ wp_add_dashboard_widget('sm_dashboard_widget2', ''.__('Emailing service','e-mail
 wp_add_dashboard_widget('sm_dashboard_widget3', ''.__('Emailing service','e-mailing-service').' '.__('E-mailing en cours','e-mailing-service').'', 'dashboard_widget_sm_stats_live');
 wp_add_dashboard_widget('sm_dashboard_widget4', ''.__('Emailing service','e-mailing-service').' '.__('Statistiques des clics','e-mailing-service').'', 'dashboard_widget_sm_stats_clic');
 wp_add_dashboard_widget('sm_dashboard_widget5', ''.__('Emailing service','e-mailing-service').' '.__('FAQ','e-mailing-service').'', 'dashboard_widget_sm_faq');		
-	}
     }
+} 
+/////////////////user ////////////////////
+elseif($user_role == 'mailing-user'){
+wp_add_dashboard_widget('sm_dashboard_widget4', ''.__('Emailing service','e-mailing-service').' : '.__('Statistiques des clics','e-mailing-service').'', 'dashboard_widget_sm_stats_clic');
+wp_add_dashboard_widget('sm_dashboard_widget3', ''.__('Emailing service','e-mailing-service').' : '.__('E-mailing en cours','e-mailing-service').'', 'dashboard_widget_sm_stats_live');	
+}
+
+
+
 }
 }
+
 add_action('wp_dashboard_setup', 'sm_dashboard_widgets');
+if(!function_exists('add_stats_dashboard')){
+function add_stats_dashboard() {
+//do_action( 'wp_dashboard_setup' );
+add_meta_box('id1', 'Dashboard Widget Title', 'sm_widget_dashboardt', 'stats-dashboard', 'side', 'high');
 
-
-
+}
+}
+add_action('wp_dashboard_setup','add_stats_dashboard'); 
 //dashboard fonction 1
 if(!function_exists('sm_widget_dashboardt')){
 function sm_widget_dashboardt() {
@@ -66,28 +83,40 @@ if(!function_exists('dashboard_widget_sm_stats_smtp')){
 function dashboard_widget_sm_stats_smtp() {
 $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 $host=str_replace("www.","",$host);
-echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_smtp.php?domaine_client='.$host.'&login='.get_option('sm_login').'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';
+$current_user = wp_get_current_user();
+$user_login=$current_user->user_login;
+if ( ! is_admin() ) {
+echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_smtp_v2.php?domaine_client='.$host.'&login='.get_option('sm_login').'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';
+} else {
+echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_smtp_v2.php?domaine_client='.$host.'&login='.$user_login.'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';		
+}
 }
 }
 if(!function_exists('dashboard_widget_sm_stats_live')){
 function dashboard_widget_sm_stats_live() {
-//include(smPATH . '/include/fonctions_sm.php');
+$current_user = wp_get_current_user();
+$user_login=$current_user->user_login;
 global $wpdb;
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $tbaleau_insert ='<table class="widefat">
                          <thead><tr>';
 $tbaleau_insert .="<td><blockquote>".__("N ",'e-mailing-service')."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".__('Status','e-mailing-service')."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Nb envoyes','e-mailing-service')."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Nb en attente','e-mailing-service')."</blockquote></td>";
+$tbaleau_insert .="<td><blockquote>".__('Envoyes','e-mailing-service')."</blockquote></td>";
+$tbaleau_insert .="<td><blockquote>".__('En attente','e-mailing-service')."</blockquote></td>";
+$tbaleau_insert .="<td><blockquote>".__('Statistics','e-mailing-service')."</blockquote></td>";
 $tbaleau_insert .="</tr></thead><tdboy>";
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` ORDER BY id DESC LIMIT 0,5");
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` WHERE login ='".$user_login."' ORDER BY status ASC, id DESC LIMIT 0,5");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->status."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".nb_envoi_in($fivesdraft->id)."</blockquote></td>";	
 $tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
+$tbaleau_insert .='<td>
+<a href="?page=e-mailing-service/admin/stats_user.php&section=detail_hie&id='.$fivesdraft->id.'" target="_parent">
+<img src="'.smURL.'img/pie_chart.png" width="32" height="32" border="0" title="'.__("statistic","e-mailing-service").'"/></a>
+</td>';
 $tbaleau_insert .="</tr>";	
 }
 $tbaleau_insert .="</tdboy></table>";
@@ -98,8 +127,11 @@ if(!function_exists('dashboard_widget_sm_stats_clic')){
 function dashboard_widget_sm_stats_clic() {
 $host=str_replace("http://","",$_SERVER['HTTP_HOST']);
 $host=str_replace("www.","",$host);
+$current_user = wp_get_current_user();
+$user_login=$current_user->user_login;
 global $wpdb;
-echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_clic.php?domaine_client='.$host.'&login='.get_option('sm_login').'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';
+echo $_GET["page"];
+echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_clic_v2.php?domaine_client='.$host.'&login='.$user_login.'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';
 }
 }
 if(!function_exists('dashboard_widget_sm_faq')){
@@ -121,4 +153,6 @@ $tableau_ticket .= '</table>';
 echo $tableau_ticket ;
 }	
 }
+
+
 ?>

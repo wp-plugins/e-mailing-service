@@ -1,4 +1,36 @@
-<?php include(smPATH . '/include/entete.php');
+<?php
+set_time_limit(0);
+?>
+<div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Liste email","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
+
+        <?php echo "<p>".__("Permet de verifier que vos emails sont bien enregistrés","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8"><?php
 extract($_POST);
 extract($_GET);
     if(isset($action)){
@@ -230,7 +262,6 @@ echo $tbaleau_insert;
 	   }
 	} 
 	else {
-echo "<br><h1>".__("Liste de vos emails","e-mailing-service")."</h1>";
 if(!isset($liste)){
 $liste=$wpdb->prefix.'sm_liste_test'; 
 }
@@ -251,7 +282,7 @@ echo paginate_links( array(
     'total' => ceil($total / $comments_per_page),
     'current' => $page
 ));
-$tbaleau_insert ='<table class="widefat">
+$tbaleau_insert ='<table class="paginate10 sortable full">
                          <thead><tr>';
 $tbaleau_insert .="<th><blockquote>".__("ID","e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__("Email","e-mailing-service")."</blockquote></th>";
@@ -295,3 +326,7 @@ $tbaleau_insert .= '</tbody></table>';
 echo $tbaleau_insert ;
 	}
 ?>
+</div>
+</section>
+</div>
+</section>

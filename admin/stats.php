@@ -53,7 +53,7 @@ $action="campagne";
 }
 if($action=="envoi"){
 echo '<h2>'.__("Listes des campagnes envoyes","e-mailing-service").'</h2>';
-$tbaleau_insert ='<table class="widefat">
+$tbaleau_insert ='<table class="paginate50 sortable full">
                          <thead><tr>';
 $tbaleau_insert .="<th><blockquote>".__('Id envoi',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Type',"e-mailing-service")."</blockquote></th>";
@@ -61,7 +61,7 @@ $tbaleau_insert .="<th><blockquote>".__('Campagne',"e-mailing-service")."</block
 $tbaleau_insert .="<th><blockquote>".__('Liste',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Nb emails envoyes',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="</tr></thead><tdboy>";
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` ORDER BY id DESC LIMIT $num,$comments_per_page");
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` ORDER BY id DESC");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";
@@ -76,7 +76,7 @@ echo $tbaleau_insert;
 }
 elseif($action=="campagne"){
 echo '<h2>'.__("Statistiques par campagne","e-mailing-service").'</h2>';
-$tbaleau_insert ='<table class="widefat">
+$tbaleau_insert ='<table class="paginate50 sortable full">
                          <thead><tr>';
 $tbaleau_insert .="<th><blockquote>".__('Id envoi',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Type',"e-mailing-service")."</blockquote></th>";
@@ -84,7 +84,7 @@ $tbaleau_insert .="<th><blockquote>".__('Campagne',"e-mailing-service")."</block
 $tbaleau_insert .="<th><blockquote>".__('Liste',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Nb emails envoyes',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="</tr></thead><tdboy>";
-$fivesdrafts = $wpdb->get_results("SELECT sum(nb_envoi) AS tot_news,id_newsletter,id_liste,id,type FROM `".$table_envoi."` GROUP BY id_newsletter LIMIT $num,$comments_per_page");
+$fivesdrafts = $wpdb->get_results("SELECT sum(nb_envoi) AS tot_news,id_newsletter,id_liste,id,type FROM `".$table_envoi."` GROUP BY id_newsletter");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";
@@ -99,7 +99,7 @@ echo $tbaleau_insert;
 }
 elseif($action=="liste"){
 echo '<h2>'.__("Statistiques par campagne","e-mailing-service").'</h2>';
-$tbaleau_insert ='<table class="widefat">
+$tbaleau_insert ='<table class="paginate50 sortable full">
                          <thead><tr>';
 $tbaleau_insert .="<th><blockquote>".__('Id envoi',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Type',"e-mailing-service")."</blockquote></th>";
@@ -107,7 +107,7 @@ $tbaleau_insert .="<th><blockquote>".__('Campagne',"e-mailing-service")."</block
 $tbaleau_insert .="<th><blockquote>".__('Liste',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="<th><blockquote>".__('Nb emails envoyes',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="</tr></thead><tdboy>";
-$fivesdrafts = $wpdb->get_results("SELECT sum(nb_envoi) AS tot_news,id_newsletter,id_liste,id,type FROM `".$table_envoi."` GROUP BY id_liste LIMIT $num,$comments_per_page");
+$fivesdrafts = $wpdb->get_results("SELECT sum(nb_envoi) AS tot_news,id_newsletter,id_liste,id,type FROM `".$table_envoi."` GROUP BY id_liste");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";

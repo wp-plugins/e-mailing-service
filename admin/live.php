@@ -1,5 +1,34 @@
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
 <?php 
-include(smPATH . '/include/entete.php');
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Suivis de vos envois","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                                   
+
+        <?php echo "<p>".__("Pour suivre en direct le nombres d'emails envoyés","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                  
+<?php
 extract($_POST);
 if(isset($action)){
 if($action =="pause"){
@@ -47,49 +76,46 @@ elseif($action =="stop"){
 	array( 'hie' => $hie));
 }
 }
-$total = $wpdb->get_var("
-    SELECT COUNT(id)
-    FROM ".$table_envoi."
-");
-$comments_per_page = 10;
-$page = isset( $_GET['cpage'] ) ? abs( (int) $_GET['cpage'] ) : 1;
-$npage = $page - 1;
-$num = $npage * $comments_per_page;
 
-echo paginate_links( array(
-    'base' => add_query_arg( 'cpage', '%#%' ),
-    'format' => '',
-    'prev_text' => __('&laquo;'),
-    'next_text' => __('&raquo;'),
-    'total' => ceil($total / $comments_per_page),
-    'current' => $page
-));
+$i=0;
 	echo '<h1>'.__("Listes des campagnes envoyes","e-mailing-service").'</h1>';
-$tbaleau_insert ='<table class="widefat">
+$tbaleau_insert ='<table class="paginate10 sortable full">
                          <thead><tr>';
-$tbaleau_insert .="<td><blockquote>".__('Id envoi',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Type',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Campagne',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Liste',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Date envoi',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Date demarrage',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Date de fin',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Status',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Nb emails envoyes',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Nb emails en attente',"e-mailing-service")."</blockquote></td>";
-if(get_option('sm_script_pause') =="oui"){
-$tbaleau_insert .="<td><blockquote>".__('Stopper',"e-mailing-service")."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".__('Pause',"e-mailing-service")."</blockquote></td>";
+$tbaleau_insert .="<th><blockquote>".__('Id envoi',"e-mailing-service")."</blockquote></th>";
+if($user_role=='administrator'){
+$tbaleau_insert .="<th><blockquote>".__('User',"e-mailing-service")."</blockquote></th>";
 }
-$tbaleau_insert .="<td><blockquote>".__('Reactiver',"e-mailing-service")."</blockquote></td>";
+$tbaleau_insert .="<th><blockquote>".__('Type',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Campagne',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Liste',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Date envoi',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Date demarrage',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Date de fin',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Status',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Nb emails envoyes',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Nb emails en attente',"e-mailing-service")."</blockquote></th>";
+if(get_option('sm_script_pause') =="oui"){
+$tbaleau_insert .="<th><blockquote>".__('Stopper',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Pause',"e-mailing-service")."</blockquote></th>";
+}
+$tbaleau_insert .="<th><blockquote>".__('Reactiver',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Log',"e-mailing-service")."</blockquote></th>";
+$tbaleau_insert .="<th><blockquote>".__('Statistics',"e-mailing-service")."</blockquote></th>";
 $tbaleau_insert .="</tr></thead><tdboy>";
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` ORDER BY id DESC LIMIT $num,$comments_per_page");
+if($user_role=='administrator'){
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` ORDER BY id DESC LIMIT 100");
+} else {
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_envoi."` WHERE login='$user_login' ORDER BY id DESC LIMIT 100");	
+}
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $tbaleau_insert .="<tr><td><blockquote>".$fivesdraft->id."</blockquote></td>";
+if($user_role=='administrator'){
+$tbaleau_insert .="<td><blockquote>".$fivesdraft->login."</blockquote></td>";	
+}
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->type."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".$fivesdraft->id_newsletter."</blockquote></td>";
-$tbaleau_insert .="<td><blockquote>".$fivesdraft->id_liste."</blockquote></td>";
+$tbaleau_insert .="<td><blockquote>".get_the_title( $fivesdraft->id_newsletter )."</blockquote></td>";
+$tbaleau_insert .="<td><blockquote>".sm_liste_title($fivesdraft->id_liste)."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->date_envoi."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->date_demarrage."</blockquote></td>";
 $tbaleau_insert .="<td><blockquote>".$fivesdraft->date_fin."</blockquote></td>";
@@ -112,7 +138,7 @@ $tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e
 $tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e-mailing-service/admin/live.php" method="post">
 <input name="action" type="hidden" value="reactiver" />
 <input name="hie" type="hidden" value="'.$fivesdraft->id.'" />
-<input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Reactiver la campagne","e-mailing-service").'" />
+<input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Probleme contacter le support (code 2)","e-mailing-service").'" />
 </form></blockquote></td>';	
 } 
 elseif($fivesdraft->status =='erreur_flux'){
@@ -141,6 +167,45 @@ $tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e
 <input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Reactiver la campagne","e-mailing-service").'" />
 </form></blockquote></td>';	
 } 
+elseif($fivesdraft->status =='erreur_license'){
+$tbaleau_insert .="<td><blockquote>".nbenvoyer($fivesdraft->id)."</blockquote></td>";	
+$tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
+if(get_option('sm_script_pause') =="oui"){
+$tbaleau_insert .='<td></td>';
+$tbaleau_insert .='<td></td>';
+}
+$tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e-mailing-service/admin/live.php" method="post">
+<input name="action" type="hidden" value="reactiver" />
+<input name="hie" type="hidden" value="'.$fivesdraft->id.'" />
+<input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Reactiver la campagne","e-mailing-service").'" />
+</form></blockquote></td>';	
+} 
+elseif($fivesdraft->status =='error'){
+$tbaleau_insert .="<td><blockquote>".nbenvoyer($fivesdraft->id)."</blockquote></td>";	
+$tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
+if(get_option('sm_script_pause') =="oui"){
+$tbaleau_insert .='<td></td>';
+$tbaleau_insert .='<td></td>';
+}
+$tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e-mailing-service/admin/live.php" method="post">
+<input name="action" type="hidden" value="reactiver" />
+<input name="hie" type="hidden" value="'.$fivesdraft->id.'" />
+<input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Reactiver la campagne","e-mailing-service").'" />
+</form></blockquote></td>';	
+}
+elseif($fivesdraft->status =='failed'){
+$tbaleau_insert .="<td><blockquote>".nbenvoyer($fivesdraft->id)."</blockquote></td>";	
+$tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
+if(get_option('sm_script_pause') =="oui"){
+$tbaleau_insert .='<td></td>';
+$tbaleau_insert .='<td></td>';
+}
+$tbaleau_insert .='<td><blockquote><form action="'.$_SERVER['PHP_SELF'].'?page=e-mailing-service/admin/live.php" method="post">
+<input name="action" type="hidden" value="reactiver" />
+<input name="hie" type="hidden" value="'.$fivesdraft->id.'" />
+<input name="submit" type="image" value="submit" src="'.smURL.'/img/vert.png" alt="'.__("Reactiver la campagne","e-mailing-service").'" />
+</form></blockquote></td>';	
+}
 elseif($fivesdraft->status =='Limite'){
 $tbaleau_insert .="<td><blockquote>".nbenvoyer($fivesdraft->id)."</blockquote></td>";	
 $tbaleau_insert .="<td><blockquote>".nbattente($fivesdraft->id)."</blockquote></td>";
@@ -211,11 +276,20 @@ $tbaleau_insert .='<td></td>';
 }
 $tbaleau_insert .='<td></td>';
 }
-
+$tbaleau_insert .='<td>
+<a href="?page=e-mailing-service/admin/stats_user.php&section=log&hie='.$fivesdraft->id.'" target="_parent">
+<img src="'.smURL.'img/log.jpg" width="32" height="32" border="0" title="'.__("log on live","e-mailing-service").'"/></a>
+</td>';
+$tbaleau_insert .='<td>
+<a href="?page=e-mailing-service/admin/stats_user.php&section=detail_hie&id='.$fivesdraft->id.'" target="_parent">
+<img src="'.smURL.'img/pie_chart.png" width="32" height="32" border="0" title="'.__("statistic","e-mailing-service").'"/></a>
+</td>';
 $tbaleau_insert .="</tr>";	
+$i++;
 }
 $tbaleau_insert .="</tdboy></table>";
 echo $tbaleau_insert;
+if($i > 0){
 ?>
 
 <div class="tooltipContent" id="sprytooltip22">
@@ -230,8 +304,19 @@ echo $tbaleau_insert;
 <?php _e('erreur_flux',"e-mailing-service");?> = "<?php _e('API surement en panne momentanement, le script va faire une nouvelle tentative dans quelques minutes',"e-mailing-service");?>"<br />
 <?php _e('erreur_license',"e-mailing-service");?> = "<?php _e('Probleme avec votre license , contacter le support',"e-mailing-service");?>"<br />
 <?php _e('suite',"e-mailing-service");?> = "<?php _e('Petite pause avant les 10 000 mails suivant',"e-mailing-service");?>"<br />
+<?php _e('bug',"e-mailing-service");?> = "<?php _e('Probleme avec le serveur smtp',"e-mailing-service");?>"<br />
+<?php _e('error',"e-mailing-service");?> = "<?php _e('Probleme avec le serveur smtp',"e-mailing-service");?>"<br />
 	 </blockquote>
 </div>
 <script type="text/javascript">
 var sprytooltip22 = new Spry.Widget.Tooltip("sprytooltip22", "#sprytrigger3", {useEffect:"blind"});
 </script>
+</div>
+
+<?php } ?>
+
+
+</div>
+</section>
+</div>
+</section>

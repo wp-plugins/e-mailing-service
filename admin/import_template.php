@@ -1,30 +1,33 @@
- <?php
-include(smPATH . '/include/entete.php');
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
 ?>
-
-		<div id="poststuff" class="metabox-holder has-right-sidebar">
-		<div class="inner-sidebar">
-			<div id="side-sortables" class="meta-box-sortabless ui-sortable" style="position:relative;">
-<div id="box" class="postbox">
-       <h3 class="hndle"><span><?php _e('Configuration PHP',"e-mailing-service");?></span></h3>
-			<div class="inside">
-				<?php			
-echo 'upload_max_filesize = ' . ini_get('upload_max_filesize') . '<br>';
-echo 'post_max_size = ' . ini_get('post_max_size') . '<br>';
-echo 'memory_limit = ' . ini_get('memory_limit') . '<br>';
-				?>
-
-	        </div>
-		</div>
-        
-        
-        
- 
+                </div>
+        </header>
 </div>
-</div>	
-<div class="has-sidebar sm-padded" >			
-		<div id="post-body-content" class="has-sidebar-content">
-			<div class="meta-box-sortabless">
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Reglage de vos alertes","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
+
+        <?php echo "<p>".__("Pour etre informé de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8">
 <?php
 $dossier_fichier=smPOST;
 define('FS_CHMOD_FILE', 0664);

@@ -4,6 +4,7 @@ global $wpdb;
 if(!isset($SMINCLUDEOK)){
 include(smPATH . '/include/fonctions_sm.php');
 }
+
 date_default_timezone_set('Europe/Paris');
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
@@ -13,11 +14,12 @@ $table_suite= $wpdb->prefix.'sm_suite';
 $table_log= $wpdb->prefix.'sm_log';
 $id=0;
 echo "<h2>".__("Envoi de votre newsletter","e-mailing-service")."</h2>";	
-$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux')  AND date_envoi < NOW() AND type ='newsletter' ORDER BY id desc LIMIT 0,1");
+$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode,login FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux')  AND date_envoi < NOW() AND type ='newsletter' ORDER BY id desc LIMIT 0,1");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
+
 	$sql2 ="UPDATE `".$table_envoi."` SET `status`='En cours', `date_demarrage`=NOW() WHERE id = '".$fivesdraft->hie."'";
-    $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
+    $result2 = $wpdb->query($sql2); 
 	   
     $id=$fivesdraft->hie;
 	$smliste = $wpdb->get_results("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$fivesdraft->id_liste."");
@@ -29,6 +31,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	if($fivesdraft->status == "En attente"){
 	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000",true);
     $wpdb->query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10001,10000000",true);
+
 	if(get_option('sm_alerte_nl_cours') == 'oui'){
 	sm_alerte_envoi(''.__("Newsletter numero").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'',''.__("Newsletter numero","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("est en cours d'envois","e-mailing-service").'<br> '.date('Y-m-d H:i:s').'');
 	}
@@ -36,7 +39,7 @@ foreach ( $fivesdrafts as $fivesdraft )
 	elseif($fivesdraft->status == "suite"){
 	$wpdb->query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$fivesdraft->hie.",cle FROM `".$table_suite."`  LIMIT 0,10000",true);
 	$sqlsuite = "DELETE FROM ".$table_suite." WHERE hie='".$fivesdraft->hie."' LIMIT 10000"; 
-    $resultsuite = $wpdb->query($wpdb->prepare($sqlsuite,true));
+    $resultsuite = $wpdb->query($sqlsuite);
 	}
 
 	echo "######### ".__("envoi newsletter n ","e-mailing-service")." ".$fivesdraft->id_newsletter." ##############<br>";
@@ -47,11 +50,17 @@ foreach ( $fivesdrafts as $fivesdraft )
 if ( is_multisite() ) {
 $repertoire = ''.smPOSTURL.''.$current_blog->blog_id.'/img/'.$post_id.'';
 $repertoire_path= ''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'';
+$fichier_log = ''.smPOST.''.$current_blog->blog_id.'/log/'.$fivesdraft->hie.'.txt';
+$url_log = ''.smPOSTURL.''.$current_blog->blog_id.'/log/'.$fivesdraft->hie.'.txt';
 if(!is_dir(''.smPOST.''.$current_blog->blog_id.'')){
 mkdir(''.smPOST.''.$current_blog->blog_id.'', 0777);
 		   }
 if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img')){
 mkdir(''.smPOST.''.$current_blog->blog_id.'/img', 0777);
+		   }
+if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/log')){
+
+mkdir(''.smPOST.''.$current_blog->blog_id.'/log', 0777);
 		   }
 if(!is_dir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'')){
 mkdir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'', 0777);
@@ -60,11 +69,16 @@ mkdir(''.smPOST.''.$current_blog->blog_id.'/img/'.$post_id.'', 0777);
 } else {
 $repertoire = ''.smPOSTURL.'1/img/'.$post_id.'';
 $repertoire_path = ''.smPOST.'1/img/'.$post_id.'';
+$fichier_log = ''.smPOST.'1/log/'.$fivesdraft->hie.'.txt';
+$url_log = ''.smPOSTURL.'1/log/'.$fivesdraft->hie.'.txt';
 if(!is_dir(''.smPOST.'1')){
 mkdir(''.smPOST.'1', 0777);
 		   }
 if(!is_dir(''.smPOST.'1/img')){
 mkdir(''.smPOST.'1/img', 0777);
+		   }
+if(!is_dir(''.smPOST.'1/log')){
+mkdir(''.smPOST.'1/log', 0777);
 		   }
 if(!is_dir(''.smPOST.'1/img/'.$post_id.'')){
 mkdir(''.smPOST.'1/img/'.$post_id.'', 0777);
@@ -156,12 +170,12 @@ echo 'size : '.filesize(''.$repertoire_path.'/'.$i.''.$extension.'').'<br>';
 	}
 	if($flux1==''){
 	$sql2 ="UPDATE `".$table_envoi."` SET `status`='erreur_flux' WHERE id = '".$fivesdraft->hie."'";
-    $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
+    $result2 = $wpdb->query($sql2); 
 	exit();	
 	}
 	elseif($row[0] == 0){
 	$sql2 ="UPDATE `".$table_envoi."` SET `status`='erreur_license' WHERE id = '".$fivesdraft->hie."'";
-    $result2 = $wpdb->query($wpdb->prepare($sql2,true)); 
+    $result2 = $wpdb->query($sql2); 
 	exit();	
 	}
 	$txth=stripslashes($row[1]);
@@ -276,7 +290,7 @@ if($fivesdraft->serveur !='auto'){
 	if(cgi_nlj() !=0){
     if($nbjs > cgi_nlj()){
 	$sql3 ="UPDATE `".$table_envoi."` SET `status`='Limite', `date_fin`=NOW() WHERE id = '".$fivesdraft->hie."'";
-    $result3 = $wpdb->query($wpdb->prepare($sql3,true)); 
+    $result3 = $wpdb->query($sql3); 
 	exit();
 	}
 	}
@@ -294,19 +308,32 @@ if($fivesdraft->serveur !='auto'){
 	add_action('phpmailer_init','sm_smtp_choix');	
 	echo "##server : ".$_SESSION['sm_choix']."<br>";
 	}
+	mysql_query("DELETE FROM `".$table_temps."` WHERE id = '".$smemails->id."'");
+        if(!isset($_SESSION["mail"])){
+        $_SESSION["mail"] ="";
+        }
+        if($_SESSION["mail"] != $smemails->id){
+        if( strpos(@file_get_contents($url_log),$smemails->id) == false) {
 	if($fivesdraft->mode == "text/html"){
 	$res=wp_mail( $smemails->email, $title, $contenu, $header, "");
 	} else {
 	$res=wp_mail( $smemails->email, $title, strip_tags($contenu), $header, "");	
-	}	
-	$sql ="DELETE FROM `".$table_temps."` WHERE id = '".$smemails->id."'";
-    $result = $wpdb->query($wpdb->prepare($sql,true));
+	}
+	}
+	}
+        $_SESSION["mail"] = $smemails->id;
+        $fp = fopen($fichier_log,'a+');
+        fseek($fp,SEEK_END);
+        $nouverr=$smemails->id."\r\n";
+        fputs($fp,$nouverr);
+        fclose($fp);
+
 	//add_action('phpmailer_init','sm_smtp_multi_remove');
 	sleep($fivesdraft->pause);
 	//$wpdb->flush();
 	if($n==100){
 	$sql2 ="UPDATE `".$table_envoi."` SET `nb_attente`='".nbattente($fivesdraft->hie)."' WHERE id = '".$fivesdraft->hie."'";
-    $result2 = $wpdb->query($wpdb->prepare($sql2,true));
+    $result2 = $wpdb->query($sql2);
 	/*
 	if(get_option('sm_license') !="free"){
 	@file_get_contents("http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php?login=".get_option('sm_login')."&nb_envoi=".$ie."&action=nb_envoi&hie=".$fivesdraft->hie."");
@@ -316,28 +343,29 @@ if($fivesdraft->serveur !='auto'){
 	}
 	$n++;
 	$ie++;
-	$wpdb->insert($table_log, array(  
+	$wpdb->insert($table_log, array(
             'email' => $smemails->email,  
             'nb_envoi' => $ie,
 			'hie' => $fivesdraft->hie,
             'date' => current_time('mysql')  
-   ));
+   ));  
 	}
+
 	   $nbenvoi=nbenvoyer($fivesdraft->hie);
 	   $nbattente=nbattente($fivesdraft->hie);
         if(sm_suite_nb($fivesdraft->hie) > 0){
         $sql3 ="UPDATE `".$table_envoi."` SET `status`='suite', `nb_envoi`='$nbenvoi' ,`nb_attente`='$nbattente' WHERE id = '".$fivesdraft->hie."'";
-        $result3 = $wpdb->query($wpdb->prepare($sql3,true));
+        $result3 = $wpdb->query($sql3);
 		exit();
         } else {
 	$sql3 ="UPDATE `".$table_envoi."` SET `status`='Terminer', `nb_envoi`='$nbenvoi', `date_fin`=NOW() WHERE id = '".$fivesdraft->hie."'";
-    $result3 = $wpdb->query($wpdb->prepare($sql3,true)); 
+    $result3 = $wpdb->query($sql3); 
 	echo "######### ".__("envoi numero","e-mailing-service")." ".$fivesdraft->hie." ".__("termine","e-mailing-service")." ##############<br>";
 	if(get_option('sm_alerte_nl_fin') == 'oui'){
 	sm_alerte_envoi(''.__("Newsletter numero","e-mailing-service").' '.$fivesdraft->id_newsletter.' '.__("envoi termine","e-mailing-service").'',''.__("Newsletter numero","e-mailing-service").' '.$fivesdraft->id_newsletter.' '._("envoi termine").' '.$ie.' '.__("emails envoyes").'<br>'.date('Y-m-d H:i:s').'');
 	}
 	$sqllog = "DELETE FROM ".$table_log." WHERE hie='".$fivesdraft->hie."'"; 
-    $resultlog = $wpdb->query($wpdb->prepare($sqllog,true));
+    $resultlog = $wpdb->query($sql3);
 	if(get_option('sm_license') !="free"){
 @file_get_contents("http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_mj.php?login=".get_option('sm_login')."&nb_envoi=".nb_envoi_in($fivesdraft->hie)."&action=nb_envoi_fin&hie=".$fivesdraft->hie."");
 	}

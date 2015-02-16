@@ -1,6 +1,33 @@
-<?php
-include(smPATH . '/include/entete.php');
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Envoyer votre newsletter","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
 
+        <?php echo "<p>".__("Programmer l'heure et la date d'envoi de votre newsletter","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8"><?php
 if(cgi_bounces() == 'non'){
 echo "<br><br>";
 _e("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces","e-mailing-service");
@@ -30,7 +57,7 @@ _e("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces
       	<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update_reset" title="<?php _e("Attention , suivant le nombre de Hard bounces que vous avez dans la table mysql, cela peu ralentir votre serveur le temps du traitements.Ce lien est interessant si vous avez importer des nouvelles listes d'emails ", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
 			<?php _e("Verifier les Hard bounces deja traites", "e-mailing-service"); ?>
 		</a>
-	</h2><h2>
+	</h2>
    <?php
  if(isset($_REQUEST['section'])){
 	
@@ -231,4 +258,6 @@ echo $tbaleau_insert ;
  
    
    ?>
-</div>
+</div></div>
+</section>
+</div></section>

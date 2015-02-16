@@ -5,7 +5,6 @@
 		$licen="free";
 		} else {
         global $wpdb;
-		$licen=get_option('sm_license');
         $table_options = $wpdb->prefix.'options';
 		$array =array (
 		"site" => str_replace("www.","",$_SERVER['HTTP_HOST']),
@@ -17,6 +16,9 @@
 		$xml2l = post_xml($fluxl,'item',array('resultat','license','stats_smtp','limite_journaliere','limite_mensuel','stats_blacklist','blacklist','alias_multi','mass_mailing_nb','bounces','alerte','date_inscription','date_validite','date_renouvellement','licence_key'));		
 		foreach($xml2l as $row) {
 		if($row[0] == 1){
+	    echo "<p>".__("Date d'inscription","e-mailing-service")."  : ".$row[11]."</p>";
+		echo "<p>".__('Dernier Paiement',"e-mailing-service")."  : ".$row[12]."</p>";
+		echo "<p>".__('Prochain prelevement',"e-mailing-service")." : ".$row[13]."</p>";
 		$licen=$row[2]; 
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[1]."' WHERE `option_name`='sm_license'");
 		$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$row[9]."' WHERE `option_name`='sm_bounces'");
@@ -37,9 +39,7 @@
 		}
 		}
 		}
-		echo "<p>".__("Date d'inscription","e-mailing-service")."  : ".$row[11]."</p>";
-		echo "<p>".__('Dernier Paiement',"e-mailing-service")."  : ".$row[12]."</p>";
-		echo "<p>".__('Prochain prelevement',"e-mailing-service")." : ".$row[13]."</p>";
+				$licen=get_option('sm_license');
 		echo "<p>".__("Login","e-mailing-service").": ".get_option('sm_login')."</p>";
 		echo "<p>".__("License","e-mailing-service").": ".get_option('sm_license')."</p>";
 		if($licen =="api_mass-mailing" || $licen =="mass-mailing"){

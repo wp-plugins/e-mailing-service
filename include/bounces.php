@@ -24,13 +24,14 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
         foreach($xml_license as $res) {	
 		$idb=$res[0];
 		echo "<br>####################<br>".__("Update bounces pour","e-mailing-service")." ".$domaine_client." ".__("license","e-mailing-service")." n  ".$idb."<br>";
-        $xml2=lit_xml_data('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_npai.php?idb='.$idb.'&domaine_client='.$domaine_client.'&login='.get_option('sm_login').'&action=mj','item',array('idb','email','fai','rules_cat','rules_no','date','subject','bounce_type','diag_code','dsn_message','dsn_report','date_insert'));
+        $xml2=lit_xml_data('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_npai.php?idb='.$idb.'&domaine_client='.$domaine_client.'&login='.get_option('sm_login').'&action=mj','item',array('idb','email','fai','rules_cat','rules_no','date','subject','bounce_type','diag_code','dsn_message','dsn_report','date_insert','hie'));
         if ($xml2!='') {			
 		$i=0;
         foreach($xml2 as $row) {	
         $wpdb->replace($table_log_bounces, array(  
             'idb' => $idb,  
             'email' => $row[1],
+			'hie' => $row[12],
 			'fai' => $row[2],
 			'rules_cat' => $row[3],
             'rules_no' => $row[4],

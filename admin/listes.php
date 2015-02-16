@@ -1,7 +1,38 @@
-<?php include(smPATH . '/include/entete.php');
+<?php
+set_time_limit(0);
+?>
+<div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
 extract($_POST);
 extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Liste de diffusion","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
 
+        <?php echo "<p>".__("La liste de diffusion sert a classer les emails de vos clients par categories","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8">
+     
+<?php
 if(isset($action)){
 
 	if($action =="update"){
@@ -13,7 +44,7 @@ echo "<br><br></div>";
 	elseif($action =="add"){
 _e("Votre liste $liste a bien ete ajoute","e-mailing-service");
 $liste=nettoie($liste);
-$table_name = $wpdb->prefix.'sm_liste_'.$liste.'';
+$table_name = $wpdb->prefix.'sm_liste_'.$user_id.'_'.$liste.'';
 $wpdb->insert($table_liste, array(  
             'liste_bd' => $table_name,  
             'liste_nom' => $liste,
@@ -25,7 +56,8 @@ $wpdb->insert($table_liste, array(
 			'champs6' => $champs6,
 			'champs7' => $champs7,
 			'champs8' => $champs8,
-			'champs9' => $champs9
+			'champs9' => $champs9,
+			'login' => $user_login,
        ));
  $wpdb->query("  
    CREATE TABLE IF NOT EXISTS `$table_name` (
@@ -141,7 +173,7 @@ $debut = 0;
 	echo '<form action="admin.php?page=e-mailing-service/admin/listes.php" method="post" target="_parent">
 	<input type="hidden" name="liste" value="'.$liste.'" />
 <input type="hidden" name="action" value="update_name" />';
-	$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."'");
+	$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."' and login='".$user_login."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 	
@@ -217,68 +249,88 @@ echo '<tr><td></td><td><input value="'.__("Modifier les champs de votre liste","
        ));
 	 echo "<br><br><h2>".__("L'email $email a bien ete ajoute","e-mailing-service")."</h2>";  
     }
+	elseif($action =="search"){
+    $fivesdrafts = $wpdb->get_results("SELECT liste_bd FROM `".$table_liste."` WHERE login='".$user_login."'");
+    foreach ( $fivesdrafts as $fivesdraft ) 
+    {
+	$res=sm_search_bd($fivesdraft->liste_bd,$email);
+	if($res != ''){
+		list($id,$mails)=explode('|',$res);
+	echo "<table><tr><td>".$mails."</td><td><a href=\"?page=e-mailing-service/admin/emails.php&liste=".$fivesdraft->liste_bd."&emailid=".$id."&action=update\" target=\"_parent\">
+	 <img src=\"".smURL."/img/profile.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Voir la fiche complete","e-mailing-service")."\"/></a></td></tr></table><br>";	
+	}
+	}
+		exit();
+	 echo "<br><br><h2>".__("L'email $email a bien ete ajoute","e-mailing-service")."</h2>";  
+    }
 	elseif($action=="ajout"){
 echo '<h2>'.__("Ajouter un email a votre liste","e-mailing-service").'</h2>';
+$i=0;
 echo '<form action="admin.php?page=e-mailing-service/admin/listes.php&liste='.$liste.'" name="form_bdd" id="form_bdd" method="post" enctype="multipart/form-data">
 <input type="hidden" name="action" value="add_ajout_unique">';
 $tbaleau_insert ='<table class="widefat">
                          <thead><tr>';
-$tbaleau_insert .="<th><blockquote>".__("Email","e-mailing-service")."</blockquote></th>";
-$tbaleau_insert .="<th><blockquote>".__("Nom","e-mailing-service")."</blockquote></th>";
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."'");
+$tbaleau_insert .="<th>".__("Email","e-mailing-service")."</th>";
+$tbaleau_insert .="<th>".__("Nom","e-mailing-service")."</th>";
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."' and login='".$user_login."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 	if($fivesdraft->champs1 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs1."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs1."</th>";
 	}
 	if($fivesdraft->champs2 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs2."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs2."</th>";
 	}if($fivesdraft->champs3 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs3."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs3."</th>";
 }if($fivesdraft->champs4 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs4."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs4."</th>";
 }if($fivesdraft->champs5 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs5."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs5."</th>";
 }if($fivesdraft->champs6 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs6."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs6."</th>";
 }if($fivesdraft->champs7 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs7."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs7."</th>";
 }if($fivesdraft->champs8 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs8."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs8."</th>";
 }if($fivesdraft->champs9 !=''){
-$tbaleau_insert .="<th><blockquote>".$fivesdraft->champs9."</blockquote></th>";
+$tbaleau_insert .="<th>".$fivesdraft->champs9."</th>";
 }
 $tbaleau_insert .="</tr><tr></thead><tdbody>";
-$tbaleau_insert .="<td><blockquote><input name=\"email\" type=\"text\" /></blockquote></td>";
-$tbaleau_insert .="<td><blockquote><input name=\"nom\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"email\" type=\"text\" /></td>";
+$tbaleau_insert .="<td><input name=\"nom\" type=\"text\" /></td>";
 	if($fivesdraft->champs1 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs1\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs1\" type=\"text\" /></td>";
 	}
 	if($fivesdraft->champs2 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs2\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs2\" type=\"text\" /></td>";
 	}if($fivesdraft->champs3 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs3\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs3\" type=\"text\" /></td>";
 }if($fivesdraft->champs4 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs4\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs4\" type=\"text\" /></td>";
 }if($fivesdraft->champs5 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs5\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs5\" type=\"text\" /></td>";
 }if($fivesdraft->champs6 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs6\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs6\" type=\"text\" /></td>";
 }if($fivesdraft->champs7 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs7\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs7\" type=\"text\" /></td>";
 }if($fivesdraft->champs8 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs8\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs8\" type=\"text\" /></td>";
 }if($fivesdraft->champs9 !=''){
-$tbaleau_insert .="<td><blockquote><input name=\"champs9\" type=\"text\" /></blockquote></td>";
+$tbaleau_insert .="<td><input name=\"champs9\" type=\"text\" /></td>";
 }
+$i++;
      }
 $tbaleau_insert .="</tr></tdbody>
 </table>
 <input type=\"submit\" value=\"".__("Ajouter","e-mailing-service")."\"> 
 </form>
-";		
+";	
+if($i !=0){	
 echo $tbaleau_insert;
-
+} else {
+echo __("Vous n'avez pas encore creer une liste de detinataire, vous devez en premier creer une liste afin d'ajouter des emails","e-mailing-service");
+}
+if($i !=0){	
 echo "<br><br>";
 $tab_champs ='';
 $tab_champs .="<option value=\"null\">".__("null","e-mailing-service")."</option>";
@@ -287,7 +339,7 @@ $tab_champs .="<option value=\"nom\">".__("Nom","e-mailing-service")."</option>"
 $tab_champs .="<option value=\ip\">".__("IP","e-mailing-service")."</option>";
 $tab_champs .="<option value=\lg\">".__("lg","e-mailing-service")."</option>";
 
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."'");
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."' and login='".$user_login."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 
@@ -352,6 +404,7 @@ D&eacute;limiteur : <select name="del">
 <input type="submit" value="'.__("Importer les emails","e-mailing-service").'"> 
 </p>';	
 	}
+	}
 	elseif($action =="add_ajout_tab"){
 $champs="";
 if($col1 !='null'){
@@ -400,20 +453,20 @@ $filename = ''.$dossier_fichier.'import_'.$aleas.'.txt';
 $inF = fopen($filename,"w+");
 fwrite($inF,$tab);
 fclose($inF);
-
+@chmod(0777,$filename);
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 $wpdb->query( "SET GLOBAL local_infile = 'ON';");
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 		
-$requette ="LOAD DATA INFILE '$filename' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
+$requette ="LOAD DATA LOCAL INFILE '$filename' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 )";
 
-$resultat = mysql_query($requette)or die('<br>Erreur SQL : '.__LINE__.' '.$requette.' '.mysql_error().'');
+$resultat = $wpdb->query($requette);
 $sql_liste = $wpdb->get_results("SELECT id FROM `$liste` WHERE `cle` like 'Hysmqponisgz564'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 foreach ( $sql_liste as $req_liste ) 
 {
-mysql_query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'") or die(mysql_error());
+$wpdb->query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'");
 }
 unlink("".$filename."");
 echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe","e-mailing-service").'</b></span>';			
@@ -421,15 +474,16 @@ echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe",
 	
 	///////////// import d'email /////////////////
 	elseif($action=="import"){
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."'");
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE liste_bd ='".$liste."' and login='".$user_login."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 	$nomliste=$fivesdraft->liste_nom;
 }
 echo "<h1>".__("Importation d'email dans votre liste","e-mailing-service")." ".$nomliste."</h1>";
 $dossier_fichier=smPOST;
+if($user_role =='administrator'){
 echo "<h3>".__("Attention de verifier que le dossier","e-mailing-service")." ".$dossier_fichier." ".__("est les droits  (CHMOD a 0777)","e-mailing-service")."</h3>";
-
+}
 
 
 
@@ -457,7 +511,7 @@ function ajouter($bd_table, $str_champs_valeurs){
 
 
 function verif_exist($table, $champ, $exist){			
-	$resultat = mysql_query("select * from ".$table_liste." where ".$champ." ='".$exist."'")or die('Erreur SQL : '.__LINE__.' '.mysql_error());
+	$resultat = mysql_query("select * from ".$table_liste." where ".$champ." ='".$exist."'  and login='".$user_login."'")or die('Erreur SQL : '.__LINE__.' '.mysql_error());
 	$nb_result_e = mysql_num_rows($resultat);
 	if ($nb_result_e > 0){
 		return 1;
@@ -470,7 +524,7 @@ function verif_exist($table, $champ, $exist){
 
 ?>
 <h2><?php _e("Preparation du fichier","e-mailing-service");?> : </h2>
-<p><?php _e("Fichier .csv ou fichier .txt","e-mailing-service");?> </p>
+<p><?php _e("Fichier .csv ou fichier .txt","e-mailing-service");?> <?php _e("Poid maximum du fichier","e-mailing-service");?> : <?php echo ini_get('upload_max_filesize');?> </p>
 <form action="<?php $_SERVER['PHP_SELF'];?>" name="form_bdd" id="form_bdd" method="post" enctype="multipart/form-data">
 <input type="hidden" name="table" value="<?php echo $liste;?>">
 <p style="font-weight:bold">&nbsp;</p>
@@ -633,14 +687,14 @@ $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 $wpdb->query( "SET GLOBAL local_infile = 'ON';");
 $wpdb->query( "SHOW GLOBAL VARIABLES LIKE 'local_infile';");
 
-$requette ="LOAD DATA INFILE '$content_dir$name_file' IGNORE INTO TABLE  `$liste`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
+$requette ="LOAD DATA LOCAL INFILE '$content_dir$name_file' IGNORE INTO TABLE  `".$liste."`  FIELDS TERMINATED BY '".$del."' ENCLOSED BY '\"' LINES TERMINATED BY '\\n'  (
 $champs 
 ) ";
-$resultat = mysql_query($requette)or die('<br>'.__('Erreur SQL contact support or FAQ',"e-mailing-service").' : '.__LINE__.' '.mysql_error().'');
+$resultat = $wpdb->query($requette);
 $sql_liste = $wpdb->get_results("SELECT id FROM `$liste` WHERE `cle` like 'Hysmqponisgz564'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 foreach ( $sql_liste as $req_liste ) 
 {
-mysql_query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'") or die(mysql_error());
+$wpdb->query("UPDATE `".$liste."` SET `cle` ='".key_generate()."' WHERE id='".$req_liste->id."'");
 }
 unlink("".$content_dir."".$name_file."");
 echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe","e-mailing-service").'</b></span>';
@@ -650,89 +704,137 @@ echo '<br><br><br><span style="color:#00f"><b>'.__("Vos emails ont ete importe",
 
 	}
 } else {
-echo "<br><h1>".__("Listes de diffusion","e-mailing-service")."</h1>";
-echo "<h2>".__("La liste de diffusion sert a classer les emails de vos clients par categories","e-mailing-service")."</h2>";
-echo '<table class="widefat">
-                         <thead>';
-echo "<tr><td><blockquote><b>".__("Nom de votre liste","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b>".__("Nb d'emails","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b><a href=\"#\" title=\"".__("Une adresse courriel Opt-In active a fait l'objet d'un consentement prealable par une validation par clic","e-mailing-service")."\">".__("Opt-in","e-mailing-service")."</a></b></blockquote></td>
-<td><blockquote><b>".__("Nb de desinscrits","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b>".__("Nb Invalide","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b>".__("Action","e-mailing-service")."</b></blockquote></td>
-<td><blockquote><b></b></blockquote></td>
-<td><blockquote><b></b></blockquote></td>
-<td><blockquote><b></b></blockquote></td>
-<td><blockquote><b></b></blockquote></td>
+echo '<div class="message warning"><form action="admin.php?page=e-mailing-service/admin/listes.php" method="post" target="_parent">
+<input type="hidden" name="action" value="search" />';
+echo ''.__('Search email','e-mailing-service').' : <input type="text" name="email" value="@"/> <input name="submit" type="submit" class="button button-blue" value="'.__("search","e-mailing-service").'"/>';
+echo '</form></div>';
+echo '<div class="message info">
+<table class="paginate10 sortable full">
+<thead>';
+echo "<tr>
+<th>".__("Liste","e-mailing-service")."</th>
+<th>".__("Emails","e-mailing-service")."</th>
+<th><a href=\"#\" title=\"".__("Une adresse courriel Opt-In active a fait l'objet d'un consentement prealable par une validation par clic","e-mailing-service")."\">".__("Opt-in","e-mailing-service")."</a></th>
+<th>".__("Desinscrits","e-mailing-service")."</th>
+<th>".__("Invalide","e-mailing-service")."</th>";
+if($user_role == 'administrator' ){
+echo "<th>".__("Login","e-mailing-service")."</th>";	
+}
+echo "<th>".__("Action","e-mailing-service")."</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
 </tr> </thead>
         <tbody>";
-$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."`");
+if ( !is_super_admin() ) {
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE login='".$user_login."' AND type='perso'");
+} else {
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."`");	
+}
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 	$bdl=$fivesdraft->liste_bd;
-	 echo "<tr><td><blockquote>".$fivesdraft->liste_nom."</blockquote></td>";
+	 echo "<tr><td>".$fivesdraft->liste_nom."</td>";
 	$user_count = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl."" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $user_count as $user_count ) 
      { 
-	 	 echo "<td><blockquote>".$user_count->total."</blockquote></td>";
+	 	 echo "<td>".$user_count->total."</td>";
 
 	 }
 	 	$optin_counts = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl." WHERE optin='1'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $optin_counts as $optin_count ) 
      { 
-	 	 echo "<td><blockquote>".$optin_count->total."</blockquote></td>";
+	 	 echo "<td>".$optin_count->total."</td>";
 
 	 }
 	 	$invalid_count = $wpdb->get_results("SELECT COUNT(id) AS total2 FROM ".$bdl." WHERE valide='0'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $invalid_count as $invalid_count ) 
      { 
-	 echo "<td><blockquote>".$invalid_count ->total2."</blockquote></td>";
+	 echo "<td>".$invalid_count ->total2."</td>";
 
 	 }
 	 	 	$bounces_count = $wpdb->get_results("SELECT COUNT(id) AS total3 FROM ".$bdl." WHERE bounces='0'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
 	foreach ( $bounces_count as $bounces_count ) 
      { 
-	 echo "<td><blockquote>".$bounces_count ->total3."</blockquote></td>";
+	 echo "<td>".$bounces_count ->total3."</td>";
 
 	 }
+     if($user_role == 'administrator' ){
+	 echo '<td>'.$fivesdraft->login.'</td>'; }
 	 echo "
-	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/emails.php&liste=".$fivesdraft->liste_bd."\" target=\"_parent\"><img src=\"".smURL."img/search.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Details","e-mailing-service")."\"/></a></blockquote></td>
-	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=ajout\" target=\"_parent\"><img src=\"".smURL."img/doc_add.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Ajouter des emails","e-mailing-service")."\"/></a></blockquote></td>
-	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=import\" target=\"_parent\"><img src=\"".smURL."img/doc_add.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Importer des emails","e-mailing-service")."\"/></a></blockquote></td>
-	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=rename\" target=\"_parent\"><img src=\"".smURL."img/doc_edit.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Modifier la liste","e-mailing-service")."\" /></a></blockquote></td>
-	 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=truncate\" target=\"_parent\"><img src=\"".smURL."img/doc_delete.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Vider la liste","e-mailing-service")."\"/></a></blockquote></td>
-	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=csv\" target=\"_parent\"><img src=\"".smURL."img/csv.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .csv\"/></a></blockquote></td>
-		 	 	 <td><blockquote><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=xls\" target=\"_parent\"><img src=\"".smURL."img/xls.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .xls\"/></a></blockquote></td>
-				 <td><blockquote><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&liste_id=".$fivesdraft->id."&nbm=".$user_count->total."&action=division\" target=\"_parent\"><img src=\"".smURL."division.png\" width=\"64\" height=\"64\" border=\"0\" title=\"".__("Diviser votre liste en plusieurs listes","e-mailing-service")."\"/></a></blockquote></td>
+	 <td><a href=\"admin.php?page=e-mailing-service/admin/emails.php&liste=".$fivesdraft->liste_bd."\" target=\"_parent\"><img src=\"".smURL."img/search.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Details","e-mailing-service")."\"/></a></td>
+	 <td><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=ajout\" target=\"_parent\"><img src=\"".smURL."img/doc_add.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Ajouter des emails","e-mailing-service")."\"/></a></td>
+	 <td><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=import\" target=\"_parent\"><img src=\"".smURL."img/doc_add.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Importer des emails","e-mailing-service")."\"/></a></td>
+	 <td><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=rename\" target=\"_parent\"><img src=\"".smURL."img/doc_edit.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Modifier la liste","e-mailing-service")."\" /></a></td>
+	 <td><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&action=truncate\" target=\"_parent\"><img src=\"".smURL."img/doc_delete.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Vider la liste","e-mailing-service")."\"/></a></td>
+	 <td><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=csv\" target=\"_parent\"><img src=\"".smURL."img/csv.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .csv\"/></a></td>
+	<td><a href=\"".smURL."include/export.php?liste=".$fivesdraft->liste_bd."&action=export&format=xls\" target=\"_parent\"><img src=\"".smURL."img/xls.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Exporter vos emails en fichier","e-mailing-service")." .xls\"/></a></td>
+	<td><a href=\"admin.php?page=e-mailing-service/admin/listes.php&liste=".$fivesdraft->liste_bd."&liste_id=".$fivesdraft->id."&nbm=".$user_count->total."&action=division\" target=\"_parent\"><img src=\"".smURL."division.png\" width=\"32\" height=\"32\" border=\"0\" title=\"".__("Diviser votre liste en plusieurs listes","e-mailing-service")."\"/></a></td>
 	 ";
 	 echo "</tr>";
 }
-echo "</tdbody></table>";
-echo "<h2>".__("Creation d'une nouvelle liste de diffusion","e-mailing-service")."</h2>";
-echo "<h3>".__("Choisissez les noms de vos colonnes pour enregistrer vos abonnes","e-mailing-service")."</h3>";
+echo "</tbody></table></div>";
+
+if(get_option('sm_location')=='yes'){
+	echo '<div class="grid_8">';
+echo '<table class="widefat">
+                         <thead>';
+echo "<tr><td><b>".__("Nom de votre liste","e-mailing-service")."</b></td>
+<td><b>".__("Nb d'emails","e-mailing-service")."</b></td>
+<td><b>".__("Description","e-mailing-service")."</b></td>
+<td><b>".__("Tarif","e-mailing-service")."</b></td>
+</tr> </thead>
+        <tbody>";
+
+$fivesdrafts = $wpdb->get_results("SELECT * FROM `".$table_liste."` WHERE type='location'");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+	$bdl=$fivesdraft->liste_bd;
+	 echo "<tr><td>".$fivesdraft->liste_nom."</td>";
+	$user_count = $wpdb->get_results("SELECT COUNT(id) AS total FROM ".$bdl." WHERE valide='1' AND bounces='1'" ) or die("erreur ligne ".__line__." ".mysql_error()."");
+	foreach ( $user_count as $user_count ) 
+     { 
+	 	 echo "<td>".$user_count->total."</td>";
+
+	 }
+	  echo "<td>".$fivesdraft->description."</td>";	
+	  echo "<td>".$fivesdraft->tarif." EUR / ".__("email","e-mailing-service")."</td>";
+	 echo "</tr>";
+}
+echo "</tdbody></table></div>";	
+}
+echo '<div class="message success"><h2>'.__("Creation d'une nouvelle liste de diffusion","e-mailing-service").'</h2>';
+echo "<p>".__("Choisissez les noms de vos colonnes pour enregistrer vos abonnes","e-mailing-service")."</p>";
 echo '<form action="admin.php?page=e-mailing-service/admin/listes.php" method="post" target="_parent">
-<table class="widefat">
+<table width="50%">
                          <thead>
-<tr><td><blockquote>'.__("Nom de la liste","e-mailing-service").' : </blockquote></td><td><input name="liste" type="text" /></td></tr>
-<tr><td><blockquote>'.__("Nom du premier champs","e-mailing-service").' : </blockquote></td><td>'.__("Email").'</td></tr>
-<tr><td><blockquote>'.__("Nom du deuxieme champs","e-mailing-service").' : </blockquote></td><td>'.__("Nom").'</td></tr>
-<tr><td><blockquote>'.__("Nom du troisieme champs","e-mailing-service").' : </blockquote></td><td>'.__("IP").'</td></tr>
-<tr><td><blockquote>'.__("Nom du quatrieme champs","e-mailing-service").' : </blockquote></td><td><input name="champs1" type="text" value="'.__("Prenom","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du cinquieme champs","e-mailing-service").' : </blockquote></td><td><input name="champs2" type="text" value="'.__("Adresse","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du sixieme champs","e-mailing-service").' :  </blockquote></td><td><input name="champs3" type="text" value="'.__("CP","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du septieme champs","e-mailing-service").' :  </blockquote></td><td><input name="champs4" type="text" value="'.__("Ville","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du huitime champs","e-mailing-service").' :  </blockquote></td><td><input name="champs5" type="text" value="'.__("Pays","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du neuvieme champs","e-mailing-service").' :  </blockquote></td><td><input name="champs6" type="text" value="'.__("societe","e-mailing-service").'"/></td></tr>
-<tr><td><blockquote>'.__("Nom du dixieme champs","e-mailing-service").' : </blockquote></td><td><input name="champs7" type="text" value=""/></td></tr>
-<tr><td><blockquote>'.__("Nom du onzieme champs","e-mailing-service").' :  </blockquote></td><td><input name="champs8" type="text" value=""/></td></tr>
-<tr><td><blockquote>'.__("Nom du douzieme champs","e-mailing-service").' : </blockquote></td><td><input name="champs9" type="text" value=""/></td></tr>
-<tr><td><blockquote><input name="Ajouter" type="submit" value="'.__("Ajouter","e-mailing-service").'"/></td><td></td></tr>
+<tr><td>'.__("Nom de la liste","e-mailing-service").' : </td><td><input name="liste" type="text" /></td></tr>
+<tr><td>'.__("Email","e-mailing-service").' : </td><td>'.__("Email","e-mailing-service").'</td></tr>
+<tr><td>'.__("Nom","e-mailing-service").' : </td><td>'.__("Nom","e-mailing-service").'</td></tr>
+<tr><td>'.__("IP","e-mailing-service").' : </td><td>'.__("IP","e-mailing-service").'</td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 4 : </td><td><input name="champs1" type="text" value="'.__("Prenom","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 5 : </td><td><input name="champs2" type="text" value="'.__("Adresse","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 6 : </td><td><input name="champs3" type="text" value="'.__("CP","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 7 : </td><td><input name="champs4" type="text" value="'.__("Ville","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 8 : </td><td><input name="champs5" type="text" value="'.__("Pays","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 9 : </td><td><input name="champs6" type="text" value="'.__("societe","e-mailing-service").'"/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 10 : </td><td><input name="champs7" type="text" value=""/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 11 : </td><td><input name="champs8" type="text" value=""/></td></tr>
+<tr><td>'.__("Champs","e-mailing-service").' 12 : </td><td><input name="champs9" type="text" value=""/></td></tr>
+<tr><td><input name="Ajouter" type="submit" value="'.__("Ajouter","e-mailing-service").'" class="button button-green"/></td><td></td></tr>
 <input type="hidden" name="action" value="add" />
 </thead></table>
-</form>';
+</form></div>';
 }
 
 
 
 ?>
- 
+</div>
+</section>
+</div>
+</section>

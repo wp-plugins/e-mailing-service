@@ -49,12 +49,13 @@ global $wpbd;
   } 
   } 
   } else {
+
   echo '<br>
-  <form action="'.get_option('siteurl').'/upd/'.$smemail.'/'.$smhie.'/'.$smcle.'/" method="post">
-                    <input name="email" type="hidden" value="'.$email.'">
-					<input name="email_id" type="hidden" value="'.$email_id.'">
-					<input name="smcle" type="hidden" value="'.$smcle.'">
-					<input name="smhie" type="hidden" value="'.$smhie.'">
+  <form action="'.get_option('siteurl').'/upd/'.$wp_query->query_vars['smemail'].'/'.$wp_query->query_vars['smhie'].'/'.$wp_query->query_vars['smemail'].'/" method="post">
+                    <input name="email" type="hidden" value="'.$wp_query->query_vars['smemail'].'">
+					<input name="email_id" type="hidden" value="'.$wp_query->query_vars['smemail'].'">
+					<input name="smcle" type="hidden" value="'.$wp_query->query_vars['smcle'].'">
+					<input name="smhie" type="hidden" value="'.$wp_query->query_vars['smhie'].'">
 					<input name="action" type="hidden" value="update_desinscrit">
 					<pre>'.get_option('sm_udp_details').'</pre><br>
 					  <table width="200" border"0">
@@ -64,7 +65,9 @@ global $wpbd;
 				      </table>					  
 					</form><br><br>'; 
 					
-		}
+		
+  }
+  
 		?>
 
 		</div><!-- #content -->

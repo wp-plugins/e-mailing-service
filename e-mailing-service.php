@@ -6,7 +6,13 @@ Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
 */
-if(!isset($_SESSION)){ session_start(); }
+if(function_exists('session_status')){
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+} else {
+ session_start();	
+}
 if(!function_exists('wp_get_current_user')) {
     include(ABSPATH . "wp-includes/pluggable.php"); 
 }
@@ -21,8 +27,15 @@ if ( is_plugin_active_for_network(plugin_basename(__FILE__)) ) {
 	$exit_msg = __('E-mailing service est deja installe', 'e-mailing-service');
 	exit($exit_msg);
 }
+if(!get_option('permalink_structure') ) { 
+add_action('admin_notices', 'SM_rewrite');
+}
+function SM_rewrite()
+{
+echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
+}
 define( 'smVERSION', '8.5' );
-define( 'smDBVERSION', '3.1' );
+define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
@@ -39,28 +52,32 @@ add_action('plugins_loaded', 'sm_init');
 
 function register_sm_menu_page() {
    add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'),  'manage_options',  smPATH . 'admin/index.php', NULL, smURL . 'include/email_edit.png');  
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Configuration SMTP', 'e-mailing-service'), __('Configuration SMTP', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/parametres.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Mass Mailing', 'e-mailing-service'), __('Mass Mailing', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/multi.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Destinataires', 'e-mailing-service'), __('Destinataires', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/listes.php', NULL);
+     add_submenu_page( 'e-mailing-service/admin/index.php', __('Contact list', 'e-mailing-service'), __('Contact list', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/listes.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/emails.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Creation Newsletter', 'e-mailing-service'), __('Creation Newsletter', 'e-mailing-service'), 'manage_options', 'post-new.php?post_type=newsletter', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'manage_options',   'edit.php?post_type=newsletter', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Creer une newsletter', 'e-mailing-service'), __('Creer une newsletter', 'e-mailing-service'), 'manage_options', smPATH . 'admin/create.php', NULL);
+   add_submenu_page( smPATH . 'admin/create.php', __('with wordpress', 'e-mailing-service'), __('with wordpress', 'e-mailing-service'), 'manage_options', 'post-new.php?post_type=newsletter', NULL);
+   add_submenu_page(smPATH . 'admin/create.php', __('with elrte', 'e-mailing-service'), __('with elrte', 'e-mailing-service'), 'manage_options', smPATH . 'admin/editor.php', NULL);   
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/import_newsletter.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/listes_newsletter.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Creation de modeles', 'e-mailing-service'), __('Creation de modeles', 'e-mailing-service'), 'manage_options',  'post-new.php?post_type=sm_modeles', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Modeles', 'e-mailing-service'), __('Liste Modeles', 'e-mailing-service'), 'manage_options',  'edit.php?post_type=sm_modeles', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Import Modele', 'e-mailing-service'), __('Import modele', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/import_template.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Envois SMTP', 'e-mailing-service'), __('Envois SMTP', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Suivis', 'e-mailing-service'), __('Suivis', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques SMTP', 'e-mailing-service'), __('Statistiques SMTP', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_smtp.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('NPAI', 'e-mailing-service'), __('NPAI', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/npai.php', NULL);
+   
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Suivis', 'e-mailing-service'), __('Suivis', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_user.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/variables.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Blacklist', 'e-mailing-service'), __('Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/blacklist.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/alerte.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Status SMTP', 'e-mailing-service'), __('Status SMTP', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/etat.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Aide', 'e-mailing-service'), __('Aide', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/aide.php', NULL); 
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Support', 'e-mailing-service'), __('Support', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/support.php', NULL); 
-     add_submenu_page( 'e-mailing-service/admin/index.php', __('License et option', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);   
-	    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug', 'e-mailing-service'), __('Debug', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/debug.php', NULL); 
+
+    add_submenu_page( 'e-mailing-service/admin/index.php', __('NPAI', 'e-mailing-service'), __('NPAI', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/npai.php', NULL);
+    add_submenu_page( 'e-mailing-service/admin/index.php', __('Blacklist', 'e-mailing-service'), __('Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/blacklist.php', NULL);
+    add_submenu_page( 'e-mailing-service/admin/index.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/alerte.php', NULL);
+     add_submenu_page( 'e-mailing-service/admin/index.php', __('Setting', 'e-mailing-service'), __('Setting', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/setting.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('License et option', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);   
+
+	add_submenu_page( 'e-mailing-service/admin/index.php', __('Aide', 'e-mailing-service'), __('Aide', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/aide.php', NULL); 
+    add_submenu_page( 'e-mailing-service/admin/index.php', __('Support', 'e-mailing-service'), __('Support', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/support.php', NULL); 
+    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug', 'e-mailing-service'), __('Debug', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/debug.php', NULL);
+	    add_submenu_page( smPATH . 'admin/debug.php', __('Status de services', 'e-mailing-service'), __('Status de services', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/etat.php', NULL);  
    if(get_option('sm_debug')=='oui'){
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Update license', 'e-mailing-service'), __('Update license', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_license.php', NULL);
       add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
@@ -72,9 +89,32 @@ function register_sm_menu_page() {
    }
 
 }
+function register_sm_menu_page_client() {
+   add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'),  'mailing-user',  smPATH . 'admin/index_user.php', NULL, smURL . 'include/email_edit.png');  
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Destinataires', 'e-mailing-service'), __('Destinataires', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/listes.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/emails.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Assistant Creation', 'e-mailing-service'), __('Assistant Creation', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/create.php', NULL);
+   add_submenu_page( smPATH . 'admin/create.php', __('with wordpress', 'e-mailing-service'), __('with wordpress', 'e-mailing-service'), 'mailing-user', 'post-new.php?post_type=newsletter', NULL);
+    add_submenu_page(smPATH . 'admin/create.php', __('with elrte', 'e-mailing-service'), __('with elrte', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/editor.php', NULL);
+      add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), 'mailing-user',   smPATH . 'admin/import_newsletter.php', NULL);
 
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'mailing-user',   smPATH . 'admin/listes_newsletter.php', NULL);
+   
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/send_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Suivis des campagnes', 'e-mailing-service'), __('Suivis des campagnes', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/live.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/stats_user.php', NULL);
+     add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/variables_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/alerte_user.php', NULL);
+}
+
+
+
+if ( !is_super_admin() ) {
+add_action('admin_menu', 'register_sm_menu_page_client');
+}
+else {
 add_action('admin_menu', 'register_sm_menu_page');
-
+}
 
 	  ////////////////// post type ////////////////
 
@@ -142,38 +182,54 @@ function sm_create_post_type() {
 function sm_mailing_install()  
 {  
     global $wpdb;  
+	$current_user = wp_get_current_user();
+    $user_login=$current_user->user_login;
+    $user_id=$current_user->ID;
     $table_name = $wpdb->prefix.'sm_liste_test';
+	$table_user_wordpress = $wpdb->prefix.'wordpress_user';
 	$table_temps = $wpdb->prefix.'sm_temps';
 	$table_liste = $wpdb->prefix.'sm_liste';  
 	$table_log = $wpdb->prefix.'sm_log';
-	$table_log_bounces = $wpdb->prefix.'sm_bounces_log';
+	$table_bounces_log = $wpdb->prefix.'sm_bounces_log';
 	$table_stats_smtp = $wpdb->prefix.'sm_stats_smtp';
 	$table_blacklist = $wpdb->prefix.'sm_blacklist';
 	$table_spamscore = $wpdb->prefix.'sm_spamscore';
 	$table_suite = $wpdb->prefix.'sm_suite';
 	$table_bounces_hard = $wpdb->prefix.'sm_bounces_hard';
-    $table_envoi_name = $wpdb->prefix.'sm_historique_envoi';  
+    $table_envoi_name = $wpdb->prefix.'sm_historique_envoi';
+	$table_bounces_log = $wpdb->prefix.'sm_bounces_log';
+	$table_messageid=$wpdb->prefix.'sm_stats_messageid';  
  
     $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_envoi_name` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+ `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_newsletter` int(11) NOT NULL,
   `id_liste` int(11) NOT NULL,
   `date_envoi` datetime NOT NULL,
   `date_demarrage` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `pause` varchar(250) NOT NULL DEFAULT '10',
-  `status` enum('En attente','En cours','Terminer','Limite','pause','reactiver','stop','erreur_flux','erreur_license') NOT NULL DEFAULT 'En attente',
+  `status` enum('En attente','En cours','Terminer','Limite','pause','reactiver','stop','erreur_flux','erreur_license','suite','suspended','bug','error') NOT NULL DEFAULT 'En attente',
   `nb_envoi` int(11) NOT NULL,
   `nb_attente` int(11) NOT NULL,
   `type` enum('newsletter','post','page') NOT NULL DEFAULT 'newsletter',
   `track1` varchar(250) NOT NULL,
   `track2` varchar(250) NOT NULL,
   `serveur` varchar(250) NOT NULL DEFAULT 'auto',
-  `mode` ENUM('text/plain','text/html') NOT NULL DEFAULT 'text/html',
+  `mode` enum('text/plain','text/html') NOT NULL DEFAULT 'text/html',
+  `login` varchar(250) NOT NULL DEFAULT 'admin',
+  `attachments` varchar(250) NOT NULL,
+  `txth` longtext NOT NULL,
+  `sujet` longtext NOT NULL,
+  `corps` longtext NOT NULL,
+  `txtb` longtext NOT NULL,
+  `txta` longtext NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `fromname` varchar(250) NOT NULL,
+  `reply_to` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_newsletter` (`id_newsletter`),
   KEY `type` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=150230 ;
 "); 
   
   $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_blacklist` (
@@ -214,14 +270,44 @@ function sm_mailing_install()
   `champs7` varchar(250) NOT NULL,
   `champs8` varchar(250) NOT NULL,
   `champs9` varchar(250) NOT NULL,
+  `login` varchar(250) NOT NULL DEFAULT 'admin',
+  `type` enum('perso','location') NOT NULL DEFAULT 'perso',
   PRIMARY KEY (`id`),
   UNIQUE KEY `liste_bd` (`liste_bd`),
   KEY `liste_nom` (`liste_nom`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;   
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14896 ;
 "); 
  
         $wpdb->query("  
    CREATE TABLE IF NOT EXISTS `$table_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) NOT NULL DEFAULT '',
+  `nom` varchar(250) NOT NULL,
+  `ip` varchar(250) NOT NULL,
+  `lg` varchar(250) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
+  `champs1` varchar(250) NOT NULL,
+  `champs2` varchar(250) NOT NULL,
+  `champs3` varchar(250) NOT NULL,
+  `champs4` varchar(250) NOT NULL,
+  `champs5` varchar(250) NOT NULL,
+  `champs6` varchar(250) NOT NULL,
+  `champs7` varchar(250) NOT NULL,
+  `champs8` varchar(250) NOT NULL,
+  `champs9` varchar(250) NOT NULL,
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `valide` (`valide`),
+  KEY `bounces` (`bounces`),
+  KEY `cle` (`cle`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;");  
+
+  $wpdb->query("  
+   CREATE TABLE IF NOT EXISTS `$table_user_wordpress` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(250) NOT NULL DEFAULT '',
   `nom` varchar(250) NOT NULL,
@@ -310,7 +396,7 @@ $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_log` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
 
 
-$wpdb->query("CREATE TABLE IF NOT EXISTS `$table_log_bounces` (
+$wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idb` int(11) NOT NULL,
   `email` varchar(250) NOT NULL,
@@ -368,6 +454,41 @@ $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_stats_smtp` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `date_2` (`date`,`smtp`,`ip`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;"); 
+
+$wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idb` int(11) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `hie` varchar(250) NOT NULL,
+  `fai` varchar(250) NOT NULL,
+  `rules_cat` varchar(250) NOT NULL,
+  `rules_no` varchar(250) NOT NULL,
+  `date` varchar(250) NOT NULL,
+  `subject` longtext NOT NULL,
+  `bounce_type` varchar(250) NOT NULL,
+  `diag_code` varchar(250) NOT NULL,
+  `dsn_message` longtext NOT NULL,
+  `dsn_report` longtext NOT NULL,
+  `date_insert` varchar(250) NOT NULL,
+  `update` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`,`date_insert`),
+  KEY `idb` (`idb`,`fai`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=322496 ;"); 
+
+$wpdb->query("CREATE TABLE IF NOT EXISTS `".$table_messageid."` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) NOT NULL,
+  `messageid` varchar(250) NOT NULL,
+  `server` varchar(250) NOT NULL,
+  `status` longtext NOT NULL,
+  `hie` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `messageid` (`messageid`,`hie`),
+  KEY `hie` (`hie`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86980 ;"); 
  
  $total = $wpdb->get_var("
     SELECT COUNT(id)
@@ -385,15 +506,26 @@ if($total==0){
 	   $wpdb->insert($table_liste, array(  
             'liste_bd' => $table_name,  
             'liste_nom' => 'test',
-       ));  
+			'login' => $user_login,
+       ));
+	   $wpdb->insert($table_liste, array(  
+            'liste_bd' => $table_user_wordpress,  
+            'liste_nom' => 'wordpress_user',
+			'login' => $user_login,
+       ));   
 	 
 	 if(!is_dir(smPOST)){
     @mkdir(smPOST, 0777);
 	@chmod(smPOST, 0777); 
 		   }	
 		   
-
+   
 }
+
+
+
+
+
 
 /////////////////////// creation des options //////////////////////////
 
@@ -490,6 +622,9 @@ add_option('sm_widget_demande_9','non');
 add_option('sm_widget_demande_10','non');
 add_option('sm_widget_demande_11','non');
 add_option('sm_widget_demande_12','non');
+//pour la location et vente du service
+add_option('sm_location','non');
+
 
 	
 		if(!get_option('sm_post_id_auto')) {
@@ -614,7 +749,7 @@ function remove_page_title() {
 if(!function_exists('sm_remove_menus')){
 function sm_remove_menus () {
 global $menu;
-                $restricted = array(__('Newsletter'), __('Modeles'), __('Templates'), __('sm_modeles'));
+                $restricted = array(__('Newsletter'), __('Modeles'), __('Templates'), __('Template'),__('sm_modeles'));
                 end ($menu);
                 while (prev($menu)){
                         $value = explode(' ',$menu[key($menu)][0]);
@@ -626,11 +761,184 @@ add_action('admin_menu', 'sm_remove_menus');
 
 if(!function_exists('sm_css_admin_head')){
 function sm_css_admin_head(){
-echo '<link rel="stylesheet" href="'.smURL.'sm.css" type="text/css" media="all" >';
-}
-add_action('admin_head', 'sm_css_admin_head');
+echo '<link rel="stylesheet" href="'.smURL.'sm.css" type="text/css" media="all" >
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>';
+echo "<script src=\"".smURL."editor/js/jquery-1.6.1.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
+<script src=\"".smURL."editor/js/jquery-ui-1.8.13.custom.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
+<link rel=\"stylesheet\" href=\"".smURL."editor/css/smoothness/jquery-ui-1.8.13.custom.css\" type=\"text/css\" media=\"screen\" charset=\"utf-8\">
+<script src=\"".smURL."editor/js/elrte.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
+<link rel=\"stylesheet\" href=\"".smURL."editor/css/elrte.min.css\" type=\"text/css\" media=\"screen\" charset=\"utf-8\">
+<STYLE type=\"text/css\">
+   a.bulle {
+     position:relative;
+     color:#396a86; 
+     text-decoration:none; 
+     font-family:arial, verdana, sans-serif; 
+     text-align:center; 
+     font-size:11px;
+   }
+   
+   a.bulle:hover {
+      background: none; 
+      z-index: 50; 
+   }
+   
+   a.bulle span { 
+     display: none;
+   }
+   
+   a.bulle:hover span {
+      display: block; 
+      position: absolute;
+      top: -10px; 
+      right: 40px;
+      font-family:arial, verdana, sans-serif; 
+      text-align:justify; 
+      font-size:12px;
+      font-weight:normal;
+      width:450px;
+      background: white;
+      padding: 5px;
+      border: 1px solid #62c0f4;
+      border-left: 10px solid #62c0f4;
+   }
+   
+-->
+</STYLE> 
+
+<!-- jquerytools -->
+<script src=\"".smURL."js/onglet.js\"></script>
+<script src=\"".smURL."js/jquery.tools.min.js\"></script>
+<script src=\"".smURL."js/visualize.jQuery.js\"></script>
+<script src=\"".smURL."js/jquery.tables.js\"></script>
+<script type=\"text/javascript\" src=\"".smURL."js/coo_form.js\"></script>
+<!--<script type=\"text/javascript\" src=\"".smURL."js/jquery.min.js\"></script>-->
+
+
+<!--[if lt IE 9]>
+<link rel=\"stylesheet\" media=\"screen\" href=\"".smURL."css/ie.css\" />
+<script type=\"text/javascript\" src=\"".smURL."js/html5.js\"></script>
+<script type=\"text/javascript\" src=\"".smURL."js/selectivizr.js\"></script>
+<script type=\"text/javascript\" src=\"".smURL."js/ie.js\"></script>
+<script type=\"text/javascript\" src=\"".smURL."js/excanvas.js\"></script>
+<![endif]-->
+<!--[if IE 8]>
+<link rel=\"stylesheet\" media=\"screen\" href=\"".smURL."css/ie8.css\" />
+<![endif]-->
+
+<script type=\"text/javascript\" src=\"".smURL."js/global.js\"></script>
+<script src=\"".smURL."editor/js/i18n/elrte.ru.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
+<script type=\"text/javascript\" charset=\"utf-8\">
+		$().mailing-usery(function() {
+			var opts = {
+				cssClass : 'el-rte',
+				lang     : 'fr',
+				height   : 450,
+				toolbar  : 'maxi',
+				cssfiles : ['".smURL."editor/css/elrte-inner.css']
+			}
+			$('#editor').elrte(opts);
+		})
+</script>";
 }
 
+}
+
+function SM_custom_login_css() {
+echo '<!-- server -->
+<link rel="stylesheet" media="screen" href="'.smURL.'css/reset.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/style.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/messages.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/forms.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/tables.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/visualize.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/uniform.aristo.css" />
+<link rel="stylesheet" media="screen" href="'.smURL.'css/invoice.css" />';
+}
+
+
+if(!function_exists('sm_js_admin_head')){
+function sm_js_admin_head(){
+echo "<script type=\"text/javascript\">
+$(document).mailing-usery(function(){
+$('#preview').hide();	
+$('#photo').click(update);
+$('#title').keypress(update);
+});
+	
+function update(){		
+		
+$('#preview').slideDown('slow');
+var title = $('#title').val();
+var photo = $('#photo').val();
+$('#Displaytitle').html(title);
+$('#image').html('<iframe src=\"'+photo+'\" width=\"850\" height=\"900\" scrolling=\"no\" align=\"middle\"></iframe>');
+}
+</script>
+<style>
+.left {
+	width:400px;
+	float:left;
+	font-size:13px;
+	color:#333;
+	margin-right:20px;
+}
+.right {
+	width:320px;
+	float:left;
+	margin-right:20px;
+}
+#preview {
+	min-height:247px;
+	background-color:#CCC;
+	padding:10px;
+	font-size:12px;
+	color:#999;
+	border:1px solid #CCC;
+	width:870px;
+}
+#title {
+	margin-top:10px;
+	padding:5px;
+	font-size:13px;
+	color:#000;
+	border:1px solid #CCC;
+	font-family:Verdana, Geneva, sans-serif;
+}
+#photo {
+	margin-bottom:10px;
+}
+#image {
+	margin-top:5px;
+}
+#Displaytitle {
+	font-size:14px;
+	color:#333;
+	margin-top:5px;
+}
+</style>";
+}
+
+}
+
+if(isset($_GET["page"])){
+        $occurence = Array("e-mailing-service"); 
+        while (list($element, $valeur) = each($occurence)) {
+                $pos = strpos($_GET["page"],$valeur);
+                if(is_int($pos)!=false)
+						{
+						 add_action('admin_head', 'sm_js_admin_head');
+						 add_action('admin_head', 'sm_css_admin_head');
+						 add_action('admin_head', 'SM_custom_login_css');   
+                         }
+          }
+}
+add_action('admin_head-index.php', 'AH_dashbord_style');
+if(!function_exists('AH_dashbord_style')){
+function AH_dashbord_style() {
+	SM_custom_login_css();
+}
+}
 ///desinscrit ////
 
 
@@ -753,7 +1061,7 @@ function xml_server_stats($url,$array){
 		foreach($xml2l as $row) {
 		if($row[0] == 1)
 		{
-			 
+
 	            if(!headers_sent()) {
 				@header('Location: '.$row[1].'');
 				echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
@@ -769,6 +1077,15 @@ function xml_server_stats($url,$array){
 		}
 }
 }
+if(!function_exists('sm_nb_envois_mois')){
+function sm_nb_envois_mois($user_login){
+global $wpdb;
+$table_envoi= $wpdb->prefix.'sm_historique_envoi';
+$total = $wpdb->get_var("SELECT count(id) AS total FROM `".$table_envoi."` WHERE login='".$user_login."' AND date_envoi like '".date('Y-m')."-%'");
+return $total;	
+}
+}
+
 /////SMTP //////
 function sm_smtp_choix($phpmailer){
 	global $wdpd;
@@ -829,9 +1146,7 @@ function sm_smtp_choix($phpmailer){
 }
 
 }
-if(get_option('sm_license') !='api_mass-mailing' ){
-	add_action('phpmailer_init','sm_smtp_multi');
-}
+
 function sm_smtp_multi($phpmailer){
 	global $wdpd;
 	//fix_phpmailer_messageid( $phpmailer );
@@ -862,6 +1177,10 @@ function sm_smtp_multi($phpmailer){
 	}
     }
 	//session pour debug//
+	list($mx,$domaine,$ext)=explode('.',get_option('sm_smtp_server_'.$num.''));
+	$semi_rand = sha1(microtime()); 
+    $message_id = '<' . $semi_rand . '@'.$domaine.'.'.$ext.'>';
+	$_SESSION['message-id']=''.$semi_rand.'@'.$domaine.'.'.$ext.'';
 	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
 	$_SESSION['sm_from']= get_option('sm_from_'.$num.'');
@@ -875,6 +1194,7 @@ function sm_smtp_multi($phpmailer){
 	$phpmailer->From = get_option('sm_email_exp_'.$num.'');
 	$phpmailer->FromName = get_option('sm_from_'.$num.'');
 	$phpmailer->AddReplyTo = get_option('sm_email_ret_'.$num.'');
+	$phpmailer->MessageID = $message_id;
 	$phpmailer->Host = get_option('sm_smtp_server_'.$num.'');
 	$phpmailer->Port = get_option('sm_smtp_port_'.$num.'');
 	$phpmailer->SMTPAuth = (get_option('sm_smtp_authentification_'.$num.'')=="oui") ? TRUE : FALSE;
@@ -887,6 +1207,11 @@ function sm_smtp_multi($phpmailer){
 	//session pour debug//
 	$num=1;
 	//session pour debug//
+	
+    list($mx,$domaine,$ext)=explode('.',get_option('sm_smtp_server_'.$num.''));
+	$semi_rand = sha1(microtime()); 
+    $message_id = '<' . $semi_rand . '@'.$domaine.'.'.$ext.'>';
+	$_SESSION['message-id']=''.$semi_rand.'@'.$domaine.'.'.$ext.'';
 	$_SESSION['sm_smtp_actif']= '##'.get_option('sm_smtp_actif_'.$num.'').'##';
 	$_SESSION['sm_smtp_server']= '##'.get_option('sm_smtp_server_'.$num.'').'##';
 	$_SESSION['sm_from']= get_option('sm_from_'.$num.'');
@@ -897,6 +1222,7 @@ function sm_smtp_multi($phpmailer){
 	$_SESSION['sm_smtp_login']= '##'.get_option('sm_smtp_login_'.$num.'').'##';
 	$_SESSION['sm_smtp_pass']= '##'.get_option('sm_smtp_pass_'.$num.'').'##';
 	$phpmailer->Sender = get_option('sm_email_exp_'.$num.'');
+	$phpmailer->MessageID = $message_id;
 	$phpmailer->From = get_option('sm_email_exp_'.$num.'');
 	$phpmailer->FromName = get_option('sm_from_'.$num.'');
 	$phpmailer->AddReplyTo = get_option('sm_email_ret_'.$num.'');
@@ -945,7 +1271,121 @@ function sm_smtp_multi($phpmailer){
     }
 
 }
+function sm_smtp_user($phpmailer){
+	if(!isset($_SESSION["user_id"])){
+	$host = get_option('sm_smtp_server_1');
+	$sender = get_option('sm_email_exp_1');
+	$from = get_option('sm_from_1');
+	$fromname = get_option('sm_from_1');
+	$reply_to = get_option('sm_email_ret_1');
+	$port = get_option('sm_smtp_port_1');
+	$auth = get_option('sm_smtp_authentification_1');
+	$username = get_option('sm_smtp_login_1');
+	$pass = get_option('sm_smtp_pass_1');
+	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }	
+	
+	} else {
+	$user_id=$_SESSION["user_id"];
+	$host = get_user_meta( $user_id, 'sm_host',true);
+	if($host ==''){
+	$host = get_option('sm_smtp_server_1');
+	$sender = get_option('sm_email_exp_1');
+	$from = get_option('sm_from_1');
+	$fromname = get_option('sm_from_1');
+	$reply_to = get_option('sm_email_ret_1');
+	$port = get_option('sm_smtp_port_1');
+	$auth = get_option('sm_smtp_authentification_1');
+	$username = get_option('sm_smtp_login_1');
+	$pass = get_option('sm_smtp_pass_1');
+	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }	
+	  } else {
+	$sender = get_user_meta( $user_id, 'sm_sender',true);
+	$from = get_user_meta( $user_id, 'sm_from',true);
+	$fromname = get_user_meta( $user_id, 'sm_fromname',true);
+	$reply_to = get_user_meta( $user_id, 'sm_reply',true);
+	$port = get_user_meta( $user_id, 'sm_port',true);
+	$auth = get_user_meta( $user_id, 'sm_authentification',true);
+	$username = get_user_meta( $user_id, 'sm_username',true);
+	$pass = get_user_meta( $user_id, 'sm_pass',true);
+	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }
+	  }  
+	}
+	if(isset($_SESSION['alert'])){
+	$host = get_option('sm_smtp_alert_server');
+	$sender = get_option('sm_email_alert_exp');
+	$from = get_option('sm_alert_from');
+	$fromname = get_option('sm_alert_from');
+	$reply_to = get_option('sm_alert_email_ret');
+	$port = get_option('sm_smtp_alert_port');
+	$auth = get_option('sm_smtp_alert_authentification');
+	$username = get_option('sm_smtp_alert_login');
+	$pass = get_option('sm_smtp_alert_pass');
+	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }
+			}
+			
+	list($mx,$domaine,$ext)=explode('.',$host);
+	$semi_rand = sha1(microtime()); 
+    $message_id = '<' . $semi_rand . '@'.$domaine.'.'.$ext.'>';
+	$_SESSION['message-id']=''.$semi_rand.'@'.$domaine.'.'.$ext.'';
+	$_SESSION['sm_smtp_server']= $host;
+	$_SESSION['sm_from']= $fromname;
+	$_SESSION['sm_email_exp']= $sender;
+	$_SESSION['sm_email_ret']= $reply_to;
+	$_SESSION['sm_smtp_port']= $port;
+	$_SESSION['sm_smtp_authentification']= '##'.$auth.'##';
+	$_SESSION['sm_smtp_login']= '##'.$username.'##';
+	$_SESSION['sm_smtp_pass']= '##'.$pass.'##';
+	$_SESSION['sm_smtp_function']= '##sm_smtp_user##';
+	
+	$phpmailer->Sender = $sender;
+	$phpmailer->From = $sender;
+	$phpmailer->FromName = $fromname;
+	$phpmailer->AddReplyTo = $reply_to;
+	$phpmailer->MessageID = $message_id;
+	$phpmailer->Host = $host;
+	$phpmailer->Port = $port;
+	$phpmailer->SMTPAuth = $auth1;
+	if($phpmailer->SMTPAuth){
+		$phpmailer->Username =  $username;
+		$phpmailer->Password = $pass;
+	}
+	/*
+	if(!$phpmailer->Send()) {
+    echo "Mailer Error: " . $phpmailer->ErrorInfo;
+	sm_log_sent('','',$message_id,$host,$phpmailer->ErrorInfo);
+    } else {
+    echo "Message sent!";
+	sm_log_sent('','',$message_id,$host,'sent');
+	}
+	*/
+	// Send!
+    $_SESSION["error"] ='sent';
+		try{
+    $phpmailer->IsSMTP();
+    $_SESSION["error"] ="successfully sent";
+    } catch(Exception $e){
+    $_SESSION["error"] = $phpmailer->ErrorInfo;
+	echo $phpmailer->ErrorInfo;
+	echo "<br> ".$phpmailer->Host."";
+	echo "<br> ".$phpmailer->Sender."";
+	echo "<br> ".$phpmailer->SMTPAuth."";
+	echo "<br> ".$phpmailer->Username."";
+	echo "<br> ".$phpmailer->Password."";	
+    }
+	
+	if(get_option('sm_debug')=="oui")
+    {
+            $phpmailer->SMTPDebug = 2;
+            $phpmailer->debug     = 1;
 
+    echo htmlspecialchars( var_export( $phpmailer, true ) );
+	}
+
+ 
+
+
+}
+add_action('phpmailer_init','sm_smtp_user');
 
 ////////cron ////////////////
 add_filter('cron_schedules', 'minutes');
@@ -1064,8 +1504,9 @@ function sm_cron_unschedule_jours1() {
 
 function action_cron_minutes() 
 {
-sm_cron_fichier('include/cron.php');
-sm_cron_fichier('include/cron_auto.php');
+
+sm_cron_fichier_v2('include/cron_auto.php');
+sm_cron_fichier_v2('include/cron_v4.php');
 }
 add_action('sm_crons', 'action_cron_minutes');
 
@@ -1096,6 +1537,7 @@ function action_cron24()
 {
 sm_cron_fichier('include/bounces_delete.php');
 sm_cron_fichier('include/cron_license.php');
+sm_userwordpress_update();
 }
 add_action('sm_crons_jours1', 'action_cron24');
 
@@ -1106,7 +1548,12 @@ function sm_cron_fichier($fichier)
 include(''.smPATH.''.$fichier.'');
 }
 }
-
+if(!function_exists('sm_cron_fichier_v2')){
+function sm_cron_fichier_v2($fichier)
+{
+@file_get_contents(''.smURL.''.$fichier.'');
+}
+}
 
 //post
 	function sm_meta_init() {
@@ -1229,7 +1676,7 @@ $id_liste =$fivesdraft->id_liste;
 $listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."` WHERE id='$id_liste'");
 foreach ( $listes as $resliste ) 
 {
-mysql_query("UPDATE `".$resliste->liste_bd."` set `optin` = '1' WHERE `id`='".$email_id."' AND `cle`='".$cle."'") or die (mysql_error());
+$wpdb->query("UPDATE `".$resliste->liste_bd."` set `optin` = '1' WHERE `id`='".$email_id."' AND `cle`='".$cle."'");
 }
 return true;
 }
@@ -1240,6 +1687,22 @@ echo $txt;
 }
 add_action('admin_head', 'sm_admin_head');
 
+function sm_userwordpress_update(){
+global $wpdb;
+$table_user_wordpress = $wpdb->prefix.'wordpress_user';
+$blogusers = get_users( 'blog_id='.$GLOBALS['blog_id'].'' );
+foreach ( $blogusers as $user ) {
+$wpdb->insert($table_user_wordpress, array(  
+            'email' => esc_html( $user->user_email ),  
+            'nom' => esc_html( $user->display_name ),
+			'ip' => '',
+			'lg' => $_SERVER['HTTP_ACCEPT_LANGUAGE'] ,
+            'date_creation' => current_time('mysql'),
+			'cle' => key_generate()			  
+       ));
+}
+	
+}
 
 function sm_no_generator() { return ''; }
 add_filter('the_generator', 'sm_no_generator');
@@ -1284,7 +1747,24 @@ function envoi_server($url,$array)
 
 }
 }
+if(!function_exists('ah_service_actif')){
+ function ah_service_actif($user_login){
+	 if(is_plugin_active('admin-hosting/admin-hosting.php')) {
+	    if(get_serveur($user_login) =='1'){
+		return 1;	
+		}
+		elseif(get_service($user_login) =='1'){
+		return 2;		
+		}
+		else {
+		return 3;		
+		}
 
+	 } else {
+return 0;		 
+	 }
+ }
+}
 if( !function_exists( 'xml_server_api' )) {
       function xml_server_api($url,$array)
        {
@@ -1338,16 +1818,109 @@ function sm_update_db(){
 	$table_temps = $wpdb->prefix.'sm_temps';
 	$table_liste = $wpdb->prefix.'sm_liste';  
 	$table_log = $wpdb->prefix.'sm_log';
-	$table_log_bounces = $wpdb->prefix.'sm_bounces_log';
+	$table_bounces_log = $wpdb->prefix.'sm_bounces_log';
 	$table_stats_smtp = $wpdb->prefix.'sm_stats_smtp';
 	$table_blacklist = $wpdb->prefix.'sm_blacklist';
 	$table_spamscore = $wpdb->prefix.'sm_spamscore';
 	$table_suite = $wpdb->prefix.'sm_suite';
 	$table_bounces_hard = $wpdb->prefix.'sm_bounces_hard';
     $table_envoi_name = $wpdb->prefix.'sm_historique_envoi'; 
-if(get_option('sm_db_version') < '3.1'){
-$wpdb->query("ALTER TABLE  `". $table_envoi_name."` CHANGE  `status`  `status` ENUM(  'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license',  'suite',  'suspended' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'"); 
-update_option( 'sm_db_version', '3.1' );
+	$table_bounces_log = $wpdb->prefix.'sm_bounces_log';
+	$table_messageid=$wpdb->prefix.'sm_stats_messageid'; 
+	$table_user_wordpress = $wpdb->prefix.'wordpress_user';  
+	
+if(get_option('sm_db_version') < '4.4'){
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` CHANGE  `status`  `status` ENUM(  'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license',  'suite',  'suspended',  'bug',  'error',  'failed' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'");	
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `txth` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `sujet` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `corps` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `txtb` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `txta` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `attachments` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `user_id` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `fromname` LONGTEXT NOT NULL");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `reply_to` LONGTEXT NOT NULL");
+$wpdb->insert($table_liste, array(  
+            'liste_bd' => $table_user_wordpress,  
+            'liste_nom' => 'wordpress_user',
+			'login' => $user_login,
+));   
+$wpdb->query("  
+   CREATE TABLE IF NOT EXISTS `$table_user_wordpress` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) NOT NULL DEFAULT '',
+  `nom` varchar(250) NOT NULL,
+  `ip` varchar(250) NOT NULL,
+  `lg` varchar(250) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `valide` enum('1','0') NOT NULL DEFAULT '1' COMMENT 'Si le client c''est desinscrit la valeur est 0',
+  `bounces` enum('0','1') NOT NULL DEFAULT '1' COMMENT 'Si l ''email n''est plus correct la valeur passe Ã  0',
+  `optin` enum('0','1') NOT NULL DEFAULT '0',
+  `champs1` varchar(250) NOT NULL,
+  `champs2` varchar(250) NOT NULL,
+  `champs3` varchar(250) NOT NULL,
+  `champs4` varchar(250) NOT NULL,
+  `champs5` varchar(250) NOT NULL,
+  `champs6` varchar(250) NOT NULL,
+  `champs7` varchar(250) NOT NULL,
+  `champs8` varchar(250) NOT NULL,
+  `champs9` varchar(250) NOT NULL,
+  `cle` varchar(250) NOT NULL DEFAULT 'Hysmqponisgz564',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `valide` (`valide`),
+  KEY `bounces` (`bounces`),
+  KEY `cle` (`cle`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;");  
+$wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idb` int(11) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `hie` varchar(250) NOT NULL,
+  `fai` varchar(250) NOT NULL,
+  `rules_cat` varchar(250) NOT NULL,
+  `rules_no` varchar(250) NOT NULL,
+  `date` varchar(250) NOT NULL,
+  `subject` longtext NOT NULL,
+  `bounce_type` varchar(250) NOT NULL,
+  `diag_code` varchar(250) NOT NULL,
+  `dsn_message` longtext NOT NULL,
+  `dsn_report` longtext NOT NULL,
+  `date_insert` varchar(250) NOT NULL,
+  `update` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`,`date_insert`),
+  KEY `idb` (`idb`,`fai`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=322496 ;"); 
+
+$wpdb->query("CREATE TABLE IF NOT EXISTS `".$table_messageid."` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) NOT NULL,
+  `messageid` varchar(250) NOT NULL,
+  `server` varchar(250) NOT NULL,
+  `status` longtext NOT NULL,
+  `hie` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `messageid` (`messageid`,`hie`),
+  KEY `hie` (`hie`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86980 ;"); 
+}
+if(get_option('sm_db_version') < '3.4'){	
+$wpdb->query("ALTER TABLE  `".$table_liste."` ADD `login` VARCHAR( 250 ) NOT NULL DEFAULT 'admin'");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD `login` VARCHAR( 250) NOT NULL DEFAULT 'admin'");
+$wpdb->query("ALTER TABLE  `".$table_liste."` ADD `type` ENUM( 'perso', 'location' ) NOT NULL DEFAULT 'perso'");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` CHANGE  `status`  `status` ENUM(  'suite', 'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'");
+}
+if(get_option('sm_db_version') < '3.6'){	
+$wpdb->query("ALTER TABLE  `".$table_bounces_log."` ADD  `hie` INT NOT NULL AFTER  `email`");
+}
+if(get_option('sm_db_version') < '3.4'){	
+$wpdb->query("ALTER TABLE  `".$table_liste."` ADD `login` VARCHAR( 250 ) NOT NULL DEFAULT 'admin'");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD `login` VARCHAR( 250) NOT NULL DEFAULT 'admin'");
+$wpdb->query("ALTER TABLE  `".$table_liste."` ADD `type` ENUM( 'perso', 'location' ) NOT NULL DEFAULT 'perso'");
+$wpdb->query("ALTER TABLE  `".$table_envoi_name."` CHANGE  `status`  `status` ENUM(  'suite', 'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'");
 }
 if(get_option('sm_db_version') < '2.6'){
 $listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."`");
@@ -1358,20 +1931,20 @@ $wpdb->query("ALTER TABLE `".$resliste->liste_bd."` ADD `optin` ENUM('0','1') NO
 }
 update_option( 'sm_db_version', '2.6' );
 }
-if(get_option('sm_db_version') >= '2.6' &&  get_option('sm_db_version') < '2.7'){
+if(get_option('sm_db_version') == '2.6' &&  get_option('sm_db_version') < '2.7'){
 $wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 $wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 }
-if(get_option('sm_db_version') >= '2.7' &&  get_option('sm_db_version') < smDBVERSION){
+if(get_option('sm_db_version') == '2.7' &&  get_option('sm_db_version') < smDBVERSION){
 $wpdb->query("ALTER TABLE `".$table_bounces_hard."` ADD `update` ENUM('0','1') NOT NULL DEFAULT '0' ");
 $wpdb->query("ALTER TABLE `".$wpdb->prefix."sm_liste_test` ADD `optin` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `bounces`");
 $wpdb->query("ALTER TABLE `".$table_temps."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 $wpdb->query("ALTER TABLE `".$table_suite."` ADD `cle` VARCHAR( 250) NOT NULL DEFAULT 'Hysmqponisgz564', ADD INDEX (`cle`)");
 }
-if(get_option('sm_db_version') >= '2.8' &&  get_option('sm_db_version') < smDBVERSION){
+if(get_option('sm_db_version') == '2.8' &&  get_option('sm_db_version') < smDBVERSION){
 $wpdb->query("ALTER TABLE `".$table_envoi_name."` ADD `mode` ENUM('text/plain','text/html') NOT NULL DEFAULT 'text/html'");
 }
-if(get_option('sm_db_version') >= '2.9' &&  get_option('sm_db_version') < smDBVERSION){
+if(get_option('sm_db_version') == '2.9' &&  get_option('sm_db_version') < smDBVERSION){
 $wpdb->query( "DROP TABLE `$table_liste`"); 
 $wpdb->query( "  
    CREATE TABLE IF NOT EXISTS `$table_liste` (
@@ -1398,7 +1971,7 @@ $wpdb->query( "
        )); 
 }
 update_option( 'sm_db_version', smDBVERSION );
-_e("mise a jour de la base de donnee du plugin e-mailing service (".$wpdb->prefix.")","e-mailing-service");	
+_e("mise a jour de la base de donnee du plugin e-mailing service","e-mailing-service");	
 }
 function sm_update_db_check() {
 	if(!get_option('sm_db_version')){
@@ -1415,13 +1988,112 @@ add_action( 'admin_head', 'sm_update_db_check' );
 }
 
 
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
+apply_filters('got_rewrite', true);
+
+//remove_role('mailing-user');
+if (!get_role('mailing-user')) {
+	$role = add_role('mailing-user', 'E-mailing service V2',array(
+        'publish_sm_modeles' => true,
+        'edit_sm_modeles' => true,
+        'edit_others_sm_modeles' => false,
+        'delete_sm_modeles' => false,
+        'delete_others_sm_modeles' => false,
+        'mailing-user_private_sm_modeles' => false,
+        'edit_sm_modeles' => true,
+        'delete_sm_modeles' => true,
+        'mailing-user_sm_modeles' => true, 
+		 'delete_posts' => true,
+         'edit_posts' => true,
+	     'edit_published_posts' => true,
+	     'publish_posts' => true,
+	     'upload_files' => true,
+        'read' => true,      
+        )); 
+
 }
 
+
+add_filter( 'posts_where', 'HA_devplus_attachments_wpquery_where' );
+function HA_devplus_attachments_wpquery_where( $where ){
+	global $current_user;
+
+	if( is_user_logged_in() ){
+		// we spreken over een ingelogde user
+		if( isset( $_POST['action'] ) ){
+			// library query
+			if( $_POST['action'] == 'query-attachments' ){
+				$where .= ' AND post_author='.$current_user->data->ID;
+			}
+		}
+	}
+
+	return $where;
+}
+
+
+
+add_action('media_buttons','SM_select_shortcode',11);
+function SM_select_shortcode(){
+
+    global $shortcode_tags;
+
+     $shortcodes_list = '&nbsp;<select id="sc_select"><option>'.__('Shortcode for newsletter','e-mailing-service').'</option>';
+     $shortcodes_list .= '<option value=\'<a href="[lien_desabo]">'.__('Unsuscribe','e-mailing-service').'</a>\'>'.__('Link unsuscribe','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'<a href="[lien_page]">'.__('View online','e-mailing-service').'</a>\'>'.__('Link view online','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'<a href="[lien_affiliation]">'.__('Send à newsltter','e-mailing-service').'</a>\'>'.__('Link affiliate','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[link_titre]\'>'.__('Title of article','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[link]\'>'.__('Link to the article ','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'\'>----------------------'.__('Automatic shortcode on your information','e-mailing-service').'-----------------------</option>';
+	 $shortcodes_list .= '<option value=\'[news-societe]\'>'.__('Your name','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-adresse]\'>'.__('Adress','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-tel]\'>'.__('your Phone','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-fax]\'>'.__('Your fax','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-link_facebook]\'>'.__('Facebook link','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-link_google]\'>'.__('Google+ link','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-link_twitter]\'>'.__('Twitter link','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-link_linkedin]\'>'.__('Linkedin link','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[news-tracking]\'>'.__('Tracking code','e-mailing-service').'</option>';
+	  $shortcodes_list .= '<option value=\'\'>----------------------'.__('Automatic shortcode on contact list','e-mailing-service').'-----------------------</option>';
+	 $shortcodes_list .= '<option value=\'[email]\'>'.__('Email customer','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[nom]\'>'.__('Name customer','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[champs1]\'>'.__('Row','e-mailing-service').' 1</option>';
+	 $shortcodes_list .= '<option value=\'[champs2]\'>'.__('Row','e-mailing-service').' 2</option>';
+	 $shortcodes_list .= '<option value=\'[champs3]\'>'.__('Row','e-mailing-service').' 3</option>';
+	 $shortcodes_list .= '<option value=\'[champs4]\'>'.__('Row','e-mailing-service').' 4</option>';
+	 $shortcodes_list .= '<option value=\'[champs5]\'>'.__('Row','e-mailing-service').' 5</option>';
+	 $shortcodes_list .= '<option value=\'[champs6]\'>'.__('Row','e-mailing-service').' 6</option>';
+	 $shortcodes_list .= '<option value=\'[champs7]\'>'.__('Row','e-mailing-service').' 7</option>';
+	 $shortcodes_list .= '<option value=\'[champs8]\'>'.__('Row','e-mailing-service').' 8</option>';
+	 $shortcodes_list .= '<option value=\'[champs9]\'>'.__('Row','e-mailing-service').' 9</option>';
+     $shortcodes_list .= '<option value=\'\'>----------------------'.__('Automatic shortcode on your campaign','e-mailing-service').'-----------------------</option>';
+	 $shortcodes_list .= '<option value=\'[date]\'>'.__('Date','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[serveur]\'>'.__('Server ID','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[auto]\'>'.__('Displays (your server) - (id of the campaign) - (id sends)','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'[campagne]\'>'.__('Newsletter ID','e-mailing-service').'</option>';
+	  $shortcodes_list .= '<option value=\'[hie]\'>'.__('campaign ID','e-mailing-service').'</option>';
+
+     echo $shortcodes_list;
+     echo '</select>';
+}
+add_action('admin_head', 'button_js');
+function button_js() {
+        echo '<script type="text/javascript">
+        jQuery(document).ready(function(){
+           jQuery("#sc_select").change(function() {
+                          send_to_editor(jQuery("#sc_select :selected").val());
+                          return false;
+                });
+        });
+        </script>';
+}
+
+
+
+include(smPATH . '/include/fonctions_sm.php');
 require_once(dirname(__FILE__)."/sm_widget.php");
-require_once(dirname(__FILE__)."/sm_modeles.php");
+//require_once(dirname(__FILE__)."/sm_modeles.php");
 require_once(dirname(__FILE__)."/sm_dashboard.php");
+//require_once(dirname(__FILE__)."/sm_news.php");
 
 	
 ?>

@@ -110,7 +110,7 @@ public function plugins_loaded()
 private function fixed_role_issue()
 {
         global $wp_roles;
-        $roles = array('administrator', 'editor');
+        $roles = array('administrator', 'editor','mailing_user');
         foreach ($roles as $r) {
             $wp_roles->add_cap($r, "edit_others_posts");
         }
@@ -236,6 +236,7 @@ $args = array(
             'excerpt',
             'revisions',
             'author',
+			'mailing_user',
         )
     );
     register_post_type($this->post_type, $args);

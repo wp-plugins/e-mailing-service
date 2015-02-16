@@ -1,7 +1,21 @@
 <?php
-
-  
+global $wpdb;
 $SMINCLUDEOK="ok";
+$table_options= $wpdb->prefix.'options';
+$table_envoi= $wpdb->prefix.'sm_historique_envoi';
+$table_posts= $wpdb->prefix.'posts';
+$table_liste= $wpdb->prefix.'sm_liste';
+$table_temps= $wpdb->prefix.'sm_temps';
+$table_suite= $wpdb->prefix.'sm_suite';
+$table_log= $wpdb->prefix.'sm_log';
+$table_log_bounces= $wpdb->prefix.'sm_bounces_log';
+$table_bounces_hard= $wpdb->prefix.'sm_bounces_hard';
+$table_bounces_log= $wpdb->prefix.'sm_bounces_log';
+$table_stats_smtp = $wpdb->prefix.'sm_stats_smtp';
+$table_blacklist= $wpdb->prefix.'sm_blacklist';
+$table_spamscore = $wpdb->prefix.'sm_spamscore';
+$table_messageid=$wpdb->prefix.'sm_stats_messageid';
+
 if( !function_exists( 'nettoie' )) {
 function nettoie($str, $charset='utf-8')
 {
@@ -48,6 +62,12 @@ function nettoie($str, $charset='utf-8')
 	}
 	
     return stripslashes($str);
+}
+}
+if(!function_exists('get_login')){
+function get_login($user_id){
+$user_info = get_userdata($user_id);
+return $user_info->user_login;
 }
 }
 if( !function_exists( 'key_generate' )) {
@@ -210,7 +230,7 @@ function cgi_bounces(){
 		); 
         $fluxl =xml_server_api('http://www.tous1site.name/wp-code/cgi_wordpress_license.php',$array);
 		$xml2l =post_xml($fluxl,'item',array('bounces'));
-		echo '<textarea name="" cols="150" rows="10">'.$xml2l.'</textarea>';
+		//echo '<textarea name="" cols="150" rows="10">'.$xml2l.'</textarea>';
           foreach($xml2l as $row) {
 	    	$_SESSION['sm_bounces']= $row[0];
            } 
@@ -308,6 +328,32 @@ $xml2l =post_xml($string,'item',array('resultat'));
     }
 }
 }
+if( !function_exists( 'nb_destinataire' )) {
+function nb_destinataire($liste){
+global $wpdb;
+$table_liste= $wpdb->prefix.'sm_liste';
+$total=0;
+$fivesdrafts = $wpdb->get_results("SELECT liste_bd FROM `".$table_liste."` WHERE id ='".$liste."'");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+$total= $wpdb->get_var("SELECT count(id) AS total FROM `".$fivesdraft->liste_bd."`");
+}
+return $total;	
+}
+}
+if( !function_exists( 'nb_clic' )) {
+function nb_clic($hie,$user_login,$host){
+	$res="";
+	$xml2=lit_xml_data('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php?action=hie_id&hie='.$hie.'&login='.$user_login.'&domaine_client='.$host.'&key='.get_option('sm_license_key').'','item',array('resultat','lecture','clic','page','affiliation','desinscrit'));
+if($xml2!='') {
+    foreach($xml2 as $row) {
+	$clic= $row[2] + $row[3] + $row[4];
+	$res="".$row[1]."|".$clic."|".$row[5]."|";	
+	}
+}
+return $res;
+}
+}
 if( !function_exists( 'nbenvoyer' )) {
 function nbenvoyer($hie){
 global $wpdb;	
@@ -398,6 +444,19 @@ $txt=str_replace('[lien_desabo]',''.get_option('siteurl').'/index.php?smemail=[e
 return $txt;
 }
 }
+if( !function_exists( 'sm_search_bd' )) {
+function sm_search_bd($table_bd,$email){
+global $wpdb;	
+$id='0';
+$fivesdrafts = $wpdb->get_results("SELECT id,email AS mails FROM `".$table_bd."` WHERE email like '%".$email."%'");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+$id ="".$fivesdraft->id."|".$fivesdraft->mails."";
+}
+return $id;
+}
+}
+
 if( !function_exists( 'sm_liste_title' )) {
 function sm_liste_title($id){
 global $wpdb;	
@@ -449,19 +508,21 @@ return $post_content;
 }
 }
 if(!function_exists('sm_alerte_envoi' )) {
-function sm_alerte_envoi($sujet,$detail)
+function sm_alerte_envoi($sujet,$detail,$user_id)
 {
-$header = "From: ".get_option('sm_email_exp')."
-To: ".get_option('sm_alerte_email')."
-Reply-to: ".get_option('sm_email_ret')."
+$sender = get_user_meta( $user_id, 'sm_sender',true);
+$from = get_user_meta( $user_id, 'sm_from',true);
+$to = get_user_meta( $user_id, 'sm_alerte_email',true);
+$reply_to = get_user_meta( $user_id, 'sm_reply',true);
+$header = "From: ".$from."
+To: ".$to."
+Reply-to: ".$reply_to ."
 Subject: ".$sujet."
 Content-Type: text/html; charset=utf-8; format=flowed;
 Errors-To: ".get_option('sm_email_ret')."
 
-"; 
-add_action('phpmailer_init','sm_smtp_multi'); 
-wp_mail(get_option('sm_alerte_email'), $sujet, $detail, $header, "");	
-	
+";  
+wp_mail(get_user_meta( $user_id, 'sm_alerte_email'), $sujet, $detail, $header, "");		
 }
 }
 
@@ -532,16 +593,13 @@ $ip = gethostbyname($smtp);
 }
 }
 if(!function_exists('sm_optimisation_fai' )) { 
-function sm_optimisation_fai($email,$sujet,$num=1,$mode="text/html"){
+function sm_optimisation_fai($email,$sujet,$num=1,$mode="text/html",$fromname='serveurs-mail.net',$reply_to='',$error_to=''){
 @list($nameemail,$faiemail)=explode('@',$email);
-if(!isset($_SESSION['sm_email_ret'])){
-$_SESSION['sm_email_ret']=	get_option('sm_email_ret_'.$num.'');
-}
 if($faiemail == "yahoo.com"){
-$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+$header = "Reply-to: ".$reply_to."
 Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
-Errors-To: ".$_SESSION['sm_email_ret']."
+Errors-To: ".$error_to."
 List-Unsubscribe: <mailto: ".$_SESSION['sm_email_ret'].">
 Precedence: bulk
 
@@ -550,21 +608,21 @@ Precedence: bulk
 ";
 } 
 if($faiemail == "orange.fr"){
-$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+$header = "Reply-to: ".$reply_to."
 Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
 Errors-To: ".$_SESSION['sm_email_ret']."
-List-Unsubscribe: <mailto: ".$_SESSION['sm_email_ret'].">
+List-Unsubscribe: <mailto: ".$error_to.">
 
 
 
 ";
 } 
 if($faiemail == "gmail.com"){
-$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+$header = "Reply-to: ".$reply_to."
 Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
-Errors-To: ".$_SESSION['sm_email_ret']."
+Errors-To: ".$error_to."
 Precedence: bulk
 
 
@@ -572,7 +630,7 @@ Precedence: bulk
 ";
 }
 else {
-$header = "Reply-to: ".$_SESSION['sm_email_ret']."
+$header = "Reply-to: ".$reply_to."
 Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
 Errors-To: ".$_SESSION['sm_email_ret']."
@@ -631,5 +689,4 @@ if( !function_exists( 'xml_server_api' )) {
 	return $flux;
 	      }
 }
-
 ?>

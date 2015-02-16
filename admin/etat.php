@@ -1,5 +1,35 @@
-<?php
-include(smPATH . '/include/entete.php');
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Reglage de vos alertes","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
+
+        <?php echo "<p>".__("Pour etre informé de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8">
+     
+           <?php
 extract($_POST);
 extract($_GET);
 if(!isset($action)){

@@ -1,9 +1,17 @@
+
 <?php
 set_time_limit(0);
-global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
+require_once('../../../../wp-load.php');
+if(!function_exists('get_option')){
+function get_option($option_name){
+global $wpdb; 
+$table_options = $wpdb->prefix.'options';
+$total = $wpdb->get_var("SELECT option_value FROM `".$table_options."` WHERE option_name='".$option_name."'");
+return $total;			
 }
+}
+
+global $wpdb;
 date_default_timezone_set('Europe/Paris');
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
@@ -265,12 +273,12 @@ if($fivesdraft->serveur !='auto'){
 	 if(!isset($_SESSION['sm_email_ret'])){
      $_SESSION['sm_email_ret'] = get_option('sm_email_ret_'.$num.'');
      }
-	 $header = sm_optimisation_fai($smemails->email,$title,$num,$fivesdraft->mode);
+	 $header = sm_optimisation_fai($email,$title,$num,$mode,$fromname,get_option('sm_email_ret_1'),get_option('sm_email_exp_1'));	
      } else {
      if(!isset($_SESSION['sm_email_ret'])){
      $_SESSION['sm_email_ret'] = get_option('sm_email_ret');
      }
-     $header = sm_optimisation_fai($smemails->email,$title,$num,$fivesdraft->mode);	
+     $header = sm_optimisation_fai($email,$title,$num,$mode,$fromname,get_option('sm_email_ret_1'),get_option('sm_email_exp_1'));	
 }
  
  
@@ -286,25 +294,22 @@ if($fivesdraft->serveur !='auto'){
 	exit();
 	}
 	}
-	if($fivesdraft->serveur =='auto'){
-	add_action('phpmailer_init','sm_smtp_multi');
-	} else {
-	$_SESSION['sm_choix'] =$fivesdraft->serveur;
-	add_action('phpmailer_init','sm_smtp_choix');	
-	}
+	$header .= 'List-ID: '.$hie.'';
+	mysql_query("DELETE FROM `".$table_temps."` WHERE id = '".$id."'");
 	if($fivesdraft->mode == "text/html"){
 	$res=wp_mail( $smemails->email, $title, $contenu, $header, "");
 	} else {
 	$res=wp_mail( $smemails->email, $title, strip_tags($contenu), $header, "");	
 	}
+	    mysql_query("INSERT IGNORE INTO  `".$table_messageid."` (`id` ,`email` ,`messageid` ,`server` ,`status` ,`hie`, `user_id`) VALUES ('' ,  '".trim($email)."',  '".$_SESSION['message-id']."', '".$_SESSION['sm_smtp_server']."', '".$_SESSION["error"]."',  '".$hie."','".$user_id."')");
+		
 	if(get_option('sm_debug')=="oui")
     {
 	echo "<br>####".$smemails->email."####<br>";
 	print_r($_SESSION);
 	echo "<br>#########################<br>";
 	}
-	$sql ="DELETE FROM `".$table_temps."` WHERE id = '".$smemails->id."'";
-    $result = $wpdb->query($wpdb->prepare($sql,true));
+	
 	
 	sleep($fivesdraft->pause);
 	if($n==100){

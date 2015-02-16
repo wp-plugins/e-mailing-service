@@ -1,6 +1,34 @@
-<?php
-include(smPATH . '/include/entete.php');
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
 ?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Reglage de vos alertes","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
+
+        <?php echo "<p>".__("Pour etre informé de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8">
+
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2 class="nav-tab-wrapper">
@@ -9,12 +37,6 @@ include(smPATH . '/include/entete.php');
 		</a>
     <a href="?page=e-mailing-service/admin/debug.php&section=upload" title="<?php _e("Verifie le dossier Upload pour importer les templates et images pour vos newsletters", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
 			<?php _e('Upload',"e-mailing-service"); ?>
-		</a>
-        <a href="?page=e-mailing-service/admin/debug.php&section=envoi_newsletter" title="<?php _e("Faites tourner le cron pour l'envoi de la newsletter manuellement, vous devez avoir programme un envoi avant d'utiliser ce menu", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_fai') echo 'nav-tab-active'; }?>">
-			<?php _e("Envoi de la newsletter", "e-mailing-service"); ?>
-		</a>
-		<a href="?page=e-mailing-service/admin/debug.php&section=envoi_article"  title="<?php _e("Faites tourner le cron pour l'envoi d'un nouvel article ou d'une nouvelle page manuellement, vous devez avoir programme un envoi avant d'utiliser ce menu", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'hard_bounces') echo 'nav-tab-active'; }?>">
-			<?php _e("Envoi d'un article ou d'une page", "e-mailing-service"); ?>
 		</a>
 		<a href="?page=e-mailing-service/admin/debug.php&section=vitesse" title="<?php _e("Verifier la vitesse d'envoi de votre newsletter", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
 			<?php _e("Vitesse d'envoi","e-mailing-service"); ?>

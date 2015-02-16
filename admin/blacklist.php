@@ -1,6 +1,33 @@
-<?php
-include(smPATH . '/include/entete.php');
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
+} else {
+	include(smPATH . '/include/entete.php');
+}
+extract($_POST);
+extract($_GET);
+?>
+                </div>
+        </header>
+</div>
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Envoyer votre newsletter","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
 
+        <?php echo "<p>".__("Programmer l'heure et la date d'envoi de votre newsletter","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8"><?php
 if(cgi_bounces() == 'non'){
 echo "<br><br>";
 _e("Vous n\'avez pas souscrit a l'option qui vous permet de recuperer les bounces","e-mailing-service");
