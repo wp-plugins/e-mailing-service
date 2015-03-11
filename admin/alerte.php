@@ -1,55 +1,35 @@
-<?php
-include(smPATH . '/include/entete.php');
-extract($_POST);
-if(isset($_GET["manuel"])){
-$manuel="manuel";	
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php 
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
 } else {
-$manuel="auto";	
+	include(smPATH . '/include/entete.php');
 }
+extract($_POST);
+extract($_GET);
 ?>
-	<div class="wrap" id="sm_div">
-
-		<div id="poststuff" class="metabox-holder has-right-sidebar">
-		<div class="inner-sidebar">
-			<div id="side-sortables" class="meta-box-sortabless ui-sortable" style="position:relative;">
-<div id="box" class="postbox">
-			<h3 class="hndle"><span><?php _e('Information sur votre license',"e-mailing-service");?></span></h3>
-			<div class="inside">
-				<?php include(smPATH . '/include/license.php');?>
-
-
-	</div>
-    <br /><br />
-    <h3 class="hndle"><span><?php _e('Configuration Wordress',"e-mailing-service");?></span></h3>
-			<div class="inside">
-				<?php
-				
-				echo "<p>".__("Plugin Version","e-mailing-service")." : ".get_option('sm_version')."</p>";				
-				echo "<p>".__("Serveur OS","e-mailing-service")." : ".PHP_OS."</p>";				
-				echo "<p>".__("Plugin fonctionne avec PHP Version: 5.0+","e-mailing-service")."<br>";
-				echo "<p>".__("Votre version de PHP","e-mailing-service")." : " . phpversion() . "</p>";							
-				echo "<p>".__("Memoire utilise","e-mailing-service")." : " . number_format(memory_get_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";				
-				echo "<p>".__("Pic utilisation de la memoire","e-mailing-service")." : " . number_format(memory_get_peak_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";				
-				$lav = sys_getloadavg();
-				echo "<p>".__("Serveur Charge moyenne","e-mailing-service")." : ".$lav[0].", ".$lav[1].", ".$lav[2]."</p>";
-				
-				?>
-
-	</div>
-		</div>
-        
-        
-        
- 
+                </div>
+        </header>
 </div>
-</div>
-	
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Reglage de vos alertes","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
 
-<div class="has-sidebar sm-padded" >			
-		<div id="post-body-content" class="has-sidebar-content">
-			<div class="meta-box-sortabless">
-<?php
-echo "<h1>".__("Reglage des alertes","e-mailing-service")."</h1>";
+        <?php echo "<p>".__("Pour etre informe de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    <div class="grid_8">
+     
+           <?php
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='sm_license' WHERE `option_name`='$licen'");
 if(isset($action)){
 	if($action =="update"){
@@ -80,6 +60,7 @@ _e("Vos alertes ont bien ete mis a jour","e-mailing-service");	}
 if(get_option('sm_alerte') !="oui"){
 _e("Vous ne disposez pas de l'option alerte , rendez vous sur la page","e-mailing-service"); echo "<a href=\"".$_SERVER['PHP_SELF']."?page=e-mailing-service/admin/index.php\" target=\"_parent\">".__("Licence et options","e-mailing-service")."</a>";		
 } else {
+echo '<div class="message success">';
 echo "<br><h3>".__("Vous allez recevoir un mail pour chaque alerte coches","e-mailing-service")."</h3>";
 ?>
 <form action="admin.php?page=e-mailing-service/admin/alerte.php" method="post">
@@ -144,7 +125,7 @@ echo "<br><h3>".__("Vous allez recevoir un mail pour chaque alerte coches","e-ma
 <?php } ?> </td>
 </tr>
 <tr>
-  <td><input name="submit" value="<?php _e("Valider la configuration","e-mailing-service");?>" type="submit" size="75" /></td>
+   <td><button name="submit" type="submit" size="75" class="button button-green"><?php _e("Valider la configuration","e-mailing-service");?></button></td>
   <td></td>
 </tr>
 </table>
@@ -154,4 +135,7 @@ echo "<br><h3>".__("Vous allez recevoir un mail pour chaque alerte coches","e-ma
 }?>
 </div></div></div></div>
 
+</div>
+</div>
+</section>
 </div>

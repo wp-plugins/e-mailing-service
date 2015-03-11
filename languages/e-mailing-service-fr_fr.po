@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: E-mailing services\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-20 14:55+0100\n"
-"PO-Revision-Date: 2014-02-20 14:57+0100\n"
+"POT-Creation-Date: 2015-02-24 16:30+0100\n"
+"PO-Revision-Date: 2015-02-24 16:45+0100\n"
 "Last-Translator: jooky limited <contact@jooky.eu>\n"
 "Language-Team: Jooky limited <contact@jooky.eu>\n"
 "Language: fr_FR\n"
@@ -12,330 +12,334 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
 "X-Poedit-Basepath: ../\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: js\n"
+"X-Poedit-SearchPathExcluded-1: editor/js\n"
+"X-Poedit-SearchPathExcluded-2: editor\n"
+"X-Poedit-SearchPathExcluded-3: template\n"
 
 #: admin/aide.php:4
 msgid "Aide a l'utilisation du service"
-msgstr "Aide à l'utilisation du service"
+msgstr "Aide a l'utilisation du service"
 
 #: admin/aide.php:10
 msgid "Aide a la Configuration"
-msgstr "Aide à la Configuration"
+msgstr "Aide a la Configuration"
 
 #: admin/aide.php:13
 msgid "Aide a la gestion de vos destinataires"
-msgstr "Aide à la gestion de vos destinataires"
+msgstr "Aide a la gestion de vos destinataires"
 
 #: admin/aide.php:16
 msgid "Aide a l'envoi"
-msgstr "Aide à l'envoi"
+msgstr "Aide a l'envoi"
 
 #: admin/aide.php:19
 msgid "Aide a la lecture des statistiques"
-msgstr "Aide à la lecture des statistiques"
+msgstr "Aide a la lecture des statistiques"
 
 #: admin/aide.php:22
 msgid "Aide a l'import de template"
-msgstr "Aide à l'import de template"
+msgstr "Aide a l'import de template"
 
-#: admin/alerte.php:16 admin/multi.php:7
-msgid "Information sur votre license"
-msgstr "Information sur votre license"
+#: admin/alerte.php:19 admin/alerte_user.php:19 admin/configuration.php:19
+#: admin/debug.php:19 admin/etat.php:19 admin/import_template.php:19
+msgid "Reglage de vos alertes"
+msgstr "Réglage de vos alertes"
 
-#: admin/alerte.php:23 admin/configuration.php:23 admin/parametres.php:21
-msgid "Configuration Wordress"
-msgstr "Configuration Wordress"
+#: admin/alerte.php:26 admin/alerte_user.php:26
+msgid "Pour etre informe de la fin de vos newsletters, credits , etc.........."
+msgstr ""
+"Pour être informé de la fin de vos newsletters, crédits , etc.........."
 
-#: admin/alerte.php:27 admin/configuration.php:27 admin/parametres.php:24
-msgid "Plugin Version"
-msgstr "Plugin Version"
-
-#: admin/alerte.php:28 admin/configuration.php:28 admin/parametres.php:25
-msgid "Serveur OS"
-msgstr "Serveur OS"
-
-#: admin/alerte.php:29 admin/configuration.php:29 admin/parametres.php:26
-msgid "Plugin fonctionne avec PHP Version: 5.0+"
-msgstr "Plugin fonctionne avec PHP Version: 5.0+"
-
-#: admin/alerte.php:30 admin/configuration.php:30 admin/parametres.php:27
-msgid "Votre version de PHP"
-msgstr "Votre version de PHP"
-
-#: admin/alerte.php:31 admin/configuration.php:31 admin/parametres.php:28
-msgid "Memoire utilise"
-msgstr "Memoire utilisé"
-
-#: admin/alerte.php:32 admin/configuration.php:32 admin/parametres.php:29
-msgid "Pic utilisation de la memoire"
-msgstr "Pic utilisation de la memoire"
-
-#: admin/alerte.php:34 admin/configuration.php:34 admin/parametres.php:31
-msgid "Serveur Charge moyenne"
-msgstr "Serveur Charge moyenne"
-
-#: admin/alerte.php:52
-msgid "Reglage des alertes"
-msgstr "Reglage des alertes"
-
-#: admin/alerte.php:78
+#: admin/alerte.php:58 admin/alerte_user.php:52
 msgid "Vos alertes ont bien ete mis a jour"
-msgstr "Vos alertes ont bien ete mis a jour"
+msgstr "Vos alertes ont bien été mises à jour"
 
-#: admin/alerte.php:81
+#: admin/alerte.php:61 admin/alerte_user.php:58
 msgid "Vous ne disposez pas de l'option alerte , rendez vous sur la page"
 msgstr "Vous ne disposez pas de l'option alerte , rendez vous sur la page"
 
-#: admin/alerte.php:81
+#: admin/alerte.php:61 admin/alerte_user.php:58
 msgid "Licence et options"
 msgstr "Licence et options"
 
-#: admin/alerte.php:83
+#: admin/alerte.php:64 admin/alerte_user.php:61
 msgid "Vous allez recevoir un mail pour chaque alerte coches"
-msgstr "Vous allez recevoir un mail pour chaque alerte coches"
+msgstr "Vous allez recevoir un mail pour chaque alerte cochées"
 
-#: admin/alerte.php:89
+#: admin/alerte.php:70 admin/alerte_user.php:67
 msgid "Email pour les alertes"
 msgstr "Email pour les alertes"
 
-#: admin/alerte.php:93
+#: admin/alerte.php:74 admin/alerte_user.php:76
 msgid "Newsletter en cours d'envoi"
 msgstr "Newsletter en cours d'envoi"
 
-#: admin/alerte.php:96 admin/alerte.php:98 admin/alerte.php:105
-#: admin/alerte.php:107 admin/alerte.php:114 admin/alerte.php:116
-#: admin/alerte.php:123 admin/alerte.php:125 admin/alerte.php:132
-#: admin/alerte.php:134 admin/alerte.php:141 admin/alerte.php:143
-#: admin/parametres.php:448 admin/parametres.php:455 admin/parametres.php:472
-#: admin/parametres.php:479 admin/parametres.php:496 admin/parametres.php:503
+#: admin/alerte.php:77 admin/alerte.php:79 admin/alerte.php:86
+#: admin/alerte.php:88 admin/alerte.php:95 admin/alerte.php:97
+#: admin/alerte.php:104 admin/alerte.php:106 admin/alerte.php:113
+#: admin/alerte.php:115 admin/alerte.php:122 admin/alerte.php:124
+#: admin/alerte_user.php:83 admin/alerte_user.php:85 admin/alerte_user.php:96
+#: admin/alerte_user.php:98 admin/alerte_user.php:109
+#: admin/alerte_user.php:112 admin/alerte_user.php:123
+#: admin/alerte_user.php:126
 msgid "OUI"
 msgstr "OUI"
 
-#: admin/alerte.php:96 admin/alerte.php:98 admin/alerte.php:105
-#: admin/alerte.php:107 admin/alerte.php:114 admin/alerte.php:116
-#: admin/alerte.php:123 admin/alerte.php:125 admin/alerte.php:132
-#: admin/alerte.php:134 admin/alerte.php:141 admin/alerte.php:143
-#: admin/parametres.php:451 admin/parametres.php:458 admin/parametres.php:475
-#: admin/parametres.php:482 admin/parametres.php:499 admin/parametres.php:506
+#: admin/alerte.php:77 admin/alerte.php:79 admin/alerte.php:86
+#: admin/alerte.php:88 admin/alerte.php:95 admin/alerte.php:97
+#: admin/alerte.php:104 admin/alerte.php:106 admin/alerte.php:113
+#: admin/alerte.php:115 admin/alerte.php:122 admin/alerte.php:124
+#: admin/alerte_user.php:83 admin/alerte_user.php:85 admin/alerte_user.php:96
+#: admin/alerte_user.php:98 admin/alerte_user.php:109
+#: admin/alerte_user.php:112 admin/alerte_user.php:123
+#: admin/alerte_user.php:126
 msgid "NON"
 msgstr "NON"
 
-#: admin/alerte.php:102
+#: admin/alerte.php:83 admin/alerte_user.php:89
 msgid "Newsletter termine"
-msgstr "Newsletter termine"
+msgstr "Newsletter terminée"
 
-#: admin/alerte.php:111
+#: admin/alerte.php:92
 msgid "Nouvel inscrit"
 msgstr "Nouvel inscrit"
 
-#: admin/alerte.php:120
+#: admin/alerte.php:101
 msgid "Blacklist et spamscore"
 msgstr "Blacklist et spamscore"
 
-#: admin/alerte.php:129
+#: admin/alerte.php:110
 msgid "Serveur SMTP indisponible"
 msgstr "Serveur SMTP indisponible"
 
-#: admin/alerte.php:138
+#: admin/alerte.php:119 admin/alerte_user.php:102
 msgid "Statistiques Journaliere"
-msgstr "Statistiques Journaliere"
+msgstr "Statistiques Journalières"
 
-#: admin/alerte.php:147 admin/configuration.php:190
+#: admin/alerte.php:128 admin/alerte_user.php:130
 msgid "Valider la configuration"
 msgstr "Valider la configuration"
 
-#: admin/blacklist.php:6
+#: admin/alerte_user.php:44
+msgid "Reglage des alertes"
+msgstr "Réglage des alertes"
+
+#: admin/alerte_user.php:116
+msgid "Credits epuises"
+msgstr "Crédits épuisés"
+
+#: admin/blacklist.php:19 admin/blacklist.php:60 admin/debug.php:99
+#: admin/etat.php:76 e-mailing-service.php:73 sm_dashboard.php:53
+#: sm_dashboard_backup.php:35
+msgid "Blacklist"
+msgstr "Blacklist"
+
+#: admin/blacklist.php:26
+msgid "Liste des blacklist sur laquel votre ip est inscrite"
+msgstr "Liste des blacklist sur laquelle votre ip est inscrite"
+
+#: admin/blacklist.php:33
 msgid ""
 "Vous n\\'avez pas souscrit a l'option qui vous permet de recuperer les "
 "bounces"
 msgstr ""
-"Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces"
+"Vous n\\'avez pas souscrit à l'option qui vous permet de récuperer les "
+"bounces"
 
-#: admin/blacklist.php:22 admin/emails.php:249 admin/live.php:62
-#: admin/npai.php:56 admin/npai.php:102 admin/npai.php:181 admin/stats.php:19
+#: admin/blacklist.php:49 admin/emails.php:280 admin/npai.php:83
+#: admin/npai.php:129 admin/npai.php:209 admin/stats.php:19
 msgid "&laquo;"
 msgstr "&laquo;"
 
-#: admin/blacklist.php:23 admin/emails.php:250 admin/live.php:63
-#: admin/npai.php:57 admin/npai.php:103 admin/npai.php:182 admin/stats.php:20
+#: admin/blacklist.php:50 admin/emails.php:281 admin/npai.php:84
+#: admin/npai.php:130 admin/npai.php:210 admin/stats.php:20
 msgid "&raquo;"
 msgstr "&raquo;"
 
-#: admin/blacklist.php:31 admin/emails.php:153 admin/etat.php:39
-#: admin/listes.php:152 admin/listes.php:287 admin/listes.php:533
-#: admin/listes.php:716 include/export.php:13 include/export.php:33
-#: sm_dashboard.php:34
+#: admin/blacklist.php:58 admin/debug.php:92 admin/emails.php:185
+#: admin/etat.php:69 admin/listes.php:184 admin/listes.php:339
+#: admin/listes.php:590 admin/listes.php:818 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
+#: sm_dashboard.php:51 sm_dashboard_backup.php:33
 msgid "IP"
 msgstr "IP"
 
-#: admin/blacklist.php:32 admin/live.php:71 admin/npai.php:116
-#: admin/npai.php:205 admin/stats.php:59 admin/stats.php:82
-#: admin/stats.php:105
+#: admin/blacklist.php:59 admin/live.php:88 admin/live_user.php:85
+#: admin/npai.php:143 admin/npai.php:233 admin/stats.php:59 admin/stats.php:82
+#: admin/stats.php:105 admin/stats_user.php:91 admin/stats_user.php:114
+#: admin/stats_user.php:137 admin/stats_user.php:525 admin/stats_user.php:526
+#: admin/stats_user.php:852 admin/stats_user.php:853
 msgid "Type"
 msgstr "Type"
 
-#: admin/blacklist.php:33 admin/etat.php:46 e-mailing-service.php:60
-#: sm_dashboard.php:36
-msgid "Blacklist"
-msgstr "Blacklist"
-
-#: admin/blacklist.php:34
+#: admin/blacklist.php:61
 msgid "Lien pour se desinscrire"
-msgstr "Lien pour se desinscrire"
+msgstr "Lien pour se désinscrire"
 
-#: admin/blacklist.php:35 admin/listes.php:696 admin/npai.php:136
-#: admin/npai.php:207 admin/npai.php:221
+#: admin/blacklist.php:62 admin/listes.php:769 admin/npai.php:163
+#: admin/npai.php:235 admin/npai.php:249 admin/stats_user.php:527
+#: admin/stats_user.php:854 admin/stats_user.php:937
 msgid "Details"
-msgstr "Details"
+msgstr "Détails"
 
-#: admin/blacklist.php:36
+#: admin/blacklist.php:63
 msgid "Date de mise a jour"
 msgstr "Date de mise a jour"
 
-#: admin/blacklist.php:49
+#: admin/blacklist.php:76
 msgid "Delister"
-msgstr "Delister"
+msgstr "Délister"
 
-#: admin/configuration.php:16
-msgid "Information sur les options"
-msgstr "Information sur les options"
+#: admin/configuration.php:26
+msgid "Configuration de votre serveur smtp"
+msgstr "Configuration de votre serveur smtp"
 
-#: admin/configuration.php:52 admin/stats.php:26 e-mailing-service.php:65
-#: tuto/faq_question.php:7 tuto/h_stats.php:5 tuto/suggestion.php:55
-#: tuto/ticket.php:7
+#: admin/configuration.php:32 admin/stats.php:26 admin/stats_user.php:57
+#: e-mailing-service.php:76 tuto/faq_question.php:7 tuto/h_stats.php:5
+#: tuto/suggestion.php:55 tuto/ticket.php:7
 msgid "License et options"
 msgstr "License et options"
 
-#: admin/configuration.php:57
+#: admin/configuration.php:37
 msgid "Vos modifications ont bien ete prises en compte"
 msgstr "Vos modifications ont bien ete prises en compte"
 
-#: admin/configuration.php:68
+#: admin/configuration.php:48
 msgid ""
 "Votre license a ete supprime, il n' y a donc plus d'interaction avec nos "
 "serveurs"
 msgstr ""
-"Votre license a ete supprime, il n' y a donc plus d'interaction avec nos "
+"Votre licence a été supprimé, il n' y a donc plus d'interaction avec nos "
 "serveurs"
 
-#: admin/configuration.php:86 admin/configuration.php:119
+#: admin/configuration.php:66 admin/configuration.php:99
 msgid "contact support"
 msgstr "contact support"
 
-#: admin/configuration.php:87 admin/configuration.php:98
-#: admin/configuration.php:120 admin/configuration.php:131
+#: admin/configuration.php:67 admin/configuration.php:78
+#: admin/configuration.php:100 admin/configuration.php:111
 msgid "retour"
 msgstr "retour"
 
-#: admin/configuration.php:95 admin/configuration.php:128
+#: admin/configuration.php:75 admin/configuration.php:108
 msgid "Vos autorisation ont bien ete prises en compte"
-msgstr "Vos autorisation ont bien ete prises en compte"
+msgstr "Vos autorisations ont bien été prises en compte"
 
-#: admin/configuration.php:97
+#: admin/configuration.php:77
 msgid "pseudo deja pris, merci de choisir un autre pseudo"
-msgstr "pseudo deja pris, merci de choisir un autre pseudo"
+msgstr "pseudo déja pris, merci de choisir un autre pseudo"
 
-#: admin/configuration.php:130
+#: admin/configuration.php:110
 msgid "pseudo ou mot de passe invalide"
 msgstr "pseudo ou mot de passe invalide"
 
+#: admin/configuration.php:118
+msgid ""
+"Pour activer gratuitements des options supplementaires tel que les "
+"statistiques detailles et la reecriture des liens , vous devez nous "
+"autoriser a intergir avec votre site internet"
+msgstr ""
+"Pour activer gratuitement des options supplémentaires telles que les "
+"statistiques détaillées et la réécriture des liens , vous devez nous "
+"autoriser a interagir avec votre site internet"
+
+#: admin/configuration.php:119
+msgid ""
+"Cela ne nous permet pas d'acceder a vos donnees personnels, ni a vos listes "
+"d'emails"
+msgstr ""
+"Cela ne nous permet pas d'accéder a vos données personnelles, ni a vos "
+"listes d'emails"
+
+#: admin/configuration.php:120
+msgid ""
+"Cela permettra seulement de connaire l'url de votre site internet, ip et les "
+"informations de campagne tel que le titre et les liens, pour pouvoir vous "
+"retourner les statistiques"
+msgstr ""
+"Cela permettra seulement de connaître l'url de votre site internet, ip et "
+"les informations de campagne tel que le titre et les liens, pour pouvoir "
+"vous retourner les statistiques"
+
+#: admin/configuration.php:124
+msgid "Choisissez un pseudo ( pas d'espace , ni de caractere speciales )"
+msgstr "Choisissez un pseudo ( pas d'espace , ni de caractère spéciales )"
+
+#: admin/configuration.php:127
+msgid ""
+"Votre email (seulement pour vous tenir informes des options ou modifications "
+"sur votre compte et pugin e-mailing-service)"
+msgstr ""
+"Votre email (seulement pour vous tenir informé des options ou modifications "
+"sur votre compte et pugin e-mailing-service)"
+
+#: admin/configuration.php:131 admin/configuration.php:149
+msgid "Oui j'utorise E-mailing Service a interagir avec mon site"
+msgstr "Oui j'autorise E-mailing Service à interagir avec mon site"
+
 #: admin/configuration.php:138
 msgid ""
-"Pour activer gratuitements des options supplementaires tel que les "
-"statistiques detailles et la reecriture des liens , vous devez nous "
-"autoriser a intergir avec votre site internet"
-msgstr ""
-"Pour activer gratuitements des options supplementaires tel que les "
-"statistiques detailles et la reecriture des liens , vous devez nous "
-"autoriser a intergir avec votre site internet"
-
-#: admin/configuration.php:139
-msgid ""
-"Cela ne nous permet pas d'acceder a vos donnees personnels, ni a vos listes "
-"d'emails"
-msgstr ""
-"Cela ne nous permet pas d'acceder a vos donnees personnels, ni a vos listes "
-"d'emails"
-
-#: admin/configuration.php:140
-msgid ""
-"Cela permettra seulement de connaire l'url de votre site internet, ip et les "
-"informations de campagne tel que le titre et les liens, pour pouvoir vous "
-"retourner les statistiques"
-msgstr ""
-"Cela permettra seulement de connaire l'url de votre site internet, ip et les "
-"informations de campagne tel que le titre et les liens, pour pouvoir vous "
-"retourner les statistiques"
-
-#: admin/configuration.php:144
-msgid "Choisissez un pseudo ( pas d'espace , ni de caractere speciales )"
-msgstr "Choisissez un pseudo ( pas d'espace , ni de caractere speciales )"
-
-#: admin/configuration.php:147
-msgid ""
-"Votre email (seulement pour vous tenir informes des options ou modifications "
-"sur votre compte et pugin e-mailing-service)"
-msgstr ""
-"Votre email (seulement pour vous tenir informes des options ou modifications "
-"sur votre compte et pugin e-mailing-service)"
-
-#: admin/configuration.php:151 admin/configuration.php:166
-msgid "Oui j'utorise E-mailing Service a interagir avec mon site"
-msgstr "Oui j'utorise E-mailing Service a interagir avec mon site"
-
-#: admin/configuration.php:155
-msgid ""
 "Si vous avez deja un compte (e-mailing-service ou serveurs-mail.net et que "
 "vous voulez regrouper vos statistiques, choisissez ce formulaire"
 msgstr ""
-"Si vous avez deja un compte (e-mailing-service ou serveurs-mail.net et que "
+"Si vous avez déja un compte (e-mailing-service ou serveurs-mail.net et que "
 "vous voulez regrouper vos statistiques, choisissez ce formulaire"
 
-#: admin/configuration.php:160
+#: admin/configuration.php:143
 msgid "Pseudo"
 msgstr "Pseudo"
 
-#: admin/configuration.php:162
+#: admin/configuration.php:145
 msgid "Mot de passe"
 msgstr "Mot de passe"
 
-#: admin/configuration.php:164 admin/emails.php:50 admin/emails.php:144
-#: admin/emails.php:257 admin/etat.php:25 admin/listes.php:150
-#: admin/listes.php:226 admin/listes.php:285 admin/listes.php:531
-#: admin/listes.php:714 admin/multi.php:146 admin/npai.php:65
-#: admin/npai.php:113 admin/npai.php:202 admin/parametres.php:161
-#: admin/variables.php:184 tuto/faq_question.php:15 tuto/ticket.php:15
+#: admin/configuration.php:147 admin/debug.php:78 admin/emails.php:82
+#: admin/emails.php:176 admin/emails.php:288 admin/etat.php:55
+#: admin/listes.php:182 admin/listes.php:273 admin/listes.php:337
+#: admin/listes.php:588 admin/listes.php:816 admin/multi.php:146
+#: admin/npai.php:92 admin/npai.php:140 admin/npai.php:230
+#: admin/stats_user.php:386 admin/stats_user.php:453 admin/stats_user.php:523
+#: admin/stats_user.php:561 admin/stats_user.php:717 admin/stats_user.php:790
+#: admin/stats_user.php:850 admin/stats_user.php:887 admin/stats_user.php:934
+#: admin/variables.php:211 admin/variables_user.php:216
+#: tuto/faq_question.php:15 tuto/ticket.php:15
 msgid "Email"
 msgstr "Email"
 
-#: admin/configuration.php:174
+#: admin/configuration.php:159
 msgid ""
 "L'installation du plugin, la creation de compte, la creation de license est "
 "automatise , mais dans le cas d'une reinstallation ou d'un probleme divers, "
 "vous avez besoin de parametrer ci-desssous"
 msgstr ""
-"L'installation du plugin, la creation de compte, la creation de license est "
-"automatise , mais dans le cas d'une reinstallation ou d'un probleme divers, "
-"vous avez besoin de parametrer ci-desssous"
+"L'installation du plugin, la création de compte, la création de licence est "
+"automatisée , mais dans le cas d'une réinstallation ou d'un problème divers, "
+"vous avez besoin de paramétrer ci-dessous"
 
-#: admin/configuration.php:180
+#: admin/configuration.php:165
 msgid ""
 "Si vous avez deja un compte sur serveurs-mail.net ou e-mailing-service.com , "
 "rentrez votre pseudo ( Attention seulement dans ce cas !!!) "
 msgstr ""
-"Si vous avez deja un compte sur serveurs-mail.net ou e-mailing-service.com , "
+"Si vous avez déja un compte sur serveurs-mail.net ou e-mailing-service.com , "
 "rentrez votre pseudo ( Attention seulement dans ce cas !!!) "
 
-#: admin/configuration.php:184
+#: admin/configuration.php:169
 msgid ""
 "Si vous avez des problemes avec la license et que le support vous a renvoyez "
 "un numero de license (Attention seulement dans ce cas !!!!)"
 msgstr ""
-"Si vous avez des problemes avec la license et que le support vous a renvoyez "
-"un numero de license (Attention seulement dans ce cas !!!!)"
+"Si vous avez des problèmes avec la licence et que le support vous a renvoyez "
+"un numéro de licence (Attention seulement dans ce cas !!!!)"
 
-#: admin/configuration.php:196
+#: admin/configuration.php:175 admin/listes.php:103
+msgid "Valider"
+msgstr "Valider"
+
+#: admin/configuration.php:182
 msgid ""
 "Si vous voulez repasser a l'offre gratuite sans interaction avec nos "
 "serveurs, cliquez ci-dessous, Attention, vous perdrez alors les statistiques "
@@ -343,75 +347,246 @@ msgid ""
 msgstr ""
 "Si vous voulez repasser a l'offre gratuite sans interaction avec nos "
 "serveurs, cliquez ci-dessous, Attention, vous perdrez alors les statistiques "
-"des campagnes precedentes"
+"des campagnes précédentes"
 
-#: admin/configuration.php:200
+#: admin/configuration.php:186
 msgid "Je ne veux plus autoriser E-mailing Service a interagir avec mon site"
-msgstr "Je ne veux plus autoriser E-mailing Service a interagir avec mon site"
+msgstr "Je ne veux plus autoriser E-mailing Service à interagir avec mon site"
 
-#: admin/emails.php:34
-msgid "Modifier l'email"
-msgstr "Modifier l'email"
+#: admin/create.php:21 admin/editor.php:44
+msgid "Assistant de creation de newsletter"
+msgstr "Assistant de création de newsletter"
 
-#: admin/emails.php:53 admin/emails.php:147 admin/emails.php:259
-#: admin/listes.php:151 admin/listes.php:227 admin/listes.php:286
-#: admin/listes.php:532 admin/listes.php:715 admin/variables.php:32
-#: admin/variables.php:94 admin/variables.php:136 admin/variables.php:177
-#: admin/variables.php:189 admin/variables.php:238
-msgid "Nom"
-msgstr "Nom"
+#: admin/create.php:80 admin/editor.php:124
+msgid "Creation de votre newsletter"
+msgstr "Création de votre newsletter"
 
-#: admin/emails.php:94 admin/emails.php:262
-msgid "Inscrit"
-msgstr "Inscrit"
+#: admin/create.php:81
+msgid "Premiere etape , choisir le sujet et le modele"
+msgstr "Premiere etape , choisir le sujet et le modèle"
 
-#: admin/emails.php:97 admin/emails.php:101 admin/emails.php:284
-msgid "Desinscrit"
-msgstr "Désinscrit"
+#: admin/create.php:86
+msgid "Choisissez un editeur"
+msgstr "Choisissez un éditeur"
 
-#: admin/emails.php:98 admin/emails.php:102 admin/emails.php:283
-#: admin/etat.php:64 admin/etat.php:80 admin/multi.php:220
+#: admin/create.php:90 admin/debug.php:79 admin/etat.php:56 admin/npai.php:144
+#: admin/npai.php:234 tuto/ticket.php:19 tuto/ticket_liste.php:77
+msgid "Sujet"
+msgstr "Sujet"
+
+#: admin/create.php:91
+msgid "Choisissez un modele"
+msgstr "Choisissez un modèle"
+
+#: admin/create.php:94
+msgid "Pas de modele"
+msgstr "Pas de modèle"
+
+#: admin/create.php:101
+msgid "Passez a l'etape 2"
+msgstr "Passez a l'étape 2"
+
+#: admin/create.php:105
+msgid "Apercu de la newsletter"
+msgstr "Aperçu de la newsletter"
+
+#: admin/debug.php:26
+msgid ""
+"Vous avez un probleme avec le plugin, cette section peu vous aider a trouver "
+"la solution"
+msgstr ""
+"Vous avez un problème avec le plugin, cette section peut vous aider à "
+"trouver la solution"
+
+#: admin/debug.php:35
+msgid "Verifie les serveurs SMTP"
+msgstr "Vérifier les serveurs SMTP"
+
+#: admin/debug.php:36 admin/debug.php:86 admin/etat.php:63
+msgid "Status serveur SMTP"
+msgstr "Statut serveur SMTP"
+
+#: admin/debug.php:38
+msgid ""
+"Verifie le dossier Upload pour importer les templates et images pour vos "
+"newsletters"
+msgstr ""
+"Vérifier le dossier Upload pour importer les templates et images pour vos "
+"newsletters"
+
+#: admin/debug.php:39
+msgid "Upload"
+msgstr "Upload"
+
+#: admin/debug.php:41
+msgid "Verifier la vitesse d'envoi de votre newsletter"
+msgstr "Vérifier la vitesse d'envoi de votre newsletter"
+
+#: admin/debug.php:42
+msgid "Vitesse d'envoi"
+msgstr "Vitesse d'envoi"
+
+#: admin/debug.php:65 admin/etat.php:42 include/cron.php:301
+#: include/cron_v2.php:305 include/cron_v3.php:353 include/cron_v4.php:403
+msgid "Reponse"
+msgstr "Réponse"
+
+#: admin/debug.php:71 admin/etat.php:48
+msgid "Tester votre serveur SMTP"
+msgstr "Tester votre serveur SMTP"
+
+#: admin/debug.php:79 admin/etat.php:56
+msgid "test smtp"
+msgstr "test smtp"
+
+#: admin/debug.php:80 admin/etat.php:57 tuto/ticket.php:23
+#: tuto/ticket_liste.php:29
+msgid "Message"
+msgstr "Message"
+
+#: admin/debug.php:80 admin/etat.php:57
+msgid "test ok ?"
+msgstr "test ok ?"
+
+#: admin/debug.php:81 admin/etat.php:58 admin/send.php:134 admin/send.php:186
+#: admin/send_user.php:248 admin/send_user.php:324 include/upload.php:22
+msgid "envoyer"
+msgstr "envoyer"
+
+#: admin/debug.php:91 admin/etat.php:68 admin/index.php:75
+msgid "Serveur SMTP"
+msgstr "Serveur SMTP"
+
+#: admin/debug.php:93 admin/etat.php:70
+msgid "Tester"
+msgstr "Tester"
+
+#: admin/debug.php:94 admin/etat.php:71
+msgid "Port 25"
+msgstr "Port 25"
+
+#: admin/debug.php:95 admin/etat.php:72
+msgid "Port 587"
+msgstr "Port 587"
+
+#: admin/debug.php:96 admin/etat.php:73
+msgid "Port 80"
+msgstr "Port 80"
+
+#: admin/debug.php:97 admin/etat.php:74
+msgid "Port 53"
+msgstr "Port 53"
+
+#: admin/debug.php:98 admin/etat.php:75 sm_dashboard.php:52
+#: sm_dashboard_backup.php:34
+msgid "Spamscore"
+msgstr "Spamscore"
+
+#: admin/debug.php:100 admin/etat.php:77 admin/live.php:94
+#: admin/live_user.php:91 admin/multi.php:216 sm_dashboard.php:104
+#: sm_dashboard_backup.php:86 tuto/ticket_liste.php:79
+msgid "Status"
+msgstr "Statut"
+
+#: admin/debug.php:109 admin/debug.php:128 admin/etat.php:86
+#: admin/etat.php:105
+msgid "Tester le serveur"
+msgstr "Tester le serveur"
+
+#: admin/debug.php:117 admin/debug.php:135 admin/emails.php:130
+#: admin/emails.php:134 admin/emails.php:314 admin/etat.php:94
+#: admin/etat.php:113 admin/multi.php:220
 msgid "Actif"
 msgstr "Actif"
 
-#: admin/emails.php:105 admin/emails.php:109 admin/emails.php:113
-#: admin/emails.php:263 include/export.php:13 include/export.php:33
+#: admin/debug.php:119 admin/etat.php:96 admin/etat.php:115
+msgid "Inactif"
+msgstr "Inactif"
+
+#: admin/editor.php:125
+msgid ""
+"Modifier les textes et les images (pour copier directement du code html , "
+"mettez l'onglet en bas a gauche sur source)"
+msgstr ""
+"Modifier les textes et les images (pour copier directement du code html , "
+"mettez l'onglet en bas à gauche sur source)"
+
+#: admin/editor.php:126
+msgid "Pour enregister votre newsletter cliquez sur la disquette"
+msgstr "Pour enregistrer votre newsletter cliquez sur la disquette"
+
+#: admin/emails.php:22
+msgid "Liste email"
+msgstr "Liste email"
+
+#: admin/emails.php:29
+msgid "Permet de verifier que vos emails sont bien enregistres"
+msgstr "Permet de vérifier que vos emails sont biens enregistrés"
+
+#: admin/emails.php:66
+msgid "Modifier l'email"
+msgstr "Modifier l'email"
+
+#: admin/emails.php:85 admin/emails.php:179 admin/emails.php:290
+#: admin/listes.php:183 admin/listes.php:274 admin/listes.php:338
+#: admin/listes.php:589 admin/listes.php:817 admin/variables.php:59
+#: admin/variables.php:121 admin/variables.php:163 admin/variables.php:204
+#: admin/variables.php:216 admin/variables.php:265 admin/variables_user.php:57
+#: admin/variables_user.php:168 admin/variables_user.php:209
+#: admin/variables_user.php:221 admin/variables_user.php:270
+msgid "Nom"
+msgstr "Nom"
+
+#: admin/emails.php:126 admin/emails.php:293
+msgid "Inscrit"
+msgstr "Inscrit"
+
+#: admin/emails.php:129 admin/emails.php:133 admin/emails.php:315
+#: admin/stats_user.php:266
+msgid "Desinscrit"
+msgstr "Désinscrit"
+
+#: admin/emails.php:137 admin/emails.php:141 admin/emails.php:145
+#: admin/emails.php:294 include/export.php:13 include/export.php:33
+#: include/export.php:53 include/export.php:76
 msgid "Valide"
 msgstr "Valide"
 
-#: admin/emails.php:108 admin/emails.php:112 admin/emails.php:286
+#: admin/emails.php:140 admin/emails.php:144 admin/emails.php:317
+#: admin/listes.php:719
 msgid "Invalide"
 msgstr "Invalide"
 
-#: admin/emails.php:119
+#: admin/emails.php:151
 msgid "modifier"
 msgstr "modifier"
 
-#: admin/emails.php:128
+#: admin/emails.php:160
 msgid "Fiche client"
 msgstr "Fiche client"
 
-#: admin/emails.php:143 admin/emails.php:280
+#: admin/emails.php:175 admin/emails.php:311 admin/listes.php:260
 msgid "Voir la fiche complete"
-msgstr "Voir la fiche complete"
+msgstr "Voir la fiche complète"
 
-#: admin/emails.php:150
+#: admin/emails.php:182
 msgid "Date Inscription"
 msgstr "Date Inscription"
 
-#: admin/emails.php:156 include/export.php:13 include/export.php:33
+#: admin/emails.php:188 include/export.php:13 include/export.php:33
+#: include/export.php:53 include/export.php:76
 msgid "Langue"
 msgstr "Langue"
 
-#: admin/emails.php:206
+#: admin/emails.php:238
 msgid "Supprimer l'email"
 msgstr "Supprimer l'email"
 
-#: admin/emails.php:211
+#: admin/emails.php:243
 msgid "Voulez vous vraiment supprimer l'email ?"
 msgstr "Voulez vous vraiment supprimer l'email ?"
 
-#: admin/emails.php:213 admin/listes.php:123 admin/multi.php:163
+#: admin/emails.php:245 admin/listes.php:155 admin/multi.php:163
 #: admin/multi.php:171 admin/multi.php:223 admin/multi.php:229
 #: admin/multi.php:251 admin/multi.php:254 admin/multi.php:266
 #: admin/multi.php:269 admin/multi.php:281 admin/multi.php:284
@@ -422,25 +597,23 @@ msgstr "Voulez vous vraiment supprimer l'email ?"
 #: admin/multi.php:538 admin/multi.php:541 admin/multi.php:553
 #: admin/multi.php:556 admin/multi.php:590 admin/multi.php:597
 #: admin/multi.php:644 admin/multi.php:651 admin/multi.php:662
-#: admin/multi.php:669 admin/npai.php:76 admin/parametres.php:213
-#: admin/parametres.php:216 admin/parametres.php:228 admin/parametres.php:231
-#: admin/parametres.php:243 admin/parametres.php:246 admin/parametres.php:279
-#: admin/parametres.php:282 admin/parametres.php:326 admin/parametres.php:333
-#: admin/parametres.php:343 admin/parametres.php:347 admin/parametres.php:399
-#: admin/parametres.php:407 admin/parametres.php:555 admin/parametres.php:562
-#: admin/parametres.php:594 admin/parametres.php:601 admin/parametres.php:612
-#: admin/parametres.php:619 e-mailing-service.php:1122
-#: e-mailing-service.php:1128 sm_widget.php:12 sm_widget.php:150
-#: sm_widget.php:175 sm_widget.php:177 sm_widget.php:184 sm_widget.php:186
-#: sm_widget.php:193 sm_widget.php:195 sm_widget.php:202 sm_widget.php:204
-#: sm_widget.php:211 sm_widget.php:213 sm_widget.php:220 sm_widget.php:222
-#: sm_widget.php:229 sm_widget.php:231 sm_widget.php:238 sm_widget.php:240
-#: sm_widget.php:247 sm_widget.php:249 sm_widget.php:256 sm_widget.php:258
-#: unsuscribe.php:61
+#: admin/multi.php:669 admin/npai.php:103 admin/setting.php:241
+#: admin/setting.php:249 admin/setting.php:306 admin/setting.php:309
+#: admin/setting.php:321 admin/setting.php:324 admin/setting.php:336
+#: admin/setting.php:339 admin/setting.php:372 admin/setting.php:375
+#: admin/setting.php:419 admin/setting.php:426 admin/setting.php:436
+#: admin/setting.php:440 admin/setting.php:476 admin/setting.php:484
+#: e-mailing-service.php:1578 e-mailing-service.php:1584 sm_widget.php:12
+#: sm_widget.php:150 sm_widget.php:175 sm_widget.php:177 sm_widget.php:184
+#: sm_widget.php:186 sm_widget.php:193 sm_widget.php:195 sm_widget.php:202
+#: sm_widget.php:204 sm_widget.php:211 sm_widget.php:213 sm_widget.php:220
+#: sm_widget.php:222 sm_widget.php:229 sm_widget.php:231 sm_widget.php:238
+#: sm_widget.php:240 sm_widget.php:247 sm_widget.php:249 sm_widget.php:256
+#: sm_widget.php:258 unsuscribe.php:62
 msgid "oui"
 msgstr "oui"
 
-#: admin/emails.php:215 admin/listes.php:125 admin/multi.php:225
+#: admin/emails.php:247 admin/listes.php:157 admin/multi.php:225
 #: admin/multi.php:231 admin/multi.php:252 admin/multi.php:255
 #: admin/multi.php:267 admin/multi.php:270 admin/multi.php:282
 #: admin/multi.php:285 admin/multi.php:321 admin/multi.php:328
@@ -450,177 +623,109 @@ msgstr "oui"
 #: admin/multi.php:542 admin/multi.php:554 admin/multi.php:557
 #: admin/multi.php:593 admin/multi.php:600 admin/multi.php:647
 #: admin/multi.php:654 admin/multi.php:665 admin/multi.php:672
-#: admin/npai.php:78 admin/parametres.php:214 admin/parametres.php:217
-#: admin/parametres.php:229 admin/parametres.php:232 admin/parametres.php:244
-#: admin/parametres.php:247 admin/parametres.php:280 admin/parametres.php:283
-#: admin/parametres.php:329 admin/parametres.php:336 admin/parametres.php:344
-#: admin/parametres.php:349 admin/parametres.php:558 admin/parametres.php:565
-#: admin/parametres.php:597 admin/parametres.php:604 admin/parametres.php:615
-#: admin/parametres.php:622 e-mailing-service.php:1123
-#: e-mailing-service.php:1129 sm_widget.php:13 sm_widget.php:14
-#: sm_widget.php:15 sm_widget.php:16 sm_widget.php:17 sm_widget.php:18
-#: sm_widget.php:19 sm_widget.php:20 sm_widget.php:21 sm_widget.php:151
-#: sm_widget.php:152 sm_widget.php:153 sm_widget.php:154 sm_widget.php:155
-#: sm_widget.php:156 sm_widget.php:157 sm_widget.php:158 sm_widget.php:159
-#: sm_widget.php:174 sm_widget.php:178 sm_widget.php:183 sm_widget.php:187
-#: sm_widget.php:192 sm_widget.php:196 sm_widget.php:201 sm_widget.php:205
-#: sm_widget.php:210 sm_widget.php:214 sm_widget.php:219 sm_widget.php:223
-#: sm_widget.php:228 sm_widget.php:232 sm_widget.php:237 sm_widget.php:241
-#: sm_widget.php:246 sm_widget.php:250 sm_widget.php:255 sm_widget.php:259
-#: unsuscribe.php:62
+#: admin/npai.php:105 admin/setting.php:307 admin/setting.php:310
+#: admin/setting.php:322 admin/setting.php:325 admin/setting.php:337
+#: admin/setting.php:340 admin/setting.php:373 admin/setting.php:376
+#: admin/setting.php:422 admin/setting.php:429 admin/setting.php:437
+#: admin/setting.php:442 e-mailing-service.php:1579 e-mailing-service.php:1585
+#: sm_widget.php:13 sm_widget.php:14 sm_widget.php:15 sm_widget.php:16
+#: sm_widget.php:17 sm_widget.php:18 sm_widget.php:19 sm_widget.php:20
+#: sm_widget.php:21 sm_widget.php:151 sm_widget.php:152 sm_widget.php:153
+#: sm_widget.php:154 sm_widget.php:155 sm_widget.php:156 sm_widget.php:157
+#: sm_widget.php:158 sm_widget.php:159 sm_widget.php:174 sm_widget.php:178
+#: sm_widget.php:183 sm_widget.php:187 sm_widget.php:192 sm_widget.php:196
+#: sm_widget.php:201 sm_widget.php:205 sm_widget.php:210 sm_widget.php:214
+#: sm_widget.php:219 sm_widget.php:223 sm_widget.php:228 sm_widget.php:232
+#: sm_widget.php:237 sm_widget.php:241 sm_widget.php:246 sm_widget.php:250
+#: sm_widget.php:255 sm_widget.php:259 unsuscribe.php:63
 msgid "non"
 msgstr "non"
 
-#: admin/emails.php:217 admin/emails.php:291
+#: admin/emails.php:249 admin/emails.php:322
 msgid "Supprimer"
 msgstr "Supprimer"
 
-#: admin/emails.php:224
+#: admin/emails.php:256
 msgid "Votre email a bien ete supprime"
 msgstr "Votre email a bien été supprimé"
 
-#: admin/emails.php:233
-msgid "Liste de vos emails"
-msgstr "Liste de vos emails"
-
-#: admin/emails.php:256
+#: admin/emails.php:287 admin/listes_newsletter.php:43
 msgid "ID"
 msgstr "ID"
 
-#: admin/emails.php:258
+#: admin/emails.php:289
 msgid "Date inscription"
 msgstr "Date inscription"
 
-#: admin/emails.php:260
+#: admin/emails.php:291
 msgid "Fiche"
 msgstr "Fiche"
 
-#: admin/emails.php:261 admin/emails.php:281 admin/listes.php:656
+#: admin/emails.php:292 admin/emails.php:312 admin/listes.php:717
 msgid "Opt-in"
 msgstr "Opt-in"
 
-#: admin/emails.php:264 admin/listes.php:659
+#: admin/emails.php:295 admin/listes.php:723 admin/listes_newsletter.php:49
 msgid "Action"
 msgstr "Action"
 
-#: admin/emails.php:282
+#: admin/emails.php:313
 msgid "Non opt-in"
 msgstr "Non opt-in"
 
-#: admin/emails.php:285
+#: admin/emails.php:316
 msgid "valide"
 msgstr "valide"
 
-#: admin/emails.php:289
+#: admin/emails.php:320
 msgid "Modifier"
 msgstr "Modifier"
 
-#: admin/etat.php:12 include/cron.php:280
-msgid "Reponse"
-msgstr "Reponse"
-
-#: admin/etat.php:18
-msgid "Tester votre serveur SMTP"
-msgstr "Tester votre serveur SMTP"
-
-#: admin/etat.php:26 admin/npai.php:117 admin/npai.php:206 tuto/ticket.php:19
-#: tuto/ticket_liste.php:77
-msgid "Sujet"
-msgstr "Sujet"
-
 #: admin/etat.php:26
-msgid "test smtp"
-msgstr "test smtp"
+msgid "Permet de vefier l'eta de votre serveur smtp"
+msgstr "Permet de vérifier l'état de votre serveur smtp"
 
-#: admin/etat.php:27 tuto/ticket.php:23 tuto/ticket_liste.php:29
-msgid "Message"
-msgstr "Message"
+#: admin/import_newsletter.php:19
+msgid "Importer une newsletter"
+msgstr "Importer une newsletter"
 
-#: admin/etat.php:27
-msgid "test ok ?"
-msgstr "test ok ?"
+#: admin/import_newsletter.php:26
+msgid "Votre newsletter doit etre au format .zip"
+msgstr "Votre newsletter doit être au format .zip"
 
-#: admin/etat.php:28 admin/send.php:121 admin/send.php:166 admin/send.php:217
-#: admin/send.php:267
-msgid "envoyer"
-msgstr "envoyer"
-
-#: admin/etat.php:33
-msgid "Status serveur SMTP"
-msgstr "Status serveur SMTP"
-
-#: admin/etat.php:38 admin/index.php:75
-msgid "Serveur SMTP"
-msgstr "Serveur SMTP"
-
-#: admin/etat.php:40
-msgid "Tester"
-msgstr "Tester"
-
-#: admin/etat.php:41
-msgid "Port 25"
-msgstr "Port 25"
-
-#: admin/etat.php:42
-msgid "Port 587"
-msgstr "Port 587"
-
-#: admin/etat.php:43
-msgid "Port 80"
-msgstr "Port 80"
-
-#: admin/etat.php:44
-msgid "Port 53"
-msgstr "Port 53"
-
-#: admin/etat.php:45 sm_dashboard.php:35
-msgid "Spamscore"
-msgstr "Spamscore"
-
-#: admin/etat.php:47 admin/live.php:77 admin/multi.php:216 sm_dashboard.php:80
-#: tuto/ticket_liste.php:79
-msgid "Status"
-msgstr "Status"
-
-#: admin/etat.php:56
-msgid "Tester le serveur"
-msgstr "Tester le serveur"
-
-#: admin/etat.php:66
-msgid "Inactif"
-msgstr "Inactif"
-
-#: admin/import_template.php:9
-msgid "Configuration PHP"
-msgstr "Configuration PHP"
-
-#: admin/import_template.php:105
+#: admin/import_newsletter.php:108 admin/import_template.php:108
 msgid "Creation template"
 msgstr "Création Newsletter"
 
-#: admin/import_template.php:109
+#: admin/import_newsletter.php:112 admin/import_template.php:112
 msgid "Importation de template"
 msgstr "Importation de template"
 
-#: admin/import_template.php:110 tuto/h_template.php:5
+#: admin/import_newsletter.php:113 admin/import_template.php:113
+#: tuto/h_template.php:5
 msgid "Le plugin a ete teste avec les design pour le marketing par email : "
-msgstr "Le plugin a ete teste avec les design pour le marketing par email : "
+msgstr "Le plugin a été testé avec les designs pour le marketing par email : "
 
-#: admin/import_template.php:111
+#: admin/import_newsletter.php:114 admin/import_template.php:114
 msgid "Fichier ZIP"
 msgstr "Fichier ZIP"
 
-#: admin/import_template.php:136 admin/listes.php:510
+#: admin/import_newsletter.php:139 admin/import_template.php:139
+#: admin/listes.php:567
 msgid "Le fichier"
 msgstr "Le fichier"
 
-#: admin/import_template.php:136
+#: admin/import_newsletter.php:139 admin/import_template.php:139
 msgid " a bien &eacute;t&eacute; upload&eacute;"
 msgstr "a bien étè uploadé"
 
-#: admin/import_template.php:153
+#: admin/import_newsletter.php:156 admin/import_template.php:156
 msgid "Terminer la creation de modele"
-msgstr "Terminer la creation de modele"
+msgstr "Terminer la création de modèle"
+
+#: admin/import_template.php:26
+msgid "Importer des modele pour vos clients"
+msgstr "Importer des models pour vos clients"
 
 #: admin/index.php:33
 msgid ""
@@ -628,13 +733,13 @@ msgid ""
 "blackliste et que votre newsletter correspond au critere editorial de chaque "
 "fournisseur d'email"
 msgstr ""
-"Notre script vous garantit la delivrabilites si votre serveur n'est pas "
-"blackliste et que votre newsletter correspond au critere editorial de chaque "
+"Notre script vous garantit la délivrabilité si votre serveur n'est pas "
+"blacklisté et que votre newsletter correspond au critère éditorial de chaque "
 "fournisseur d'email"
 
 #: admin/index.php:34
 msgid "Nous garantissons ces resultats que sur nos serveurs SMTP ci-dessous"
-msgstr "Nous garantissons ces resultats que sur nos serveurs SMTP ci-dessous"
+msgstr "Nous garantissons ces reéultats que sur nos serveurs SMTP ci-dessous"
 
 #: admin/index.php:76
 msgid ""
@@ -643,10 +748,10 @@ msgid ""
 "script fonctionne avec tous les serveurs SMTP.Nous garantissont les "
 "resultats inbox de nos scripts que sur nos serveurs SMTP.</pre>"
 msgstr ""
-"<pre>Vous allez pouvoir parametrer un serveur SMTP qui va vous permettre "
+"<pre>Vous allez pouvoir paramétrer un serveur SMTP qui va vous permettre "
 "d'envoyer sans prendre le risque de blacklister votre site principal.Le "
-"script fonctionne avec tous les serveurs SMTP.Nous garantissont les "
-"resultats inbox de nos scripts que sur nos serveurs SMTP.</pre>"
+"script fonctionne avec tous les serveurs SMTP.Nous garantissons les "
+"résultats inbox de nos scripts que sur nos serveurs SMTP.</pre>"
 
 #: admin/index.php:81
 msgid "REWRITING"
@@ -655,11 +760,11 @@ msgstr "REWRITING"
 #: admin/index.php:82
 msgid ""
 "<pre><p>Tous les liens sont en reecriture d'url ce qui permet d'avoir des "
-"liens courts et de passer les barrieres anti-spam </p>\n"
+"liens courts et de passer les barrieres anti-spam </p>\r\n"
 "    <p>&nbsp;</p></pre>"
 msgstr ""
-"<pre><p>Tous les liens sont en reecriture d'url ce qui permet d'avoir des "
-"liens courts et de passer les barrieres anti-spam </p>\n"
+"<pre><p>Tous les liens sont en réécriture d'url ce qui permet d'avoir des "
+"liens courts et de passer les barrières anti-spam </p>\r\n"
 "    <p>&nbsp;</p></pre>"
 
 #: admin/index.php:88 admin/index.php:103 admin/index.php:166
@@ -669,18 +774,18 @@ msgstr "Gestion NPAI"
 #: admin/index.php:89
 msgid ""
 "<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il "
-"previenne d'un email invalide, un eventuel blacklistage etc...\n"
-"\n"
+"previenne d'un email invalide, un eventuel blacklistage etc...\r\n"
+"\r\n"
 "En bref des informations necessaires pour garder une base de donnee propre "
 "sans email invalide, et de continuer aconserver un bon pourcentage de "
 "delivrabilite.</pre>"
 msgstr ""
-"<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il "
-"previenne d'un email invalide, un eventuel blacklistage etc...\n"
-"\n"
-"En bref des informations necessaires pour garder une base de donnee propre "
-"sans email invalide, et de continuer aconserver un bon pourcentage de "
-"delivrabilite.</pre>"
+"<pre>Les NPAI sont les email en réponse a votre envoi,  en général , il "
+"prévient d'un email invalide, un éventuel blacklistage etc...\r\n"
+"\r\n"
+"En bref des informations nécessaires pour garder une base de données propre "
+"sans email invalide, et de continuer a conserver un bon pourcentage de "
+"delivrabilité.</pre>"
 
 #: admin/index.php:96
 msgid "Nom de domaine"
@@ -689,45 +794,45 @@ msgstr "Nom de domaine"
 #: admin/index.php:97
 msgid ""
 "Si l'option est coche , on vous offre un nom de domaine que vous choisissez "
-"vous meme apres paiement,  qui sera dedie avos envois de newsletters.\n"
+"vous meme apres paiement,  qui sera dedie avos envois de newsletters.\r\n"
 "Meilleur delivrabilite."
 msgstr ""
-"Si l'option est coche , on vous offre un nom de domaine que vous choisissez "
-"vous meme apres paiement,  qui sera dedie avos envois de newsletters.\n"
-"Meilleur delivrabilite."
+"Si l'option est cochée , on vous offre un nom de domaine que vous choisissez "
+"vous même après paiement,  qui sera dédié a vos envois de newsletters.\r\n"
+"Meilleur delivrabilité."
 
 #: admin/index.php:104 admin/index.php:167
 msgid ""
 "<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il "
-"previenne d'un email invalide, un eventuel blacklistage etc... \n"
-"\n"
+"previenne d'un email invalide, un eventuel blacklistage etc... \r\n"
+"\r\n"
 "En bref des informations necessaires pour garder une base de donnee propre "
 "sans email invalide, et de continuer aconserver un bon pourcentage de "
-"delivrabilite.\n"
-"\n"
+"delivrabilite.\r\n"
+"\r\n"
 "Si vous souscrivez anos serveurs SMTP , le script de gestion des NPAI est "
 "offert !</pre>"
 msgstr ""
-"<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il "
-"previenne d'un email invalide, un eventuel blacklistage etc... \n"
-"\n"
-"En bref des informations necessaires pour garder une base de donnee propre "
-"sans email invalide, et de continuer aconserver un bon pourcentage de "
-"delivrabilite.\n"
-"\n"
-"Si vous souscrivez anos serveurs SMTP , le script de gestion des NPAI est "
+"<pre>Les NPAI sont les email en réponse a votre envoi,  en général , il "
+"prévient d'un email invalide, un éventuel blacklistage etc... \r\n"
+"\r\n"
+"En bref des informations nécessaires pour garder une base de données propre "
+"sans email invalide, et de continuer a conserver un bon pourcentage de "
+"delivrabilité.\r\n"
+"\r\n"
+"Si vous souscrivez a nos serveurs SMTP , le script de gestion des NPAI est "
 "offert !</pre>"
 
 #: admin/index.php:113
 msgid "IP dedie"
-msgstr "IP dedie"
+msgstr "IP dediée"
 
 #: admin/index.php:114
 msgid ""
 "Vous etes seules sur votre IP ce qui permet d'etre sur de la qualite de vos "
 "envois, personne ne peut faire blacklister votre serveur par erreur"
 msgstr ""
-"Vous etes seules sur votre IP ce qui permet d'etre sur de la qualite de vos "
+"Vous êtes seules sur votre IP ce qui permet d'être sur de la qualité de vos "
 "envois, personne ne peut faire blacklister votre serveur par erreur"
 
 #: admin/index.php:114
@@ -735,33 +840,33 @@ msgid ""
 "vous etes le seul responsable en cas d'incident, et vous pouvez donc gerer "
 "la desinscription au cas ou vous etiez inscrit sur une liste anti-spam."
 msgstr ""
-"vous etes le seul responsable en cas d'incident, et vous pouvez donc gerer "
-"la desinscription au cas ou vous etiez inscrit sur une liste anti-spam."
+"vous êtes le seul responsable en cas d'incident, et vous pouvez donc gérer "
+"la désinscription au cas ou vous étiez inscrit sur une liste anti-spam."
 
 #: admin/index.php:115
 msgid "Indispensable pour une delivrabilite maximum"
-msgstr "Indispensable pour une delivrabilite maximum"
+msgstr "Indispensable pour une délivrabilité maximum"
 
 #: admin/index.php:120 admin/index.php:186
 msgid "Script Multi-SMTP"
-msgstr "Script Multi-SMTP"
+msgstr "Scripte Multi-SMTP"
 
 #: admin/index.php:121
 msgid ""
 "<pre>Si vous souscrivez al'offre mass mailing , le script multi-smtp est "
 "offert, des serveurs MX avec ip dedie et serveur dedie vous sont fournis "
-"suivant vos besoins \n"
-"et le script SMTP va envoyer atour de role sur les differents serveurs "
-"SMTP .\n"
-"\n"
+"suivant vos besoins \r\n"
+"et le script SMTP va envoyer atour de role sur les differents serveurs SMTP ."
+"\r\n"
+"\r\n"
 "Fortement conseille si vous envoyer plus de 60 000 emails  par jours.</pre>"
 msgstr ""
-"<pre>Si vous souscrivez al'offre mass mailing , le script multi-smtp est "
-"offert, des serveurs MX avec ip dedie et serveur dedie vous sont fournis "
-"suivant vos besoins \n"
-"et le script SMTP va envoyer atour de role sur les differents serveurs "
-"SMTP .\n"
-"\n"
+"<pre>Si vous souscrivez a l'offre mass mailing , le script multi-smtp est "
+"offert, des serveurs MX avec ip dédié et serveur dédié vous sont fournis "
+"suivant vos besoins \r\n"
+"et le script SMTP va envoyer atour de rôle sur les différents serveurs SMTP ."
+"\r\n"
+"\r\n"
 "Fortement conseille si vous envoyer plus de 60 000 emails  par jours.</pre>"
 
 #: admin/index.php:129
@@ -771,12 +876,12 @@ msgstr "Alias d'email"
 #: admin/index.php:130
 msgid ""
 "<pre>Ce que l'on appelle alias d'email et le nom de votre email par exemple "
-"alias@monnom.com\n"
+"alias@monnom.com\r\n"
 "Si vous ne prenez pas une offre avec nom de domaine , l'alias vous sera "
 "fournit automatiquement , vous ne pourrez pas la choisir</pre>"
 msgstr ""
-"<pre>Ce que l'on appelle alias d'email et le nom de votre email par exemple "
-"alias@monnom.com\n"
+"<pre>Ce que l'on appelle alias d'email est le nom de votre email par exemple "
+"alias@monnom.com\r\n"
 "Si vous ne prenez pas une offre avec nom de domaine , l'alias vous sera "
 "fournit automatiquement , vous ne pourrez pas la choisir</pre>"
 
@@ -787,14 +892,16 @@ msgstr "Statistiques des liens"
 #: admin/index.php:137 admin/index.php:202
 msgid ""
 "<pre>Vous avez des statistiques d'envoi, d'ouverture , de clic , clic email "
-"dans navigateur ( vous ne visualisez pas cet email ), les desinscriptions.\n"
-"\n"
+"dans navigateur ( vous ne visualisez pas cet email ), les desinscriptions."
+"\r\n"
+"\r\n"
 "Le classement est possible , par jour , par FAI , par tracking, par url , "
 "par serveur</pre>"
 msgstr ""
 "<pre>Vous avez des statistiques d'envoi, d'ouverture , de clic , clic email "
-"dans navigateur ( vous ne visualisez pas cet email ), les desinscriptions.\n"
-"\n"
+"dans navigateur ( vous ne visualisez pas cet email ), les désinscriptions."
+"\r\n"
+"\r\n"
 "Le classement est possible , par jour , par FAI , par tracking, par url , "
 "par serveur</pre>"
 
@@ -807,7 +914,7 @@ msgid ""
 "<pre>Statistiques sur les fichiers log du serveur SMTP, emails delivres ,"
 "emails mis spam , bounces .... </pre>"
 msgstr ""
-"<pre>Statistiques sur les fichiers log du serveur SMTP, emails delivres ,"
+"<pre>Statistiques sur les fichiers log du serveur SMTP, emails délivrés ,"
 "emails mis spam , bounces .... </pre>"
 
 #: admin/index.php:150 admin/index.php:215
@@ -824,15 +931,15 @@ msgid ""
 "liens pour vous desinscrire au cas ou. </pre>"
 msgstr ""
 "<pre>du nombre d'inscription sur les listes anti-spam (blacklist), avec "
-"liens pour vous desinscrire au cas ou. </pre>"
+"liens pour vous désinscrire au cas ou. </pre>"
 
 #: admin/index.php:154 admin/index.php:221
 msgid ""
 "<pre>du spam score (note de qualite des emailing la note est sur 100 , la "
 "meilleur note etant 100) importante notemment pour hotmail.</pre>"
 msgstr ""
-"<pre>du spam score (note de qualite des emailing la note est sur 100 , la "
-"meilleur note etant 100) importante notemment pour hotmail.</pre>"
+"<pre>du spam score (note de qualité des emailing la note est sur 100 , la "
+"meilleur note étant 100) importante notamment pour hotmail.</pre>"
 
 #: admin/index.php:160 admin/index.php:229
 msgid "Limite d'envois"
@@ -845,45 +952,45 @@ msgid ""
 "matin a 0h01.</pre>"
 msgstr ""
 "<pre>Vous pouvez choisir la vitesse d'envois , mais si vous arrivez au bout "
-"de votre limite journaliere, le script s'arretera et reprendra le lendemain "
+"de votre limite journalière, le script s'arrêtera et reprendra le lendemain "
 "matin a 0h01.</pre>"
 
 #: admin/index.php:176
 msgid "Importation de modeles"
-msgstr "Importation de modeles"
+msgstr "Importation de modèles"
 
 #: admin/index.php:177
 msgid ""
-"<pre>Script d'importation de modeles en fichier zip ou url.\n"
-"Votre modeles est alors installe automatiquement.\n"
-"\n"
+"<pre>Script d'importation de modeles en fichier zip ou url.\r\n"
+"Votre modeles est alors installe automatiquement.\r\n"
+"\r\n"
 "Il vous suffit alors de choisir un modele lors de la creation de votre "
-"newsletter et celui-ci ce met en place tous seul.\n"
+"newsletter et celui-ci ce met en place tous seul.\r\n"
 "</pre>"
 msgstr ""
-"<pre>Script d'importation de modeles en fichier zip ou url.\n"
-"Votre modeles est alors installe automatiquement.\n"
-"\n"
-"Il vous suffit alors de choisir un modele lors de la creation de votre "
-"newsletter et celui-ci ce met en place tous seul.\n"
+"<pre>Script d'importation de modèles en fichier zip ou url.\r\n"
+"Votre modèles est alors installe automatiquement.\r\n"
+"\r\n"
+"Il vous suffit alors de choisir un modèle lors de la création de votre "
+"newsletter et celui-ci ce met en place tous seul.\r\n"
 "</pre>"
 
 #: admin/index.php:187
 msgid ""
 "<pre>Si vous choisissez l'offre mass mailing , vous pouvez parametrer "
-"plusieurs SMTP \n"
+"plusieurs SMTP \r\n"
 "et le script effctuera une rotation reguliere entre les differents SMTP pour "
-"repartir la charge d'envoi.\n"
+"repartir la charge d'envoi.\r\n"
 "Les deux premiers sont offerts a la souscription, 3 euros 50 par SMTP "
-"supplementaire.\n"
+"supplementaire.\r\n"
 "</pre>"
 msgstr ""
-"<pre>Si vous choisissez l'offre mass mailing , vous pouvez parametrer "
-"plusieurs SMTP \n"
-"et le script effctuera une rotation reguliere entre les differents SMTP pour "
-"repartir la charge d'envoi.\n"
+"<pre>Si vous choisissez l'offre mass mailing , vous pouvez paramètrer "
+"plusieurs SMTP \r\n"
+"et le script effectuera une rotation régulière entre les différents SMTP "
+"pour repartir la charge d'envoi.\r\n"
 "Les deux premiers sont offerts a la souscription, 3 euros 50 par SMTP "
-"supplementaire.\n"
+"supplémentaire.\r\n"
 "</pre>"
 
 #: admin/index.php:195
@@ -895,151 +1002,169 @@ msgid ""
 "<pre>Avec le script vous allez facilement pouvoir gerer une aplusieurs liste "
 "de contact (inscrire,modifier,supprimer,desinscrire) </pre>"
 msgstr ""
-"<pre>Avec le script vous allez facilement pouvoir gerer une aplusieurs liste "
-"de contact (inscrire,modifier,supprimer,desinscrire) </pre>"
+"<pre>Avec le script vous allez facilement pouvoir gérer une à plusieurs "
+"listes de contacts (inscrire,modifier,supprimer,désinscrire) </pre>"
 
 #: admin/index.php:224
 msgid "Disponible en option au tarifs de 2 euros /mois</pre>"
 msgstr "Disponible en option au tarifs de 2 euros /mois</pre>"
 
-#: admin/listes.php:10 admin/multi.php:116 admin/parametres.php:118
-#: admin/variables.php:19
-msgid "Vos informations ont bien ete mis a jour"
-msgstr "Vos informations ont bien ete mis a jour"
+#: admin/listes.php:22
+msgid "Liste de diffusion"
+msgstr "Liste de diffusion"
 
-#: admin/listes.php:59 admin/listes.php:703
+#: admin/listes.php:29
+msgid ""
+"La liste de diffusion sert a classer les emails de vos clients par categories"
+msgstr ""
+"La liste de diffusion sert a classer les emails de vos clients par catégories"
+
+#: admin/listes.php:41 admin/multi.php:116 admin/setting.php:153
+#: admin/variables.php:46 admin/variables_user.php:45
+msgid "Vos informations ont bien ete mis a jour"
+msgstr "Vos informations ont bien été mises a jour"
+
+#: admin/listes.php:91 admin/listes.php:776
 msgid "Diviser votre liste en plusieurs listes"
 msgstr "Diviser votre liste en plusieurs listes"
 
-#: admin/listes.php:65
+#: admin/listes.php:97
 msgid "Nombre de listes ?"
 msgstr "Nombre de listes ?"
 
-#: admin/listes.php:68
+#: admin/listes.php:100
 msgid "prefix de la liste"
-msgstr "prefix de la liste"
+msgstr "préfix de la liste"
 
-#: admin/listes.php:71
-msgid "Valider"
-msgstr "Valider"
-
-#: admin/listes.php:75
+#: admin/listes.php:107
 msgid "Nombre par liste"
 msgstr "Nombre par liste"
 
-#: admin/listes.php:117 admin/listes.php:700
+#: admin/listes.php:149 admin/listes.php:773
 msgid "Vider la liste"
 msgstr "Vider la liste"
 
-#: admin/listes.php:121
+#: admin/listes.php:153
 msgid "Voulez vous vraiment vider votre liste ?"
 msgstr "Voulez vous vraiment vider votre liste ?"
 
-#: admin/listes.php:127
+#: admin/listes.php:159
 msgid "Vider"
 msgstr "Vider"
 
-#: admin/listes.php:133
+#: admin/listes.php:165
 msgid "Votre liste a bien ete vide"
-msgstr "Votre liste a bien ete vide"
+msgstr "Votre liste a bien été vidé"
 
-#: admin/listes.php:140 admin/listes.php:163
+#: admin/listes.php:172 admin/listes.php:195
 msgid "Modifier les champs de votre liste"
 msgstr "Modifier les champs de votre liste"
 
-#: admin/listes.php:185
+#: admin/listes.php:217
 msgid "Votre liste a bien ete modifie"
-msgstr "Votre liste a bien ete modifie"
+msgstr "Votre liste a bien été modifié"
 
-#: admin/listes.php:221
+#: admin/listes.php:267
 msgid "Ajouter un email a votre liste"
-msgstr "Ajouter un email a votre liste"
+msgstr "Ajouter un email à votre liste"
 
-#: admin/listes.php:277 admin/listes.php:726
+#: admin/listes.php:325 admin/listes.php:828
 msgid "Ajouter"
 msgstr "Ajouter"
 
-#: admin/listes.php:284 admin/listes.php:530
-msgid "null"
-msgstr "null"
+#: admin/listes.php:331
+msgid ""
+"Vous n'avez pas encore creer une liste de detinataire, vous devez en premier "
+"creer une liste afin d'ajouter des emails"
+msgstr ""
+"Vous n'avez pas encore créer une liste de destinataire, vous devez en "
+"premier créer une liste afin d'ajouter des emails"
 
-#: admin/listes.php:288 admin/listes.php:534
+#: admin/listes.php:336 admin/listes.php:587
+msgid "null"
+msgstr "nul"
+
+#: admin/listes.php:340 admin/listes.php:591
 msgid "lg"
 msgstr "lg"
 
-#: admin/listes.php:317
+#: admin/listes.php:369
 msgid "Ajouter plusieurs emails a votre liste"
-msgstr "Ajouter plusieurs emails a votre liste"
+msgstr "Ajouter plusieurs emails à votre liste"
 
-#: admin/listes.php:318
+#: admin/listes.php:370
 msgid "Copier vos emails dans le formulaire , 1 email par ligne : "
 msgstr "Copier vos emails dans le formulaire , 1 email par ligne : "
 
-#: admin/listes.php:334
+#: admin/listes.php:386
 msgid "Correspondance des champs dans votre votre formulaire"
 msgstr "Correspondance des champs dans votre votre formulaire"
 
-#: admin/listes.php:352
+#: admin/listes.php:404
 msgid "Importer les emails"
 msgstr "Importer les emails"
 
-#: admin/listes.php:416 admin/listes.php:643
+#: admin/listes.php:472 admin/listes.php:700
 msgid "Vos emails ont ete importe"
-msgstr "Vos emails ont ete importe"
+msgstr "Vos emails ont été importé"
 
-#: admin/listes.php:426
+#: admin/listes.php:482
 msgid "Importation d'email dans votre liste"
 msgstr "Importation d'email dans votre liste"
 
-#: admin/listes.php:428
+#: admin/listes.php:485
 msgid "Attention de verifier que le dossier"
-msgstr "Attention de verifier que le dossier"
+msgstr "Attention de vérifier que le dossier"
 
-#: admin/listes.php:428
+#: admin/listes.php:485
 msgid "est les droits  (CHMOD a 0777)"
-msgstr "est les droits  (CHMOD a 0777)"
+msgstr "ait les droits  (CHMOD a 0777)"
 
-#: admin/listes.php:469
+#: admin/listes.php:526
 msgid "Preparation du fichier"
-msgstr "Preparation du fichier"
+msgstr "Préparation du fichier"
 
-#: admin/listes.php:470
+#: admin/listes.php:527
 msgid "Fichier .csv ou fichier .txt"
 msgstr "Fichier .csv ou fichier .txt"
 
-#: admin/listes.php:477
+#: admin/listes.php:527
+msgid "Poid maximum du fichier"
+msgstr "Poids maximum du fichier"
+
+#: admin/listes.php:534
 msgid "Point virgule"
 msgstr "Point virgule"
 
-#: admin/listes.php:478
+#: admin/listes.php:535
 msgid "Virgule"
 msgstr "Virgule"
 
-#: admin/listes.php:479
+#: admin/listes.php:536
 msgid "Deux points"
 msgstr "Deux points"
 
-#: admin/listes.php:480
+#: admin/listes.php:537
 msgid "Barre"
 msgstr "Barre"
 
-#: admin/listes.php:481
+#: admin/listes.php:538
 msgid "Diese"
 msgstr "Diese"
 
-#: admin/listes.php:488
+#: admin/listes.php:545
 msgid "Importer le fichier"
 msgstr "Importer le fichier"
 
-#: admin/listes.php:510
+#: admin/listes.php:567
 msgid "a bien ete uploade"
-msgstr "a bien ete uploade"
+msgstr "a bien été uploade"
 
-#: admin/listes.php:515
+#: admin/listes.php:572
 msgid "Extension incorrecte (votre fichier se termine par"
 msgstr "Extension incorrecte (votre fichier se termine par"
 
-#: admin/listes.php:515
+#: admin/listes.php:572
 msgid ""
 "vous pouvez seulement uploader des fichier se terminant par <strong>.csv ou ."
 "txt. "
@@ -1047,327 +1172,402 @@ msgstr ""
 "vous pouvez seulement uploader des fichier se terminant par <strong>.csv ou ."
 "txt. "
 
-#: admin/listes.php:561
+#: admin/listes.php:618
 msgid ""
 "Votre fichier doit contenir , le champs email obligatoirement , pour le "
-"reste choisissez si vous souhaite le nombre de colonne et l'ordre</p>\n"
+"reste choisissez si vous souhaite le nombre de colonne et l'ordre</p>\r\n"
 "Exemple de fichier :  email@fai.com;dupond;"
 msgstr ""
 "Votre fichier doit contenir , le champs email obligatoirement , pour le "
-"reste choisissez si vous souhaite le nombre de colonne et l'ordre</p>\n"
+"reste choisissez si vous souhaite le nombre de colonne et l'ordre</p>\r\n"
 "Exemple de fichier :  email@fai.com;dupond;"
 
-#: admin/listes.php:627
+#: admin/listes.php:684
 msgid "Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier"
-msgstr "Votre fichier n'exite pas , verifier le chmod  0777 sur le dossier"
+msgstr "Votre fichier n'existe pas , vérifier le chmod  0777 sur le dossier"
 
-#: admin/listes.php:636
-msgid "Erreur SQL contact support or FAQ"
-msgstr "Erreur SQL contact support or FAQ"
+#: admin/listes.php:709
+msgid "Search email"
+msgstr "recherche émail"
 
-#: admin/listes.php:650
-msgid "Listes de diffusion"
-msgstr "Listes de diffusion"
+#: admin/listes.php:709
+msgid "search"
+msgstr "recherche"
 
-#: admin/listes.php:651
-msgid ""
-"La liste de diffusion sert a classer les emails de vos clients par categories"
-msgstr ""
-"La liste de diffusion sert a classer les emails de vos clients par categories"
+#: admin/listes.php:715 admin/live.php:90 admin/live_user.php:87
+#: admin/stats.php:61 admin/stats.php:84 admin/stats.php:107
+#: admin/stats_user.php:93 admin/stats_user.php:116 admin/stats_user.php:139
+msgid "Liste"
+msgstr "Liste"
 
-#: admin/listes.php:654
-msgid "Nom de votre liste"
-msgstr "Nom de votre liste"
+#: admin/listes.php:716
+msgid "Emails"
+msgstr "Emails"
 
-#: admin/listes.php:655
-msgid "Nb d'emails"
-msgstr "Nb d'emails"
-
-#: admin/listes.php:656
+#: admin/listes.php:717
 msgid ""
 "Une adresse courriel Opt-In active a fait l'objet d'un consentement "
 "prealable par une validation par clic"
 msgstr ""
 "Une adresse courriel Opt-In active a fait l'objet d'un consentement "
-"prèalable par une validation par clic"
+"préalable par une validation par clic"
 
-#: admin/listes.php:657
-msgid "Nb de desinscrits"
-msgstr "Nb de desinscrits"
+#: admin/listes.php:718
+msgid "Desinscrits"
+msgstr "Desinscrits"
 
-#: admin/listes.php:658
-msgid "Nb Invalide"
-msgstr "Nb Invalide"
+#: admin/listes.php:721 admin/multi.php:180 include/license.php:43
+msgid "Login"
+msgstr "Login"
 
-#: admin/listes.php:697
+#: admin/listes.php:770
 msgid "Ajouter des emails"
 msgstr "Ajouter des emails"
 
-#: admin/listes.php:698
+#: admin/listes.php:771
 msgid "Importer des emails"
 msgstr "Importer des emails"
 
-#: admin/listes.php:699
+#: admin/listes.php:772
 msgid "Modifier la liste"
 msgstr "Modifier la liste"
 
-#: admin/listes.php:701 admin/listes.php:702
+#: admin/listes.php:774 admin/listes.php:775
 msgid "Exporter vos emails en fichier"
 msgstr "Exporter vos emails en fichier"
 
-#: admin/listes.php:708
+#: admin/listes.php:786
+msgid "Nom de votre liste"
+msgstr "Nom de votre liste"
+
+#: admin/listes.php:787
+msgid "Nb d'emails"
+msgstr "Nb d'emails"
+
+#: admin/listes.php:788 admin/variables.php:61 admin/variables.php:123
+#: admin/variables.php:165 admin/variables.php:206 admin/variables.php:267
+#: admin/variables_user.php:59 admin/variables_user.php:170
+#: admin/variables_user.php:211 admin/variables_user.php:272 sm_widget.php:168
+msgid "Description"
+msgstr "Description"
+
+#: admin/listes.php:789
+msgid "Tarif"
+msgstr "Tarif"
+
+#: admin/listes.php:805 include/export.php:13 include/export.php:33
+#: include/export.php:53 include/export.php:76
+msgid "email"
+msgstr "email"
+
+#: admin/listes.php:810
 msgid "Creation d'une nouvelle liste de diffusion"
-msgstr "Creation d'une nouvelle liste de diffusion"
+msgstr "Création d'une nouvelle liste de diffusion"
 
-#: admin/listes.php:709
+#: admin/listes.php:811
 msgid "Choisissez les noms de vos colonnes pour enregistrer vos abonnes"
-msgstr "Choisissez les noms de vos colonnes pour enregistrer vos abonnes"
+msgstr "Choisissez les noms de vos colonnes pour enregistrer vos abonnés"
 
-#: admin/listes.php:713
+#: admin/listes.php:815
 msgid "Nom de la liste"
 msgstr "Nom de la liste"
 
-#: admin/listes.php:714
-msgid "Nom du premier champs"
-msgstr "Nom du premier champs"
+#: admin/listes.php:819 admin/listes.php:820 admin/listes.php:821
+#: admin/listes.php:822 admin/listes.php:823 admin/listes.php:824
+#: admin/listes.php:825 admin/listes.php:826 admin/listes.php:827
+msgid "Champs"
+msgstr "Champs"
 
-#: admin/listes.php:715
-msgid "Nom du deuxieme champs"
-msgstr "Nom du deuxieme champs"
-
-#: admin/listes.php:716
-msgid "Nom du troisieme champs"
-msgstr "Nom du troisieme champs"
-
-#: admin/listes.php:717
-msgid "Nom du quatrieme champs"
-msgstr "Nom du quatrieme champs"
-
-#: admin/listes.php:717
+#: admin/listes.php:819
 msgid "Prenom"
-msgstr "Prenom"
+msgstr "Prénom"
 
-#: admin/listes.php:718
-msgid "Nom du cinquieme champs"
-msgstr "Nom du cinquieme champs"
-
-#: admin/listes.php:718
+#: admin/listes.php:820
 msgid "Adresse"
 msgstr "Adresse"
 
-#: admin/listes.php:719
-msgid "Nom du sixieme champs"
-msgstr "Nom du sixieme champs"
-
-#: admin/listes.php:719
+#: admin/listes.php:821
 msgid "CP"
 msgstr "CP"
 
-#: admin/listes.php:720
-msgid "Nom du septieme champs"
-msgstr "Nom du septieme champs"
-
-#: admin/listes.php:720
+#: admin/listes.php:822
 msgid "Ville"
 msgstr "Ville"
 
-#: admin/listes.php:721
-msgid "Nom du huitime champs"
-msgstr "Nom du huitime champs"
-
-#: admin/listes.php:721
+#: admin/listes.php:823 admin/stats_user.php:390 admin/stats_user.php:565
+#: admin/stats_user.php:721 admin/stats_user.php:891
 msgid "Pays"
 msgstr "Pays"
 
-#: admin/listes.php:722
-msgid "Nom du neuvieme champs"
-msgstr "Nom du neuvieme champs"
-
-#: admin/listes.php:722
+#: admin/listes.php:824
 msgid "societe"
-msgstr "societe"
+msgstr "societé"
 
-#: admin/listes.php:723
-msgid "Nom du dixieme champs"
-msgstr "Nom du dixieme champs"
+#: admin/listes_newsletter.php:19
+msgid "Newsletter list"
+msgstr "Liste de Newsletter"
 
-#: admin/listes.php:724
-msgid "Nom du onzieme champs"
-msgstr "Nom du onzieme champs"
+#: admin/listes_newsletter.php:26
+msgid ""
+"List des newsletters, vous pouvez envoyer plusieurs fois la meme newsletter"
+msgstr ""
+"Liste des newsletters, vous pouvez envoyer plusieurs fois la même newsletter"
 
-#: admin/listes.php:725
-msgid "Nom du douzieme champs"
-msgstr "Nom du douzieme champs"
+#: admin/listes_newsletter.php:44
+msgid "Title"
+msgstr "Titre"
 
-#: admin/live.php:67 admin/stats.php:55
+#: admin/listes_newsletter.php:45 admin/stats_user.php:936
+#: admin/stats_user.php:1133 admin/variables.php:272
+#: admin/variables_user.php:277 e-mailing-service.php:2070 tuto/faq.php:16
+#: tuto/faq.php:72 tuto/suggestion.php:16 tuto/ticket_liste.php:31
+#: tuto/ticket_liste.php:78
+msgid "Date"
+msgstr "Date"
+
+#: admin/listes_newsletter.php:47 admin/live.php:86
+msgid "User"
+msgstr "utilisateur"
+
+#: admin/listes_newsletter.php:74
+msgid "view"
+msgstr "Voir"
+
+#: admin/listes_newsletter.php:77
+msgid "Edit whith wordpress editor"
+msgstr "Editer avec wordpress "
+
+#: admin/listes_newsletter.php:81
+msgid "edit wift elrte editor"
+msgstr "éditer avec wift elrte"
+
+#: admin/listes_newsletter.php:84
+msgid "Send newsletter"
+msgstr "Envoi newsletter"
+
+#: admin/listes_newsletter.php:88 admin/live.php:285 admin/live_user.php:240
+#: sm_dashboard.php:118
+msgid "statistic"
+msgstr "statistiques"
+
+#: admin/live.php:19 admin/live_user.php:19 admin/support.php:57
+msgid "Suivis de vos envois"
+msgstr "Suivis de vos envois"
+
+#: admin/live.php:26 admin/live_user.php:26 admin/support.php:64
+msgid "Pour suivre en direct le nombres d'emails envoyes"
+msgstr "Pour suivre en direct le nombre d'emails envoyés"
+
+#: admin/live.php:81 admin/live_user.php:81 admin/stats.php:55
+#: admin/stats_user.php:87
 msgid "Listes des campagnes envoyes"
-msgstr "Listes des campagnes envoyes"
+msgstr "Listes des campagnes envoyées"
 
-#: admin/live.php:70 admin/stats.php:58 admin/stats.php:81 admin/stats.php:104
+#: admin/live.php:84 admin/live_user.php:84 admin/stats.php:58
+#: admin/stats.php:81 admin/stats.php:104 admin/stats_user.php:90
+#: admin/stats_user.php:113 admin/stats_user.php:136
 msgid "Id envoi"
 msgstr "Id envoi"
 
-#: admin/live.php:72 admin/stats.php:60 admin/stats.php:83 admin/stats.php:106
+#: admin/live.php:89 admin/live_user.php:86 admin/stats.php:60
+#: admin/stats.php:83 admin/stats.php:106 admin/stats_user.php:92
+#: admin/stats_user.php:115 admin/stats_user.php:138
 msgid "Campagne"
 msgstr "Campagne"
 
-#: admin/live.php:73 admin/stats.php:61 admin/stats.php:84 admin/stats.php:107
-msgid "Liste"
-msgstr "Liste"
-
-#: admin/live.php:74
+#: admin/live.php:91 admin/live_user.php:88
 msgid "Date envoi"
 msgstr "Date envoi"
 
-#: admin/live.php:75
+#: admin/live.php:92 admin/live_user.php:89
 msgid "Date demarrage"
-msgstr "Date demarrage"
+msgstr "Date démarrage"
 
-#: admin/live.php:76
+#: admin/live.php:93 admin/live_user.php:90
 msgid "Date de fin"
 msgstr "Date de fin"
 
-#: admin/live.php:78 admin/stats.php:62 admin/stats.php:85 admin/stats.php:108
+#: admin/live.php:95 admin/live_user.php:92 admin/stats.php:62
+#: admin/stats.php:85 admin/stats.php:108 admin/stats_user.php:94
+#: admin/stats_user.php:117 admin/stats_user.php:140
 msgid "Nb emails envoyes"
-msgstr "Nb emails envoyes"
+msgstr "Nb emails envoyés"
 
-#: admin/live.php:79
+#: admin/live.php:96 admin/live_user.php:93
 msgid "Nb emails en attente"
 msgstr "Nb emails en attente"
 
-#: admin/live.php:81
+#: admin/live.php:98 admin/live_user.php:95
 msgid "Stopper"
 msgstr "Stopper"
 
-#: admin/live.php:82 admin/live.php:228 include/help_live.php:8
+#: admin/live.php:99 admin/live.php:302 admin/live_user.php:96
+#: admin/live_user.php:257 include/help_live.php:8
 msgid "Pause"
 msgstr "Pause"
 
-#: admin/live.php:84
+#: admin/live.php:101 admin/live_user.php:98
 msgid "Reactiver"
-msgstr "Reactiver"
+msgstr "Réactiver"
 
-#: admin/live.php:104 admin/live.php:161 admin/live.php:177
+#: admin/live.php:102 admin/live_user.php:99
+msgid "Log"
+msgstr "Log"
+
+#: admin/live.php:103 admin/live_user.php:100 sm_dashboard.php:107
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: admin/live.php:130 admin/live.php:226 admin/live.php:242
+#: admin/live_user.php:124 admin/live_user.php:181 admin/live_user.php:197
 msgid "Stopper la campagne"
 msgstr "Stopper la campagne"
 
-#: admin/live.php:109 admin/live.php:182
+#: admin/live.php:135 admin/live.php:247 admin/live_user.php:129
+#: admin/live_user.php:202
 msgid "Mettre la campagne en pause"
 msgstr "Mettre la campagne en pause"
 
-#: admin/live.php:115 admin/live.php:128 admin/live.php:141 admin/live.php:167
-msgid "Reactiver la campagne"
-msgstr "Reactiver la campagne"
+#: admin/live.php:141 admin/live_user.php:135
+msgid "Probleme contacter le support (code 2)"
+msgstr "Problème contacter le support (code 2)"
 
-#: admin/live.php:223 include/help_live.php:2
+#: admin/live.php:154 admin/live.php:167 admin/live.php:180 admin/live.php:193
+#: admin/live.php:206 admin/live.php:232 admin/live_user.php:148
+#: admin/live_user.php:161 admin/live_user.php:187
+msgid "Reactiver la campagne"
+msgstr "Réactiver la campagne"
+
+#: admin/live.php:281 admin/live_user.php:236
+msgid "log on live"
+msgstr "log en direct"
+
+#: admin/live.php:297 admin/live_user.php:252 include/help_live.php:2
 msgid "Description des status"
 msgstr "Description des status"
 
-#: admin/live.php:224 include/help_live.php:4
+#: admin/live.php:298 admin/live_user.php:253 include/help_live.php:4
 msgid "En Attente"
 msgstr "En Attente"
 
-#: admin/live.php:224 include/help_live.php:4
+#: admin/live.php:298 admin/live_user.php:253 include/help_live.php:4
 msgid ""
 "La newsletter attend le cron (tache qui va demarrer le script d'envoi de "
 "l'emailing)"
 msgstr ""
-"La newsletter attend le cron (tache qui va demarrer le script d'envoi de "
+"La newsletter attend le cron (tache qui va démarrer le script d'envoi de "
 "l'emailing)"
 
-#: admin/live.php:225 include/help_live.php:5
+#: admin/live.php:299 admin/live_user.php:254 include/help_live.php:5
 msgid "En cours"
 msgstr "En cours"
 
-#: admin/live.php:225 include/help_live.php:5
+#: admin/live.php:299 admin/live_user.php:254 include/help_live.php:5
 msgid "Votre newsletter est en cours d'envoi"
 msgstr "Votre newsletter est en cours d'envoi"
 
-#: admin/live.php:226 include/help_live.php:6
+#: admin/live.php:300 admin/live_user.php:255 include/help_live.php:6
 msgid "Terminer"
 msgstr "Terminer"
 
-#: admin/live.php:226 include/help_live.php:6
+#: admin/live.php:300 admin/live_user.php:255 include/help_live.php:6
 msgid "Votre newsletter a ete envoye"
-msgstr "Votre newsletter a ete envoyé"
+msgstr "Votre newsletter a été envoyé"
 
-#: admin/live.php:227 include/help_live.php:7
+#: admin/live.php:301 admin/live_user.php:256 include/help_live.php:7
 msgid "Limite"
 msgstr "Limite"
 
-#: admin/live.php:227 include/help_live.php:7
+#: admin/live.php:301 admin/live_user.php:256 include/help_live.php:7
 msgid ""
 "Vous avez atteint la limite journaliere de votre license , l'envoi reprendra "
 "demain."
 msgstr ""
-"Vous avez atteint la limite journaliere de votre license , l'envoi reprendra "
+"Vous avez atteint la limite journalière de votre licence , l'envoi reprendra "
 "demain."
 
-#: admin/live.php:228 include/help_live.php:8
+#: admin/live.php:302 admin/live_user.php:257 include/help_live.php:8
 msgid "Vous avez mis votre cmapagne en pause"
 msgstr "Vous avez mis votre campagne en pause"
 
-#: admin/live.php:229
+#: admin/live.php:303 admin/live_user.php:258
 msgid "Stop"
 msgstr "Stop"
 
-#: admin/live.php:229 include/help_live.php:9
+#: admin/live.php:303 admin/live_user.php:258 include/help_live.php:9
 msgid "Votre newsletter a ete stoppe"
 msgstr "Votre newsletter à été stoppé"
 
-#: admin/live.php:230
+#: admin/live.php:304 admin/live_user.php:259
 msgid "erreur_flux"
 msgstr "erreur_flux"
 
-#: admin/live.php:230
+#: admin/live.php:304 admin/live_user.php:259
 msgid ""
 "API surement en panne momentanement, le script va faire une nouvelle "
 "tentative dans quelques minutes"
 msgstr ""
-"API surement en panne momentanement, le script va faire une nouvelle "
+"API surement en panne momentanément, le script va faire une nouvelle "
 "tentative dans quelques minutes"
 
-#: admin/live.php:231
+#: admin/live.php:305 admin/live_user.php:260
 msgid "erreur_license"
-msgstr "erreur_license"
+msgstr "erreur_licence"
 
-#: admin/live.php:231
+#: admin/live.php:305 admin/live_user.php:260
 msgid "Probleme avec votre license , contacter le support"
-msgstr "Probleme avec votre license , contacter le support"
+msgstr "Problème avec votre licence , contacter le support"
 
-#: admin/live.php:232
+#: admin/live.php:306 admin/live_user.php:261
 msgid "suite"
 msgstr "suite"
 
-#: admin/live.php:232
+#: admin/live.php:306 admin/live_user.php:261
 msgid "Petite pause avant les 10 000 mails suivant"
-msgstr "Petite pause avant les 10 000 mails suivant"
+msgstr "Petite pause avant les 10 000 mails suivants"
+
+#: admin/live.php:307 admin/live_user.php:262
+msgid "bug"
+msgstr "bug"
+
+#: admin/live.php:307 admin/live.php:308 admin/live_user.php:262
+#: admin/live_user.php:263
+msgid "Probleme avec le serveur smtp"
+msgstr "Problème avec le serveur smtp"
+
+#: admin/live.php:308 admin/live_user.php:263
+msgid "error"
+msgstr "erreur"
+
+#: admin/multi.php:7
+msgid "Information sur votre license"
+msgstr "Information sur votre licence"
 
 #: admin/multi.php:121
 msgid "Parametres Mass Mailing"
-msgstr "Parametres Mass Mailing"
+msgstr "Paramètres Mass Mailing"
 
 #: admin/multi.php:134 admin/multi.php:424
 msgid "SERVEUR SMTP NUMERO"
 msgstr "SERVEUR SMTP NUMERO"
 
-#: admin/multi.php:137 admin/parametres.php:153 admin/variables.php:250
+#: admin/multi.php:137 admin/variables.php:277 admin/variables_user.php:282
 msgid "Serveur"
 msgstr "Serveur"
 
-#: admin/multi.php:141 admin/parametres.php:157 sm_dashboard.php:33
+#: admin/multi.php:141 sm_dashboard.php:50 sm_dashboard_backup.php:32
 msgid "SMTP"
 msgstr "SMTP"
 
-#: admin/multi.php:150 admin/multi.php:436 admin/parametres.php:374
+#: admin/multi.php:150 admin/multi.php:436
 msgid "Nom de l'expediteur (From:)"
-msgstr "Nom de l'expediteur (From:)"
+msgstr "Nom de l'expéditeur (From:)"
 
-#: admin/multi.php:155 admin/parametres.php:165 admin/parametres.php:391
+#: admin/multi.php:155 admin/setting.php:233 admin/setting.php:468
 msgid "Port"
 msgstr "Port"
 
-#: admin/multi.php:159 admin/parametres.php:395
+#: admin/multi.php:159 admin/setting.php:237 admin/setting.php:472
 msgid "Avec ou sans authentification par mot de passe"
 msgstr "Avec ou sans authentification par mot de passe"
 
@@ -1377,126 +1577,110 @@ msgid "avec authentification"
 msgstr "avec authentification"
 
 #: admin/multi.php:166 admin/multi.php:174 admin/multi.php:451
-#: admin/multi.php:458 admin/parametres.php:402 admin/parametres.php:410
+#: admin/multi.php:458 admin/setting.php:244 admin/setting.php:252
+#: admin/setting.php:479 admin/setting.php:487
 msgid "pas d'authentification"
 msgstr "pas d'authentification"
-
-#: admin/multi.php:180 include/license.php:43
-msgid "Login"
-msgstr "Login"
 
 #: admin/multi.php:184
 msgid "Pass"
 msgstr "Pass"
 
-#: admin/multi.php:192 admin/parametres.php:173
+#: admin/multi.php:192
 msgid "Email NPAI"
 msgstr "Email NPAI"
 
-#: admin/multi.php:196 admin/parametres.php:177 admin/parametres.php:423
+#: admin/multi.php:196 admin/setting.php:271
 msgid "Serveur NPAI"
 msgstr "Serveur NPAI"
 
-#: admin/multi.php:200 admin/parametres.php:181 admin/parametres.php:427
+#: admin/multi.php:200 admin/setting.php:275
 msgid "Port NPAI"
 msgstr "Port NPAI"
 
-#: admin/multi.php:204 admin/parametres.php:185 admin/parametres.php:431
+#: admin/multi.php:204 admin/setting.php:279
 msgid "Login NPAI"
 msgstr "Login NPAI"
 
-#: admin/multi.php:208 admin/parametres.php:189 admin/parametres.php:435
+#: admin/multi.php:208 admin/setting.php:283
 msgid "Pass NPAI"
 msgstr "Pass NPAI"
 
-#: admin/multi.php:212 admin/parametres.php:193
+#: admin/multi.php:212
 msgid "Version du serveur"
 msgstr "Version du serveur"
 
-#: admin/multi.php:244 admin/multi.php:516 admin/parametres.php:206
-#: admin/parametres.php:439
+#: admin/multi.php:244 admin/multi.php:516 admin/setting.php:299
 msgid "Texte en Haut de la newsletter"
 msgstr "Texte en Haut de la newsletter"
 
-#: admin/multi.php:249 admin/multi.php:521 admin/parametres.php:211
+#: admin/multi.php:249 admin/multi.php:521 admin/setting.php:304
 msgid "Utiliser texte en haut"
 msgstr "Utiliser texte en haut"
 
-#: admin/multi.php:259 admin/multi.php:531 admin/parametres.php:221
-#: admin/parametres.php:463
+#: admin/multi.php:259 admin/multi.php:531 admin/setting.php:314
 msgid "Lien desabonnement"
-msgstr "Lien desabonnement"
+msgstr "Lien désabonnement"
 
-#: admin/multi.php:264 admin/multi.php:536 admin/parametres.php:226
+#: admin/multi.php:264 admin/multi.php:536 admin/setting.php:319
 msgid "Utiliser texte de desabonnement"
-msgstr "Utiliser texte de desabonnement"
+msgstr "Utiliser texte de désabonnement"
 
-#: admin/multi.php:274 admin/multi.php:546 admin/parametres.php:236
-#: admin/parametres.php:487
+#: admin/multi.php:274 admin/multi.php:546 admin/setting.php:329
 msgid "Texte Affiliation (voir les commissions dans l'aide)"
 msgstr "Texte Affiliation (voir les commissions dans l'aide)"
 
-#: admin/multi.php:279 admin/multi.php:551 admin/parametres.php:241
+#: admin/multi.php:279 admin/multi.php:551 admin/setting.php:334
 msgid "Utiliser texte en pour notre affiliation"
-msgstr "Utiliser texte en pour notre affiliation"
+msgstr "Utiliser texte pour notre affiliation"
 
-#: admin/multi.php:289 admin/multi.php:561 admin/parametres.php:251
-#: admin/parametres.php:511
+#: admin/multi.php:289 admin/multi.php:561 admin/setting.php:344
 msgid "Texte sur le bouton de desinscription"
-msgstr "Texte sur le bouton de desinscription"
+msgstr "Texte sur le bouton de désinscription"
 
-#: admin/multi.php:294 admin/multi.php:566 admin/parametres.php:256
-#: admin/parametres.php:516
+#: admin/multi.php:294 admin/multi.php:566 admin/setting.php:349
 msgid "Texte de la page de desinscription"
-msgstr "Texte de la page de desinscription"
+msgstr "Texte de la page de désinscription"
 
-#: admin/multi.php:299 admin/multi.php:571 admin/parametres.php:261
-#: admin/parametres.php:521
+#: admin/multi.php:299 admin/multi.php:571 admin/setting.php:354
 msgid "Texte de la page de confirmation"
 msgstr "Texte de la page de confirmation"
 
-#: admin/multi.php:304 admin/multi.php:576 admin/parametres.php:266
-#: admin/parametres.php:526
+#: admin/multi.php:304 admin/multi.php:576 admin/setting.php:359
 msgid "Titre de la page de desinscription"
-msgstr "Titre de la page de desinscription"
+msgstr "Titre de la page de désinscription"
 
-#: admin/multi.php:309 admin/multi.php:581 admin/parametres.php:271
-#: admin/parametres.php:531
+#: admin/multi.php:309 admin/multi.php:581 admin/setting.php:364
 msgid "Charset (exemple : ISO-8859-15  ou UTF-8)"
 msgstr "Charset (exemple : ISO-8859-15  ou UTF-8)"
 
-#: admin/multi.php:315 admin/multi.php:587 admin/parametres.php:277
-#: admin/parametres.php:552
+#: admin/multi.php:315 admin/multi.php:587 admin/setting.php:370
 msgid "Envoi automatique des nouveaux posts et nouvelles pages"
 msgstr "Envoi automatique des nouveaux posts et nouvelles pages"
 
-#: admin/multi.php:333 admin/multi.php:605 admin/parametres.php:287
-#: admin/parametres.php:570
+#: admin/multi.php:333 admin/multi.php:605 admin/setting.php:380
 msgid "Liste de destinataires pour les envois automatiques"
 msgstr "Liste de destinataires pour les envois automatiques"
 
-#: admin/multi.php:348 admin/multi.php:620 admin/parametres.php:302
-#: admin/parametres.php:585
+#: admin/multi.php:348 admin/multi.php:620 admin/setting.php:395
 msgid "Temps de pause entre chaque envoi automatique"
 msgstr "Temps de pause entre chaque envoi automatique"
 
-#: admin/multi.php:354 admin/multi.php:626 admin/parametres.php:308
-#: admin/parametres.php:537
+#: admin/multi.php:354 admin/multi.php:626 admin/setting.php:401
 msgid "Template pour l'envoi du lien des nouvelles pages et nouveaux posts"
 msgstr "Template pour l'envoi du lien des nouvelles pages et nouveaux posts"
 
-#: admin/multi.php:369 admin/multi.php:641 admin/parametres.php:323
-#: admin/parametres.php:591
+#: admin/multi.php:369 admin/multi.php:641 admin/setting.php:416
 msgid "Possibilite de mettre les campagnes en pause (consomme plus de memoire)"
 msgstr ""
-"Possibilite de mettre les campagnes en pause (consomme plus de memoire)"
+"Possibilité de mettre les campagnes en pause (consomme plus de mémoire)"
 
-#: admin/multi.php:387 admin/parametres.php:609
+#: admin/multi.php:387 e-mailing-service.php:80
 msgid "Debug"
 msgstr "Debug"
 
-#: admin/multi.php:406 admin/multi.php:678 admin/parametres.php:354
-#: admin/parametres.php:628 admin/variables.php:83
+#: admin/multi.php:406 admin/multi.php:678 admin/setting.php:506
+#: admin/variables.php:110 admin/variables_user.php:156
 msgid "valider la configuration"
 msgstr "valider la configuration"
 
@@ -1504,21 +1688,29 @@ msgstr "valider la configuration"
 msgid "seconde"
 msgstr "seconde"
 
-#: admin/npai.php:6
+#: admin/npai.php:19 e-mailing-service.php:72
+msgid "NPAI"
+msgstr "NPAI"
+
+#: admin/npai.php:26
+msgid "Email retour indiquant d'eventuel probleme de delivrabilite"
+msgstr "Email retour indiquant d'éventuel problème de délivrabilité"
+
+#: admin/npai.php:33
 msgid ""
 "Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces"
 msgstr ""
-"Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces"
+"Vous n'avez pas souscrit à l'option qui vous permet de récupérer les bounces"
 
-#: admin/npai.php:15
+#: admin/npai.php:42
 msgid "Liste des reponses sur vos envois (NPAI)"
 msgstr "Liste des réponses sur vos envois (NPAI)"
 
-#: admin/npai.php:16
+#: admin/npai.php:43
 msgid "Liste des NPAI"
 msgstr "Liste des NPAI"
 
-#: admin/npai.php:18
+#: admin/npai.php:45
 msgid ""
 "Reponse des FAI sur vos envois (une seule reponse par fai) , pour plus de "
 "visabilite par fai"
@@ -1526,11 +1718,11 @@ msgstr ""
 "Réponse des FAI sur vos envois (une seule réponse par fai) , pour plus de "
 "visabilité par fai"
 
-#: admin/npai.php:19
+#: admin/npai.php:46
 msgid "Reponses FAI"
-msgstr "Reponses FAI"
+msgstr "Réponses FAI"
 
-#: admin/npai.php:21
+#: admin/npai.php:48
 msgid ""
 "Liste detaille des hard bounces (emails invalides) inscrit par l'API sur vos "
 "envois"
@@ -1538,198 +1730,136 @@ msgstr ""
 "Liste detaillé des hard bounces (emails invalides) inscrit par l'API sur vos "
 "envois"
 
-#: admin/npai.php:22
+#: admin/npai.php:49
 msgid "Hard Bounces "
 msgstr "Hard Bounces "
 
-#: admin/npai.php:24
+#: admin/npai.php:51
 msgid ""
 "Une tache planifie effectue deja cette tache , mais si vous voulez verifier "
 "que l'Api a mis a jour vos  bounces, vous pouvez l'appeler manuellement"
 msgstr ""
-"Une tache planifié éffectue deja cette tache , mais si vous voulez verifier "
-"que l'Api à mis a jour vos  bounces, vous pouvez l'appeler manuellement"
+"Une tache planifiée effectue déjà cette tache , mais si vous voulez vérifier "
+"que l'Api a mis à jour vos  bounces, vous pouvez l'appeler manuellement"
 
-#: admin/npai.php:25
+#: admin/npai.php:52
 msgid "Importer NPAI"
 msgstr "Importer NPAI"
 
-#: admin/npai.php:27
+#: admin/npai.php:54
 msgid ""
 "Une tache planifie effectue deja cette tache , mais si vous voulez verifier "
 "ou avez besoin de debuger , vous pouvez le declancher manuellement"
 msgstr ""
-"Une tache planifié effectue deja cette tache , mais si vous voulez verifier "
-"ou avez besoin de debuger , vous pouvez le declancher manuellement"
+"Une tache planifie effectue déjà cette tache , mais si vous voulez vérifier "
+"ou avez besoin de débuger , vous pouvez le déclencher manuellement"
 
-#: admin/npai.php:28
+#: admin/npai.php:55
 msgid "Retirer des listes les Hard bounces non traites"
 msgstr "Retirer des listes les Hard bounces non traités"
 
-#: admin/npai.php:30
+#: admin/npai.php:57
 msgid ""
 "Attention , suivant le nombre de Hard bounces que vous avez dans la table "
 "mysql, cela peu ralentir votre serveur le temps du traitements.Ce lien est "
 "interessant si vous avez importer des nouvelles listes d'emails "
 msgstr ""
 "Attention , suivant le nombre de Hard bounces que vous avez dans la table "
-"mysql, cela peu ralentir votre serveur le temps du traitement.Ce lien est "
-"interessant si vous avez importer des nouvelles listes d'emails "
+"mysql, cela peut ralentir votre serveur le temps du traitements.Ce lien est "
+"intéressant si vous avez importer des nouvelles listes d'emails "
 
-#: admin/npai.php:31
+#: admin/npai.php:58
 msgid "Verifier les Hard bounces deja traites"
-msgstr "Verifier les Hard bounces deja traités"
+msgstr "Vérifier les Hard bounces déjà traités"
 
-#: admin/npai.php:66
+#: admin/npai.php:93
 msgid "Retirer des listes"
 msgstr "Retirer des listes"
 
-#: admin/npai.php:111 admin/npai.php:201
+#: admin/npai.php:138 admin/npai.php:229
 msgid "License NPAI"
 msgstr "License NPAI"
 
-#: admin/npai.php:112
+#: admin/npai.php:139
 msgid "FAI"
 msgstr "FAI"
 
-#: admin/npai.php:114 admin/npai.php:203
+#: admin/npai.php:141 admin/npai.php:231
 msgid "Date email"
 msgstr "Date email"
 
-#: admin/npai.php:115 admin/npai.php:204
+#: admin/npai.php:142 admin/npai.php:232
 msgid "Categorie"
-msgstr "Categorie"
+msgstr "Catégorie"
 
-#: admin/npai.php:118
+#: admin/npai.php:145
 msgid "Lire le mail"
 msgstr "Lire le mail"
 
-#: admin/npai.php:189
+#: admin/npai.php:217
 msgid "Les NPAI ont bien ete supprimes"
-msgstr "Les NPAI ont bien ete supprimes"
+msgstr "Les NPAI ont bien été supprimés"
 
-#: admin/npai.php:195
+#: admin/npai.php:223
 msgid "Vider les bounces"
 msgstr "Vider les bounces"
 
-#: admin/parametres.php:16
-msgid "Informations"
-msgstr "Informations"
-
-#: admin/parametres.php:46
-msgid "Parametres E-mailing Service"
-msgstr "Parametres E-mailing Service"
-
-#: admin/parametres.php:122
-msgid ""
-"Vous disposez d'une license de Mass Mailing, pour configurer vos serveurs , "
-"rendez vous sur la page"
-msgstr ""
-"Vous disposez d'une license de Mass Mailing, pour configurer vos serveurs , "
-"rendez vous sur la page"
-
-#: admin/parametres.php:123 admin/parametres.php:127 e-mailing-service.php:46
-#: tuto/h_config.php:34
-msgid "Mass Mailing"
-msgstr "Mass Mailing"
-
-#: admin/parametres.php:126
-msgid ""
-"Vous disposez d'une license pour l'API Mass Mailing, pour configurer vos "
-"serveurs , rendez vous sur la page"
-msgstr ""
-"Vous disposez d'une license pour l'API Mass Mailing, pour configurer vos "
-"serveurs , rendez vous sur la page"
-
-#: admin/parametres.php:132
-msgid "Parametre manuel"
-msgstr "Parametre manuel"
-
-#: admin/parametres.php:149 admin/parametres.php:370 include/license.php:44
-msgid "License"
-msgstr "License"
-
-#: admin/parametres.php:169
-msgid "Avec authentification"
-msgstr "Avec authentification"
-
-#: admin/parametres.php:197
-msgid "Nom de l'expediteur"
-msgstr "Nom de l'expediteur"
-
-#: admin/parametres.php:202 admin/parametres.php:379
-msgid "Email de l'expediteur"
-msgstr "Email de l'expediteur"
-
-#: admin/parametres.php:360
-msgid "Parametres Automatiques"
-msgstr "Parametres Automatiques"
-
-#: admin/parametres.php:383
-msgid "Email reponse"
-msgstr "Email reponse"
-
-#: admin/parametres.php:387
-msgid "SMTP SERVER"
-msgstr "SMTP SERVER"
-
-#: admin/parametres.php:399
-msgid "avec authentification ?"
-msgstr "avec authentification ?"
-
-#: admin/parametres.php:407
-msgid "avec authentification?"
-msgstr "avec authentification?"
-
-#: admin/parametres.php:415
-msgid "Si avec authentification precisez le login"
-msgstr "Si avec authentification precisez le login"
-
-#: admin/parametres.php:419
-msgid "Si avec authentification precisez le mot de passe"
-msgstr "Si avec authentification precisez le mot de passe"
-
-#: admin/parametres.php:444
-msgid "Afficher le texte en haut"
-msgstr "Afficher le texte en haut"
-
-#: admin/parametres.php:468
-msgid "Afficher le texte de desabonnement"
-msgstr "Afficher le texte de desabonnement"
-
-#: admin/parametres.php:492
-msgid "Afficher le lien de notre affiliation"
-msgstr "Afficher le lien de notre affiliation"
-
-#: admin/send.php:19 admin/send.php:37 admin/send.php:56 admin/send.php:74
-msgid "Votre mailing va bientot demarrer"
-msgstr "Votre mailing va bientot demarrer"
-
-#: admin/send.php:79
+#: admin/send.php:19 admin/send.php:77 admin/send_user.php:19
+#: admin/send_user.php:255
 msgid "Envoyer votre newsletter"
 msgstr "Envoyer votre newsletter"
 
-#: admin/send.php:80
+#: admin/send.php:26 admin/send_user.php:26
+msgid "Programmer l'heure et la date d'envoi de votre newsletter"
+msgstr "Programmer l'heure et la date d'envoi de votre newsletter"
+
+#: admin/send.php:54 admin/send.php:72 admin/send_user.php:155
+#: admin/send_user.php:176 admin/send_user.php:194
+msgid "Votre mailing va bientot demarrer"
+msgstr "Votre mailing va bientôt démarrer"
+
+#: admin/send.php:78 admin/send_user.php:267
 msgid ""
 "Votre newsletter partira quelques minutes apres la validation du formulaire "
 "si vous ne changer pas la date et l'heure d'envoi"
 msgstr ""
-"Votre newsletter partira quelques minutes apres la validation du formulaire "
+"Votre newsletter partira quelques minutes après la validation du formulaire "
 "si vous ne changer pas la date et l'heure d'envoi"
 
-#: admin/send.php:86 admin/send.php:132 admin/send.php:177 admin/send.php:227
+#: admin/send.php:84 admin/send.php:144 admin/send_user.php:206
+#: admin/send_user.php:273
 msgid "Choisir une liste"
 msgstr "Choisir une liste"
 
-#: admin/send.php:87 admin/send.php:133 admin/send.php:178 admin/send.php:228
+#: admin/send.php:95 admin/send_user.php:284
+msgid "location"
+msgstr "Emplacement"
+
+#: admin/send.php:95 admin/send_user.php:258 admin/send_user.php:260
+#: admin/send_user.php:284
+msgid "credit"
+msgstr "crédit"
+
+#: admin/send.php:100 admin/send.php:154 admin/send_user.php:216
+#: admin/send_user.php:289
 msgid "Choisir une campagne"
 msgstr "Choisir une campagne"
 
-#: admin/send.php:88 admin/send.php:134 admin/send.php:180 admin/send.php:230
+#: admin/send.php:112 admin/send.php:163 admin/send_user.php:225
+#: admin/send_user.php:302
 msgid "Choisir la date"
 msgstr "Choisir la date"
 
-#: admin/send.php:89 admin/send.php:135 admin/send.php:181 admin/send.php:231
+#: admin/send.php:113 admin/send_user.php:303
+msgid "From Name"
+msgstr "Au nom de"
+
+#: admin/send.php:115 admin/send_user.php:305
+msgid "Reply TO"
+msgstr "Répondre au"
+
+#: admin/send.php:117 admin/send.php:167 admin/send_user.php:229
+#: admin/send_user.php:307
 msgid ""
 "exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = "
 "8 460 mails par jours )"
@@ -1737,97 +1867,244 @@ msgstr ""
 "exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = "
 "8 460 mails par jours )"
 
-#: admin/send.php:89 admin/send.php:135 admin/send.php:181 admin/send.php:231
+#: admin/send.php:117 admin/send.php:167 admin/send_user.php:229
+#: admin/send_user.php:307
 msgid "Temps de pause"
 msgstr "Temps de pause"
 
-#: admin/send.php:90 admin/send.php:136 admin/send.php:182 admin/send.php:232
+#: admin/send.php:119 admin/send.php:171 admin/send_user.php:233
+#: admin/send_user.php:309
 msgid ""
 "Permet de suivre vos liens dans les statistiques pour separer vos theme par "
 "exemple rencontre, commerce, ..."
 msgstr ""
-"Permet de suivre vos liens dans les statistiques pour separer vos theme par "
+"Permet de suivre vos liens dans les statistiques pour séparer vos thèmes par "
 "exemple rencontre, commerce, ..."
 
-#: admin/send.php:90 admin/send.php:136 admin/send.php:182 admin/send.php:232
+#: admin/send.php:119 admin/send.php:171 admin/send_user.php:233
+#: admin/send_user.php:309 admin/stats_user.php:388 admin/stats_user.php:563
+#: admin/stats_user.php:719 admin/stats_user.php:889
 msgid "Tracking 1"
 msgstr "Tracking 1"
 
-#: admin/send.php:91 admin/send.php:137 admin/send.php:183 admin/send.php:233
+#: admin/send.php:122 admin/send.php:175 admin/send.php:179
+#: admin/send_user.php:237 admin/send_user.php:241 admin/send_user.php:312
 msgid ""
 "Permet de suivre vos liens dans les statistiques pour separer vos clients ou "
 "autres)"
 msgstr ""
-"Permet de suivre vos liens dans les statistiques pour separer vos clients ou "
+"Permet de suivre vos liens dans les statistiques pour séparer vos clients ou "
 "autres)"
 
-#: admin/send.php:91 admin/send.php:137 admin/send.php:183 admin/send.php:233
+#: admin/send.php:122 admin/send.php:175 admin/send.php:179
+#: admin/send_user.php:237 admin/send_user.php:241 admin/send_user.php:312
+#: admin/stats_user.php:389 admin/stats_user.php:564 admin/stats_user.php:720
+#: admin/stats_user.php:890
 msgid "Tracking 2"
 msgstr "Tracking 2"
 
-#: admin/send.php:125
-msgid "Envoyer le lien d'un article ou d'un page"
-msgstr "Envoyer le lien d'un article ou d'un page"
+#: admin/send.php:125 admin/send_user.php:315
+msgid "Format"
+msgstr "Format"
 
-#: admin/send.php:126
-msgid ""
-"Si vous avez coche dans les parametres l'envoi automatiques des nouveaux "
-"articles , vous n'avez pas besoin de vous servir de ce menu"
-msgstr ""
-"Si vous avez coche dans les parametres l'envoi automatiques des nouveaux "
-"articles , vous n'avez pas besoin de vous servir de ce menu"
+#: admin/send.php:130 admin/send_user.php:320
+msgid "Piece jointe"
+msgstr "Pièce jointe"
 
-#: admin/send.php:171
-msgid "Envoyer la newsletter avec un serveur au choix"
-msgstr "Envoyer la newsletter avec un serveur au choix"
-
-#: admin/send.php:179 admin/send.php:229
-msgid "Choisir un serveur"
-msgstr "Choisir un serveur"
-
-#: admin/send.php:221
+#: admin/send.php:140 admin/send_user.php:202
 msgid "Envoyer un article ou une page avec un serveur au choix"
 msgstr "Envoyer un article ou une page avec un serveur au choix"
 
-#: admin/stats.php:24 e-mailing-service.php:56 tuto/h_stats.php:2
+#: admin/send_user.php:88
+msgid ""
+"Vous etes arrive au bout de votre quota , vous ne pouvez plus envoyer avant "
+"le mois suivant"
+msgstr ""
+"Vous êtes arrivé au bout de votre quota , vous ne pouvez plus envoyer avant "
+"le mois suivant"
+
+#: admin/send_user.php:88 admin/send_user.php:99
+msgid "credits necessaires"
+msgstr "crédits nécessaires"
+
+#: admin/send_user.php:99 admin/send_user.php:262
+msgid ""
+"Votre solde de credit n'est pas suffisant pour envoyer un mailing, vous "
+"devez crediter votre compte"
+msgstr ""
+"Votre solde de crédit n'est pas suffisant pour envoyer un mailing, vous "
+"devez créditer votre compte"
+
+#: admin/send_user.php:112
+msgid "Probleme avec la piece jointe contacter le support"
+msgstr "Problème avec la pièce jointe contacter le support"
+
+#: admin/send_user.php:143
+msgid "solde"
+msgstr "Solde"
+
+#: admin/send_user.php:144
+msgid "Debit campagne numero"
+msgstr "Débit campagne numéro"
+
+#: admin/send_user.php:258
+msgid "mail envoyes avec vos listes"
+msgstr "mails envoyés avec vos listes"
+
+#: admin/setting.php:19
+msgid "Configuration du plugin"
+msgstr "Configuration du plugin"
+
+#: admin/setting.php:26
+msgid "Vous devez disposer d'un serveur SMTP pour utiliser le plugin"
+msgstr "Vous devez disposer d'un serveur SMTP pour utiliser le plugin"
+
+#: admin/setting.php:40
+msgid "Parametres E-mailing Service"
+msgstr "Paramètres E-mailing Service"
+
+#: admin/setting.php:184
+msgid "Parametre manuel"
+msgstr "Paramètre manuel"
+
+#: admin/setting.php:192
+msgid "Information"
+msgstr "Information"
+
+#: admin/setting.php:193 admin/setting.php:218
+msgid "SMTP setting"
+msgstr "Paramètre SMTP"
+
+#: admin/setting.php:194
+msgid "POP3 Setting"
+msgstr "Paramètre POP3 "
+
+#: admin/setting.php:195
+msgid "General Setting"
+msgstr "Paramètres Généraux"
+
+#: admin/setting.php:196 admin/setting.php:449
+msgid "SMTP setting for alert"
+msgstr "SMTP paramètre pour alerte"
+
+#: admin/setting.php:200
+msgid "Configuration Wordress"
+msgstr "Configuration Wordress"
+
+#: admin/setting.php:202
+msgid "Plugin Version"
+msgstr "Plugin Version"
+
+#: admin/setting.php:203
+msgid "Serveur OS"
+msgstr "Serveur OS"
+
+#: admin/setting.php:204
+msgid "Plugin fonctionne avec PHP Version: 5.0+"
+msgstr "Plugin fonctionne avec PHP Version: 5.0+"
+
+#: admin/setting.php:205
+msgid "Votre version de PHP"
+msgstr "Votre version de PHP"
+
+#: admin/setting.php:206
+msgid "Memoire utilise"
+msgstr "Memoire utilisé"
+
+#: admin/setting.php:207
+msgid "Pic utilisation de la memoire"
+msgstr "Pic utilisation de la memoire"
+
+#: admin/setting.php:209
+msgid "Serveur Charge moyenne"
+msgstr "Serveur Charge moyenne"
+
+#: admin/setting.php:221 admin/setting.php:456
+msgid "Email de l'expediteur"
+msgstr "Email de l'expéditeur"
+
+#: admin/setting.php:225 admin/setting.php:460
+msgid "Email reponse"
+msgstr "Email réponse"
+
+#: admin/setting.php:229 admin/setting.php:464
+msgid "SMTP SERVER"
+msgstr "SMTP SERVER"
+
+#: admin/setting.php:241 admin/setting.php:476
+msgid "avec authentification ?"
+msgstr "avec authentification ?"
+
+#: admin/setting.php:249 admin/setting.php:484
+msgid "avec authentification?"
+msgstr "avec authentification?"
+
+#: admin/setting.php:257 admin/setting.php:492
+msgid "Si avec authentification precisez le login"
+msgstr "Si avec authentification précisez le login"
+
+#: admin/setting.php:261 admin/setting.php:496
+msgid "Si avec authentification precisez le mot de passe"
+msgstr "Si avec authentification précisez le mot de passe"
+
+#: admin/setting.php:268
+msgid "POP3 setting"
+msgstr "Paramètres API"
+
+#: admin/setting.php:290
+msgid "User setting"
+msgstr "Paramètres utilisés"
+
+#: admin/setting.php:293
+msgid "Nom de l'expediteur"
+msgstr "Nom de l'expediteur"
+
+#: admin/setting.php:452
+msgid "From"
+msgstr "De"
+
+#: admin/stats.php:24 admin/stats_user.php:37 admin/stats_user.php:55
+#: e-mailing-service.php:64 e-mailing-service.php:106 tuto/h_stats.php:2
 msgid "Statistiques"
 msgstr "Statistiques"
 
-#: admin/stats.php:25 tuto/h_stats.php:4
+#: admin/stats.php:25 admin/stats_user.php:56 tuto/h_stats.php:4
 msgid ""
 "Nous ne pouvons pas fournir de statistiques detailles si vous nous "
 "fournissez pas l'autorisation d'interagir avec votre site, c'est entierement "
 "gratuit,  pour cela rendez vous dans le menu "
 msgstr ""
-"Nous ne pouvons pas fournir de statistiques detailles si vous nous "
-"fournissez pas l'autorisation d'interagir avec votre site, c'est entierement "
+"Nous ne pouvons pas fournir de statistiques détaillées si vous ne nous "
+"fournissez pas l'autorisation d'interagir avec votre site, c'est entièrement "
 "gratuit,  pour cela rendez vous dans le menu "
 
-#: admin/stats.php:31 admin/stats.php:157
+#: admin/stats.php:31 admin/stats.php:157 admin/stats_user.php:62
 msgid "Statistiques par Campagne"
 msgstr "Statistiques par Campagne"
 
-#: admin/stats.php:39 admin/stats.php:161
+#: admin/stats.php:39 admin/stats.php:161 admin/stats_user.php:70
 msgid "Statistiques par envoi"
 msgstr "Statistiques par envoi"
 
-#: admin/stats.php:46
+#: admin/stats.php:46 admin/stats_user.php:77
 msgid "Statistiques par liste"
 msgstr "Statistiques par liste"
 
-#: admin/stats.php:78 admin/stats.php:101
+#: admin/stats.php:78 admin/stats.php:101 admin/stats_user.php:12
+#: admin/stats_user.php:31 admin/stats_user.php:110 admin/stats_user.php:133
 msgid "Statistiques par campagne"
 msgstr "Statistiques par campagne"
 
 #: admin/stats.php:149
 msgid "Statistiques Mensuel"
-msgstr "Statistiques Mensuel"
+msgstr "Statistiques Mensuelles"
 
 #: admin/stats.php:153
 msgid "Statistiques detatille du jour"
-msgstr "Statistiques detatille du jour"
+msgstr "Statistiques detatillées du jour"
 
-#: admin/stats_smtp.php:9
+#: admin/stats_smtp.php:9 admin/stats_smtp_user.php:13
+#: admin/stats_user.php:301
 msgid "Statistiques SMTP du serveur"
 msgstr "Statistiques SMTP du serveur"
 
@@ -1839,157 +2116,524 @@ msgstr ""
 "Les statistiques SMTP du serveur sont disponibles seulement avec nos pack "
 "serveur SMTP"
 
-#: admin/support.php:23
-msgid "Votre ticket a bien ete envoye"
-msgstr "Votre ticket a bien ete envoye"
+#: admin/stats_user.php:8
+msgid "Statistiques journalieres"
+msgstr "Statistiques journalières"
 
-#: admin/support.php:38 admin/support.php:69
-msgid "Votre reponse a bien ete envoye"
-msgstr "Votre reponse a bien ete envoye"
+#: admin/stats_user.php:15 admin/stats_user.php:29
+msgid "Statistiques par newsletter"
+msgstr "Statistiques par newsletter"
 
-#: admin/support.php:54
-msgid "Votre question est en ligne"
-msgstr "Votre question est en ligne"
+#: admin/stats_user.php:18 admin/stats_user.php:32 sm_dashboard.php:18
+#: sm_dashboard_backup.php:10
+msgid "Statistiques SMTP"
+msgstr "Statistiques SMTP"
 
-#: admin/support.php:85
+#: admin/stats_user.php:30
+msgid "Statisques par date"
+msgstr "Statisques par date"
+
+#: admin/stats_user.php:33
+msgid "Newsletter Statistics for"
+msgstr "Newsletter Statistiques pour n°"
+
+#: admin/stats_user.php:34
+msgid "Email Campaign Statistics for id"
+msgstr "Email pour campagne de statistique pour id"
+
+#: admin/stats_user.php:35
+msgid "Log in live"
+msgstr "Log en direct"
+
+#: admin/stats_user.php:49
 msgid ""
-"Votre demande est en ligne, il faut maintenant obtenir suffisement de vote, "
-"pour que nous devellopions votre demande"
+"Le temps d'actualisation des statistiques peut etre plus ou moin decale, "
+"sauf pour les statistiques en direct"
 msgstr ""
-"Votre demande est en ligne, il faut maintenant obtenir suffisement de vote, "
-"pour que nous devellopions votre demande"
+"Le temps d'actualisation des statistiques peut être plus ou moins décalé, "
+"sauf pour les statistiques en direct"
 
-#: admin/support.php:100
-msgid "Merci d'avoir vote"
-msgstr "Merci d'avoir vote"
+#: admin/stats_user.php:260
+msgid "Statistiques de l'envoi numero"
+msgstr "Statistiques de l'envoi numéro"
 
-#: admin/support.php:105 e-mailing-service.php:64
-msgid "Support"
-msgstr "Support"
+#: admin/stats_user.php:261
+msgid "Statistiques de depart"
+msgstr "Statistiques de départ"
 
-#: admin/support.php:111 sm_dashboard.php:12 sm_dashboard.php:18
+#: admin/stats_user.php:262
+msgid "Statistiques de fin"
+msgstr "Statistiques de fin"
+
+#: admin/stats_user.php:263 e-mailing-service.php:95
+msgid "Destinataires"
+msgstr "Destinataires"
+
+#: admin/stats_user.php:264 admin/stats_user.php:1134
+msgid "Ouverture"
+msgstr "Ouverture"
+
+#: admin/stats_user.php:265
+msgid "Clics"
+msgstr "Clics"
+
+#: admin/stats_user.php:273
+msgid "Clic sur vos liens"
+msgstr "Clics sur vos liens"
+
+#: admin/stats_user.php:276
+msgid "Liens"
+msgstr "Liens"
+
+#: admin/stats_user.php:277
+msgid "Nombres de Clics"
+msgstr "Nombres de Clics"
+
+#: admin/stats_user.php:318 admin/stats_user.php:648
+msgid "Statistiques snapshot"
+msgstr "Statistiques snapshot"
+
+#: admin/stats_user.php:319 admin/stats_user.php:649
+msgid "Open Statistics"
+msgstr "Statistiques"
+
+#: admin/stats_user.php:320 admin/stats_user.php:650
+msgid "Link Statistics"
+msgstr "Lien statistiques"
+
+#: admin/stats_user.php:321 admin/stats_user.php:651
+msgid "Bounces statistics"
+msgstr "Bounces statistiques"
+
+#: admin/stats_user.php:322 admin/stats_user.php:652
+msgid "Unsuscribe Statistics"
+msgstr "statistiques de désinscription"
+
+#: admin/stats_user.php:326 admin/stats_user.php:656
+msgid "Snapshot statistics"
+msgstr "Statistiques générales"
+
+#: admin/stats_user.php:339 admin/stats_user.php:371 admin/stats_user.php:439
+#: admin/stats_user.php:511 admin/stats_user.php:554
+#: e-mailing-service.php:2043
+msgid "View online"
+msgstr "Vue en directe"
+
+#: admin/stats_user.php:340 admin/stats_user.php:372 admin/stats_user.php:440
+#: admin/stats_user.php:512 admin/stats_user.php:555 admin/stats_user.php:661
+#: admin/stats_user.php:699 admin/stats_user.php:772 admin/stats_user.php:837
+#: admin/stats_user.php:879
+msgid "Sent To"
+msgstr "envoyé à"
+
+#: admin/stats_user.php:341 admin/stats_user.php:373 admin/stats_user.php:441
+#: admin/stats_user.php:666 admin/stats_user.php:703 admin/stats_user.php:776
+msgid "Opened"
+msgstr "ouverte"
+
+#: admin/stats_user.php:342 admin/stats_user.php:374 admin/stats_user.php:442
+#: admin/stats_user.php:667 admin/stats_user.php:704 admin/stats_user.php:777
+msgid "Open Rate"
+msgstr "taux d'ouverture"
+
+#: admin/stats_user.php:343 admin/stats_user.php:375 admin/stats_user.php:443
+#: admin/stats_user.php:668 admin/stats_user.php:705 admin/stats_user.php:778
+msgid "Click link"
+msgstr "Cliquer sur le lien"
+
+#: admin/stats_user.php:344 admin/stats_user.php:376 admin/stats_user.php:444
+#: admin/stats_user.php:669 admin/stats_user.php:706 admin/stats_user.php:779
+msgid "Click-through Rate"
+msgstr "taux de clics"
+
+#: admin/stats_user.php:345 admin/stats_user.php:377 admin/stats_user.php:445
+#: admin/stats_user.php:670 admin/stats_user.php:707 admin/stats_user.php:780
+msgid "Click online"
+msgstr "Clic en direct"
+
+#: admin/stats_user.php:346 admin/stats_user.php:378 admin/stats_user.php:446
+#: admin/stats_user.php:671 admin/stats_user.php:708 admin/stats_user.php:781
+msgid "Click affiliate link"
+msgstr "Clic sur lien affilié"
+
+#: admin/stats_user.php:347 admin/stats_user.php:379 admin/stats_user.php:447
+#: admin/stats_user.php:672 admin/stats_user.php:709 admin/stats_user.php:782
+#: e-mailing-service.php:2042
+msgid "Unsuscribe"
+msgstr "S\"abonner"
+
+#: admin/stats_user.php:348 admin/stats_user.php:380 admin/stats_user.php:448
+#: admin/stats_user.php:673 admin/stats_user.php:710 admin/stats_user.php:783
+msgid "Bounced"
+msgstr "Bounced"
+
+#: admin/stats_user.php:359 admin/stats_user.php:683
+msgid "Open statistics"
+msgstr "ouvrir statistiques"
+
+#: admin/stats_user.php:387 admin/stats_user.php:562 admin/stats_user.php:718
+#: admin/stats_user.php:888
+msgid "Date opened"
+msgstr "Date d'ouverture"
+
+#: admin/stats_user.php:426 admin/stats_user.php:757
+msgid "Link statistics"
+msgstr "lien des statistiques"
+
+#: admin/stats_user.php:454 admin/stats_user.php:791
+msgid "Date clicked"
+msgstr "Date du clic"
+
+#: admin/stats_user.php:455 admin/stats_user.php:792
+msgid "Link"
+msgstr "Lien"
+
+#: admin/stats_user.php:488 admin/stats_user.php:825
+msgid "Bounced statistics"
+msgstr "évolution des statistiques"
+
+#: admin/stats_user.php:513 admin/stats_user.php:838
+msgid "Total Hard bounce"
+msgstr "Total  bounce en dur"
+
+#: admin/stats_user.php:514 admin/stats_user.php:839
+msgid "Hard bounce Rate"
+msgstr "taux d'évolution"
+
+#: admin/stats_user.php:515 admin/stats_user.php:840
+msgid "Total Soft bounce"
+msgstr "courbe des évolutions"
+
+#: admin/stats_user.php:516 admin/stats_user.php:841
+msgid "Soft bounce Rate"
+msgstr "taux des évolutions"
+
+#: admin/stats_user.php:522 admin/stats_user.php:849
+msgid "ID Campaign"
+msgstr "Campagne"
+
+#: admin/stats_user.php:524 admin/stats_user.php:851
+msgid "Date bounced"
+msgstr "Date du bounce"
+
+#: admin/stats_user.php:551 admin/stats_user.php:876
+msgid "Unsubscribe statistics"
+msgstr " statistiques des désinscriptions"
+
+#: admin/stats_user.php:556 admin/stats_user.php:880
+msgid "Click Unsubscribe"
+msgstr "Désabonner"
+
+#: admin/stats_user.php:618
+msgid "you do not have access to these statistics"
+msgstr "vous n'avez pas accès à ces statistiques"
+
+#: admin/stats_user.php:659 admin/stats_user.php:697 admin/stats_user.php:770
+msgid "Newsletter subject"
+msgstr "Sujet de la Newsletter"
+
+#: admin/stats_user.php:660 admin/stats_user.php:698 admin/stats_user.php:771
+#: e-mailing-service.php:55
+msgid "Contact list"
+msgstr "Votre liste de contacte"
+
+#: admin/stats_user.php:662 admin/stats_user.php:700 admin/stats_user.php:773
+msgid "Date send"
+msgstr "Date d'envoi"
+
+#: admin/stats_user.php:663 admin/stats_user.php:701 admin/stats_user.php:774
+msgid "Date start"
+msgstr "Date de démarrage"
+
+#: admin/stats_user.php:664 admin/stats_user.php:702 admin/stats_user.php:775
+msgid "Date finish"
+msgstr "Date de fin"
+
+#: admin/stats_user.php:665
+msgid "Number send"
+msgstr "nombre d'envois"
+
+#: admin/stats_user.php:933
+msgid "Campaign ID"
+msgstr "Campagne"
+
+#: admin/stats_user.php:935
+msgid "Message-ID"
+msgstr "Message"
+
+#: admin/stats_user.php:1007
+msgid "Mois"
+msgstr "Mois"
+
+#: admin/stats_user.php:1025
+msgid "Annee"
+msgstr "Année"
+
+#: admin/stats_user.php:1037
+msgid "Tous les serveurs"
+msgstr "Tous les serveurs"
+
+#: admin/stats_user.php:1052
+msgid "Tous les fournisseurs"
+msgstr "Tous les fournisseurs"
+
+#: admin/stats_user.php:1068
+msgid "Tous les sites"
+msgstr "Tous les sites"
+
+#: admin/stats_user.php:1082 admin/stats_user.php:1095
+msgid "Tous les tracks"
+msgstr "Tous les tracks"
+
+#: admin/stats_user.php:1110
+msgid "Tous les pays"
+msgstr "Tous les pays"
+
+#: admin/stats_user.php:1123
+msgid "Valider la selection"
+msgstr "Valider la sélection"
+
+#: admin/stats_user.php:1135
+msgid "Clic lien"
+msgstr "Clic lien"
+
+#: admin/stats_user.php:1136
+msgid "Clic page"
+msgstr "Cliquez sur la page"
+
+#: admin/stats_user.php:1137
+msgid "Clic affiliation"
+msgstr "Clic affiliation"
+
+#: admin/stats_user.php:1138
+msgid "Clic desinscription"
+msgstr "Clic désinscription"
+
+#: admin/support.php:12 sm_dashboard.php:15 sm_dashboard.php:21
+#: sm_dashboard_backup.php:7 sm_dashboard_backup.php:13
 msgid "FAQ"
 msgstr "FAQ"
 
-#: admin/support.php:114
-msgid "Posez une question public"
-msgstr "Posez une question public"
+#: admin/support.php:13
+msgid "Server check "
+msgstr "Cocher Serveur"
 
-#: admin/support.php:117
-msgid "Liste des tickets"
-msgstr "Liste des tickets"
+#: admin/support.php:14
+msgid "Statistics smtp for server"
+msgstr "Statistiques SMTP"
 
-#: admin/support.php:120
-msgid "Contacter le support technique"
-msgstr "Contacter le support technique"
+#: admin/support.php:15 admin/support.php:16
+msgid "Order"
+msgstr "Commander"
 
-#: admin/support.php:123 tuto/suggestion.php:64
-msgid "Suggestion"
-msgstr "Suggestion"
+#: admin/support.php:25
+msgid "Server"
+msgstr "Serveur"
 
-#: admin/variables.php:24
+#: admin/support.php:26
+msgid "Server check"
+msgstr "Cocher Serveur"
+
+#: admin/support.php:27
+msgid "Statistics smtp"
+msgstr "Statistiques smtp"
+
+#: admin/support.php:28
+msgid "Gestion des adresses emails"
+msgstr "Gestion des adresses émails"
+
+#: admin/support.php:29
+msgid "Domains Renewal"
+msgstr "Renouvellement des noms de domaines"
+
+#: admin/support.php:30
+msgid "Domain Registration"
+msgstr "Enregistrement du nom de domaine"
+
+#: admin/support.php:31
+msgid "Whois Information"
+msgstr "Whois Information"
+
+#: admin/support.php:32
+msgid "Advanced DNS Management"
+msgstr "Gestion DNS avancée"
+
+#: admin/support.php:33
+msgid "SMTP information"
+msgstr "Information sur votre licence SMTP"
+
+#: admin/support.php:34
+msgid "SMTP statistics"
+msgstr "Statistiques SMTP"
+
+#: admin/support.php:35
+msgid "Order Options"
+msgstr "Commander Options"
+
+#: admin/support.php:36
+msgid "Web service"
+msgstr "Web service"
+
+#: admin/support.php:37 admin/support.php:45
+msgid "Server list"
+msgstr "Liste Serveur"
+
+#: admin/support.php:38
+msgid "Server order"
+msgstr "commander serveur"
+
+#: admin/support.php:39 admin/support.php:40
+msgid "Server install"
+msgstr "Installation du serveur"
+
+#: admin/support.php:41
+msgid "Load Balancing"
+msgstr "Load Balancing"
+
+#: admin/support.php:42
+msgid "Statistics SMTP"
+msgstr "Statistiques SMTP"
+
+#: admin/support.php:43
+msgid "Live statistics"
+msgstr "Statistiques en direct"
+
+#: admin/support.php:85
+msgid "Votre ticket a bien ete envoye"
+msgstr "Votre ticket a bien été envoyé"
+
+#: admin/support.php:100 admin/support.php:131
+msgid "Votre reponse a bien ete envoye"
+msgstr "Votre réponse à bien été envoyé"
+
+#: admin/support.php:116
+msgid "Votre question est en ligne"
+msgstr "Votre question est en ligne"
+
+#: admin/support.php:147
+msgid ""
+"Votre demande est en ligne, il faut maintenant obtenir suffisement de vote, "
+"pour que nous devellopions votre demande"
+msgstr ""
+"Votre demande est en ligne, il faut maintenant obtenir suffisamment de vote, "
+"pour que nous développions votre demande"
+
+#: admin/support.php:162
+msgid "Merci d'avoir vote"
+msgstr "Merci d'avoir voté"
+
+#: admin/variables.php:19 admin/variables_user.php:19
+msgid "Variable pour vos newsletters"
+msgstr "Variable pour vos newsletters"
+
+#: admin/variables.php:26 admin/variables_user.php:26
+msgid ""
+"Pour creer des newsletters dynamique, vous devez remplacer dans votre texte "
+"les mots par le code (shortcode) ci-dessous"
+msgstr ""
+"Pour créer des newsletters dynamiques, vous devez remplacer dans votre texte "
+"les mots par le code (shortcode) ci-dessous"
+
+#: admin/variables.php:51
 msgid "Variables pour vos Modeles"
-msgstr "Variables pour vos Modeles"
+msgstr "Variables pour vos Modèles"
 
-#: admin/variables.php:26
+#: admin/variables.php:53 admin/variables_user.php:51
 msgid "Variables sur vos informations"
 msgstr "Variables sur vos informations"
 
-#: admin/variables.php:33 admin/variables.php:95 admin/variables.php:137
-#: admin/variables.php:178 admin/variables.php:239
+#: admin/variables.php:60 admin/variables.php:122 admin/variables.php:164
+#: admin/variables.php:205 admin/variables.php:266 admin/variables_user.php:58
+#: admin/variables_user.php:169 admin/variables_user.php:210
+#: admin/variables_user.php:271
 msgid "Shortcode"
 msgstr "Shortcode"
 
-#: admin/variables.php:34 admin/variables.php:96 admin/variables.php:138
-#: admin/variables.php:179 admin/variables.php:240 sm_widget.php:168
-msgid "Description"
-msgstr "Description"
-
-#: admin/variables.php:39
+#: admin/variables.php:66 admin/variables_user.php:64
 msgid "Votre Nom"
 msgstr "Votre Nom"
 
-#: admin/variables.php:43
+#: admin/variables.php:70 admin/variables_user.php:75
 msgid "Votre Adresse"
 msgstr "Votre Adresse"
 
-#: admin/variables.php:48
+#: admin/variables.php:75 admin/variables_user.php:86
 msgid "Votre Telephone"
-msgstr "Votre Telephone"
+msgstr "Votre Téléphone"
 
-#: admin/variables.php:53
+#: admin/variables.php:80 admin/variables_user.php:96
 msgid "Votre Fax"
 msgstr "Votre Fax"
 
-#: admin/variables.php:58
+#: admin/variables.php:85 admin/variables_user.php:107
 msgid "Lien Facebook"
 msgstr "Lien Facebook"
 
-#: admin/variables.php:62
+#: admin/variables.php:89 admin/variables_user.php:116
 msgid "Lien google"
 msgstr "Lien google"
 
-#: admin/variables.php:67
+#: admin/variables.php:94 admin/variables_user.php:126
 msgid "Lien Twitter"
 msgstr "Lien Twitter"
 
-#: admin/variables.php:72
+#: admin/variables.php:99 admin/variables_user.php:136
 msgid "Lien Linkedin"
 msgstr "Lien Linkedin"
 
-#: admin/variables.php:77
+#: admin/variables.php:104 admin/variables_user.php:146
 msgid "Code de tracking (google analytics par exemple)"
 msgstr "Code de tracking (google analytics par exemple)"
 
-#: admin/variables.php:90
+#: admin/variables.php:117
 msgid "Variables automatique sur les informations serveur et wordpress"
-msgstr "Variables automatique sur les informations serveur et wordpress"
+msgstr "Variables automatiques sur les informations serveur et wordpress"
 
-#: admin/variables.php:101
+#: admin/variables.php:128
 msgid "url de votre site"
 msgstr "url de votre site"
 
-#: admin/variables.php:106
+#: admin/variables.php:133
 msgid "Nom de votre site"
 msgstr "Nom de votre site"
 
-#: admin/variables.php:111
+#: admin/variables.php:138
 msgid "Description de votre site"
 msgstr "Description de votre site"
 
-#: admin/variables.php:116
+#: admin/variables.php:143
 msgid "Email de votre site"
 msgstr "Email de votre site"
 
-#: admin/variables.php:121
+#: admin/variables.php:148
 msgid "Email de reponse"
-msgstr "Email de reponse"
+msgstr "Email de réponse"
 
-#: admin/variables.php:126
+#: admin/variables.php:153
 msgid "Date du jour"
 msgstr "Date du jour"
 
-#: admin/variables.php:132
+#: admin/variables.php:159 admin/variables_user.php:164
 msgid "Variables automatique sur notre plugin"
-msgstr "Variables automatique sur notre plugin"
+msgstr "Variables automatiques sur notre plugin"
 
-#: admin/variables.php:143
+#: admin/variables.php:170 admin/variables_user.php:175
 msgid "Lien de desinscription"
 msgstr "Lien de desinscription"
 
-#: admin/variables.php:145
+#: admin/variables.php:172 admin/variables_user.php:177
 msgid ""
 "affiche le lien de desabonnement exemple : (http://votre_site.com/upd/"
 "email_client/id_envoi/ )"
 msgstr ""
-"affiche le lien de desabonnement exemple : (http://votre_site.com/upd/"
+"affiche le lien de désabonnement exemple : (http://votre_site.com/upd/"
 "email_client/id_envoi/ )"
 
-#: admin/variables.php:148
+#: admin/variables.php:175 admin/variables_user.php:180
 msgid "Lien de la newsletter"
 msgstr "Lien de la newsletter"
 
-#: admin/variables.php:150
+#: admin/variables.php:177 admin/variables_user.php:182
 msgid ""
 "affiche le Lien de la page de la newsletter en ligne par exemple : (http://"
 "votre_site.com/out/email_client/id_page/id_envoi/ )"
@@ -1997,11 +2641,11 @@ msgstr ""
 "affiche le Lien de la page de la newsletter en ligne par exemple : (http://"
 "votre_site.com/out/email_client/id_page/id_envoi/ )"
 
-#: admin/variables.php:153
+#: admin/variables.php:180 admin/variables_user.php:185
 msgid "Lien d'affiliation"
 msgstr "Lien d'affiliation"
 
-#: admin/variables.php:155
+#: admin/variables.php:182 admin/variables_user.php:187
 msgid ""
 "affiche le lien de notre affiliation exemple : (http://votre_site.com/upd/"
 "email_client/id_envoi/ )"
@@ -2009,364 +2653,393 @@ msgstr ""
 "affiche le lien de notre affiliation exemple : (http://votre_site.com/upd/"
 "email_client/id_envoi/ )"
 
-#: admin/variables.php:158
+#: admin/variables.php:185 admin/variables_user.php:190
 msgid "Titre de l'article ou de la page  sur le template automatique"
 msgstr "Titre de l'article ou de la page  sur le template automatique"
 
-#: admin/variables.php:160
+#: admin/variables.php:187 admin/variables_user.php:192
 msgid "affiche le titre de l'article ou de la page"
 msgstr "affiche le titre de l'article ou de la page"
 
-#: admin/variables.php:163
+#: admin/variables.php:190 admin/variables_user.php:195
 msgid "Lien de l'article ou de la page sur le template automatique"
 msgstr "Lien de l'article ou de la page sur le template automatique"
 
-#: admin/variables.php:165
+#: admin/variables.php:192 admin/variables_user.php:197
 msgid "affiche le lien de l'article ou de la page"
 msgstr "affiche le lien de l'article ou de la page"
 
-#: admin/variables.php:170
+#: admin/variables.php:197 admin/variables_user.php:202
 msgid "Variables automatique sur votre liste d'envoi"
-msgstr "Variables automatique sur votre liste d'envoi"
+msgstr "Variables automatiques sur votre liste d'envoi"
 
-#: admin/variables.php:186
+#: admin/variables.php:213 admin/variables_user.php:218
 msgid "Email du destinataires"
-msgstr "Email du destinataires"
+msgstr "Email du destinataire"
 
-#: admin/variables.php:191
+#: admin/variables.php:218 admin/variables_user.php:223
 msgid "Nom du destinataires"
-msgstr "Nom du destinataires"
+msgstr "Nom du destinataire"
 
-#: admin/variables.php:194 include/export.php:13 include/export.php:33
+#: admin/variables.php:221 admin/variables_user.php:226 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs1"
 msgstr "champs1"
 
-#: admin/variables.php:196
+#: admin/variables.php:223 admin/variables_user.php:228
 msgid "Affiche le contenu du champs1 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs1 de votre liste de desitnataires"
 
-#: admin/variables.php:198 include/export.php:13 include/export.php:33
+#: admin/variables.php:225 admin/variables_user.php:230 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs2"
 msgstr "champs2"
 
-#: admin/variables.php:200
+#: admin/variables.php:227 admin/variables_user.php:232
 msgid "Affiche le contenu du champs2 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs2 de votre liste de desitnataires"
 
-#: admin/variables.php:203 include/export.php:13 include/export.php:33
+#: admin/variables.php:230 admin/variables_user.php:235 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs3"
 msgstr "champs3"
 
-#: admin/variables.php:205
+#: admin/variables.php:232 admin/variables_user.php:237
 msgid "Affiche le contenu du champs3 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs3 de votre liste de desitnataires"
 
-#: admin/variables.php:207 include/export.php:13 include/export.php:33
+#: admin/variables.php:234 admin/variables_user.php:239 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs4"
 msgstr "champs4"
 
-#: admin/variables.php:209
+#: admin/variables.php:236 admin/variables_user.php:241
 msgid "Affiche le contenu du champs4 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs4 de votre liste de desitnataires"
 
-#: admin/variables.php:211 include/export.php:13 include/export.php:33
+#: admin/variables.php:238 admin/variables_user.php:243 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs5"
 msgstr "champs5"
 
-#: admin/variables.php:213
+#: admin/variables.php:240 admin/variables_user.php:245
 msgid "Affiche le contenu du champs5 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs5 de votre liste de desitnataires"
 
-#: admin/variables.php:215 include/export.php:13 include/export.php:33
+#: admin/variables.php:242 admin/variables_user.php:247 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs6"
 msgstr "champs6"
 
-#: admin/variables.php:217
+#: admin/variables.php:244 admin/variables_user.php:249
 msgid "Affiche le contenu du champs6 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs6 de votre liste de desitnataires"
 
-#: admin/variables.php:219 include/export.php:13 include/export.php:33
+#: admin/variables.php:246 admin/variables_user.php:251 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs7"
 msgstr "champs7"
 
-#: admin/variables.php:221
+#: admin/variables.php:248 admin/variables_user.php:253
 msgid "Affiche le contenu du champs7 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs7 de votre liste de desitnataires"
 
-#: admin/variables.php:223 include/export.php:13 include/export.php:33
+#: admin/variables.php:250 admin/variables_user.php:255 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs8"
 msgstr "champs8"
 
-#: admin/variables.php:225
+#: admin/variables.php:252 admin/variables_user.php:257
 msgid "Affiche le contenu du champs8 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs8 de votre liste de desitnataires"
 
-#: admin/variables.php:227 include/export.php:13 include/export.php:33
+#: admin/variables.php:254 admin/variables_user.php:259 include/export.php:13
+#: include/export.php:33 include/export.php:53 include/export.php:76
 msgid "champs9"
 msgstr "champs9"
 
-#: admin/variables.php:229
+#: admin/variables.php:256 admin/variables_user.php:261
 msgid "Affiche le contenu du champs9 de votre liste de desitnataires"
 msgstr "Affiche le contenu du champs9 de votre liste de desitnataires"
 
-#: admin/variables.php:233
+#: admin/variables.php:260 admin/variables_user.php:265
 msgid "Variables automatique sur liens"
-msgstr "Variables automatique sur liens"
+msgstr "Variables automatiques sur liens"
 
-#: admin/variables.php:234
+#: admin/variables.php:261 admin/variables_user.php:266
 msgid ""
 "A mettre dans le tracking de vos liens sponsor, ce qui vous permettre de "
 "recuperer chez celui-ci les informations"
 msgstr ""
-"A mettre dans le tracking de vos liens sponsor, ce qui vous permettre de "
-"recuperer chez celui-ci les informations"
+"A mettre dans le tracking de vos liens sponsor, ce qui vous permettra de "
+"récupérer chez celui-ci les informations"
 
-#: admin/variables.php:245 tuto/faq.php:16 tuto/faq.php:72
-#: tuto/suggestion.php:16 tuto/ticket_liste.php:31 tuto/ticket_liste.php:78
-msgid "Date"
-msgstr "Date"
-
-#: admin/variables.php:247
+#: admin/variables.php:274 admin/variables_user.php:279
 msgid "(affiche par exemple : 20131020)"
 msgstr "(affiche par exemple : 20131020)"
 
-#: admin/variables.php:252
+#: admin/variables.php:279 admin/variables_user.php:284
 msgid ""
 "Pour ceux qu'utilise plusieurs serveurs SMTP avec nos offres affiche par "
 "exemple : srv1270-mx1"
 msgstr ""
-"Pour ceux qu'utilise plusieurs serveurs SMTP avec nos offres affiche par "
+"Pour ceux qu'utilisent plusieurs serveurs SMTP avec nos offres affichées par "
 "exemple : srv1270-mx1"
 
-#: admin/variables.php:255
+#: admin/variables.php:282 admin/variables_user.php:287
 msgid "auto"
 msgstr "auto"
 
-#: admin/variables.php:257
+#: admin/variables.php:284 admin/variables_user.php:289
 msgid "Affiche (votre serveur)-(id de la campagne)- (id envoie)"
 msgstr "Affiche (votre serveur)-(id de la campagne)- (id envoie)"
 
-#: admin/variables.php:260
+#: admin/variables.php:287 admin/variables_user.php:292
 msgid "Identifiant de la newsletter"
 msgstr "Identifiant de la newsletter"
 
-#: admin/variables.php:262
+#: admin/variables.php:289 admin/variables_user.php:294
 msgid "Affiche l'identifiant de la newsletter affiche par exemple : 10"
 msgstr "Affiche l'identifiant de la newsletter affiche par exemple : 10"
 
-#: admin/variables.php:265
+#: admin/variables.php:292 admin/variables_user.php:297
 msgid "Identifiant d'envoi"
 msgstr "Identifiant d'envoi"
 
-#: admin/variables.php:267
+#: admin/variables.php:294 admin/variables_user.php:299
 msgid "Affiche l'identifiant d'envoi de votre campagne affiche par exemple : 5"
 msgstr ""
 "Affiche l'identifiant d'envoi de votre campagne affiche par exemple : 5"
 
-#: e-mailing-service.php:21 include/entete.php:12
+#: e-mailing-service.php:27 include/entete.php:12
 msgid "E-mailing service est deja installe"
 msgstr "E-mailing service est deja installé"
 
-#: e-mailing-service.php:44 include/entete.php:52
+#: e-mailing-service.php:35
+msgid ""
+"Attention permalink is not active ! \"E-mailing service\" does not work "
+"properly if the permalinks are not enabled."
+msgstr ""
+"Attention le lien permanent n'est pas actif! \"E-mailing service\"ne "
+"fonctionne pas correctement si les liens  permanents ne sont pas activés."
+
+#: e-mailing-service.php:54 e-mailing-service.php:94 include/entete.php:50
 msgid "E-mailing service"
 msgstr "E-mailing service"
 
-#: e-mailing-service.php:45 tuto/h_config.php:2
-msgid "Configuration SMTP"
-msgstr "Configuration SMTP"
-
-#: e-mailing-service.php:47
-msgid "Destinataires"
-msgstr "Destinataires"
-
-#: e-mailing-service.php:48
+#: e-mailing-service.php:56 e-mailing-service.php:96
 msgid "Liste test"
 msgstr "Liste test"
 
-#: e-mailing-service.php:49
-msgid "Creation Newsletter"
-msgstr "Création Newsletter"
+#: e-mailing-service.php:57
+msgid "Creer une newsletter"
+msgstr "Créer une newsletter"
 
-#: e-mailing-service.php:50
+#: e-mailing-service.php:58 e-mailing-service.php:98
+msgid "with wordpress"
+msgstr "interface wordpress"
+
+#: e-mailing-service.php:59 e-mailing-service.php:99
+msgid "with elrte"
+msgstr "avec elrte"
+
+#: e-mailing-service.php:60 e-mailing-service.php:100
+msgid "Import Newsetter"
+msgstr "Importer Newsetter"
+
+#: e-mailing-service.php:61 e-mailing-service.php:102
 msgid "Liste Newsetter"
 msgstr "Liste Newsetter"
 
-#: e-mailing-service.php:51
-msgid "Creation de modeles"
-msgstr "Création de newsletter"
+#: e-mailing-service.php:62
+msgid "Envoyer une newsletter"
+msgstr "Envoyer une newsletter"
 
-#: e-mailing-service.php:52
-msgid "Liste Modeles"
-msgstr "Modeles"
+#: e-mailing-service.php:63
+msgid "Campaign"
+msgstr "Campagne"
 
-#: e-mailing-service.php:53
-msgid "Import Modele"
-msgstr "Import Modele"
-
-#: e-mailing-service.php:53
-msgid "Import modele"
-msgstr "Import modele"
-
-#: e-mailing-service.php:54
-msgid "Envois SMTP"
-msgstr "Envois SMTP"
-
-#: e-mailing-service.php:55
-msgid "Suivis"
-msgstr "Suivis"
-
-#: e-mailing-service.php:57 sm_dashboard.php:15
-msgid "Statistiques SMTP"
-msgstr "Statistiques SMTP"
-
-#: e-mailing-service.php:58
-msgid "NPAI"
-msgstr "NPAI"
-
-#: e-mailing-service.php:59
+#: e-mailing-service.php:65 e-mailing-service.php:107
 msgid "Variables"
 msgstr "Variables"
 
-#: e-mailing-service.php:61
+#: e-mailing-service.php:67 e-mailing-service.php:153
+msgid "Creer un modele"
+msgstr "Créer un modèle"
+
+#: e-mailing-service.php:67
+msgid "Creation de modeles"
+msgstr "Création de newsletter"
+
+#: e-mailing-service.php:68
+msgid "Liste Modeles"
+msgstr "Liste Modèles"
+
+#: e-mailing-service.php:69
+msgid "Import Modele"
+msgstr "Import Modèle"
+
+#: e-mailing-service.php:69
+msgid "Import modele"
+msgstr "Import modèle"
+
+#: e-mailing-service.php:74 e-mailing-service.php:108
 msgid "Gestion des alertes"
 msgstr "Gestion des alertes"
 
-#: e-mailing-service.php:62 sm_dashboard.php:10 sm_dashboard.php:14
-msgid "Status SMTP"
-msgstr "Status SMTP"
+#: e-mailing-service.php:75
+msgid "Setting"
+msgstr "paramètre"
 
-#: e-mailing-service.php:63
+#: e-mailing-service.php:76
+msgid "License et option"
+msgstr "Licence et option"
+
+#: e-mailing-service.php:78
 msgid "Aide"
 msgstr "Aide"
 
-#: e-mailing-service.php:65
-msgid "License et option"
-msgstr "License et option"
+#: e-mailing-service.php:79
+msgid "Support"
+msgstr "Support"
 
-#: e-mailing-service.php:67
+#: e-mailing-service.php:81
+msgid "Status de services"
+msgstr "Statut des services"
+
+#: e-mailing-service.php:83
 msgid "Update license"
-msgstr "Update license"
+msgstr "mise à jour licence"
 
-#: e-mailing-service.php:68
+#: e-mailing-service.php:84
 msgid "Debug send"
-msgstr "Debug send"
+msgstr "envoi débugger"
 
-#: e-mailing-service.php:69
+#: e-mailing-service.php:85
 msgid "Debug send auto"
-msgstr "Debug send auto"
+msgstr "envoi debugger auto"
 
-#: e-mailing-service.php:70
+#: e-mailing-service.php:86
 msgid "Debug Blacklist"
 msgstr "Debug Blacklist"
 
-#: e-mailing-service.php:71
+#: e-mailing-service.php:87
 msgid "Debug alerte"
 msgstr "Debug alerte"
 
-#: e-mailing-service.php:72
+#: e-mailing-service.php:88
 msgid "Debug Vitesse"
 msgstr "Debug Vitesse"
 
-#: e-mailing-service.php:72
+#: e-mailing-service.php:88
 msgid "Debug vitesse"
 msgstr "Debug vitesse"
 
-#: e-mailing-service.php:73
+#: e-mailing-service.php:89
 msgid "Debug stats"
 msgstr "Debug stats"
 
-#: e-mailing-service.php:87 e-mailing-service.php:89 e-mailing-service.php:617
+#: e-mailing-service.php:97
+msgid "Assistant Creation"
+msgstr "Assistant Creation"
+
+#: e-mailing-service.php:104
+msgid "Envois Newsletter"
+msgstr "Envois Newsletter"
+
+#: e-mailing-service.php:105
+msgid "Suivis des campagnes"
+msgstr "Suivis des campagnes"
+
+#: e-mailing-service.php:126 e-mailing-service.php:128
+#: e-mailing-service.php:753
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: e-mailing-service.php:90 e-mailing-service.php:92
+#: e-mailing-service.php:129 e-mailing-service.php:131
 msgid "Ajouter une newsletter"
 msgstr "Ajouter une newsletter"
 
-#: e-mailing-service.php:91
+#: e-mailing-service.php:130
 msgid "Modifier la newsletter"
 msgstr "Modifier la newsletter"
 
-#: e-mailing-service.php:93
+#: e-mailing-service.php:132
 msgid "Creation de newsletter"
-msgstr "Creation de newsletter"
+msgstr "Création de newsletter"
 
-#: e-mailing-service.php:94
+#: e-mailing-service.php:133
 msgid "Visualisez la newsletter"
 msgstr "Visualisez la newsletter"
 
-#: e-mailing-service.php:95 e-mailing-service.php:96
+#: e-mailing-service.php:134 e-mailing-service.php:135
 msgid "La newsletter n'existe plus"
 msgstr "La newsletter n'existe plus"
 
-#: e-mailing-service.php:97
+#: e-mailing-service.php:136
 msgid "Recherche une newsletter"
 msgstr "Recherche une newsletter"
 
-#: e-mailing-service.php:109 e-mailing-service.php:111
-#: e-mailing-service.php:617 sm_modeles.php:212 sm_modeles.php:214
+#: e-mailing-service.php:148 e-mailing-service.php:150
+#: e-mailing-service.php:753 sm_modeles.php:212 sm_modeles.php:214
 msgid "Modeles"
-msgstr "Modeles"
+msgstr "Modèles"
 
-#: e-mailing-service.php:112 e-mailing-service.php:115 sm_modeles.php:218
+#: e-mailing-service.php:151 e-mailing-service.php:154 sm_modeles.php:218
 msgid "Nouveau modele"
-msgstr "Nouveau modele"
+msgstr "Nouveau modèle"
 
-#: e-mailing-service.php:113 sm_modeles.php:216
+#: e-mailing-service.php:152 sm_modeles.php:216
 msgid "Modifier le modele"
-msgstr "Modifier le modele"
+msgstr "Modifier le modèle"
 
-#: e-mailing-service.php:114
-msgid "Creer un modele"
-msgstr "Creer un modele"
-
-#: e-mailing-service.php:116
+#: e-mailing-service.php:155
 msgid "Visionner le modele"
-msgstr "Visionner le modele"
+msgstr "Visionner le modèle"
 
-#: e-mailing-service.php:117
+#: e-mailing-service.php:156
 msgid "Le modele ne fonctionne pas"
-msgstr "Le modele ne fonctionne pas"
+msgstr "Le modèle ne fonctionne pas"
 
-#: e-mailing-service.php:118
+#: e-mailing-service.php:157
 msgid "Le modele ne fonctionne pas."
-msgstr "Le modele ne fonctionne pas."
+msgstr "Le modèle ne fonctionne pas."
 
-#: e-mailing-service.php:119
+#: e-mailing-service.php:158
 msgid "Rechercher un modele"
-msgstr "Rechercher un modele"
+msgstr "Rechercher un modèle"
 
-#: e-mailing-service.php:407
+#: e-mailing-service.php:540
 msgid "Lire le mail dans votre navigateur"
 msgstr "Lire le mail dans votre navigateur"
 
-#: e-mailing-service.php:408
+#: e-mailing-service.php:541
 msgid ""
 "Veuillez ne pas repondre a cet email. Cette boite aux lettres n'etant pas "
-"consultee, vous ne recevrez aucune reponse.</h5>\n"
+"consultee, vous ne recevrez aucune reponse.</h5>\r\n"
 "<h5>Pour ne plus recevoir d\\'email"
 msgstr ""
-"Veuillez ne pas repondre a cet email. Cette boite aux lettres n'etant pas "
-"consultee, vous ne recevrez aucune reponse.</h5>\n"
+"Veuillez ne pas répondre a cet email. Cette boite aux lettres n'étant pas "
+"consultée, vous ne recevrez aucune réponse.</h5>\n"
 "<h5>Pour ne plus recevoir d\\'email"
 
-#: e-mailing-service.php:409
+#: e-mailing-service.php:542
 msgid "il suffit de cliquez ICI"
-msgstr "il suffit de cliquez ICI"
+msgstr "il suffit de cliquer ICI"
 
-#: e-mailing-service.php:410
+#: e-mailing-service.php:543
 msgid "Service de routage d'email fournit par"
 msgstr "Service de routage d'email fournit par"
 
-#: e-mailing-service.php:410
+#: e-mailing-service.php:543
 msgid "service de routage de mail"
 msgstr "service de routage de mail"
 
-#: e-mailing-service.php:477
+#: e-mailing-service.php:610
 msgid "Gestion liste de diffusion"
 msgstr "Gestion liste de diffusion"
 
-#: e-mailing-service.php:478
+#: e-mailing-service.php:611
 msgid ""
 "Si vous ne voulez plus recevoir des emails de notre part , valider le "
 "formulaire.<br>Vous ne recevrez plus aucun email de cette liste de diffusion."
@@ -2374,66 +3047,178 @@ msgstr ""
 "Si vous ne voulez plus recevoir des emails de notre part , valider le "
 "formulaire.<br>Vous ne recevrez plus aucun email de cette liste de diffusion."
 
-#: e-mailing-service.php:479
+#: e-mailing-service.php:612
 msgid "Je confirme ma desinscription"
-msgstr "Je confirme ma desinscription"
+msgstr "Je confirme ma désinscription"
 
-#: e-mailing-service.php:480
+#: e-mailing-service.php:613
 msgid ""
 "Vous etes bien desinscrit , vous ne recevrez plus d'email de notre liste de "
 "diffusion"
 msgstr ""
-"Vous etes bien desinscrit , vous ne recevrez plus d'email de notre liste de "
+"Vous êtes bien désinscrit , vous ne recevrez plus d'email de notre liste de "
 "diffusion"
 
-#: e-mailing-service.php:501
+#: e-mailing-service.php:637
 msgid "Modele automatique"
-msgstr "Modele automatique"
+msgstr "Modèle automatique"
 
-#: e-mailing-service.php:520
+#: e-mailing-service.php:656
 msgid "Test shortcode pour mr [nom]"
 msgstr "Test shortcode pour mr [nom]"
 
-#: e-mailing-service.php:617
+#: e-mailing-service.php:753
 msgid "Templates"
-msgstr "Modele"
+msgstr "Modèles"
 
-#: e-mailing-service.php:617
+#: e-mailing-service.php:753
+msgid "Template"
+msgstr "Template"
+
+#: e-mailing-service.php:753
 msgid "sm_modeles"
-msgstr "sm_modeles"
+msgstr "sm_modèles"
 
-#: e-mailing-service.php:949
+#: e-mailing-service.php:1398
 msgid "Toutes les 3 mn"
 msgstr "Toutes les 3 mn"
 
-#: e-mailing-service.php:971
+#: e-mailing-service.php:1420
 msgid "Toutes les 15 mn"
 msgstr "Toutes les 15 mn"
 
-#: e-mailing-service.php:991
+#: e-mailing-service.php:1440
 msgid "Toutes les heures"
 msgstr "Toutes les heures"
 
-#: e-mailing-service.php:1012
+#: e-mailing-service.php:1461
 msgid "Toutes les 4 heures"
 msgstr "Toutes les 4 heures"
 
-#: e-mailing-service.php:1033
+#: e-mailing-service.php:1482
 msgid "Tous les jours"
 msgstr "Tous les jours"
 
-#: e-mailing-service.php:1105 e-mailing-service.php:1106
+#: e-mailing-service.php:1561 e-mailing-service.php:1562
 msgid "Envoyer un email a votre liste de destinataires avec le lien de la page"
 msgstr ""
-"Envoyer un email a votre liste de destinataires avec le lien de la page"
+"Envoyer un email à votre liste de destinataires avec le lien de la page"
 
-#: e-mailing-service.php:1118
+#: e-mailing-service.php:1574
 msgid "Cochez pour envoyer le lien a votre liste de destinataires"
 msgstr "Cochez pour envoyer le lien a votre liste de destinataires"
 
-#: e-mailing-service.php:1389
-msgid "mise a jour de la base de donnee du plugin e-mailing service ("
-msgstr "mise a jour de la base de donnee du plugin e-mailing service ("
+#: e-mailing-service.php:1975
+msgid "mise a jour de la base de donnee du plugin e-mailing service"
+msgstr "mise a jour de la base de donnée du plugin e-mailing service"
+
+#: e-mailing-service.php:2041
+msgid "Shortcode for newsletter"
+msgstr "code pour la newsletter"
+
+#: e-mailing-service.php:2042
+msgid "Link unsuscribe"
+msgstr "lien de désinscription"
+
+#: e-mailing-service.php:2043
+msgid "Link view online"
+msgstr "Vue des liens en directe"
+
+#: e-mailing-service.php:2044
+msgid "Send a newsltter"
+msgstr "Envoyer une newsltter"
+
+#: e-mailing-service.php:2044
+msgid "Link affiliate"
+msgstr "Lien d'affiliation"
+
+#: e-mailing-service.php:2045
+msgid "Title of article"
+msgstr "Titre de l'article"
+
+#: e-mailing-service.php:2046
+msgid "Link to the article "
+msgstr "lien vers l'article"
+
+#: e-mailing-service.php:2047
+msgid "Automatic shortcode on your information"
+msgstr "code automatique sur vos informations"
+
+#: e-mailing-service.php:2048
+msgid "Your name"
+msgstr "votre nom"
+
+#: e-mailing-service.php:2049
+msgid "Adress"
+msgstr "Adresse"
+
+#: e-mailing-service.php:2050
+msgid "your Phone"
+msgstr "votre téléphone"
+
+#: e-mailing-service.php:2051
+msgid "Your fax"
+msgstr "votre fax"
+
+#: e-mailing-service.php:2052
+msgid "Facebook link"
+msgstr "Lien Facebook"
+
+#: e-mailing-service.php:2053
+msgid "Google+ link"
+msgstr "Lien Google+ "
+
+#: e-mailing-service.php:2054
+msgid "Twitter link"
+msgstr "Lien Twitter"
+
+#: e-mailing-service.php:2055
+msgid "Linkedin link"
+msgstr "Lien Linkedin"
+
+#: e-mailing-service.php:2056
+msgid "Tracking code"
+msgstr "code de suivi"
+
+#: e-mailing-service.php:2057
+msgid "Automatic shortcode on contact list"
+msgstr "code automatique sur la liste des contacts"
+
+#: e-mailing-service.php:2058
+msgid "Email customer"
+msgstr "Emailing service"
+
+#: e-mailing-service.php:2059
+msgid "Name customer"
+msgstr "Nom du client"
+
+#: e-mailing-service.php:2060 e-mailing-service.php:2061
+#: e-mailing-service.php:2062 e-mailing-service.php:2063
+#: e-mailing-service.php:2064 e-mailing-service.php:2065
+#: e-mailing-service.php:2066 e-mailing-service.php:2067
+#: e-mailing-service.php:2068
+msgid "Row"
+msgstr "rangée"
+
+#: e-mailing-service.php:2069
+msgid "Automatic shortcode on your campaign"
+msgstr "code automatique de votre campagne"
+
+#: e-mailing-service.php:2071
+msgid "Server ID"
+msgstr "ID serveur"
+
+#: e-mailing-service.php:2072
+msgid "Displays (your server) - (id of the campaign) - (id sends)"
+msgstr "Affiche (votre serveur)-(id de la campagne)- (id envoie)"
+
+#: e-mailing-service.php:2073
+msgid "Newsletter ID"
+msgstr "Newsletter"
+
+#: e-mailing-service.php:2074
+msgid "campaign ID"
+msgstr "Campagne"
 
 #: inc/class.admin.php:16
 msgid "My shortcode button"
@@ -2441,7 +3226,7 @@ msgstr "Raccourcis"
 
 #: inc/class.admin.php:18
 msgid "Category: "
-msgstr "Categorie :"
+msgstr "Catégorie"
 
 #: inc/class.admin.php:21
 msgid "Number of posts: "
@@ -2449,7 +3234,7 @@ msgstr "Nombre"
 
 #: inc/class.admin.php:27
 msgid "Insert the Event"
-msgstr "Insert un nouvel evenement"
+msgstr "Insérer un nouvel évenement"
 
 #: include/blacklist.php:11
 msgid ""
@@ -2481,11 +3266,11 @@ msgstr "Verifier le flux"
 
 #: include/blacklist.php:29
 msgid "Update blacklist pour"
-msgstr "Update blacklist pour"
+msgstr "Mise à jour blacklist pour"
 
 #: include/blacklist.php:42
 msgid "blacklist ont ete insere dans la base de donnee"
-msgstr "blacklist ont ete inseré dans la base de donnée"
+msgstr "blacklist ont été inséré dans la base de donnée"
 
 #: include/bounces.php:15 include/bounces_delete.php:14
 #: include/bounces_update.php:14 include/bounces_update_liste.php:14
@@ -2493,7 +3278,7 @@ msgid ""
 "Vous n'avez pas souscrit a l'option qui vous permet de recuperer les "
 "bounces, pour ajouter cette option"
 msgstr ""
-"Vous n'avez pas souscrit a l'option qui vous permet de recuperer les "
+"Vous n'avez pas souscrit à l'option qui vous permet de récuperer les "
 "bounces, pour ajouter cette option"
 
 #: include/bounces.php:17 include/bounces_update.php:16
@@ -2502,20 +3287,20 @@ msgid ""
 "L'option est au tarifs de 2 euros mois si vous ne disposez pas de serveur "
 "SMTP chez nous"
 msgstr ""
-"L'option est au tarifs de 2 euros mois si vous ne disposez pas de serveur "
+"L'option est au tarif de 2 euros mois si vous ne disposez pas de serveur "
 "SMTP chez nous"
 
 #: include/bounces.php:26
 msgid "Update bounces pour"
-msgstr "Update bounces pour"
+msgstr "mise à jour bounces pour"
 
 #: include/bounces.php:26
 msgid "license"
-msgstr "license"
+msgstr "licence"
 
-#: include/bounces.php:47
+#: include/bounces.php:48
 msgid "bounces ont ete insere dans la base de donnee pour la license"
-msgstr "bounces ont ete inseré dans la base de donnée pour la license"
+msgstr "bounces ont été inséré dans la base de donnée pour la licence"
 
 #: include/bounces_delete.php:16
 msgid ""
@@ -2527,7 +3312,7 @@ msgstr ""
 
 #: include/bounces_delete.php:20
 msgid "Les bounces dont la date est inferieur a "
-msgstr "Les bounces dont la date est inferieur a "
+msgstr "Les bounces dont la date est inférieure à"
 
 #: include/bounces_update.php:32
 msgid " "
@@ -2535,82 +3320,122 @@ msgstr " "
 
 #: include/bounces_update_liste.php:40 include/bounces_update_liste.php:64
 msgid "update list"
-msgstr "update list"
+msgstr "Mise à jour liste"
 
-#: include/cron.php:29 include/cron.php:328
+#: include/cron.php:16 include/cron_auto.php:24 include/cron_v2.php:21
+#: include/cron_v3.php:25 include/cron_v4.php:35
+msgid "Envoi de votre newsletter"
+msgstr "Envoi de votre newsletter"
+
+#: include/cron.php:36 include/cron.php:365 include/cron_v2.php:40
+#: include/cron_v2.php:360 include/cron_v3.php:48 include/cron_v3.php:402
+#: include/cron_v4.php:166 include/cron_v4.php:453
 msgid "Newsletter numero"
 msgstr "Newsletter numero"
 
-#: include/cron.php:29 include/cron_auto.php:30
+#: include/cron.php:36 include/cron_auto.php:40 include/cron_v2.php:40
+#: include/cron_v3.php:48 include/cron_v4.php:166
 msgid "est en cours d'envois"
-msgstr "est en cours d'envois"
+msgstr "est en cours d'envoi"
 
-#: include/cron.php:40 include/cron_auto.php:41
+#: include/cron.php:45 include/cron_auto.php:51 include/cron_v2.php:49
+#: include/cron_v3.php:56 include/cron_v4.php:174
 msgid "envoi newsletter n "
 msgstr "envoi newsletter n "
 
-#: include/cron.php:41 include/cron_auto.php:42
+#: include/cron.php:46 include/cron_auto.php:52 include/cron_v2.php:50
+#: include/cron_v3.php:57 include/cron_v4.php:175
 msgid "liste n "
 msgstr "liste n° "
 
-#: include/cron.php:138 include/cron_auto.php:144
+#: include/cron.php:159 include/cron_auto.php:161 include/cron_v2.php:163
+#: include/cron_v3.php:213 include/cron_v4.php:88
 msgid "Tout s'est bien deroule"
-msgstr "Tout s'est bien deroule"
+msgstr "Tout s'est bien deroulé"
 
-#: include/cron.php:326
+#: include/cron.php:363 include/cron_v2.php:358 include/cron_v3.php:400
+#: include/cron_v4.php:451
 msgid "envoi numero"
 msgstr "envoi numero"
 
-#: include/cron.php:326 include/cron_auto.php:325
+#: include/cron.php:363 include/cron_auto.php:342 include/cron_v2.php:358
+#: include/cron_v3.php:400 include/cron_v4.php:451
 msgid "termine"
-msgstr "termine"
+msgstr "terminé"
 
-#: include/cron.php:328 include/cron_auto.php:327
+#: include/cron.php:365 include/cron_auto.php:344 include/cron_v2.php:360
+#: include/cron_v3.php:402 include/cron_v4.php:453
 msgid "envoi termine"
-msgstr "envoi termine"
+msgstr "envoi terminé"
 
-#: include/cron.php:328 include/cron_auto.php:327
+#: include/cron.php:365 include/cron_auto.php:344 include/cron_v2.php:360
+#: include/cron_v3.php:402 include/cron_v4.php:453
 msgid "emails envoyes"
-msgstr "emails envoyes"
+msgstr "emails envoyés"
 
-#: include/cron_auto.php:30 include/cron_auto.php:327
+#: include/cron.php:376 include/cron_auto.php:355 include/cron_v2.php:372
+#: include/cron_v3.php:412 include/cron_v4.php:463
+msgid "Vous n'avez pas de newsletter qui doit tourner actuellement"
+msgstr "Vous n'avez pas de newsletter qui doit tourner actuellement"
+
+#: include/cron_auto.php:40 include/cron_auto.php:344
 msgid "Newsletter n "
 msgstr "Newsletter n°"
 
-#: include/cron_auto.php:325
+#: include/cron_auto.php:342
 msgid "envoi n "
 msgstr "envoi n° "
 
-#: include/cron_blocage.php:11
+#: include/cron_blocage.php:8
+msgid "Tester la vitesse d'envoi de votre newsletter"
+msgstr "Tester la vitesse d'envoi de votre newsletter"
+
+#: include/cron_blocage.php:12
+msgid ""
+"Si votre newsletter envoi moin vite que le reglage que vous avez effectue "
+"lors de l'envoi , c'est que votre Hebergement wordpress est trop lent"
+msgstr ""
+"Si votre newsletter envoi moins vite que le réglage que vous avez effectué "
+"lors de l'envoi , c'est que votre Hébergement wordpress est trop lent"
+
+#: include/cron_blocage.php:16
 msgid "Nombre en attente"
 msgstr "Nombre en attente"
 
-#: include/cron_blocage.php:16
+#: include/cron_blocage.php:21
 msgid "Nombre en attente apres "
-msgstr "Nombre en attente apres "
+msgstr "Nombre en attente après "
 
-#: include/cron_blocage.php:17
+#: include/cron_blocage.php:22
 msgid "secondes"
 msgstr "secondes"
 
-#: include/cron_blocage.php:19
+#: include/cron_blocage.php:24
 msgid "le status va etre reactiver"
-msgstr "le status va etre reactiver"
+msgstr "le statut va être réactivé"
+
+#: include/cron_blocage.php:30
+msgid ""
+"Vous n'avez pas de newsletter qui tourne actuellement, vous ne pouvez donc "
+"pas verifier la vitesse d'envoi"
+msgstr ""
+"Vous n'avez pas de newsletter qui tourne actuellement, vous ne pouvez donc "
+"pas vérifier la vitesse d'envoi"
 
 #: include/cron_license.php:6 include/cron_nettoyage.php:6
 #: include/license.php:4
 msgid "Vous n'avez pas de license, vous utilisez la version gratuite"
-msgstr "Vous n'avez pas de license, vous utilisez la version gratuite"
+msgstr "Vous n'avez pas de licence, vous utilisez la version gratuite"
 
-#: include/cron_license.php:33 include/cron_nettoyage.php:33
-#: include/license.php:34
-msgid "Les options de votre license sont a jour"
-msgstr "Les options de votre license sont a jour"
-
-#: include/cron_license.php:35 include/cron_nettoyage.php:35
+#: include/cron_license.php:38 include/cron_nettoyage.php:33
 #: include/license.php:36
+msgid "Les options de votre license sont a jour"
+msgstr "Les options de votre licence sont a jour"
+
+#: include/cron_license.php:40 include/cron_nettoyage.php:35
+#: include/license.php:38
 msgid "Votre license comporte une erreur , contacter le support"
-msgstr "Votre license comporte une erreur , contacter le support"
+msgstr "Votre licence comporte une erreur , contacter le support"
 
 #: include/cron_stats.php:13
 msgid "Statistiques de l'envoi numero :"
@@ -2618,83 +3443,98 @@ msgstr "Statistiques de l'envoi numero :"
 
 #: include/cron_stats.php:13
 msgid "mis a jour"
-msgstr "mis à jour"
+msgstr "mise a jour"
 
-#: include/entete.php:52
+#: include/cron_stats.php:13
+msgid "envoyes"
+msgstr "envoyes"
+
+#: include/cron_v4.php:6
+msgid "Probleme avec le fichier load"
+msgstr "Probleme avec le fichier load"
+
+#: include/entete.php:53
 msgid ""
 "Avec l'api Gratuite, vous obtenez des statistiques plus precises sans "
 "augmenter la charge de wordpress, les liens sont en reecriture, vous avez "
 "egalement des graphiques et les alertes de panne, details sur la page "
 "options et services"
 msgstr ""
-"Avec l'api Gratuite, vous obtenez des statistiques plus precises sans "
-"augmenter la charge de wordpress, les liens sont en reecriture, vous avez "
-"egalement des graphiques et les alertes de panne, details sur la page "
+"Avec l'api Gratuite, vous obtenez des statistiques plus précises sans "
+"augmenter la charge de wordpress, les liens sont en réécriture, vous avez "
+"également des graphiques et les alertes de panne, détails sur la page "
 "options et services"
 
-#: include/entete.php:52
+#: include/entete.php:53
 msgid "Activer l'api Gratuite"
 msgstr "Activer l'api Gratuite"
 
-#: include/export.php:13 include/export.php:33
-msgid "email"
-msgstr "email"
-
-#: include/export.php:13 include/export.php:33
+#: include/export.php:13 include/export.php:33 include/export.php:53
+#: include/export.php:76
 msgid "nom"
 msgstr "nom"
 
-#: include/export.php:13 include/export.php:33
+#: include/export.php:13 include/export.php:33 include/export.php:53
+#: include/export.php:76
 msgid "Bounces"
 msgstr "Bounces"
 
-#: include/export.php:47
+#: include/export.php:13 include/export.php:33 include/export.php:53
+#: include/export.php:76
+msgid "OPT-IN"
+msgstr "OPT-IN"
+
+#: include/export.php:90
 msgid "Le format n'est pas corret"
 msgstr "Le format n'est pas valide"
 
-#: include/fonctions_sm.php:524
+#: include/fonctions_sm.php:591
 msgid "offline"
-msgstr "offline"
+msgstr "déconnecté"
 
-#: include/fonctions_sm.php:525
+#: include/fonctions_sm.php:592
 msgid "online"
-msgstr "online"
+msgstr "Connecté"
 
 #: include/help_live.php:9
 msgid "Stopper,\"e-mailing-service\""
 msgstr "Stopper,\"e-mailing-service\""
 
-#: include/license.php:40
+#: include/license.php:19
 msgid "Date d'inscription"
 msgstr "Date d'inscription"
 
-#: include/license.php:41
+#: include/license.php:20
 msgid "Dernier Paiement"
 msgstr "Dernier Paiement"
 
-#: include/license.php:42
+#: include/license.php:21
 msgid "Prochain prelevement"
-msgstr "Prochain prelevement"
+msgstr "Prochain prélèvement"
+
+#: include/license.php:44
+msgid "License"
+msgstr "Licence"
 
 #: include/license.php:46
 msgid "Nombres de SMTP"
-msgstr "Nombres de SMTP"
+msgstr "Nombre de SMTP"
 
 #: include/license.php:50
 msgid "Limite Journaliere  : Illimites"
-msgstr "Limite Journaliere  : Illimité"
+msgstr "Limite Journalière  : Illimitée"
 
 #: include/license.php:51
 msgid "Limite Mensuel  :  Illimites"
-msgstr "Limite Mensuel  :  Illimité"
+msgstr "Limite Mensuel  :  Illimitée"
 
 #: include/license.php:53
 msgid "Limite Journaliere"
-msgstr "Limite Journaliere"
+msgstr "Limite Journalière"
 
 #: include/license.php:54
 msgid "Limite Mensuel"
-msgstr "Limite Mensuel"
+msgstr "Limite Mensuelle"
 
 #: include/license.php:56
 msgid "Option Alerte"
@@ -2714,7 +3554,7 @@ msgstr "Option Stats Blacklist"
 
 #: include/license.php:60
 msgid "Service deblacklistage"
-msgstr "Service deblacklistage"
+msgstr "Service déblacklistage"
 
 #: include/license.php:61
 msgid "Option Multi Alias"
@@ -2722,61 +3562,105 @@ msgstr "Option Multi Alias"
 
 #: include/pub-mass-mailing.php:1
 msgid "Vous n'avez pas encore souscrit a une offre mass-mailing"
-msgstr "Vous n'avez pas encore souscrit a une offre mass-mailing"
+msgstr "Vous n'avez pas encore souscrit à une offre mass-mailing"
 
 #: include/spamscore.php:9
 msgid ""
 "Vous n\\'avez pas souscrit a l'option qui vous permet de recuperer les "
 "bounces, pour ajouter cette option"
 msgstr ""
-"Vous n\\'avez pas souscrit a l'option qui vous permet de recuperer les "
+"Vous n\\'avez pas souscrit a l'option qui vous permet de récuperer les "
 "bounces, pour ajouter cette option"
 
 #: include/spamscore.php:25
 msgid "Le spamscore de vos serveurs a bien ete mis a jour"
-msgstr "Le spamscore de vos serveurs a bien ete mis a jour"
+msgstr "Le spamscore de vos serveurs a bien été mis a jour"
 
-#: sm_dashboard.php:10 sm_dashboard.php:11 sm_dashboard.php:12
-#: sm_dashboard.php:14 sm_dashboard.php:15 sm_dashboard.php:16
-#: sm_dashboard.php:17 sm_dashboard.php:18
+#: include/upload.php:16
+msgid "Test importation d'image sur l'envoi numero"
+msgstr "Test importation d'image sur l'envoi numéro"
+
+#: include/upload.php:17
+msgid ""
+"Pour tester sur un autre envoi rentrer son identifiant dans le formulaire ci-"
+"dessous"
+msgstr ""
+"Pour tester sur un autre envoi rentrer son identifiant dans le formulaire ci-"
+"dessous"
+
+#: include/upload.php:99 include/upload.php:103 include/upload.php:107
+#: include/upload.php:110 include/upload.php:112
+msgid "upload"
+msgstr "télécharger"
+
+#: include/upload.php:99 include/upload.php:103 include/upload.php:107
+#: include/upload.php:112
+msgid "impossible verifier les droit 0777 sur le dossier"
+msgstr "impossible vérifier les droit 0777 sur le dossier"
+
+#: include/upload.php:110
+msgid "correct"
+msgstr "correcte"
+
+#: sm_dashboard.php:13 sm_dashboard.php:14 sm_dashboard.php:15
+#: sm_dashboard.php:17 sm_dashboard.php:18 sm_dashboard.php:19
+#: sm_dashboard.php:20 sm_dashboard.php:21 sm_dashboard.php:26
+#: sm_dashboard.php:27 sm_dashboard_backup.php:5 sm_dashboard_backup.php:6
+#: sm_dashboard_backup.php:7 sm_dashboard_backup.php:9
+#: sm_dashboard_backup.php:10 sm_dashboard_backup.php:11
+#: sm_dashboard_backup.php:12 sm_dashboard_backup.php:13
 msgid "Emailing service"
 msgstr "Emailing service"
 
-#: sm_dashboard.php:11 sm_dashboard.php:16
+#: sm_dashboard.php:13 sm_dashboard.php:17 sm_dashboard_backup.php:5
+#: sm_dashboard_backup.php:9
+msgid "Status SMTP"
+msgstr "Statut SMTP"
+
+#: sm_dashboard.php:14 sm_dashboard.php:19 sm_dashboard.php:27
+#: sm_dashboard_backup.php:6 sm_dashboard_backup.php:11
 msgid "E-mailing en cours"
 msgstr "E-mailing en cours"
 
-#: sm_dashboard.php:17
+#: sm_dashboard.php:20 sm_dashboard.php:26 sm_dashboard_backup.php:12
 msgid "Statistiques des clics"
 msgstr "Statistiques des clics"
 
-#: sm_dashboard.php:79
+#: sm_dashboard.php:103 sm_dashboard_backup.php:85
 msgid "N "
 msgstr "N°"
 
-#: sm_dashboard.php:81
-msgid "Nb envoyes"
-msgstr "Nb envoyés"
+#: sm_dashboard.php:105
+msgid "Envoyes"
+msgstr "Mails Envoyés"
 
-#: sm_dashboard.php:82
+#: sm_dashboard.php:106
+msgid "En attente"
+msgstr "En attente"
+
+#: sm_dashboard_backup.php:87
+msgid "Nb envoyes"
+msgstr "Nb envoyé"
+
+#: sm_dashboard_backup.php:88
 msgid "Nb en attente"
 msgstr "Nb en attente"
 
 #: sm_modeles.php:42 sm_modeles.php:53 sm_modeles.php:64
 msgid "Copie comme nouveau modele"
-msgstr "Copie comme nouveau modele"
+msgstr "Copie comme nouveau modèle"
 
-#: sm_modeles.php:174 sm_modeles.php:249 sm_modeles.php:267 sm_modeles.php:269
+#: sm_modeles.php:174 sm_modeles.php:250 sm_modeles.php:268 sm_modeles.php:270
 msgid "Partager"
 msgstr "Partager"
 
 #: sm_modeles.php:191
 msgid "Permission refuse"
-msgstr "Permission refuse"
+msgstr "Permission refusée"
 
 #: sm_modeles.php:215
 msgid "Ajouter un modele"
-msgstr "Ajouter un modele"
+msgstr "Ajouter un modèle"
 
 #: sm_modeles.php:217
 msgid "Nouveau"
@@ -2784,23 +3668,31 @@ msgstr "Nouveau"
 
 #: sm_modeles.php:219
 msgid "Visualiser le modele"
-msgstr "Visualiser le modele"
+msgstr "Visualiser le modèle"
 
 #: sm_modeles.php:220
 msgid "Pas de modele ."
-msgstr "Pas de modele ."
+msgstr "Pas de modèle ."
 
 #: sm_modeles.php:221
 msgid "Pas de modele."
-msgstr "Pas de modele."
+msgstr "Pas de modèle."
 
 #: sm_modeles.php:222
 msgid "Chercher un modele"
-msgstr "Chercher un modele"
+msgstr "Chercher un modèle"
 
-#: sm_modeles.php:265
+#: sm_modeles.php:266
 msgid "Prive"
 msgstr "Privé"
+
+#: sm_news.php:36
+msgid "Some Meta Box Headline"
+msgstr "certains titres de Meta box"
+
+#: sm_news.php:109
+msgid "Description for this field"
+msgstr "Description pour ce domaine"
 
 #: sm_widget.php:5
 msgid "Formulaire d'inscription a votre newsletter"
@@ -2816,7 +3708,7 @@ msgstr "Inscription newsletter"
 
 #: sm_widget.php:11 sm_widget.php:149
 msgid "Pour recevoir les dernieres actualites inscrivez vous"
-msgstr "Pour recevoir les dernieres actualites inscrivez vous"
+msgstr "Pour recevoir les dernières actualités inscrivez vous"
 
 #: sm_widget.php:22 sm_widget.php:160
 msgid "test"
@@ -2824,7 +3716,7 @@ msgstr "test"
 
 #: sm_widget.php:71
 msgid "Vous etes maintenant inscrit sur notre newsletter"
-msgstr "Vous etes maintenant inscrit sur notre newsletter"
+msgstr "Vous êtes maintenant inscrit sur notre newsletter"
 
 #: sm_widget.php:73
 msgid "Nouvel inscrit a votre newsletter sur"
@@ -2872,7 +3764,7 @@ msgstr "pseudo"
 #: tuto/faq.php:51 tuto/faq.php:58 tuto/ticket_liste.php:55
 #: tuto/ticket_liste.php:62
 msgid "Repondre"
-msgstr "Repondre"
+msgstr "Répondre"
 
 #: tuto/faq.php:73
 msgid "Auteur"
@@ -2892,20 +3784,20 @@ msgstr "Posez une question public sur notre FAQ"
 
 #: tuto/faq_question.php:2
 msgid ""
-"Verifier avant d'envoyer que votre question n'existe pas deja !<br>  \n"
+"Verifier avant d'envoyer que votre question n'existe pas deja !<br>  \r\n"
 "Si vous faites de la promotion abusive , vous prenez le risque d'etre bloque "
 "et de ne plus pouvoir acceder a la faq"
 msgstr ""
-"Verifier avant d'envoyer que votre question n'existe pas déja !<br>  \n"
-"Si vous faites de la promotion abusive , vous prenez le risque d'etre bloqué "
-"et de ne plus pouvoir acceder à la faq"
+"Vérifier avant d'envoyer que votre question n'existe pas déjà !<br>  \n"
+"Si vous faites de la promotion abusive , vous prenez le risque d'être bloque "
+"et de ne plus pouvoir accéder a la faq"
 
 #: tuto/faq_question.php:6
 msgid ""
 "Pour pouvoir posez une question public sur notre FAQ, vous devez activer "
 "gratuitement la permission d'interagir avec notre site dans la rubrique "
 msgstr ""
-"Pour pouvoir posez une question public sur notre FAQ, vous devez activer "
+"Pour pouvoir posez une question publique sur notre FAQ, vous devez activer "
 "gratuitement la permission d'interagir avec notre site dans la rubrique "
 
 #: tuto/faq_question.php:25
@@ -2918,6 +3810,10 @@ msgstr "Posez votre question"
 msgid "Menu"
 msgstr "Menu"
 
+#: tuto/h_config.php:2
+msgid "Configuration SMTP"
+msgstr "Configuration SMTP"
+
 #: tuto/h_config.php:3
 msgid ""
 "Si vous avez louez un servur SMTP chez nous la configuration est "
@@ -2925,8 +3821,8 @@ msgid ""
 "bas de formulaires qui vous interesse."
 msgstr ""
 "Si vous avez louez un serveur SMTP chez nous la configuration est "
-"automatique , vous avez juste à valider le formulaire avec les options en "
-"bas de formulaires qui vous interesse."
+"automatique , vous avez juste a valider le formulaire avec les options en "
+"bas de formulaires qui vous intéresse."
 
 #: tuto/h_config.php:5
 msgid ""
@@ -2934,8 +3830,8 @@ msgid ""
 "formulaire et donc possedez les informations necessaires (serveur, email, "
 "port, login et mot de passe)"
 msgstr ""
-"Si vous possedez déja un serveur SMTP, vous devez donc renseigner le "
-"formulaire et donc possedez les informations necessaires (serveur, email, "
+"Si vous possédez déjà un serveur SMTP, vous devez donc renseigner le "
+"formulaire et donc possédez les informations nécessaires (serveur, email, "
 "port, login et mot de passe)"
 
 #: tuto/h_config.php:8
@@ -2948,8 +3844,8 @@ msgid ""
 "parametrer les informations importante de votre newsletter , sans avoir a "
 "toujours les indiquer sur votre template"
 msgstr ""
-"Affichage texte en haut , texte de desabonnement et affiliation servent à "
-"parametrer les informations importante de votre newsletter , sans avoir à "
+"Affichage texte en haut , texte de désabonnement et affiliation servent a "
+"paramètrer les informations importante de votre newsletter , sans avoir a "
 "toujours les indiquer sur votre template"
 
 #: tuto/h_config.php:13
@@ -2959,17 +3855,17 @@ msgid ""
 "newsletter ne partiras pas, car retirer le lien de desabonnement est "
 "considere comme du spam !"
 msgstr ""
-"Attention à la variable [lien_desabo] , si elle n'est pas presente sur votre "
-"template et que vous avez desactiver le lien de desabonnement , votre "
-"newsletter ne partiras pas, car retirer le lien de desabonnement est "
-"consideré comme du spam !"
+"Attention a la variable [lien_desabo] , si elle n'est pas présente sur votre "
+"template et que vous avez désactivé le lien de désabonnement , votre "
+"newsletter ne partiras pas, car retirer le lien de désabonnement est "
+"considéré comme du spam !"
 
 #: tuto/h_config.php:15
 msgid ""
 "Vous pouvez connaitre facilement toutes les variables disponible dans le "
 "menu variables"
 msgstr ""
-"Vous pouvez connaitre facilement toutes les variables disponible dans le "
+"Vous pouvez connaitre facilement toutes les variables disponibles dans le "
 "menu variables"
 
 #: tuto/h_config.php:18
@@ -2979,32 +3875,32 @@ msgid ""
 "nouveau post , le lien est envoye a votre liste par defaut"
 msgstr ""
 "Si vous cocher la case 'Envoi automatique des nouveaux posts et nouvelles "
-"pages' , à chaque fois que vous publier une nouvelle newsletter ou un "
-"nouveau post , le lien est envoyé a votre liste par defaut"
+"pages' , a chaque fois que vous publiez une nouvelle newsletter ou un "
+"nouveau post , le lien est envoyé a votre liste par défaut"
 
 #: tuto/h_config.php:20
 msgid ""
 "Vous pouvez modifier le modele ou creer un nouveau modele a partir de la "
 "liste de modeles"
 msgstr ""
-"Vous pouvez modifier le modele ou creer un nouveau modele à partir de la "
-"liste de modeles"
+"Vous pouvez modifier le modèle ou créer un nouveau modèle a partir de la "
+"liste de modèles"
 
 #: tuto/h_config.php:23
 msgid ""
 "Le temps pause est le delai d'attente entre chaque email envoyes , plus le "
 "temps de pause est court plus , votre newsletter sera envoye rapidement."
 msgstr ""
-"Le temps pause est le delai d'attente entre chaque email envoyés , plus le "
-"temps de pause est court plus , votre newsletter sera envoyé rapidement."
+"Le temps pause est le délai d'attente entre chaque email envoyés , plus le "
+"temps de pause est court plus , votre newsletter sera envoye rapidement."
 
 #: tuto/h_config.php:25
 msgid ""
 "Si vous envoyez trop vite , votre serveur pourra etre bloque ou blackliste "
 "par les fournisseurs d'email."
 msgstr ""
-"Si vous envoyez trop vite , votre serveur pourra etre bloqué ou blacklisté "
-"par les fournisseurs d'email."
+"Si vous envoyez trop vite , votre serveur pourra être bloqué ou blacklisté "
+"par les fournisseurs d'emails."
 
 #: tuto/h_config.php:28
 msgid ""
@@ -3013,7 +3909,7 @@ msgid ""
 "vraiment besoin , car sinon ralentit le script"
 msgstr ""
 "Possibilité de mettre les campagnes en pause : vous pouvez l'activer ou le "
-"desactiver en cours d'envoi , pour le mettre en place que si vous en avez "
+"désactiver en cours d'envoi , pour le mettre en place que si vous en avez "
 "vraiment besoin , car sinon ralentit le script"
 
 #: tuto/h_config.php:31
@@ -3026,14 +3922,18 @@ msgstr ""
 "configuration en cours d'envoi , cela changera votre serveur SMTP sur le "
 "script d'envoi"
 
+#: tuto/h_config.php:34
+msgid "Mass Mailing"
+msgstr "Mass Mailing"
+
 #: tuto/h_config.php:36
 msgid ""
 "Le script d'envoi par defaut effectue une rotation entre tous vos serveurs "
 "actifs, pour retirer un serveur de la rotation , vous devez le desactiver "
 "dans la configuration ."
 msgstr ""
-"Le script d'envoi par defaut effectue une rotation entre tous vos serveurs "
-"actifs, pour retirer un serveur de la rotation , vous devez le desactiver "
+"Le script d'envoi par défaut effectue une rotation entre tous vos serveurs "
+"actifs, pour retirer un serveur de la rotation , vous devez le désactiver "
 "dans la configuration ."
 
 #: tuto/h_config.php:39
@@ -3041,8 +3941,8 @@ msgid ""
 "Vous pourrez envoyer avec vos serveurs desactives a l'aide du formulaire "
 "envoyer en choissant votre serveur"
 msgstr ""
-"Vous pourrez envoyer avec vos serveurs desactivés à l'aide du formulaire "
-"envoyer en choissant votre serveur"
+"Vous pourrez envoyer avec vos serveurs désactivés a l'aide du formulaire "
+"envoyer en choisissant votre serveur"
 
 #: tuto/h_email.php:2
 msgid "destinataires"
@@ -3054,8 +3954,8 @@ msgid ""
 "de garder la categorie creer par defaut (test) pour effectuer vos tests de "
 "mailing"
 msgstr ""
-"La liste permet de classer vos clients par categories, nous vous conseillons "
-"de garder la categorie creer par defaut (test) pour effectuer vos tests de "
+"La liste permet de classer vos clients par catégories, nous vous conseillons "
+"de garder la catégorie créée par défaut (test) pour effectuer vos tests de "
 "mailing"
 
 #: tuto/h_email.php:6
@@ -3064,8 +3964,8 @@ msgid ""
 "permettra de gerer les informations sur vos clients comme vous le souhaitez "
 "et rajouter ces informations automatiquement dans vos mailings"
 msgstr ""
-"Vous avez la possibilités de creer des champs specifiques , se qui vous "
-"permettra de gerer les informations sur vos clients comme vous le souhaitez "
+"Vous avez la possibilité de créer des champs spécifiques , se qui vous "
+"permettra de gérer les informations sur vos clients comme vous le souhaitez "
 "et rajouter ces informations automatiquement dans vos mailings"
 
 #: tuto/h_email.php:8
@@ -3081,8 +3981,8 @@ msgid ""
 "Si vous avez l'option NPAI (bounces) est active sur votre license, les email "
 "invalide (hard bounces) serons desactive de vos listes"
 msgstr ""
-"Si vous avez l'option NPAI (bounces) est activé sur votre license, les email "
-"invalide (hard bounces) serons desactivé de vos listes"
+"Si vous avez l'option NPAI (bounces) est active sur votre licence, les "
+"emails invalides (hard bounces) serons désactivés de vos listes"
 
 #: tuto/h_email.php:13
 msgid "Importation d'email"
@@ -3096,14 +3996,14 @@ msgid ""
 msgstr ""
 "Vous devez avoir le dossier /e-mailing-service/post avec l'autorisation sur "
 "le dossier (CHMOD 777) pour pouvoir importer des fichiers emails, une fois "
-"importer vos fichiers sont supprimes"
+"importés vos fichiers sont supprimés"
 
 #: tuto/h_email.php:16 tuto/h_template.php:8
 msgid ""
 "Pas defaut en general vous pouvez importer un fichier de 2mo, pour augmenter "
 "celui-ci , il faut rajouter dans votre fichier .htaccess"
 msgstr ""
-"Pas defaut en general vous pouvez importer un fichier de 2mo, pour augmenter "
+"Pas défaut en général vous pouvez importer un fichier de 2mo, pour augmenter "
 "celui-ci , il faut rajouter dans votre fichier .htaccess"
 
 #: tuto/h_send.php:2
@@ -3124,8 +4024,8 @@ msgid ""
 "destinataires et creer votre newsletter, il suffit donc de remplir le "
 "formulaire et d'envoyer"
 msgstr ""
-"Pour envoyer la newsletter , une fois que vous avez creer votre liste de "
-"destinataires et creer votre newsletter, il suffit donc de remplir le "
+"Pour envoyer la newsletter , une fois que vous avez créer votre liste de "
+"destinataires et créer votre newsletter, il suffit donc de remplir le "
 "formulaire et d'envoyer"
 
 #: tuto/h_send.php:8
@@ -3136,16 +4036,16 @@ msgid ""
 "l'envoi la ou elle a ete arrete"
 msgstr ""
 "Pour suivre l'envoi , vous devez vous rendre sur le menu 'suivi' , si vous "
-"avez activer la possibilités de mettre en pause la newsletter dans la "
+"avez activé la possibilité de mettre en pause la newsletter dans la "
 "configuration SMTP, vous pouvez donc mettre en pause l'envoi et reprendre "
-"l'envoi la ou elle à été arrété"
+"l'envoi la ou elle a été arrêté"
 
 #: tuto/h_send.php:10
 msgid ""
 "Vous avez la possibilites d'ajouter des trackings supplementaires, pour "
 "affiner vos statistiques"
 msgstr ""
-"Vous avez la possibilités d'ajouter des trackings supplementaires, pour "
+"Vous avez la possibilité d'ajouter des trackings supplémentaires, pour "
 "affiner vos statistiques"
 
 #: tuto/h_stats.php:7
@@ -3154,17 +4054,18 @@ msgid ""
 "si le destinataire n'active pas l'affichage d'image sur ces emails, "
 "l'ouverture de l'email ne sera pas pris en compte"
 msgstr ""
-"Les statistiques d'ouverture sont effectuer avec une image, malheureusement "
-"si le destinataire n'active pas l'affichage d'image sur ces emails, "
+"Les statistiques d'ouverture sont effectués avec une image, malheureusement "
+"si le destinataire n'active pas l'affichage d'image sur ses emails, "
 "l'ouverture de l'email ne sera pas pris en compte"
 
 #: tuto/h_stats.php:9
 msgid "Les statistiques d'ouverture sont donc largement inferieur a la normal"
-msgstr "Les statistiques d'ouverture sont donc largement inferieur à la normal"
+msgstr ""
+"Les statistiques d'ouverture sont donc largement inférieures a la normal"
 
 #: tuto/h_template.php:2
 msgid "Importation de modele"
-msgstr "Importation de modeles"
+msgstr "Importation de modèle"
 
 #: tuto/h_template.php:3
 msgid ""
@@ -3172,19 +4073,19 @@ msgid ""
 "le dossier (CHMOD 777) pour pouvoir importer des fichier .zip"
 msgstr ""
 "Vous devez avoir le dossier /e-mailing-service/post avec l'autorisation sur "
-"le dossier (CHMOD 777) pour pouvoir importer des fichier .zip"
+"le dossier (CHMOD 777) pour pouvoir importer des fichiers .zip"
 
 #: tuto/suggestion.php:49
 msgid ""
 "Vous souhaitez que nous rajoutions des options ou des ameliorations au "
-"plugin ?\n"
-"<br>Faites en la demande.\n"
+"plugin ?\r\n"
+"<br>Faites en la demande.\r\n"
 "<br>Les idees qui obtiennent le plus de vote, sont develloppes en priorite"
 msgstr ""
-"Vous souhaitez que nous rajoutions des options ou des ameliorations au "
-"plugin ?\n"
-"<br>Faites en la demande.\n"
-"<br>Les idées qui obtiennent le plus de vote, sont develloppés en priorité"
+"Vous souhaitez que nous rajoutions des options ou des améliorations au "
+"plugin ?\r\n"
+"<br>Faites en la demande.\r\n"
+"<br>Les idées qui obtiennent le plus de vote, sont développées en priorité"
 
 #: tuto/suggestion.php:54
 msgid ""
@@ -3192,9 +4093,13 @@ msgid ""
 "devez activer gratuitement la permission d'interagir avec notre site dans la "
 "rubrique "
 msgstr ""
-"Pour pouvoir envoyer une suggestion a notre equipe de devellopeur, vous "
+"Pour pouvoir envoyer une suggestion a notre équipe de développeurs, vous "
 "devez activer gratuitement la permission d'interagir avec notre site dans la "
 "rubrique "
+
+#: tuto/suggestion.php:64
+msgid "Suggestion"
+msgstr "Suggestion"
 
 #: tuto/suggestion.php:71
 msgid "Envoyer votre demande"
@@ -3202,7 +4107,7 @@ msgstr "Envoyer votre demande"
 
 #: tuto/suggestion.php:85
 msgid "Suggerer par"
-msgstr "Suggerer par"
+msgstr "Suggérer par"
 
 #: tuto/suggestion.php:85
 msgid "le"
@@ -3227,12 +4132,12 @@ msgstr "Ticket"
 #: tuto/ticket.php:2
 msgid ""
 "Les tickets ne concernent que les problemes techniques lies a la location "
-"d'un de nos serveurs ou un probleme avec le plugin !<br>  \n"
+"d'un de nos serveurs ou un probleme avec le plugin !<br>  \r\n"
 "Pour les questions de gestion de spam ou autre vous devez lire ou posez "
 "votre question sur la FAQ"
 msgstr ""
-"Les tickets ne concernent que les problemes techniques liés à la location "
-"d'un de nos serveurs ou un probleme avec le plugin !<br>  \n"
+"Les tickets ne concernent que les problèmes techniques lies a la location "
+"d'un de nos serveurs ou un problème avec le plugin !<br>  \n"
 "Pour les questions de gestion de spam ou autre vous devez lire ou posez "
 "votre question sur la FAQ"
 
@@ -3260,14 +4165,119 @@ msgstr "N° du ticket"
 msgid "Fermer"
 msgstr "Fermer"
 
+#~ msgid "Information sur les options"
+#~ msgstr "Information sur les options"
+
+#~ msgid "Erreur SQL contact support or FAQ"
+#~ msgstr "Erreur SQL contact support or FAQ"
+
+#~ msgid "Nb de desinscrits"
+#~ msgstr "Nb de desinscrits"
+
+#~ msgid "Nb Invalide"
+#~ msgstr "Nb Invalide"
+
+#~ msgid "Nom du premier champs"
+#~ msgstr "Nom du premier champs"
+
+#~ msgid "Nom du deuxieme champs"
+#~ msgstr "Nom du deuxieme champs"
+
+#~ msgid "Nom du troisieme champs"
+#~ msgstr "Nom du troisieme champs"
+
+#~ msgid "Nom du quatrieme champs"
+#~ msgstr "Nom du quatrieme champs"
+
+#~ msgid "Nom du cinquieme champs"
+#~ msgstr "Nom du cinquieme champs"
+
+#~ msgid "Nom du sixieme champs"
+#~ msgstr "Nom du sixieme champs"
+
+#~ msgid "Nom du septieme champs"
+#~ msgstr "Nom du septieme champs"
+
+#~ msgid "Nom du huitime champs"
+#~ msgstr "Nom du huitime champs"
+
+#~ msgid "Nom du neuvieme champs"
+#~ msgstr "Nom du neuvieme champs"
+
+#~ msgid "Nom du dixieme champs"
+#~ msgstr "Nom du dixieme champs"
+
+#~ msgid "Nom du onzieme champs"
+#~ msgstr "Nom du onzieme champs"
+
+#~ msgid "Nom du douzieme champs"
+#~ msgstr "Nom du douzieme champs"
+
+#~ msgid ""
+#~ "Vous disposez d'une license de Mass Mailing, pour configurer vos "
+#~ "serveurs , rendez vous sur la page"
+#~ msgstr ""
+#~ "Vous disposez d'une license de Mass Mailing, pour configurer vos "
+#~ "serveurs , rendez vous sur la page"
+
+#~ msgid ""
+#~ "Vous disposez d'une license pour l'API Mass Mailing, pour configurer vos "
+#~ "serveurs , rendez vous sur la page"
+#~ msgstr ""
+#~ "Vous disposez d'une license pour l'API Mass Mailing, pour configurer vos "
+#~ "serveurs , rendez vous sur la page"
+
+#~ msgid "Avec authentification"
+#~ msgstr "Avec authentification"
+
+#~ msgid "Parametres Automatiques"
+#~ msgstr "Parametres Automatiques"
+
+#~ msgid "Afficher le texte en haut"
+#~ msgstr "Afficher le texte en haut"
+
+#~ msgid "Afficher le texte de desabonnement"
+#~ msgstr "Afficher le texte de desabonnement"
+
+#~ msgid "Afficher le lien de notre affiliation"
+#~ msgstr "Afficher le lien de notre affiliation"
+
+#~ msgid "Envoyer le lien d'un article ou d'un page"
+#~ msgstr "Envoyer le lien d'un article ou d'un page"
+
+#~ msgid ""
+#~ "Si vous avez coche dans les parametres l'envoi automatiques des nouveaux "
+#~ "articles , vous n'avez pas besoin de vous servir de ce menu"
+#~ msgstr ""
+#~ "Si vous avez coche dans les parametres l'envoi automatiques des nouveaux "
+#~ "articles , vous n'avez pas besoin de vous servir de ce menu"
+
+#~ msgid "Envoyer la newsletter avec un serveur au choix"
+#~ msgstr "Envoyer la newsletter avec un serveur au choix"
+
+#~ msgid "Posez une question public"
+#~ msgstr "Posez une question public"
+
+#~ msgid "Liste des tickets"
+#~ msgstr "Liste des tickets"
+
+#~ msgid "Contacter le support technique"
+#~ msgstr "Contacter le support technique"
+
+#~ msgid "Creation Newsletter"
+#~ msgstr "Création Newsletter"
+
+#~ msgid "Envois SMTP"
+#~ msgstr "Envois SMTP"
+
+#~ msgid "Suivis"
+#~ msgstr "Suivis"
+
 #~ msgid "Test file"
 #~ msgstr "Test file"
 
 #~ msgid "test file"
 #~ msgstr "test file"
-
-#~ msgid "Debug bounces"
-#~ msgstr "Debug bounces"
 
 #~ msgid "emails"
 #~ msgstr "emails"
@@ -3375,9 +4385,6 @@ msgstr "Fermer"
 #~ msgid "No templates found in Trash."
 #~ msgstr "Le modele fonctionne pas"
 
-#~ msgid "Search Templates"
-#~ msgstr "Recherche un modele"
-
 #~ msgid "Debug dashboard"
 #~ msgstr "Debug dashboard"
 
@@ -3436,9 +4443,6 @@ msgstr "Fermer"
 #~ msgstr ""
 #~ "Seuls les caractères alphanumériques sont acceptés pour les noms de listes"
 
-#~ msgid "Add contact to list"
-#~ msgstr "Ajouter le contact à la liste"
-
 #~ msgid "More"
 #~ msgstr "Plus"
 
@@ -3465,9 +4469,6 @@ msgstr "Fermer"
 
 #~ msgid "Change your mailjet settings"
 #~ msgstr "Parametre sm"
-
-#~ msgid "Settings"
-#~ msgstr "Paramètres"
 
 #~ msgid "Mailjet Settings"
 #~ msgstr "Parametres serveurs mails"
@@ -3538,14 +4539,8 @@ msgstr "Fermer"
 #~ msgid "<code>From:</code> email address"
 #~ msgstr "<code>De :</code> adresse email"
 
-#~ msgid "Disable autosubscribe"
-#~ msgstr "Désactiver l'inscription auto"
-
 #~ msgid "Autosubscribe new users to this list"
 #~ msgstr "Ajouter les nouveaux utilisateurs à cette liste"
-
-#~ msgid "General Settings"
-#~ msgstr "Paramètres généraux"
 
 #~ msgid ""
 #~ "Enable or disable the sending of your emails through your Mailjet account"
@@ -3557,9 +4552,6 @@ msgstr "Fermer"
 
 #~ msgid "API secret"
 #~ msgstr "API Sm"
-
-#~ msgid "API Settings"
-#~ msgstr "Paramètres API"
 
 #~ msgid ""
 #~ "You can get your API keys from <a href=\"https://www.mailjet.com/account/"
@@ -3602,9 +4594,6 @@ msgstr "Fermer"
 #~ msgid "Allows your visitors to subscribe to one of your lists"
 #~ msgstr "Permet à vos visiteurs de s'inscrire à une de vos listes"
 
-#~ msgid "Title:"
-#~ msgstr "Titre :"
-
 #~ msgid "Button text:"
 #~ msgstr "Texte du bouton :"
 
@@ -3636,9 +4625,6 @@ msgstr "Fermer"
 #~ "Mailjet plugin\">faire cela dès maintenant</a> ? <a href=\"%1$s\" style="
 #~ "\"display:block; float:right;\">Cacher ce message</a>"
 
-#~ msgid "Subscribe"
-#~ msgstr "S'abonner"
-
 #~ msgid "Created on"
 #~ msgstr "Créée le "
 
@@ -3647,9 +4633,6 @@ msgstr "Fermer"
 
 #~ msgid "Yes"
 #~ msgstr "Oui"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
 
 #~ msgid "Delete"
 #~ msgstr "Effacer"

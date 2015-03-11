@@ -23,7 +23,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Pour etre informé de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Vous avez un probleme avec le plugin, cette section peu vous aider a trouver la solution","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

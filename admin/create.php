@@ -77,7 +77,7 @@ if($_POST['editeur'] == "wordpress"){
 //fin du menu action
 } else {
 echo '<div class="message success">';
-echo "<br><h1>".__("Création de votre newsletter","e-mailing-service")."</h1>";
+echo "<br><h1>".__("Creation de votre newsletter","e-mailing-service")."</h1>";
 echo "<h2>".__("Premiere etape , choisir le sujet et le modele","e-mailing-service")."</h2>";
 echo '<form action="?page=e-mailing-service/admin/create.php" method="post">
 <input name="action" type="hidden" value="editor" />
@@ -98,11 +98,11 @@ foreach ( $listemodeles as $listemodele )
 echo '<option value="'.get_site_url().'/?post_type=sm_modeles&p='.$listemodele->ID.'">'.$listemodele->post_name.'</option>';
 }
 echo ' </select></td></tr>
-   <tr><td>'.__("Passez à l'etape 2","e-mailing-service").'</td><td>   <input name="submit" type="submit" value="create" class="button button-green" /></td></tr>
+   <tr><td>'.__("Passez a l'etape 2","e-mailing-service").'</td><td>   <input name="submit" type="submit" value="create" class="button button-green" /></td></tr>
     </table>
     </form></div>
 <br>
-    <div id="preview">'.__("Aperçu de la newsletter","e-mailing-service").'
+    <div id="preview">'.__("Apercu de la newsletter","e-mailing-service").'
       <div id="image"></div>
       <div id="Displaytitle"></div>
     </div>';

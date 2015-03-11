@@ -16,14 +16,14 @@ extract($_GET);
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
-<?php _e("Envoyer votre newsletter","e-mailing-service");?>
+<?php _e("NPAI","e-mailing-service");?>
  </h2>
                 </div>
          </div>
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Programmer l'heure et la date d'envoi de votre newsletter","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Email retour indiquant d'eventuel probleme de delivrabilite","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

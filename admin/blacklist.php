@@ -16,14 +16,14 @@ extract($_GET);
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
-<?php _e("Envoyer votre newsletter","e-mailing-service");?>
+<?php _e("Blacklist","e-mailing-service");?>
  </h2>
                 </div>
          </div>
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Programmer l'heure et la date d'envoi de votre newsletter","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Liste des blacklist sur laquel votre ip est inscrite","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

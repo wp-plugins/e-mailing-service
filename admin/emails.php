@@ -26,7 +26,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Permet de verifier que vos emails sont bien enregistrés","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Permet de verifier que vos emails sont bien enregistres","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

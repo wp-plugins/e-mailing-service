@@ -597,7 +597,6 @@ function sm_optimisation_fai($email,$sujet,$num=1,$mode="text/html",$fromname='s
 @list($nameemail,$faiemail)=explode('@',$email);
 if($faiemail == "yahoo.com"){
 $header = "Reply-to: ".$reply_to."
-Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
 Errors-To: ".$error_to."
 List-Unsubscribe: <mailto: ".$_SESSION['sm_email_ret'].">
