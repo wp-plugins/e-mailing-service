@@ -23,7 +23,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("List des newsletters, vous pouvez envoyer plusieurs fois la même newsletter","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("List des newsletters, vous pouvez envoyer plusieurs fois la meme newsletter","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

@@ -23,7 +23,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Pour etre informé de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Pour etre informe de la fin de vos newsletters, credits , etc..........","e-mailing-service")."</p>";?>
                     
                     <hr />
                     
@@ -113,7 +113,7 @@ if(get_user_meta( $user_id, 'sm_alerte_stats',true) =='oui'){?>
 <?php } ?> </td>
 </tr>
 <tr height="20">
-  <td><?php _e("Credits epuisés","e-mailing-service");?></td>
+  <td><?php _e("Credits epuises","e-mailing-service");?></td>
   <td><?php 
     if(!get_user_meta( $user_id, 'sm_alerte_credit',true)){
     add_user_meta( $user_id, 'sm_alerte_credit', '', true);

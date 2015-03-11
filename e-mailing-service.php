@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 8.7
+Version: 8.8
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '8.7' );
+define( 'smVERSION', '8.8' );
 define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -52,21 +52,22 @@ add_action('plugins_loaded', 'sm_init');
 
 function register_sm_menu_page() {
    add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'),  'manage_options',  smPATH . 'admin/index.php', NULL, smURL . 'include/email_edit.png');  
-     add_submenu_page( 'e-mailing-service/admin/index.php', __('Contact list', 'e-mailing-service'), __('Contact list', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/listes.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/emails.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Contact list', 'e-mailing-service'), __('Contact list', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/listes.php', NULL);
+   add_submenu_page( smPATH . 'admin/listes.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/emails.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Creer une newsletter', 'e-mailing-service'), __('Creer une newsletter', 'e-mailing-service'), 'manage_options', smPATH . 'admin/create.php', NULL);
    add_submenu_page( smPATH . 'admin/create.php', __('with wordpress', 'e-mailing-service'), __('with wordpress', 'e-mailing-service'), 'manage_options', 'post-new.php?post_type=newsletter', NULL);
    add_submenu_page(smPATH . 'admin/create.php', __('with elrte', 'e-mailing-service'), __('with elrte', 'e-mailing-service'), 'manage_options', smPATH . 'admin/editor.php', NULL);   
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/import_newsletter.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/listes_newsletter.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Creation de modeles', 'e-mailing-service'), __('Creation de modeles', 'e-mailing-service'), 'manage_options',  'post-new.php?post_type=sm_modeles', NULL);
+     add_submenu_page( 'e-mailing-service/admin/index.php', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Campaign', 'e-mailing-service'), __('Campaign', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/variables.php', NULL);
+
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Creer un modele', 'e-mailing-service'), __('Creation de modeles', 'e-mailing-service'), 'manage_options',  'post-new.php?post_type=sm_modeles', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Modeles', 'e-mailing-service'), __('Liste Modeles', 'e-mailing-service'), 'manage_options',  'edit.php?post_type=sm_modeles', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Import Modele', 'e-mailing-service'), __('Import modele', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/import_template.php', NULL);
    
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send_user.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Suivis', 'e-mailing-service'), __('Suivis', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_user.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/variables.php', NULL);
 
     add_submenu_page( 'e-mailing-service/admin/index.php', __('NPAI', 'e-mailing-service'), __('NPAI', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/npai.php', NULL);
     add_submenu_page( 'e-mailing-service/admin/index.php', __('Blacklist', 'e-mailing-service'), __('Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/blacklist.php', NULL);
@@ -2040,7 +2041,7 @@ function SM_select_shortcode(){
      $shortcodes_list = '&nbsp;<select id="sc_select"><option>'.__('Shortcode for newsletter','e-mailing-service').'</option>';
      $shortcodes_list .= '<option value=\'<a href="[lien_desabo]">'.__('Unsuscribe','e-mailing-service').'</a>\'>'.__('Link unsuscribe','e-mailing-service').'</option>';
 	 $shortcodes_list .= '<option value=\'<a href="[lien_page]">'.__('View online','e-mailing-service').'</a>\'>'.__('Link view online','e-mailing-service').'</option>';
-	 $shortcodes_list .= '<option value=\'<a href="[lien_affiliation]">'.__('Send à newsltter','e-mailing-service').'</a>\'>'.__('Link affiliate','e-mailing-service').'</option>';
+	 $shortcodes_list .= '<option value=\'<a href="[lien_affiliation]">'.__('Send a newsltter','e-mailing-service').'</a>\'>'.__('Link affiliate','e-mailing-service').'</option>';
 	 $shortcodes_list .= '<option value=\'[link_titre]\'>'.__('Title of article','e-mailing-service').'</option>';
 	 $shortcodes_list .= '<option value=\'[link]\'>'.__('Link to the article ','e-mailing-service').'</option>';
 	 $shortcodes_list .= '<option value=\'\'>----------------------'.__('Automatic shortcode on your information','e-mailing-service').'-----------------------</option>';

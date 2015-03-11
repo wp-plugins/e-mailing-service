@@ -23,7 +23,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                                   
 
-        <?php echo "<p>".__("Pour suivre en direct le nombres d'emails envoyés","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Pour suivre en direct le nombres d'emails envoyes","e-mailing-service")."</p>";?>
                     
                     <hr />
                     

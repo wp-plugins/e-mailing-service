@@ -46,7 +46,7 @@
                  <section id="content">
             <div class="wrapper">                                 
 
-        <?php echo "<p>".__("Le temps d'actualisation des statistiques peuvent etre plus ou moin decalés, sauf pour les statistiques en direct","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Le temps d'actualisation des statistiques peut etre plus ou moin decale, sauf pour les statistiques en direct","e-mailing-service")."</p>";?>
                     
                     <hr />
 <?php
@@ -671,6 +671,7 @@ $pourcent_clic=round(100 * $row[4] / $total_envoi, 2 );
 <li><?php echo __('Click affiliate link','e-mailing-service'); ?>  :  <?php echo $row[6];?></li>
 <li><?php echo __('Unsuscribe','e-mailing-service'); ?>  :  <?php echo $row[7];?></li>
 <li><?php echo __('Bounced','e-mailing-service'); ?>  :  <?php echo $row[8];?></li>
+
 </ul>
 
 <br /><br /><br />
@@ -708,6 +709,14 @@ echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_
 <li><?php echo __('Click affiliate link','e-mailing-service'); ?>  :  <?php echo $row[6];?></li>
 <li><?php echo __('Unsuscribe','e-mailing-service'); ?>  :  <?php echo $row[7];?></li>
 <li><?php echo __('Bounced','e-mailing-service'); ?>  :  <?php echo $row[8];?></li>
+<li>&nbsp;</li>
+<?php echo "
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_open_total&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter les statistiques en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_open_email&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter seulement les emails en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_open_total&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter les statistiques en fichier","e-mailing-service")." .xls</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_open_email&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter seulement les emails en fichier","e-mailing-service")." .xls</a></li>
+";
+?>
 </ul>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br />
@@ -781,6 +790,14 @@ echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_
 <li><?php echo __('Click affiliate link','e-mailing-service'); ?>  :  <?php echo $row[6];?></li>
 <li><?php echo __('Unsuscribe','e-mailing-service'); ?>  :  <?php echo $row[7];?></li>
 <li><?php echo __('Bounced','e-mailing-service'); ?>  :  <?php echo $row[8];?></li>
+<li>&nbsp;</li>
+<?php echo "
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_link_total&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter les statistiques en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_link_email&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter seulement les emails en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_link_total&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter les statistiques en fichier","e-mailing-service")." .xls</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_link_email&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter seulement les emails en fichier","e-mailing-service")." .xls</a></li>
+";
+?>
 </ul>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br />
@@ -839,6 +856,14 @@ $pourcent_soft=round(100 * $total_soft / $total_envoi, 2 );
 <li><?php echo __('Hard bounce Rate','e-mailing-service'); ?>  : <?php echo $pourcent_hard;?> %</li>
 <li><?php echo __('Total Soft bounce','e-mailing-service'); ?>  :  <?php echo $total_soft;?></li>
 <li><?php echo __('Soft bounce Rate','e-mailing-service'); ?>  :  <?php echo $pourcent_soft;?> %</li>
+<li>&nbsp;</li>
+<?php echo "
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_hard_bounces&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter Hard Bounces en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_soft_bounces&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter Soft Bounces en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_hard_bounces&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter Hard Bounces en fichier","e-mailing-service")." .xls</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_soft_bouncesl&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter Soft Bounces en fichier","e-mailing-service")." .xls</a></li>
+";
+?>
 </ul>
 
 <br /><br /><br /><br /><br /><br /><br /><br />
@@ -878,6 +903,12 @@ echo $tbaleau_insert;
 <ul>
 <li><?php echo __('Sent To','e-mailing-service'); ?>  :  <?php echo $total_envoi;?></li>
 <li><?php echo __('Click Unsubscribe','e-mailing-service'); ?>  :  <?php echo $row[7];?></li>
+<li>&nbsp;</li>
+<?php echo "
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=csv_unsuscribe&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter desinscrit en fichier","e-mailing-service")." .csv</a></li>
+<li><a href=\"".smURL."include/export.php?liste=".sm_liste_title($fivesdraft->id_liste)."&action=export&format=xls_unsuscribes&hie=".$_GET["id"]."\" target=\"_parent\">".__("Exporter desinscrit en fichier","e-mailing-service")." .xls</a></li>
+";
+?>
 </ul><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 

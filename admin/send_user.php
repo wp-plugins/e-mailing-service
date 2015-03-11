@@ -85,7 +85,7 @@ update_user_meta( $user_id, 'sm_username', ''.$infossmtps->email.'@'.$infossmtps
 update_user_meta( $user_id, 'sm_pass', $infossmtps->pass_email_redirection);
 }
 } else {
-echo "<h2>".__("Vous êtes arrivé au bout de votre quota , vous ne pouvez plus envoyer avant le mois suivant","e-mailing-service")." : ".$nb_credit_necessaire." ".__("credits necessaires","admin-hosting")."</h2>";	
+echo "<h2>".__("Vous etes arrive au bout de votre quota , vous ne pouvez plus envoyer avant le mois suivant","e-mailing-service")." : ".$nb_credit_necessaire." ".__("credits necessaires","admin-hosting")."</h2>";	
 exit();	
 }
 }
@@ -153,7 +153,7 @@ add_user_meta( $user_id, 'sm_username', get_option('sm_smtp_login_1'),true);
 add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
 }
 	     _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
 			
 	}
 	
@@ -247,16 +247,16 @@ echo "</select></blockquote></td>
 <tr>
 <td><input name=\"envoyer\" type=\"submit\" class=\"button button-blue\" value=\"".__("envoyer","e-mailing-service")."\"/></td>
 <td></td>
-</tr>";
-echo " </tbody></table></form><br><div>";	
+</tr></tbody></table></form>";
+echo "</div>";	
 }
 
 echo '<div class="message success">';
 echo "<br><h1>".__("Envoyer votre newsletter","e-mailing-service")."</h1>";
 
 if(ah_service_actif($user_login) > 1){
-echo "<h3>1 ".__("mail envoyé avec vos listes","e-mailing-service")." = ".get_option('ah_tarif_credit')." ".__("credit","e-mailing-service")."<h3>";
-echo "<p>".__("Si le nombre d'email dans votre liste est superieur aux nombres de credit necessaire à l'envoi , la totalité de votre liste ne sera pas envoyé","e-mailing-service")."<p>";
+echo "<h3>1 ".__("mail envoyes avec vos listes","e-mailing-service")." = ".get_option('ah_tarif_credit')." ".__("credit","e-mailing-service")."<h3>";
+
 echo '<button><strong>'.ah_credit($user_login).' '.__('credit','e-mailing-service').'</strong></button>';
   if(ah_credit($user_login) < 1) {	
   echo "<h2>".__("Votre solde de credit n'est pas suffisant pour envoyer un mailing, vous devez crediter votre compte","e-mailing-service")."</h2>";	
@@ -271,7 +271,7 @@ echo '<table width="500">
                          <thead>';
 echo "
 <tr><td width=\"50%\"><blockquote><b>".__("Choisir une liste","e-mailing-service")."</b></blockquote></td>
-<td><select name=\"liste\">";
+<td width=\"200\"><select name=\"liste\">";
 $listes = $wpdb->get_results("SELECT * FROM `".$table_liste."` where login='".$user_login."'");
 foreach ( $listes as $liste ) 
 {
@@ -298,7 +298,8 @@ foreach ( $news as $new )
 
 }
 echo "</select></td></tr>
-<tr><td><blockquote><b>".__("Choisir la date","e-mailing-service")."</b></blockquote></td><td><input name=\"date_envoi\" type=\"text\" value=\"".date('Y-m-d H:i:s')."\" /></td></tr>
+<tr>
+<td width=\"200\"><blockquote><b>".__("Choisir la date","e-mailing-service")."</b></blockquote></td><td><input name=\"date_envoi\" type=\"text\" value=\"".date('Y-m-d H:i:s')."\" /></td></tr>
 <tr><td><blockquote><b>".__("From Name","e-mailing-service")."</b></blockquote></td><td>
 <input name=\"reply_to\" type=\"text\" value=\"".get_user_meta( $user_id, 'sm_reply',true)."\" /></td></tr>
 <tr><td><blockquote><b>".__("Reply TO","e-mailing-service")."</b></blockquote></td><td>
@@ -320,9 +321,9 @@ echo '</select></td></tr>
 ';
 
 echo "</thead></table><br>
-<input name=\"envoyer\" type=\"submit\" class=\"button button-green\" value=\"".__("envoyer","e-mailing-service")."\"/></td>
+<input name=\"envoyer\" type=\"submit\" class=\"button button-green\" value=\"".__("envoyer","e-mailing-service")."\"/></td></form><br>
 ";
-echo "</form><br><div>";
+echo "</div>";
 
 
 

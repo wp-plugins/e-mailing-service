@@ -122,7 +122,7 @@ if($_POST['editeur'] == "wordpress"){
 
 echo '<div class="message info">';
 echo "<br><h1>".__("Creation de votre newsletter","e-mailing-service")."</h1>";
-echo "<p>".__("Modifier les textes et les images (pour copier directement du code html , mettez l'onglet en bas à gauche sur source)","e-mailing-service")."</p>";
+echo "<p>".__("Modifier les textes et les images (pour copier directement du code html , mettez l'onglet en bas a gauche sur source)","e-mailing-service")."</p>";
 echo "<p>".__("Pour enregister votre newsletter cliquez sur la disquette","e-mailing-service")."</p><br>";
 ?>
 <form action="?page=e-mailing-service/admin/editor.php" method="post">

@@ -2,6 +2,31 @@
 include("../../../../wp-config.php");
 @mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("<br /> Excusez nous mais la connection est interrompue pour quelques instants.");
 extract($_GET);
+if(get_option('sm_license') == 'free' ||get_option('sm_license') == 'api-free'){
+echo __('Vous ne disposez pas de la license pour pouvoir exporter les fichiers','e-mailing-service');
+echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3TNHDCQEV7TA8">
+<input name="custom" type="hidden" value="'.get_option('sm_login').'|e-mailing-service.net" />
+<input type="hidden" name="on1" value="Url du wordpress">
+<input type="hidden" name="os1" maxlength="200" value="'.get_option('sm_domain').'">
+<table>
+<tr><td><input type="hidden" name="on0" value="Options">'.__("Options","e-mailing-service").'</td></tr><tr><td><select name="os0">
+	<option value="API avec toutes les options">'.__("API avec toutes les options : 30.00 EUR - monthly","e-mailing-service").'</option>
+	<option value="API + export csv">'.__("API + export csv : 20.00 EUR - monthly","e-mailing-service").'</option>
+	<option value="API + NPAI">'.__("API + NPAI : 13.00 EUR - monthly","e-mailing-service").'</option>
+	<option value="API + Blacklist">'.__("API + Blacklist : 12.00 EUR - monthly","e-mailing-service").'</option>
+	<option value="API Sans Options">'.__("API Sans Options : 10.00 EUR - monthly","e-mailing-service").'</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="EUR">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+';
+exit();	
+}
 if($format=="xls_backup"){
 $i=1;
 $csv_output="";
@@ -86,7 +111,371 @@ header("Expires: 0");
 print $csv_output;
 exit;
 }
-else {
+elseif($format=="csv_open_total"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_open_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2].";".$rang[3].";".$rang[4].";".$rang[5].";".$rang[6].";\n";
+                             }
+		}
+		}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="csv_open_email"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_open_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2].";\n";
+                             }
+		}
+		}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="xls_open_total"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_open_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2]."\t".$rang[3]."\t".$rang[4]."\t".$rang[5]."\t".$rang[6]."\t\n";
+                             }
+		}
+		}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");  
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="xls_open_email"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_open_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2]."\t\n";
+                             }
+		}
+		}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");  
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="csv_link_total"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','link'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2].";".$rang[3].";".$rang[4].";\n";
+                             }
+		}
+		}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="csv_link_email"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','link'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2].";\n";
+                             }
+		}
+		}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="xls_link_total"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','link'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2]."\t".$rang[3]."\t".$rang[4]."\t\n";
+                             }
+		}
+		}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");  
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="xls_link_email"){
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','link'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2]."\t\n";
+                             }
+		}
+		}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");  
+print $csv_output;
+exit;
+
+	
+}
+elseif($format=="csv_hard_bounces"){
+$i=1;
+$csv_output="";
+$q6=mysql_query("SELECT * FROM `".$table_bounces_log."` WHERE hie='".$hie."' AND bounce_type ='hard' ORDER BY id DESC") OR die("".mysql_error()."");
+while ($r6 = mysql_fetch_array($q6))
+{
+  extract($r6);
+	if($i==1){
+	$csv_output .= "".__("email","e-mailing-service").";\n";
+	}	
+	$csv_output .= "".$email.";\n";
+	$i++;
+
+}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+elseif($format=="csv_soft_bounces"){
+$i=1;
+$csv_output="";
+$q6=mysql_query("SELECT * FROM `".$table_bounces_log."` WHERE hie='".$hie."' AND bounce_type ='soft' ORDER BY id DESC") OR die("".mysql_error()."");
+while ($r6 = mysql_fetch_array($q6))
+{
+  extract($r6);
+	if($i==1){
+	$csv_output .= "".__("email","e-mailing-service").";\n";
+	}	
+	$csv_output .= "".$email.";\n";
+	$i++;
+
+}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+elseif($format=="xls_hard_bounces"){
+$i=1;
+$csv_output="";
+$q6=mysql_query("SELECT * FROM `".$table_bounces_log."` WHERE hie='".$hie."' AND bounce_type ='hard' ORDER BY id DESC") OR die("".mysql_error()."");
+while ($r6 = mysql_fetch_array($q6))
+{
+  extract($r6);
+	if($i==1){
+	$csv_output .= "".__("email","e-mailing-service").";\n";
+	}	
+	$csv_output .= "".$email."\t\n";
+	$i++;
+
+}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+elseif($format=="xls_soft_bounces"){
+$i=1;
+$csv_output="";
+$q6=mysql_query("SELECT * FROM `".$table_bounces_log."` WHERE hie='".$hie."' AND bounce_type ='soft' ORDER BY id DESC") OR die("".mysql_error()."");
+while ($r6 = mysql_fetch_array($q6))
+{
+  extract($r6);
+	if($i==1){
+	$csv_output .= "".__("email","e-mailing-service").";\n";
+	}	
+	$csv_output .= "".$email."\t\n";
+	$i++;
+
+}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+elseif($format=="csv_unsuscribe"){
+$i=1;
+$csv_output="";
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2].";\n";
+                             }
+		}
+		}
+header("Content-Type: application/csv");
+header("Content-Disposition: attachment; filename=".$hie.".csv");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+elseif($format=="xls_unsuscribes"){
+$i=1;
+$csv_output="";
+$array =array (
+		"site" => get_option('sm_domain'),
+		"license_key" => get_option('sm_license_key'), 
+		"login" => $user_login,
+		"ip" => $_SERVER['REMOTE_ADDR'],
+		"action" => "list_link_hie",
+		"id" => $hie
+		); 
+        $fluxl =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php',$array);
+		$xml_open = post_xml_data($fluxl,'item',array('resultat','id','email','date','track1','track2','pays'));
+		//echo '<textarea name="bug" cols="150" rows="10">'.$fluxl.'</textarea>';
+		if($xml_open !=''){
+		foreach($xml_open as $rang) {
+			if($rang[0] == 1){
+$csv_output .= "".$rang[2]."\t\n";
+                             }
+		}
+		}
+header("Content-Type: application/xls");
+header("Content-Disposition: attachment; filename=".$hie.".xls");
+header("Pragma: no-cache"); 
+header("Expires: 0");
+print $csv_output;
+exit;
+}
+ else {
 _e("Le format n'est pas corret","e-mailing-service");	
 }
 ?>
