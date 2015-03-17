@@ -52,7 +52,7 @@ update_user_meta( $user_id, 'sm_fromname',$fromname);
 update_user_meta( $user_id, 'sm_from', $fromname);
 update_user_meta( $user_id, 'sm_reply',$reply_to);
 	  _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
 	}
 	elseif($action == "envoi_article"){
 		list($ID,$POSTTYPE)=explode("|",$campagne);
@@ -66,11 +66,14 @@ update_user_meta( $user_id, 'sm_reply',$reply_to);
 			'track2' => $track2,
             'date_envoi' => $date_envoi,
 			'mode' => $mode,
+			'login' => $user_login,
+			'attachments' => '',
+			'user_id' => $user_id,
        ));
 	    $hie = $wpdb->insert_id;
 		
 	    _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
 	}
 } else {
 echo '<div class="message success">';
@@ -111,9 +114,9 @@ foreach ( $news as $new )
 echo "</select></td></tr>
 <tr><td><blockquote><b>".__("Choisir la date","e-mailing-service")."</b></blockquote></td><td><input name=\"date_envoi\" type=\"text\" value=\"".date('Y-m-d H:i:s')."\" /></td></tr>
 <tr><td><blockquote><b>".__("From Name","e-mailing-service")."</b></blockquote></td><td>
-<input name=\"reply_to\" type=\"text\" value=\"".get_user_meta( $user_id, 'sm_reply',true)."\" /></td></tr>
+<input name=\"fromname\" type=\"text\" value=\"".get_user_meta( $user_id, 'sm_reply',true)."\" /></td></tr>
 <tr><td><blockquote><b>".__("Reply TO","e-mailing-service")."</b></blockquote></td><td>
-<input name=\"fromname\" type=\"text\" value=\"".get_user_meta( $user_id, 'sm_fromname',true)."\" /></td></tr>
+<input name=\"reply_to\" type=\"text\" value=\"".get_user_meta( $user_id, 'sm_fromname',true)."\" /></td></tr>
 <tr><td><blockquote><b><a href=\"#\" title=\"".__("exemple pause 1s = 1 mail par seconde = 84 600 mails par jours, pause 10 s = 8 460 mails par jours )","e-mailing-service")."\">".__("Temps de pause")."</a></b></blockquote></td>
 <td><input name=\"pause\" type=\"text\" value=\"10\" size=\"4\"/> s </td></tr>
 <tr><td><blockquote><b><a href=\"#\" title=\"".__("Permet de suivre vos liens dans les statistiques pour separer vos theme par exemple rencontre, commerce, ...","e-mailing-service")."\">".__("Tracking 1","e-mailing-service")."</a></b></blockquote></td>
