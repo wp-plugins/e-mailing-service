@@ -153,7 +153,7 @@ add_user_meta( $user_id, 'sm_username', get_option('sm_smtp_login_1'),true);
 add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
 }
 	     _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
 			
 	}
 	
@@ -174,7 +174,7 @@ add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
 	    $hie = $wpdb->insert_id;
 		
 	    _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
 	}
 	elseif($action == "envoi_choix"){
 	    $wpdb->insert("".$wpdb->prefix."sm_historique_envoi", array(  
@@ -192,7 +192,7 @@ add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
 	    $hie = $wpdb->insert_id;
 		
 	    _e("Votre mailing va bientot demarrer","e-mailing-service");
-		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live.php">';
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
 	}
 } else {
 

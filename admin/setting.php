@@ -52,6 +52,8 @@ $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_smtp_port' WHE
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_smtp_authentification' WHERE `option_name`='sm_smtp_authentification'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_smtp_login' WHERE `option_name`='sm_smtp_login'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_smtp_pass' WHERE `option_name`='sm_smtp_pass'");
+$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$user_login' WHERE `option_name`='sm_smtp_user_login_stats'");
+$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$user_id' WHERE `option_name`='sm_smtp_user_id_stats'");
 
 
 if(get_user_meta( $user_id, 'sm_host',true) == ''){

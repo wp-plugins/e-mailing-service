@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 8.8
+Version: 8.9
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '8.8' );
+define( 'smVERSION', '8.9' );
 define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -60,6 +60,7 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/import_newsletter.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/listes_newsletter.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send_user.php', NULL);
+	   add_submenu_page( '', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Campaign', 'e-mailing-service'), __('Campaign', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_user.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/variables.php', NULL);
@@ -102,6 +103,7 @@ function register_sm_menu_page_client() {
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'mailing-user',   smPATH . 'admin/listes_newsletter.php', NULL);
    
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/send_user.php', NULL);
+    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/send.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Suivis des campagnes', 'e-mailing-service'), __('Suivis des campagnes', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/live.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/stats_user.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/variables_user.php', NULL);
@@ -548,6 +550,8 @@ add_option('sm_affiche_txt_affiliation','oui');
 
 add_option('sm_email_exp', get_option('admin_email'));
 add_option('sm_email_ret', get_option('admin_email'));
+add_option('sm_smtp_user_login_stats', $user_login);
+add_option('sm_smtp_user_id_stats', $user_id);
 add_option('sm_from', get_option('blogname'));
 add_option('sm_smtp_server','smtp.'.get_option('blogurl').'');
 add_option('sm_smtp_authentification','non');
@@ -1506,7 +1510,7 @@ function sm_cron_unschedule_jours1() {
 function action_cron_minutes() 
 {
 
-sm_cron_fichier_v2('include/cron_auto.php');
+sm_cron_fichier_v2('include/cron_auto_v2.php');
 sm_cron_fichier_v2('include/cron_v4.php');
 }
 add_action('sm_crons', 'action_cron_minutes');
@@ -1612,7 +1616,10 @@ function sm_cron_fichier_v2($fichier)
 			'status' => 'En attente',
             'type' => $type,
 			'track1'=> 'auto',
-			'date_envoi' => current_time('mysql')
+			'date_envoi' => current_time('mysql'),
+			'login' => get_option('sm_smtp_user_login_stats'),
+			'attachments' => '',
+			'user_id' => get_option('sm_smtp_user_id_stats'),
         ));
 		}
 	    }
