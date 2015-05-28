@@ -109,10 +109,10 @@ $limit_liste=ceil($nb_total/$nb_liste);
 echo "".$limit_liste." <br>";
 for($i=0;$i<$nb_liste;$i++){
 $liste=nettoie(''.$pfix.'_'.$i.'');
-$table_name = $wpdb->prefix.'sm_liste_'.$liste.'';
-	$wpdb->query("INSERT IGNORE INTO  `".$table_liste."` (liste_bd ,liste_nom,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9) SELECT '".$table_name ."','".$liste."',champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9 FROM `".$table_liste."` WHERE id='".$table_original_id."'",true);
- $wpdb->query("  
-   CREATE TABLE IF NOT EXISTS `$table_name` (
+$table_name = $wpdb->prefix.'sm_liste_'.$user_id.'_'.$liste.'';
+$wpdb->query("INSERT IGNORE INTO  `".$table_liste."` (liste_bd ,liste_nom,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,login) SELECT '".$table_name ."','".$liste."',champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,login FROM `".$table_liste."` WHERE id='".$table_original_id."'",true);
+$wpdb->query("  
+   CREATE TABLE IF NOT EXISTS `".$table_name."` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(250) NOT NULL DEFAULT '',
   `nom` varchar(250) NOT NULL,
@@ -143,6 +143,7 @@ $debut = 0;
 }
 	$wpdb->query("INSERT IGNORE INTO `".$table_name."` (id,email,nom,ip,lg,date_creation,valide,bounces,optin,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle) SELECT id,email,nom,ip,lg,date_creation,valide,bounces,optin,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,cle FROM `".$table_original."` LIMIT $debut,$limit_liste",true);
 	$debut = $limit_liste + $debut;
+$wpdb->print_error();	
 	}
 	}
 	elseif($action =="truncate"){

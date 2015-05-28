@@ -41,7 +41,7 @@ extract($_GET);
 		<a href="?page=e-mailing-service/admin/debug.php&section=vitesse" title="<?php _e("Verifier la vitesse d'envoi de votre newsletter", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
 			<?php _e("Vitesse d'envoi","e-mailing-service"); ?>
 		</a>
-	</h2><h2>
+	</h2>
    <?php
  if(isset($_REQUEST['section'])){
 	

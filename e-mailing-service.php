@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '9.0' );
+define( 'smVERSION', '9.1' );
 define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -51,6 +51,7 @@ add_action('plugins_loaded', 'sm_init');
 //////////////menu ///////////////////////
 
 function register_sm_menu_page() {
+   add_menu_page(__('Messages', 'e-mailing-service'), __('Messages', 'e-mailing-service'),  'administrator',  smPATH . 'admin/message.php', NULL, smURL . 'include/email_edit.png');   
    add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'),  'manage_options',  smPATH . 'admin/index.php', NULL, smURL . 'include/email_edit.png');  
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Contact list', 'e-mailing-service'), __('Contact list', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/listes.php', NULL);
    add_submenu_page( smPATH . 'admin/listes.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/emails.php', NULL);
@@ -87,27 +88,36 @@ function register_sm_menu_page() {
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL); 
-      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug stats', 'e-mailing-service'), __('Debug stats', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_stats.php', NULL);  
+      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug stats', 'e-mailing-service'), __('Debug stats', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_stats.php', NULL); 
    }
 
 }
 function register_sm_menu_page_client() {
-   add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'),  'mailing-user',  smPATH . 'admin/index_user.php', NULL, smURL . 'include/email_edit.png');  
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Destinataires', 'e-mailing-service'), __('Destinataires', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/listes.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/emails.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Assistant Creation', 'e-mailing-service'), __('Assistant Creation', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/create.php', NULL);
-   add_submenu_page( smPATH . 'admin/create.php', __('with wordpress', 'e-mailing-service'), __('with wordpress', 'e-mailing-service'), 'mailing-user', 'post-new.php?post_type=newsletter', NULL);
-    add_submenu_page(smPATH . 'admin/create.php', __('with elrte', 'e-mailing-service'), __('with elrte', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/editor.php', NULL);
-      add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), 'mailing-user',   smPATH . 'admin/import_newsletter.php', NULL);
+	if(is_plugin_active('admin-hosting/admin-hosting.php') ) {
+	if(get_option('AH_user_mailing')== 'yes'){
+	$droit_user='ah-user';		
+	} else {
+	$droit_user='mailing-user';		
+	}
+	} else {
+	$droit_user='mailing-user';	
+	}
+   add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'), $droit_user,  smPATH . 'admin/index_user.php', NULL, smURL . 'include/email_edit.png');  
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Destinataires', 'e-mailing-service'), __('Destinataires', 'e-mailing-service'), $droit_user,  smPATH . 'admin/listes.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), $droit_user,  smPATH . 'admin/emails.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Assistant Creation', 'e-mailing-service'), __('Assistant Creation', 'e-mailing-service'), $droit_user, smPATH . 'admin/create.php', NULL);
+   add_submenu_page( smPATH . 'admin/create.php', __('with wordpress', 'e-mailing-service'), __('with wordpress', 'e-mailing-service'), $droit_user, 'post-new.php?post_type=newsletter', NULL);
+   add_submenu_page(smPATH . 'admin/create.php', __('with elrte', 'e-mailing-service'), __('with elrte', 'e-mailing-service'), $droit_user, smPATH . 'admin/editor.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Import Newsetter', 'e-mailing-service'), __('Import Newsetter', 'e-mailing-service'), $droit_user,   smPATH . 'admin/import_newsletter.php', NULL);
 
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'mailing-user',   smPATH . 'admin/listes_newsletter.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), $droit_user,   smPATH . 'admin/listes_newsletter.php', NULL);
    
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/send_user.php', NULL);
-    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/send.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Suivis des campagnes', 'e-mailing-service'), __('Suivis des campagnes', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/live.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/stats_user.php', NULL);
-     add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'mailing-user',  smPATH . 'admin/variables_user.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), 'mailing-user', smPATH . 'admin/alerte_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Envois Newsletter', 'e-mailing-service'), __('Envois Newsletter', 'e-mailing-service'), $droit_user,  smPATH . 'admin/send_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Suivis des campagnes', 'e-mailing-service'), __('Suivis des campagnes', 'e-mailing-service'), $droit_user,  smPATH . 'admin/live_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), $droit_user,  smPATH . 'admin/stats_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), $droit_user,  smPATH . 'admin/variables_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), $droit_user, smPATH . 'admin/alerte_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Account', 'e-mailing-service'), __('Account', 'e-mailing-service'), $droit_user, smPATH . 'admin/solde.php', NULL);
 }
 
 
@@ -176,6 +186,28 @@ function sm_create_post_type() {
         )
     );
     register_post_type('sm_modeles', $args);
+	
+		$message = array(
+		'label' => __('Message', 'e-mailing-service'),
+        'labels' => array(
+            'singular_name' => __('Message', 'e-mailing-service'),
+            'add_new_item' => __('Ajouter un message', 'e-mailing-service'),
+            'edit_item' => __('Modifier le message', 'e-mailing-service'),
+            'add_new' => __('Ajouter un message', 'e-mailing-service'),
+            'new_item' => __('Creation de message', 'e-mailing-service'),
+            'view_item' => __('Visualisez les messages', 'e-mailing-service'),
+            'not_found' => __('Le message n\'existe plus', 'e-mailing-service'),
+            'not_found_in_trash' => __('Le message n\'existe plus','e-mailing-service'),
+            'search_items' => __('Recherche un message', 'e-mailing-service'),
+        ),
+        'public' => false,
+        'publicly_queryable' => false,
+        'exclude_from_search' => false,
+        'show_ui' => false,
+        'capability_type' => 'post',
+		'rewrite' => array('slug' => 'message'),
+		);
+	register_post_type('message', $message);
 }
 } 
 
@@ -694,6 +726,13 @@ function sm_rule_init() {
   $wp->add_query_var('smidmp');
   $wp->add_query_var('smidmd');
   $wp->add_query_var('smcle');
+  
+  $wp->add_query_var('sm_action');
+  $wp->add_query_var('sm_email');
+  $wp->add_query_var('sm_sujet');
+  $wp->add_query_var('sm_message');
+  
+  $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/(.*)/(.*)?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');	
   $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
   $wp_rewrite->add_rule('^outp/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
   $wp_rewrite->add_rule('^outd/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
@@ -944,6 +983,100 @@ function AH_dashbord_style() {
 	SM_custom_login_css();
 }
 }
+
+
+add_action( 'init', 'SM_register_shortcodes');
+function SM_register_shortcodes(){
+   add_shortcode('sm_form_contact', 'SM_form_contact');
+}
+
+if(!function_exists(SM_send_message)){
+function SM_send_message($sm_email,$sm_sujet,$sm_message,$ip){
+	
+$message = ''.__('Message du formulaire de contact sur','e-mailing-service').' '.get_site_url().'<br><br>';
+$message .= ''.$sm_message.'<br><br>';
+$message .= ''.__('Email','e-mailing-service').' <a href="mailto:'.$sm_email.'">'.$sm_email.'</a><br>';
+$message .= ''.__('IP','e-mailing-service').' : '.$ip.'<br>';
+$message .= ''.__("Date d'envoi",'e-mailing-service').' : '.date('Y-m-d H:i:s').'<br>';
+
+
+	$my_post = array(
+  'post_title'    => $sm_sujet,
+  'post_content'  => $message,
+  'post_status'   => 'private',
+  'post_author'   => 1,
+  'comment_status'=> 'closed',
+  'ping_status'	=> 'closed',
+  'post_type' => 'message',
+  'post_password' => wp_generate_password()
+     );
+
+    $post_id = wp_insert_post( $my_post );
+	
+	$header = sm_optimisation_fai(get_option('sm_alerte_email'),$sm_sujet,1,"text/html");	
+	wp_mail( get_option('sm_alerte_email'), $sm_sujet, $message, $header, "");	
+	
+  }
+}
+
+function SM_force_type_private($post)
+{
+    $post['post_password'] = '6jsjs5900';
+    $post['post_status'] = 'private';
+    return $post;
+}
+
+if(!function_exists(SM_form_contact)){
+function SM_form_contact($atts, $content = null){	
+extract(shortcode_atts(array(
+      'name' => 'yes',
+	  'style' => '',
+   ), $atts));
+global $wp_query;
+$sm_action =$wp_query->query_vars['sm_action'];
+$sm_email= $wp_query->query_vars['sm_email'];
+$sm_sujet= $wp_query->query_vars['sm_sujet'];
+$sm_message= $wp_query->query_vars['sm_message'];
+
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+
+
+
+if(isset($sm_action) && $sm_action == 'post_message'){
+  if($sm_sujet !='' && $sm_email != '' && $sm_message !=''){
+SM_send_message($sm_email,$sm_sujet,$sm_message,$ip);
+$content .=  "<h2>".__("Votre message a ete envoye","e-mailing-service")."</h2>";
+  } else {
+$content .=  "<h2>".__("Tous les champs sont obligatoires","e-mailing-service")."</h2>";
+$content .=  "[sm_form_contact name=yes][/sm_form_contact]";
+  }
+} else {
+
+$content .= '<form action="" method="post" target="_parent">
+<input type="hidden" name="sm_action" value="post_message" />';
+$content .= '<table class="widefat">
+                         ';
+$content .=  "
+<tr><td><b>".__("Email","e-mailing-service")." *</b></td><td><input name=\"sm_email\" type=\"text\" value=\"\" /></td></tr>
+<tr><td><b>".__("Sujet","e-mailing-service")." *</b></td><td><input name=\"sm_sujet\" type=\"text\" value=\"\" size=\"40\"/></td></tr>
+<tr><td><b>".__("Message","e-mailing-service")." *</b></td><td><textarea name=\"sm_message\" cols=\"50\" rows=\"10\"></textarea></td></tr>
+<tr><td></td><td><input name=\"envoyer\" type=\"submit\" value=\"".__("send","e-mailing-service")."\"/></td></tr>
+</table>
+";
+}
+return $content;
+
+}  
+}
+
+
+
 ///desinscrit ////
 
 
@@ -952,22 +1085,24 @@ add_filter('wp_head', 'sm_head' );
 if(!function_exists('sm_head')){
 function sm_head() {
    global $wp_query;
+   /*
   if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
   $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
-  echo sm_stats();
+  return sm_stats();
   }
   elseif(isset($wp_query->query_vars['smlink']) && isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmp'];
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
   $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
-  echo sm_stats_page();  
+  return sm_stats_page();  
   }
-  elseif(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && isset($wp_query->query_vars['smidmd'])){
+  */
+  if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && isset($wp_query->query_vars['smidmd'])){
   $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmd'];
   $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
   $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
-	echo sm_stats_desinscrit();  
+	return sm_stats_desinscrit();  
   }
 global $wpdb;
 echo @get_option("sm_tracking");
@@ -996,7 +1131,7 @@ $email=affiche_mail($smnum,$smemail);
 		"smcle" => $smcle,
 		"smdate" => $smdate	
 		);
- xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('sm_stats_page')){
@@ -1024,7 +1159,7 @@ $email=affiche_mail($smnum,$smidmp);
 		"smcle" => $smcle,
 		"smdate" => $smdate	
 		); 
-  xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('sm_stats_desinscrit')){
@@ -1052,7 +1187,7 @@ $email=affiche_mail($smnum,$smidmd);
 		"smcle" => $smcle,
 		"smdate" => $smdate	
 		); 	
-  xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
+xml_server_stats('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats.php',$array);
 }
 }
 if(!function_exists('xml_server_stats')){
@@ -1066,13 +1201,15 @@ function xml_server_stats($url,$array){
 		foreach($xml2l as $row) {
 		if($row[0] == 1)
 		{
-
+			
+		$lien = str_replace('http://http://','http://',$row[1]);
+                @header('Location: '.$lien.'');
 	            if(!headers_sent()) {
-				@header('Location: '.$row[1].'');
-				echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
+				@header('Location: '.$lien.'');
+				echo '<meta http-equiv="refresh" content="0; url='.$lien.'">';
                 exit();
                 } else {
-                echo '<meta http-equiv="refresh" content="0; url='.$row[1].'">';
+				echo '<meta http-equiv="refresh" content="0; url='.$lien.'">';
 	            exit();
                 }		
 		} else {
@@ -1082,11 +1219,42 @@ function xml_server_stats($url,$array){
 		}
 }
 }
+add_action('template_redirect','sm_stats_redirect');
+function sm_stats_redirect() {
+global $wp_query;
+if(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
+$smlink= $wp_query->query_vars['smlink'];
+$smemail= $wp_query->query_vars['smemail'];
+$smdate= $wp_query->query_vars['smdate'];
+$smnum= $wp_query->query_vars['smnum'];
+$smcle= $wp_query->query_vars['smcle'];
+session_start();
+$_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+$_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
+$email=affiche_mail($smnum,$smemail);
+sm_stats();
+exit();	
+  }
+   elseif(isset($wp_query->query_vars['smlink']) && isset($wp_query->query_vars['smidmp']) && !isset($wp_query->query_vars['smidmd'])){
+  $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmp'];
+  $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
+sm_stats_page();  
+  }
+  /*
+  elseif(isset($wp_query->query_vars['smlink']) && !isset($wp_query->query_vars['smidmp']) && isset($wp_query->query_vars['smidmd'])){
+  $_SESSION["sm_emailid"]=$wp_query->query_vars['smidmd'];
+  $_SESSION["sm_hie"]=$wp_query->query_vars['smnum'];
+  $_SESSION["sm_cle"]=$wp_query->query_vars['smcle'];
+sm_stats_desinscrit();  
+  }
+  */
+}
 if(!function_exists('sm_nb_envois_mois')){
 function sm_nb_envois_mois($user_login){
 global $wpdb;
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
-$total = $wpdb->get_var("SELECT count(id) AS total FROM `".$table_envoi."` WHERE login='".$user_login."' AND date_envoi like '".date('Y-m')."-%'");
+$total = $wpdb->get_var("SELECT sum(nb_envoi) AS total FROM `".$table_envoi."` WHERE login='".$user_login."' AND date_envoi like '".date('Y-m')."-%'");
 return $total;	
 }
 }
@@ -1328,10 +1496,15 @@ function sm_smtp_user($phpmailer){
 	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }
 			}
 			
-	list($mx,$domaine,$ext)=explode('.',$host);
+	list($mx,$domaine,$ext,$autre)=explode('.',$host);
+	if($autre !=''){
+	$domaine_envoi =''.$domaine.'.'.$ext.'.'.$autre.''; 	
+	} else {
+	$domaine_envoi =''.$domaine.'.'.$ext.'';
+	}
 	$semi_rand = sha1(microtime()); 
-    $message_id = '<' . $semi_rand . '@'.$domaine.'.'.$ext.'>';
-	$_SESSION['message-id']=''.$semi_rand.'@'.$domaine.'.'.$ext.'';
+    $message_id = '<' . $semi_rand . '@'.$domaine_envoi.'>';
+	$_SESSION['message-id']=''.$semi_rand.'@'.$domaine_envoi.'';
 	$_SESSION['sm_smtp_server']= $host;
 	$_SESSION['sm_from']= $fromname;
 	$_SESSION['sm_email_exp']= $sender;
@@ -1635,20 +1808,20 @@ global $wpdb;
 $table_liste = $wpdb->prefix.'sm_liste';  
 $table_hie = $wpdb->prefix.'sm_historique_envoi';
 $nb=0;
-$fivesdrafts = $wpdb->get_results("SELECT id_liste  FROM `".$table_hie."` WHERE id='$smhie'");
+$fivesdrafts = $wpdb->get_results("SELECT id_liste  FROM `".$table_hie."` WHERE id='".$smhie."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $id_liste =$fivesdraft->id_liste;
 }
-$listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."` WHERE id='$id_liste'");
+$listes = $wpdb->get_results("SELECT liste_bd  FROM `".$table_liste."` WHERE id='".$id_liste."'");
 foreach ( $listes as $resliste ) 
 {
 $liste = $resliste->liste_bd;
-}
 $listese = $wpdb->get_results("SELECT email  FROM `".$liste."` WHERE id='$smemail'");
 foreach ( $listese as $reslistee ) 
 {
 $email = $reslistee->email;
+}
 }
 if(!isset($email)){ $email=""; }
 $_SESSION["sm_email"]=$email;
