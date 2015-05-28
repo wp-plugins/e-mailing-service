@@ -110,7 +110,7 @@ $title=str_replace("</title>","",$title);
 }
 ?>
 <h2><?php echo _e("Importation de template","e-mailing-service");?>  : </h2>
-<h3><?php echo _e("Le plugin a ete teste avec les design pour le marketing par email : ","e-mailing-service");?> <a href="http://themeforest.net/category/marketing/email-templates?ref=tous1site" target="_blank">Themeforest</a> </h3>
+<h3><?php echo _e("Le plugin a ete teste avec les design pour le marketing par email : ","e-mailing-service");?> <a href="http://themeforest.net/category/marketing/email-templates?ref=mariegf38" target="_blank">Themeforest</a> </h3>
 <p><?php _e("Fichier ZIP","e-mailing-service")?></p>
 <form action="<?php $_SERVER['PHP_SELF'];?>" name="form_bdd" id="form_bdd" method="post" enctype="multipart/form-data">
 <input type="file" name="fichiercsv" size="16">

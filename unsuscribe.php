@@ -15,8 +15,8 @@ get_header();
 global $wpbd;
 ?>
 
-	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
+
+
 			<?php 
 			  
   global $wp_query;
@@ -50,27 +50,21 @@ global $wpbd;
   } 
   } else {
 
-  echo '<br>
+ echo '<center><br><p>'.get_option('sm_udp_details').'</p>
   <form action="'.get_option('siteurl').'/upd/'.$wp_query->query_vars['smemail'].'/'.$wp_query->query_vars['smhie'].'/'.$wp_query->query_vars['smemail'].'/" method="post">
                     <input name="email" type="hidden" value="'.$wp_query->query_vars['smemail'].'">
 					<input name="email_id" type="hidden" value="'.$wp_query->query_vars['smemail'].'">
 					<input name="smcle" type="hidden" value="'.$wp_query->query_vars['smcle'].'">
 					<input name="smhie" type="hidden" value="'.$wp_query->query_vars['smhie'].'">
 					<input name="action" type="hidden" value="update_desinscrit">
-					<pre>'.get_option('sm_udp_details').'</pre><br>
-					  <table width="200" border"0">
-				<tr><td><label><input type="radio" name="valide" value="oui"  checked>'.__('oui').'</label></td></tr>
-				<tr><td><label><input type="radio" name="valide" value="non">'.__('non').'</label></td></tr>
-				<tr><td><input name="sumit" type="submit" value="'.get_option('sm_udp_bouton').'"></td></tr>
-				      </table>					  
-					</form><br><br>'; 
-					
-		
+					<label><input type="radio" name="valide" value="oui"  checked>'.__('oui').'</label><label>
+					<input type="radio" name="valide" value="non">'.__('non').'</label>
+				    <input name="sumit" type="submit" value="'.__("Oui je souhaite me desinscrire","admin-hsoting").'">
+					</form><br><br></center>'; 
   }
   
 		?>
 
-		</div><!-- #content -->
-	</div><!-- #primary -->
+
 
 <?php get_footer(); ?>

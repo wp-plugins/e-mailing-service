@@ -33,7 +33,7 @@ extract($_GET);
 if(isset($_POST["action"])){
 	if($_POST["action"] == "envoi"){
 		if($user_role !='administrator'){
-		    if(ah_service_actif($user_login) == 1){
+		    if(ah_service_actif($user_login) == 'server'){
 		
 $infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_server_list."` WHERE login='".$user_login."' LIMIT 1");
 foreach ( $infossmtp as $infossmtps ) 
@@ -56,13 +56,15 @@ update_user_meta( $user_id, 'sm_authentification', 'oui');
 update_user_meta( $user_id, 'sm_username', ''.$infossmtps->email.'@'.$infossmtps->domaine.'');
 update_user_meta( $user_id, 'sm_pass', $infossmtps->pass_email_redirection);
 }	
-}
+    }
 
 			}
-			 elseif(ah_service_actif($user_login) == 2){
+			
+///// offre smtp			
+elseif(ah_service_actif($user_login) == 'smtp'){
 		    $nb_total_a_envoyes = nb_destinataire($liste);
 			$nb_envoi_mois = sm_nb_envois_mois($user_login);
-$infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_service_list."` WHERE login='".$user_login."' LIMIT 1");
+$infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_service_list."` WHERE login='".$user_login."' and categorie='service-smtp' and (status='ok' OR status='Actif' OR status='cancel') LIMIT 1");
 foreach ( $infossmtp as $infossmtps ) 
 {
 $port=25;
@@ -84,13 +86,50 @@ update_user_meta( $user_id, 'sm_authentification', 'oui');
 update_user_meta( $user_id, 'sm_username', ''.$infossmtps->email.'@'.$infossmtps->domaine.'');
 update_user_meta( $user_id, 'sm_pass', $infossmtps->pass_email_redirection);
 }
-} else {
-echo "<h2>".__("Vous etes arrive au bout de votre quota , vous ne pouvez plus envoyer avant le mois suivant","e-mailing-service")." : ".$nb_credit_necessaire." ".__("credits necessaires","admin-hosting")."</h2>";	
+
+                }  else {
+echo "<h2>".__("Vous etes arrive au bout de votre quota , vous ne pouvez plus envoyer avant le mois suivant","e-mailing-service")." : ".$nb_credit_necessaire." ".__("credits necessaires","admin-hosting")."</h2>";
+form_add_credit();
 exit();	
 }
 }
-			 }
-			elseif(ah_service_actif($user_login) == 3){
+}
+//// offre marketing
+ elseif(ah_service_actif($user_login) == 'marketing'){
+		    $nb_total_a_envoyes = nb_destinataire($liste);
+			$nb_envoi_mois = sm_nb_envois_mois($user_login);
+$infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_service_list."` WHERE login='".$user_login."' and categorie='service-smtp' and (status='ok' OR status='Actif' OR status='cancel') LIMIT 1");
+foreach ( $infossmtp as $infossmtps ) 
+{
+$port=25;
+				if(ah_limit_month($reference) < $nb_total_envoyes){
+	if(get_user_meta( $user_id, 'sm_host',true) == ''){
+add_user_meta( $user_id, 'sm_sender',''.$infossmtps->email.'@'.$infossmtps->domaine.'',true);
+add_user_meta( $user_id, 'sm_from', ''.$infossmtps->email.'@'.$infossmtps->domaine.'',true);
+add_user_meta( $user_id, 'sm_host', ''.$infossmtps->mx.'.'.$infossmtps->domaine.'',true);
+add_user_meta( $user_id, 'sm_port', $port, true);
+add_user_meta( $user_id, 'sm_authentification', 'oui',true);
+add_user_meta( $user_id, 'sm_username', ''.$infossmtps->email.'@'.$infossmtps->domaine.'',true);
+add_user_meta( $user_id, 'sm_pass', $infossmtps->pass_email_redirection,true);
+} else {
+update_user_meta( $user_id, 'sm_sender',''.$infossmtps->email.'@'.$infossmtps->domaine.'');
+update_user_meta( $user_id, 'sm_from', ''.$infossmtps->email.'@'.$infossmtps->domaine.'');
+update_user_meta( $user_id, 'sm_host', ''.$infossmtps->mx.'.'.$infossmtps->domaine.'');
+update_user_meta( $user_id, 'sm_port', $port);
+update_user_meta( $user_id, 'sm_authentification', 'oui');
+update_user_meta( $user_id, 'sm_username', ''.$infossmtps->email.'@'.$infossmtps->domaine.'');
+update_user_meta( $user_id, 'sm_pass', $infossmtps->pass_email_redirection);
+}
+
+} else {
+echo "<h2>".__("Vous etes arrive au bout de votre quota , vous ne pouvez plus envoyer avant le mois suivant","e-mailing-service")." : ".$nb_credit_necessaire." ".__("credits necessaires","admin-hosting")."</h2>";
+form_add_credit();
+exit();	
+}
+}
+}
+////// offre par credit			
+else {
 		    $nb_total_envoyes = nb_destinataire($liste);
 	        $nb_credit = get_option('ah_tarif_credit') * $nb_total_envoyes;
 			if(ah_credit($user_login) < $nb_credit){
@@ -102,6 +141,7 @@ exit();
 	         } 
 			}
 		}
+		
 if($_FILES['file']['name'] !=''){
 $uploaddir = smPOST;
 $uploadfile = $uploaddir . date('Ymshis') . basename($_FILES['file']['name']);
@@ -115,6 +155,9 @@ if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
 } else {
 $attachments ='';	
 }
+	if(get_user_meta( $user_id, 'sm_sender',true) == ''){
+add_user_meta( $user_id, 'sm_sender',get_option('sm_email_exp'),true);
+	}
 update_user_meta( $user_id, 'sm_fromname',$fromname);
 update_user_meta( $user_id, 'sm_from', $fromname);
 update_user_meta( $user_id, 'sm_reply',$reply_to);
@@ -136,7 +179,7 @@ update_user_meta( $user_id, 'sm_reply',$reply_to);
 			'reply_to' => $reply_to,
        ));
 	      $hie = $wpdb->insert_id;
-		    if(ah_service_actif($user_login) == 3){
+		    if(ah_service_actif($user_login) == 'null'){
 		  	$wpdb->insert(AH_table_financial_credit, array(
             'membre_login' => $user_login,  
             'credit' => - $nb_credit,
@@ -251,19 +294,24 @@ echo "</select></blockquote></td>
 echo "</div>";	
 }
 
+if(ah_service_actif($user_login) !='server'){
+ $all_meta_for_user = get_user_meta( $user_id );
+echo '<div class="message warning">';
+echo '<h1>'.ah_credit($user_login).' '.get_option('ah_curency1').'</h1>';
+$nb_mail_possible =ah_credit($user_login) / get_option('ah_tarif_credit');
+echo '<p>'.__("Vous pouvez envoyer","e-mailing-service").' '.$nb_mail_possible.' '.__("emails","e-mailing-service").' '.__("avec votre solde","e-mailing-service").'</p>';
+echo '</div>';
+  if(ah_credit($user_login) < 1) {	
+  echo "<h2>".__("Votre solde de credit n'est pas suffisant pour envoyer un mailing, vous devez crediter votre compte","e-mailing-service")."</h2>";
+   echo "<h2><a href=\"".get_site_url()."/".$all_meta_for_user['lang'][0]."/email/email-marketing/\">".__("ou choisisir un forfait","e-mailing-service")."</a></h2>";
+  form_add_credit();
+ exit();
+  } 
+} 
+
 echo '<div class="message success">';
 echo "<br><h1>".__("Envoyer votre newsletter","e-mailing-service")."</h1>";
 
-if(ah_service_actif($user_login) > 1){
-echo "<h3>1 ".__("mail envoyes avec vos listes","e-mailing-service")." = ".get_option('ah_tarif_credit')." ".__("credit","e-mailing-service")."<h3>";
-
-echo '<button><strong>'.ah_credit($user_login).' '.__('credit','e-mailing-service').'</strong></button>';
-  if(ah_credit($user_login) < 1) {	
-  echo "<h2>".__("Votre solde de credit n'est pas suffisant pour envoyer un mailing, vous devez crediter votre compte","e-mailing-service")."</h2>";	
-  form_add_credit();
-  exit();
-  } 
-} 
 echo "<p>".__("Votre newsletter partira quelques minutes apres la validation du formulaire si vous ne changer pas la date et l'heure d'envoi","e-mailing-service")."</p>";
 echo '<form action="admin.php?page=e-mailing-service/admin/send_user.php" method="post" target="_parent"  enctype="multipart/form-data">
 <input type="hidden" name="action" value="envoi" />';
@@ -272,10 +320,13 @@ echo '<table width="500">
 echo "
 <tr><td width=\"50%\"><blockquote><b>".__("Choisir une liste","e-mailing-service")."</b></blockquote></td>
 <td width=\"200\"><select name=\"liste\">";
-$listes = $wpdb->get_results("SELECT * FROM `".$table_liste."` where login='".$user_login."'");
+$n=0;
+$listes = $wpdb->get_results("SELECT * FROM `".$table_liste."` where login='".$user_login."' ORDER BY id DESC");
 foreach ( $listes as $liste ) 
 {
-	  echo "<option value=\"".$liste->id."|".$liste->liste_bd."\" selected=\"selected\">".$liste->liste_nom." </option>";
+	if($n == 0){ $select = "selected=\"selected\""; } else { $select = ""; }
+	  echo "<option value=\"".$liste->id."|".$liste->liste_bd."\" ".$select.">".$liste->liste_nom." </option>";
+	  $n++;
 
 }
 $listes = $wpdb->get_results("SELECT * FROM `".$table_liste."` where type='location'");
@@ -287,6 +338,7 @@ echo '<option value="'.$liste->id.'|'.$liste->liste_bd.'">'.__('location','e-mai
 echo "</select></td>
 </tr>
 <tr><td><blockquote><b>".__("Choisir une campagne","e-mailing-service")."</b></blockquote></td><td><select name=\"campagne\">";
+$n=0;
 if(isset($newsletter)){
 $news = $wpdb->get_results("SELECT ID,post_title FROM `".$wpdb->prefix."posts` WHERE post_author='".$user_id."' AND ID ='".$newsletter."' ORDER BY ID DESC");
 } else {
@@ -294,7 +346,9 @@ $news = $wpdb->get_results("SELECT ID,post_title FROM `".$wpdb->prefix."posts` W
 }
 foreach ( $news as $new ) 
 {
-	 echo "<option value=\"".$new->ID."\" selected=\"selected\">".substr($new->post_title,0,70)."</option>";
+	if($n == 0){ $select = "selected=\"selected\""; } else { $select = ""; }
+	 echo "<option value=\"".$new->ID."\" ".$select.">".substr($new->post_title,0,70)."</option>";
+	 $n++;
 
 }
 echo "</select></td></tr>

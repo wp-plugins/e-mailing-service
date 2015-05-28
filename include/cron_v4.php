@@ -47,7 +47,8 @@ extract($r31);
 	$error_to=get_user_meta( $user_id, 'sm_sender',true);
 
 
-	$post_content = get_post_field('post_content', $id_newsletter);
+	$post_content2 = get_post_field('post_content', $id_newsletter);
+	$post_content = "".$post_content2."<br><img src=\"".smURL."/img/suivis.jpg\" border=\"0\"/>";
     $post_id=$id_newsletter;
 		 
 	if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
