@@ -58,6 +58,7 @@ extract($_GET);
             <div class="contenu_onglet" id="contenu_onglet_solde">
                 <h1><?php echo __('Verifier votre solde','e-mailing-service'); ?></h1>
 <?php
+
 echo ''.__("Vous avez plusieurs façon d'alimenter votre solde","e-mailing-service").' : ';
 echo '<ol><li>'.__("Avec des credits, vous choisissez le montant, vous n'avez pas d'options, les envois ce font de nos serveurs avec nos noms de domaines","e-mailing-service").' (<a href="?page=admin-hosting/admin_financial/index.php&section=add-credit">'.__('Crediter votre compte','e-mailing-service').'</a>)</li>';
 echo '<li>'.__("En choisissant un forfait email marketing, sans engagement, les envois ce font de nos serveurs avec nos noms de domaines, en option vous pouvez choisir un domaine et avoir une ip dedie","e-mailing-service").' (<a href="?page=admin-hosting/admin_service/index.php&section=email_order&cat=email">'.__('Choisir un forfait','e-mailing-service').'</a>)</li>';
@@ -113,7 +114,7 @@ echo '<li>'.__("Avec un serveur dedie, l'interface est illimite , le serveur, le
                                 <?php
 		   echo '<p>'.__("Pour envoyer votre newsletter, il suffit de choisir votre newsletter, votre liste de contact et de cliquez sur envoyer","e-mailing-service").'</p>';
 		    echo '<p>'.__("Le tracking ne sert qu'aux clients qui travaillent avec des sites d'affiliation et veulent tracer leur revenu","e-mailing-service").'</p>'; 
-			  echo '<p>'.__("Le temps de pause determine la vitesse d'envoi de votre newsletter 10 correspond à 1 mail toutes les 10 secondes","e-mailing-service").'</p>'; 
+			  echo '<p>'.__("Le temps de pause determine la vitesse d'envoi de votre newsletter 10 correspond a 1 mail toutes les 10 secondes","e-mailing-service").'</p>'; 
 		   ?> 
              <br /><br /><a href="?page=e-mailing-service/admin/send_user.php"><img src="<?php echo smURL;?>/screenshot-14.png" width="750" border="0"/></a><br />
             </div>

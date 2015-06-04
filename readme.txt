@@ -4,7 +4,7 @@ Donate link: http://www.e-mailing-service.net/
 Tags: send newsletter, newsletter, emailing, e-mailing, e-mails, e-mail, newsletter, smtp, server smtp, email, mail, smtp server, phpmailer, Rundschreiben, envío por correo electrónico, correo postal, correo electrónico, correo electrónico, boletín de noticias, smtp, servidor SMTP, el correo electrónico, el correo electrónico, direct mailing, email, email marketing, list build, mass mail, subscription, contact, widget newsletter, plugin newsletter, template newsletter
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 9.1
+Stable tag: 9.3
 License: GPLv3
 License URI: http://www.e-mailing-service.net/license.txt
 
@@ -197,6 +197,8 @@ No, the plugin also works without smtp server, and we can provide a smtp server
 
 == Changelog ==
 
+= 9.3 =
+* Patch security - delete prettyPhoto.js
 = 9.2 =
 * New version for user service
 = 9.0 =
@@ -296,6 +298,9 @@ Compatible unsubscribe link gmail
 
 == Upgrade Notice ==
 
+
+= 9.3 =
+* Patch security - delete prettyPhoto.js
 = 9.0 =
 * Add file for send post
 = 8.9 =

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 9.0
+Version: 9.3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '9.1' );
+define( 'smVERSION', '9.2' );
 define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -43,10 +43,22 @@ define( 'smCONTENT',str_replace('/plugins/e-mailing-service/','',smPATH));
 define( 'smPOST', smCONTENT .'/uploads/sm-post/');
 define( 'smPOSTURL', ''.get_option('siteurl').'/wp-content/uploads/sm-post/'); 
 
-function sm_init() {
+/*
+function sm_load_textdomain() {
 load_plugin_textdomain( 'e-mailing-service', false, smDIR . '/languages/' );
 }
-add_action('plugins_loaded', 'sm_init');
+add_action('plugins_loaded', 'sm_load_textdomain');
+*/
+
+function sm_load_textdomain() {
+
+	$domain = 'e-mailing-service';
+	$locale = apply_filters( 'plugin_locale', 'fr_FR', $domain );
+	load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+	load_plugin_textdomain( $domain, FALSE, ''.smDIR.'/languages/' );
+
+}
+add_action( 'init', 'sm_load_textdomain' );
 
 //////////////menu ///////////////////////
 
@@ -102,6 +114,7 @@ function register_sm_menu_page_client() {
 	} else {
 	$droit_user='mailing-user';	
 	}
+
    add_menu_page(__('E-mailing service', 'e-mailing-service'), __('E-mailing service', 'e-mailing-service'), $droit_user,  smPATH . 'admin/index_user.php', NULL, smURL . 'include/email_edit.png');  
    add_submenu_page( 'e-mailing-service/admin/index_user.php', __('Destinataires', 'e-mailing-service'), __('Destinataires', 'e-mailing-service'), $droit_user,  smPATH . 'admin/listes.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste test', 'e-mailing-service'), __('Liste test', 'e-mailing-service'), $droit_user,  smPATH . 'admin/emails.php', NULL);
@@ -1873,14 +1886,7 @@ global $wpdb;
 $table_user_wordpress = $wpdb->prefix.'wordpress_user';
 $blogusers = get_users( 'blog_id='.$GLOBALS['blog_id'].'' );
 foreach ( $blogusers as $user ) {
-$wpdb->insert($table_user_wordpress, array(  
-            'email' => esc_html( $user->user_email ),  
-            'nom' => esc_html( $user->display_name ),
-			'ip' => '',
-			'lg' => $_SERVER['HTTP_ACCEPT_LANGUAGE'] ,
-            'date_creation' => current_time('mysql'),
-			'cle' => key_generate()			  
-       ));
+$wpdb->query("INSERT IGNORE INTO ".$table_user_wordpress." FROM   `email`='".esc_html( $user->user_email )."',  `nom`  = '".esc_html( $user->display_name )."',`lg`= '".$_SERVER['HTTP_ACCEPT_LANGUAGE']."',`cle` = ".key_generate()."'");			  
 }
 	
 }
