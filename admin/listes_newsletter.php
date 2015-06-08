@@ -44,7 +44,7 @@ $tab ='<table class="paginate50 sortable full">
 <th>'.__('Title','e-mailing-service').'</th>
 <th>'.__('Date','e-mailing-service').'</th>';
 if($user_role=='administrator'){
-$tab .='<td>'.__('User','e-mailing-service').'</td>';
+$tab .='<th>'.__('User','e-mailing-service').'</th>';
 }
 $tab .='<th>'.__('Action','e-mailing-service').'</th>
 <th></th>

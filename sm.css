@@ -38,3 +38,45 @@
 	color: #FFFFFF;
 	font-weight: bold;
 }
+
+
+.left {
+	width:400px;
+	float:left;
+	font-size:13px;
+	color:#333;
+	margin-right:20px;
+}
+.right {
+	width:320px;
+	float:left;
+	margin-right:20px;
+}
+#preview {
+	min-height:247px;
+	background-color:#CCC;
+	padding:10px;
+	font-size:12px;
+	color:#999;
+	border:1px solid #CCC;
+	width:870px;
+}
+#title {
+	margin-top:10px;
+	padding:5px;
+	font-size:13px;
+	color:#000;
+	border:1px solid #CCC;
+	font-family:Verdana, Geneva, sans-serif;
+}
+#photo {
+	margin-bottom:10px;
+}
+#image {
+	margin-top:5px;
+}
+#Displaytitle {
+	font-size:14px;
+	color:#333;
+	margin-top:5px;
+}

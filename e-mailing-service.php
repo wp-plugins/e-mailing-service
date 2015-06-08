@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 9.4
+Version: 9.5
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '9.4' );
+define( 'smVERSION', '9.5' );
 define( 'smDBVERSION', '4.4' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -134,13 +134,72 @@ function register_sm_menu_page_client() {
 }
 
 
-
 if ( !is_super_admin() ) {
 add_action('admin_menu', 'register_sm_menu_page_client');
 }
 else {
 add_action('admin_menu', 'register_sm_menu_page');
 }
+
+  ////////// javascript   /////////////////
+  
+function sm_js_init($hook) {
+
+echo '<!-- hook : '.$hook.' -->';
+
+        $occurence = Array("e-mailing-service"); 
+        while (list($element, $valeur) = each($occurence)) {
+                $pos = strpos($hook,$valeur);
+                if(is_int($pos)!=false || $hook == 'index.php')
+						{						 
+
+wp_enqueue_script('jquery');
+
+wp_enqueue_script( 'e-mailing-service-js5',''.smURL.'js/coo_form.js' );
+wp_enqueue_script( 'e-mailing-service-js6',''.smURL.'js/html5.js');
+wp_enqueue_script( 'e-mailing-service-js7',''.smURL.'js/selectivizr.js');
+wp_enqueue_script( 'e-mailing-service-js8',''.smURL.'js/ie.js' );
+wp_enqueue_script( 'e-mailing-service-js9',''.smURL.'js/excanvas.js' );
+	
+wp_enqueue_script( 'e-mailing-service-js10',''.smURL.'js/onglet.js' );
+wp_enqueue_script( 'e-mailing-service-js11',''.smURL.'js/jquery.tools.min.js');
+wp_enqueue_script( 'e-mailing-service-js12',''.smURL.'js/visualize.jQuery.js' );
+wp_enqueue_script( 'e-mailing-service-js13',''.smURL.'js/jquery.tables.js');
+
+//help
+wp_enqueue_script( 'e-mailing-service-js14',''.smURL.'SpryAssets/SpryTooltip.js');
+
+//form preview
+wp_enqueue_script( 'e-mailing-service-js15',''.smURL.'js/preview.min.js');
+
+     }
+          }
+
+}
+//add_action( 'admin_init', 'sm_js_ini' );
+add_action( 'admin_enqueue_scripts', 'sm_js_init' );
+
+
+
+function sm_enque_css() {
+	wp_enqueue_style( 'e-mailing-service-sm', ''.smURL.'css/sm.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-reset', ''.smURL.'css/reset.css','','','screen');
+	wp_enqueue_style( 'e-mailing-service-style', ''.smURL.'css/style.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-messages', ''.smURL.'css/messages.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-forms', ''.smURL.'css/forms.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-visualize', ''.smURL.'css/visualize.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-tables', ''.smURL.'css/tables.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-aristo', ''.smURL.'css/uniform.aristo.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-invoice', ''.smURL.'css/invoice.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-ie8', ''.smURL.'css/ie8.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-ie', ''.smURL.'css/ie.css' ,'','','screen');
+	wp_enqueue_style( 'e-mailing-service-spry', ''.smURL.'SpryAssets/SpryTooltip.css' ,'','','screen');
+}
+
+add_action( 'admin_enqueue_scripts', 'sm_enque_css' );
+
+
+
 
 	  ////////////////// post type ////////////////
 
@@ -816,194 +875,23 @@ global $menu;
 }
 add_action('admin_menu', 'sm_remove_menus');
 
-if(!function_exists('sm_css_admin_head')){
-function sm_css_admin_head(){
-echo '<link rel="stylesheet" href="'.smURL.'sm.css" type="text/css" media="all" >
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>';
-echo "<script src=\"".smURL."editor/js/jquery-1.6.1.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
-<script src=\"".smURL."editor/js/jquery-ui-1.8.13.custom.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
-<link rel=\"stylesheet\" href=\"".smURL."editor/css/smoothness/jquery-ui-1.8.13.custom.css\" type=\"text/css\" media=\"screen\" charset=\"utf-8\">
-<script src=\"".smURL."editor/js/elrte.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
-<link rel=\"stylesheet\" href=\"".smURL."editor/css/elrte.min.css\" type=\"text/css\" media=\"screen\" charset=\"utf-8\">
-<STYLE type=\"text/css\">
-   a.bulle {
-     position:relative;
-     color:#396a86; 
-     text-decoration:none; 
-     font-family:arial, verdana, sans-serif; 
-     text-align:center; 
-     font-size:11px;
-   }
-   
-   a.bulle:hover {
-      background: none; 
-      z-index: 50; 
-   }
-   
-   a.bulle span { 
-     display: none;
-   }
-   
-   a.bulle:hover span {
-      display: block; 
-      position: absolute;
-      top: -10px; 
-      right: 40px;
-      font-family:arial, verdana, sans-serif; 
-      text-align:justify; 
-      font-size:12px;
-      font-weight:normal;
-      width:450px;
-      background: white;
-      padding: 5px;
-      border: 1px solid #62c0f4;
-      border-left: 10px solid #62c0f4;
-   }
-   
--->
-</STYLE> 
-
-<!-- jquerytools -->
-<script src=\"".smURL."js/onglet.js\"></script>
-<script src=\"".smURL."js/jquery.tools.min.js\"></script>
-<script src=\"".smURL."js/visualize.jQuery.js\"></script>
-<script src=\"".smURL."js/jquery.tables.js\"></script>
-<script type=\"text/javascript\" src=\"".smURL."js/coo_form.js\"></script>
-<!--<script type=\"text/javascript\" src=\"".smURL."js/jquery.min.js\"></script>-->
 
 
-<!--[if lt IE 9]>
-<link rel=\"stylesheet\" media=\"screen\" href=\"".smURL."css/ie.css\" />
-<script type=\"text/javascript\" src=\"".smURL."js/html5.js\"></script>
-<script type=\"text/javascript\" src=\"".smURL."js/selectivizr.js\"></script>
-<script type=\"text/javascript\" src=\"".smURL."js/ie.js\"></script>
-<script type=\"text/javascript\" src=\"".smURL."js/excanvas.js\"></script>
-<![endif]-->
-<!--[if IE 8]>
-<link rel=\"stylesheet\" media=\"screen\" href=\"".smURL."css/ie8.css\" />
-<![endif]-->
-
-<script type=\"text/javascript\" src=\"".smURL."js/global.js\"></script>
-<script src=\"".smURL."editor/js/i18n/elrte.ru.js\" type=\"text/javascript\" charset=\"utf-8\"></script>
-<script type=\"text/javascript\" charset=\"utf-8\">
-		$().mailing-usery(function() {
-			var opts = {
-				cssClass : 'el-rte',
-				lang     : 'fr',
-				height   : 450,
-				toolbar  : 'maxi',
-				cssfiles : ['".smURL."editor/css/elrte-inner.css']
-			}
-			$('#editor').elrte(opts);
-		})
-</script>";
-}
-
-}
-
-function SM_custom_login_css() {
-echo '<!-- server -->
-<link rel="stylesheet" media="screen" href="'.smURL.'css/reset.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/style.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/messages.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/forms.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/tables.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/visualize.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/uniform.aristo.css" />
-<link rel="stylesheet" media="screen" href="'.smURL.'css/invoice.css" />';
-}
-
-
-if(!function_exists('sm_js_admin_head')){
-function sm_js_admin_head(){
-echo "<script type=\"text/javascript\">
-$(document).mailing-usery(function(){
-$('#preview').hide();	
-$('#photo').click(update);
-$('#title').keypress(update);
-});
-	
-function update(){		
-		
-$('#preview').slideDown('slow');
-var title = $('#title').val();
-var photo = $('#photo').val();
-$('#Displaytitle').html(title);
-$('#image').html('<iframe src=\"'+photo+'\" width=\"850\" height=\"900\" scrolling=\"no\" align=\"middle\"></iframe>');
-}
-</script>
-<style>
-.left {
-	width:400px;
-	float:left;
-	font-size:13px;
-	color:#333;
-	margin-right:20px;
-}
-.right {
-	width:320px;
-	float:left;
-	margin-right:20px;
-}
-#preview {
-	min-height:247px;
-	background-color:#CCC;
-	padding:10px;
-	font-size:12px;
-	color:#999;
-	border:1px solid #CCC;
-	width:870px;
-}
-#title {
-	margin-top:10px;
-	padding:5px;
-	font-size:13px;
-	color:#000;
-	border:1px solid #CCC;
-	font-family:Verdana, Geneva, sans-serif;
-}
-#photo {
-	margin-bottom:10px;
-}
-#image {
-	margin-top:5px;
-}
-#Displaytitle {
-	font-size:14px;
-	color:#333;
-	margin-top:5px;
-}
-</style>";
-}
-
-}
-
-if(isset($_GET["page"])){
-        $occurence = Array("e-mailing-service"); 
-        while (list($element, $valeur) = each($occurence)) {
-                $pos = strpos($_GET["page"],$valeur);
-                if(is_int($pos)!=false)
-						{
-						 add_action('admin_head', 'sm_js_admin_head');
-						 add_action('admin_head', 'sm_css_admin_head');
-						 add_action('admin_head', 'SM_custom_login_css');   
-                         }
-          }
-}
+/*
 add_action('admin_head-index.php', 'AH_dashbord_style');
 if(!function_exists('AH_dashbord_style')){
 function AH_dashbord_style() {
 	SM_custom_login_css();
 }
 }
-
+*/
 
 add_action( 'init', 'SM_register_shortcodes');
 function SM_register_shortcodes(){
    add_shortcode('sm_form_contact', 'SM_form_contact');
 }
 
-if(!function_exists(SM_send_message)){
+if(!function_exists('SM_send_message')){
 function SM_send_message($sm_email,$sm_sujet,$sm_message,$ip){
 	
 $message = ''.__('Message du formulaire de contact sur','e-mailing-service').' '.get_site_url().'<br><br>';
@@ -1039,17 +927,13 @@ function SM_force_type_private($post)
     return $post;
 }
 
-if(!function_exists(SM_form_contact)){
+if(!function_exists('SM_form_contact')){
 function SM_form_contact($atts, $content = null){	
 extract(shortcode_atts(array(
       'name' => 'yes',
 	  'style' => '',
    ), $atts));
 global $wp_query;
-$sm_action =$wp_query->query_vars['sm_action'];
-$sm_email= $wp_query->query_vars['sm_email'];
-$sm_sujet= $wp_query->query_vars['sm_sujet'];
-$sm_message= $wp_query->query_vars['sm_message'];
 
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
     $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -1060,8 +944,12 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 }
 
 
+if(isset($wp_query->query_vars['sm_action']) && $wp_query->query_vars['sm_action'] == 'post_message' ){
+$sm_action =$wp_query->query_vars['sm_action'];
+$sm_email= $wp_query->query_vars['sm_email'];
+$sm_sujet= $wp_query->query_vars['sm_sujet'];
+$sm_message= $wp_query->query_vars['sm_message'];
 
-if(isset($sm_action) && $sm_action == 'post_message'){
   if($sm_sujet !='' && $sm_email != '' && $sm_message !=''){
 SM_send_message($sm_email,$sm_sujet,$sm_message,$ip);
 $content .=  "<h2>".__("Votre message a ete envoye","e-mailing-service")."</h2>";
@@ -1071,7 +959,7 @@ $content .=  "[sm_form_contact name=yes][/sm_form_contact]";
   }
 } else {
 
-$content .= '<form action="" method="post" target="_parent">
+$content .= '<form action="" method="post">
 <input type="hidden" name="sm_action" value="post_message" />';
 $content .= '<table class="widefat">
                          ';
@@ -1081,6 +969,7 @@ $content .=  "
 <tr><td><b>".__("Message","e-mailing-service")." *</b></td><td><textarea name=\"sm_message\" cols=\"50\" rows=\"10\"></textarea></td></tr>
 <tr><td></td><td><input name=\"envoyer\" type=\"submit\" value=\"".__("send","e-mailing-service")."\"/></td></tr>
 </table>
+</form>
 ";
 }
 return $content;
@@ -1509,7 +1398,7 @@ function sm_smtp_user($phpmailer){
 	if($auth =="oui") { $auth1 = TRUE; } else { $auth1 = FALSE; }
 			}
 			
-	list($mx,$domaine,$ext,$autre)=explode('.',$host);
+	@list($mx,$domaine,$ext,$autre)=explode('.',$host);
 	if($autre !=''){
 	$domaine_envoi =''.$domaine.'.'.$ext.'.'.$autre.''; 	
 	} else {
@@ -1874,12 +1763,8 @@ $wpdb->query("UPDATE `".$resliste->liste_bd."` set `optin` = '1' WHERE `id`='".$
 }
 return true;
 }
-function sm_admin_head(){
-$txt='<script src="'.smURL.'SpryAssets/SpryTooltip.js" type="text/javascript"></script>
-<link href="'.smURL.'SpryAssets/SpryTooltip.css" rel="stylesheet" type="text/css">';
-echo $txt;
-}
-add_action('admin_head', 'sm_admin_head');
+
+
 
 function sm_userwordpress_update(){
 global $wpdb;

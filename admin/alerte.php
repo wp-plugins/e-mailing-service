@@ -30,7 +30,7 @@ extract($_GET);
                     <div class="grid_8">
      
            <?php
-$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='sm_license' WHERE `option_name`='$licen'");
+
 if(isset($action)){
 	if($action =="update"){
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".$sm_alerte_nl_cours."' WHERE `option_name`='sm_alerte_nl_cours'");

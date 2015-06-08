@@ -45,7 +45,7 @@ $user_email=$current_user->email;
 $user_info = get_userdata($current_user->ID);
 $user_role =implode(', ', $user_info->roles);
 
-define('WPLANG', get_user_meta( $user_id ,'lang',true));
+
  
 if(!get_option('ah_company_marque')){
 echo '<table><tr><td width="132" height="42"><a href="http://www.e-mailing-service.net" target="_blank"><img src="'.smURL.'/include/email_edit2x150.png" width="75" height="42" border="0"/></a></td><td align="center" valign="top"><h2>'.__('E-mailing service',"e-mailing-service").' V'.get_option('sm_version').'</h2></td>

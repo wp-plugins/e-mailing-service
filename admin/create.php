@@ -90,7 +90,7 @@ echo '<form action="?page=e-mailing-service/admin/create.php" method="post">
     <tr><td>'.__("Sujet","e-mailing-service").'<td><input name="subject" type="text" size="100"/>&nbsp;&nbsp;</td></tr>
     <tr><td>'.__("Choisissez un modele","e-mailing-service").'&nbsp;&nbsp;</td>
     <td>
-      <select name="modele_url" class="click" id="photo">
+      <select name="modele_url" class="click" id="photo" onchange="photo">
         <option value="'.smURL.'admin/no-modele.php" selected="selected">'.__("Pas de modele","e-mailing-service").'</option>';
 $listemodeles = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix.'posts'."` WHERE post_type='sm_modeles' ORDER BY id DESC");
 foreach ( $listemodeles as $listemodele ) 
@@ -108,22 +108,50 @@ echo ' </select></td></tr>
     </div>';
 
 }
-echo "<script type=\"text/javascript\">
-$(document).ready(function(){
-$('#preview').hide();	
-$('#photo').click(update);
-$('#title').keypress(update);
-});
-	
-function update(){		
-		
-$('#preview').slideDown('slow');
-var title = $('#title').val();
-var photo = $('#photo').val();
-$('#Displaytitle').html(title);
-$('#image').html('<iframe src=\"'+photo+'\" width=\"99%\" height=\"900\" scrolling=\"no\" align=\"middle\"></iframe>');
+echo"
+<style>
+.left {
+	width:400px;
+	float:left;
+	font-size:13px;
+	color:#333;
+	margin-right:20px;
 }
-</script>";
+.right {
+	width:320px;
+	float:left;
+	margin-right:20px;
+}
+#preview {
+	min-height:247px;
+	background-color:#CCC;
+	padding:10px;
+	font-size:12px;
+	color:#999;
+	border:1px solid #CCC;
+	width:870px;
+}
+#title {
+	margin-top:10px;
+	padding:5px;
+	font-size:13px;
+	color:#000;
+	border:1px solid #CCC;
+	font-family:Verdana, Geneva, sans-serif;
+}
+#photo {
+	margin-bottom:10px;
+}
+#image {
+	margin-top:5px;
+}
+#Displaytitle {
+	font-size:14px;
+	color:#333;
+	margin-top:5px;
+}
+</style>";
+
 ?>
 </div>
 </section>

@@ -461,7 +461,8 @@ if( !function_exists( 'sm_liste_title' )) {
 function sm_liste_title($id){
 global $wpdb;	
 $table_liste= $wpdb->prefix.'sm_liste';
-$fivesdrafts = $wpdb->get_results("SELECT liste_nom FROM `".$table_liste."` WHERE id='$id'");
+$liste_nom='?';
+$fivesdrafts = $wpdb->get_results("SELECT liste_nom FROM `".$table_liste."` WHERE id='".$id."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
 $liste_nom =$fivesdraft->liste_nom;
@@ -629,10 +630,15 @@ Precedence: bulk
 ";
 }
 else {
+if(!isset($_SESSION['sm_email_ret'])){
+	$erroto=$reply_to;
+} else {
+	$erroto=$_SESSION['sm_email_ret'];
+}
 $header = "Reply-to: ".$reply_to."
 Subject: ".$sujet."
 Content-Type: ".$mode."; charset=utf-8; format=flowed;
-Errors-To: ".$_SESSION['sm_email_ret']."
+Errors-To: ".$erroto."
 
 
 

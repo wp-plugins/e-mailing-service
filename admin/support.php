@@ -8,12 +8,17 @@ if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
 	include(smPATH . '/include/entete.php');
 }?>
                                <div id="main-nav">
-                    <ul class="clearfix">            
+                    <ul class="clearfix">    
+                    <?php
+if(!isset($active_page)){
+$active_page='faq';
+}					
+					?>        
 <li <?php if($active_page=="faq"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=faq"><?php _e('FAQ','admin-hosting');?></a></li>
-<li <?php if($active_page=="faq_question"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=faq_question"><?php _e("Server check ",'admin-hosting');?></a></li>
-<li <?php if($active_page=="ticket_liste"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=ticket_liste"><?php _e("Statistics smtp for server",'admin-hosting');?></a></li>
-<li <?php if($active_page=="ticket"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=ticket"><?php _e("Order",'admin-hosting');?></a></li>
-<li <?php if($active_page=="suggestion"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=suggestion"><?php _e("Order",'admin-hosting');?></a></li>	
+<li <?php if($active_page=="faq_question"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=faq_question"><?php _e("FAQ Question",'admin-hosting');?></a></li>
+<li <?php if($active_page=="ticket_liste"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=ticket_liste"><?php _e("List Ticket",'admin-hosting');?></a></li>
+<li <?php if($active_page=="ticket"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=ticket"><?php _e("Create ticket",'admin-hosting');?></a></li>
+<li <?php if($active_page=="suggestion"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/support.php&section=suggestion"><?php _e("Suggestion",'admin-hosting');?></a></li>	
                     </ul>
                 </div>
              </div>
@@ -54,7 +59,8 @@ if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
-<?php _e("Suivis de vos envois","e-mailing-service");?>
+<?php _e("Support","e-mailing-service");?>
+
  </h2>
                 </div>
          </div>
@@ -62,6 +68,7 @@ if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
             <div class="wrapper">                                   
 
         <?php echo "<p>".__("Pour suivre en direct le nombres d'emails envoyes","e-mailing-service")."</p>";?>
+        
                     
                     <hr />
 <?php

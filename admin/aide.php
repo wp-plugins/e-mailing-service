@@ -2,23 +2,27 @@
 <?php
 include(smPATH . '/include/entete.php');
 echo "<h1>". __("Aide a l'utilisation du service","e-mailing-service")."</h1>";
+extract($_GET);
+if(!isset($section)){
+$section='h_config';
+}		
 ?>
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=e-mailing-service/admin/aide.php&section=h_config" class="nav-tab <?php if ($_REQUEST['section'] == 'h_config' || empty($_REQUEST['section'])) echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/aide.php&section=h_config" class="nav-tab <?php if ($section == 'h_config') echo 'nav-tab-active'; ?>">
 			<?php _e('Aide a la Configuration',"e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/aide.php&section=h_email" class="nav-tab <?php if ($_REQUEST['section'] == 'videos') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/aide.php&section=h_email" class="nav-tab <?php if ($section == 'videos') echo 'nav-tab-active'; ?>">
 			<?php _e("Aide a la gestion de vos destinataires", "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/aide.php&section=h_send" class="nav-tab <?php if ($_REQUEST['section'] == 'player') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/aide.php&section=h_send" class="nav-tab <?php if ($section == 'player') echo 'nav-tab-active'; ?>">
 			<?php _e("Aide a l'envoi", "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/aide.php&section=h_stats" class="nav-tab <?php if ($_REQUEST['section'] == 'posts') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/aide.php&section=h_stats" class="nav-tab <?php if ($section == 'posts') echo 'nav-tab-active'; ?>">
 			<?php _e('Aide a la lecture des statistiques', "e-mailing-service"); ?>
 		</a>
-		<a href="?page=e-mailing-service/admin/aide.php&section=h_template" class="nav-tab <?php if ($_REQUEST['section'] == 'posts') echo 'nav-tab-active'; ?>">
+		<a href="?page=e-mailing-service/admin/aide.php&section=h_template" class="nav-tab <?php if ($section == 'posts') echo 'nav-tab-active'; ?>">
 			<?php _e("Aide a l'import de template", "e-mailing-service"); ?>
 		</a>
 	</h2><h2>

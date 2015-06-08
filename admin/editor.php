@@ -1,27 +1,27 @@
 	<!-- jQuery and jQuery UI -->
-	<script src="../editor/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../editor/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" charset="utf-8">
+<script src="<?php echo smURL;?>editor/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?php echo smURL;?>editor/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="<?php echo smURL;?>editor/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" charset="utf-8">
 
 	<!-- elRTE -->
-	<script src="../editor/js/elrte.min.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
+<script src="<?php echo smURL;?>editor/js/elrte.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="<?php echo smURL;?>editor/css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
 
 	<!-- elRTE translation messages -->
-	<script src="../editor/js/i18n/elrte.ru.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?php echo smURL;?>editor/js/i18n/elrte.ru.js" type="text/javascript" charset="utf-8"></script>
 
-	<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 		$().ready(function() {
 			var opts = {
 				cssClass : 'el-rte',
 				lang     : 'fr',
 				height   : 450,
 				toolbar  : 'maxi',
-				cssfiles : ['css/elrte-inner.css']
+				cssfiles : ['<?php echo smURL;?>editor/css/elrte-inner.css']
 			}
 			$('#editor').elrte(opts);
 		})
-	</script>
+</script>
  <div id="wrapper">
         <header id="page-header">
              <div class="wrapper">
@@ -31,7 +31,7 @@ if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
 } else {
 	include(smPATH . '/include/entete.php');
 }
-
+global $wpdb;
 extract($_POST);
 extract($_GET);
 ?>
@@ -48,11 +48,11 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php //echo "<p>".__("La liste de diffusion sert a classer les emails de vos clients par categories","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("La liste de diffusion sert a classer les emails de vos clients par categories","e-mailing-service")."</p>";?>
                     
                     <br />
                     
-                    <div class="grid_8"><?php
+                   <?php
 
 extract($_POST);
 if(isset($action)){
@@ -82,6 +82,7 @@ if($action=="save") {
 </form>	
 <?php }
 elseif($action=='edit'){
+	echo 'edit '.$id.'';
 $fivesdrafts = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."posts` WHERE ID='".$id."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
@@ -140,7 +141,7 @@ echo '</div>';
 //fin du menu action
 }
 ?>
-</div>
+
 </section>
 </div>
 </section>

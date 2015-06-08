@@ -65,20 +65,20 @@ echo $tableau_ticket ;
     $domaine_client= str_replace("www.","",$_SERVER['HTTP_HOST']);
 	$xml2=lit_xml_data('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_ticket.php?domaine_client='.$domaine_client.'&login='.get_option('sm_login').'&license_key='.get_option('sm_license_key').'&action=faq_liste&wplang='.WPLANG.'','item',array('id','message','date','pseudo'));
     $tableau_ticket="";
-    $tableau_ticket .= '<table class="widefat">
+    $tableau_ticket .= '<table class="paginate10 sortable full">
                          <thead>';
     $tableau_ticket .= "<tr>";
-	$tableau_ticket .= "<td><blockquote>".__('Question',"e-mailing-service")."</blockquote></td>";
-	$tableau_ticket .= "<td><blockquote>".__('Date',"e-mailing-service")."</blockquote></td>";
-	$tableau_ticket .= "<td><blockquote>".__('Auteur',"e-mailing-service")."</blockquote></td>";
-	$tableau_ticket .= "<td><blockquote>".__('Lire',"e-mailing-service")."</blockquote></td>";
+	$tableau_ticket .= "<th>".__('Question',"e-mailing-service")."</th>";
+	$tableau_ticket .= "<th>".__('Date',"e-mailing-service")."</th>";
+	$tableau_ticket .= "<th>".__('Auteur',"e-mailing-service")."</th>";
+	$tableau_ticket .= "<th>".__('Lire',"e-mailing-service")."</th>";
     $tableau_ticket .= '</tr>           
         </thead>
         <tbody>';
         if($xml2!='') {
         foreach($xml2 as $row) {
     $tableau_ticket .= "<tr>
-	<td><blockquote>".$row[1]."</blockquote></td>
+	<td><blockquote>".stripslashes($row[1])."</blockquote></td>
 	<td><blockquote>".$row[2]."</blockquote></td>
 	<td><blockquote>".$row[3]."</blockquote></td>
 	<td><blockquote><a href='?page=e-mailing-service/admin/support.php&section=faq&action=faq_lire&id=".$row[0]."'>". __("Lire les reponses", "e-mailing-service")."</a></blockquote></td>
@@ -89,6 +89,7 @@ echo $tableau_ticket ;
 $tableau_ticket .= '</tbody></table>';			
 echo $tableau_ticket ;
 }
+
 ?>
 
 
