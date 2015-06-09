@@ -1,8 +1,6 @@
 <?php
+function sm_cron_blocage(){
 global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $id=0;
 echo "<h2>".__("Tester la vitesse d'envoi de votre newsletter","e-mailing-service")."</h2>";	
@@ -28,5 +26,6 @@ echo _e("le status va etre reactiver","e-mailing-service");
 }
 if($id ==0){
 _e("Vous n'avez pas de newsletter qui tourne actuellement, vous ne pouvez donc pas verifier la vitesse d'envoi","e-mailing-service");	
+}
 }
  ?>

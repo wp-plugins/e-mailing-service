@@ -1,7 +1,6 @@
 <?php
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
+function sm_cron_license(){
+set_time_limit(0);
         if(!get_option('sm_license_key')) {
 		echo "<br><br>".__("Vous n'avez pas de license, vous utilisez la version gratuite","e-mailing-service")."";	
 		} else {
@@ -42,4 +41,5 @@ include(smPATH . '/include/fonctions_sm.php');
 		}
 		}
 		}
+}
  ?>

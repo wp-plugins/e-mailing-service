@@ -1,8 +1,7 @@
 <?php
+function sm_cron_blacklist(){
+set_time_limit(0);
 global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
 $table_blacklist= $wpdb->prefix.'sm_blacklist';
 $datelimite = date("Y-m-d", mktime(0,0,0,date("m"),date("d")-2,date("Y"))); 
 
@@ -41,4 +40,5 @@ _e("L'option est au tarifs de 2 euros / mois si vous ne disposez pas de serveur 
 		}
 		echo '<br>'.$i.' '.__("blacklist ont ete insere dans la base de donnee","e-mailing-service").'';
 		}				
+}
 }

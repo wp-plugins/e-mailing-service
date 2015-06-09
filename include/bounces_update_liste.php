@@ -1,8 +1,6 @@
 <?php
-global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
+function sm_cron_bounce_update_liste(){
+set_time_limit(0);
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
 $table_liste= $wpdb->prefix.'sm_liste';
@@ -69,5 +67,6 @@ $wpdb->query("UPDATE `".$table_bounces_hard."` SET `update` ='0'");
 		 }
 		          echo "<br>";
 		 }
+}
 }
 ?>

@@ -50,6 +50,7 @@
                     
                     <hr />
 <?php
+$table_liste = $wpdb->prefix.'sm_liste';  
 	if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 		echo '<!-- no license -->';
 echo '<h1>'.__("Statistiques","e-mailing-service").'</h1>';
@@ -621,6 +622,7 @@ exit();
 if($user_role=='administrator'){
 $user_login=$fivesdraft->login;
 }
+
 $liste=$wpdb->get_var("SELECT liste_bd FROM `".$table_liste."` WHERE login='".$user_login."' AND id='".$id_liste."'");
 if($status !='Terminer'){
 $total_envoi=nbenvoyer($fivesdraft->id);

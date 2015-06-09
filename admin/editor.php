@@ -1,31 +1,38 @@
-	<!-- jQuery and jQuery UI -->
-<script src="<?php echo smURL;?>editor/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="<?php echo smURL;?>editor/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="<?php echo smURL;?>editor/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" charset="utf-8">
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
+<?php
+function sm_editor_js($hook){ 
+echo '<!-- hook : '.$hook.'-->';
+wp_enqueue_script( 'e-mailing-service-editor_js',''.smURL.'editor/js/jquery-1.6.1.min.js' );
+wp_enqueue_script( 'e-mailing-service-editor_js',''.smURL.'editor/js/jquery-ui-1.8.13.custom.min.js' );
+wp_enqueue_script( 'e-mailing-service-editor_js',''.smURL.'editor/js/elrte.min.js' );
+wp_enqueue_script( 'e-mailing-service-editor_js',''.smURL.'editor/js/i18n/elrte.ru.js' );
 
-	<!-- elRTE -->
-<script src="<?php echo smURL;?>editor/js/elrte.min.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="<?php echo smURL;?>editor/css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
+wp_enqueue_style( 'e-mailing-service-editor_js',''.smURL.'editor/css/elrte.min.css' );
+wp_enqueue_style( 'e-mailing-service-editor_js',''.smURL.'editor/css/smoothness/jquery-ui-1.8.13.custom.css' );
+}
+add_action( 'admin_enqueue_scripts', 'sm_editor_js' );
 
-	<!-- elRTE translation messages -->
-<script src="<?php echo smURL;?>editor/js/i18n/elrte.ru.js" type="text/javascript" charset="utf-8"></script>
+function sm_editor_print_js(){
 
-<script type="text/javascript" charset="utf-8">
+echo "<script type='text/javascript' charset='utf-8'>
 		$().ready(function() {
 			var opts = {
 				cssClass : 'el-rte',
 				lang     : 'fr',
 				height   : 450,
 				toolbar  : 'maxi',
-				cssfiles : ['<?php echo smURL;?>editor/css/elrte-inner.css']
+				cssfiles : ['".smURL."editor/css/elrte-inner.css']
 			}
 			$('#editor').elrte(opts);
 		})
-</script>
- <div id="wrapper">
-        <header id="page-header">
-             <div class="wrapper">
-<?php 
+</script>";
+}
+add_action( 'admin_print_scripts', 'sm_editor_print_js' );
+
+
+
 if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
 	include(AH_PATH . '/include/entete.php');
 } else {
@@ -48,7 +55,7 @@ extract($_GET);
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("La liste de diffusion sert a classer les emails de vos clients par categories","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("En cas de probleme avec l'editeur wordpress quand vous copiez le code html dans la source, utilisez cet editeur","e-mailing-service")."</p>";?>
                     
                     <br />
                     

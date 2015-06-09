@@ -1,8 +1,7 @@
 <?php
+function sm_cron_bounces_delete(){
+set_time_limit(0);
 global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
 $table_liste= $wpdb->prefix.'sm_liste';
@@ -21,4 +20,6 @@ echo "".__("L'option est au tarif de 2 euros mois si vous ne disposez pas de ser
 	         $sql ="DELETE FROM `".$table_log_bounces."` WHERE `date_insert` < '".$datelimite."'";
              $result = $wpdb->query($wpdb->prepare($sql,true)); 
 }
+}
+
 ?>
