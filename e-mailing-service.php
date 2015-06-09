@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 9.7
+Version: 9.8
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,8 +34,8 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '9.7' );
-define( 'smDBVERSION', '4.4' );
+define( 'smVERSION', '9.8' );
+define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
@@ -507,6 +507,7 @@ $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idb` int(11) NOT NULL,
   `email` varchar(250) NOT NULL,
+  `hie` varchar(250) NOT NULL,
   `fai` varchar(250) NOT NULL,
   `rules_cat` varchar(250) NOT NULL,
   `rules_no` varchar(250) NOT NULL,
@@ -521,7 +522,7 @@ $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_log` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`,`date_insert`),
   KEY `idb` (`idb`,`fai`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ; "); 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"); 
 
 $wpdb->query("CREATE TABLE IF NOT EXISTS `$table_bounces_hard` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1584,40 +1585,37 @@ function sm_cron_unschedule_jours1() {
 
 function action_cron_minutes() 
 {
-
-sm_cron_fichier_v2('include/cron_auto_v2.php');
-sm_cron_fichier_v2('include/cron_v4.php');
+sm_send_newsletter();
+sm_send_article();
 }
 add_action('sm_crons', 'action_cron_minutes');
 
 function action_cron15()
 {
-sm_cron_fichier('include/cron_blocage.php');
-sm_cron_fichier('include/bounces.php');
-sm_cron_fichier('include/cron_stats.php');
+sm_cron_blocage();
+sm_cron_bounce();
+sm_cron_stats();
 }
 add_action('sm_crons15', 'action_cron15');
 
 function action_cron_heure()
 {
-sm_cron_fichier('include/bounces_delete.php');
+sm_cron_bounces_delete();
 }
 add_action('sm_crons_heure1', 'action_cron_heure');
 
 function action_cron_heure4()
 {
-sm_cron_fichier('include/blacklist.php');
-sm_cron_fichier('include/spamscore.php');
-sm_cron_fichier('include/bounces_update.php');
-sm_cron_fichier('include/bounces_update_liste.php');
+sm_cron_blacklist();
+sm_cron_bounce_update();
+sm_cron_bounce_update_liste();
 }
 add_action('sm_crons_heures4', 'action_cron_heure4');
 
 function action_cron24()
 {
-sm_cron_fichier('include/bounces_delete.php');
-sm_cron_fichier('include/cron_license.php');
 sm_userwordpress_update();
+sm_cron_license();
 }
 add_action('sm_crons_jours1', 'action_cron24');
 
@@ -1628,12 +1626,7 @@ function sm_cron_fichier($fichier)
 include(''.smPATH.''.$fichier.'');
 }
 }
-if(!function_exists('sm_cron_fichier_v2')){
-function sm_cron_fichier_v2($fichier)
-{
-@file_get_contents(''.smURL.''.$fichier.'');
-}
-}
+
 
 //post
 	function sm_meta_init() {
@@ -1900,7 +1893,9 @@ function sm_update_db(){
 	$table_bounces_log = $wpdb->prefix.'sm_bounces_log';
 	$table_messageid=$wpdb->prefix.'sm_stats_messageid'; 
 	$table_user_wordpress = $wpdb->prefix.'wordpress_user';  
-	
+if(get_option('sm_db_version') < '4.5'){
+$wpdb->query("ALTER TABLE  `".$table_bounces_log."` ADD  `hie` INT NOT NULL AFTER  `fai`");	
+}
 if(get_option('sm_db_version') < '4.4'){
 $wpdb->query("ALTER TABLE  `".$table_envoi_name."` CHANGE  `status`  `status` ENUM(  'En attente',  'En cours',  'Terminer',  'Limite',  'pause',  'reactiver',  'stop',  'erreur_flux',  'erreur_license',  'suite',  'suspended',  'bug',  'error',  'failed' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'En attente'");	
 $wpdb->query("ALTER TABLE  `".$table_envoi_name."` ADD  `txth` LONGTEXT NOT NULL");
@@ -2163,9 +2158,15 @@ function button_js() {
 
 include(smPATH . '/include/fonctions_sm.php');
 require_once(dirname(__FILE__)."/sm_widget.php");
-//require_once(dirname(__FILE__)."/sm_modeles.php");
 require_once(dirname(__FILE__)."/sm_dashboard.php");
-//require_once(dirname(__FILE__)."/sm_news.php");
+sm_cron_fichier('include/cron_v5.php');
+sm_cron_fichier('include/cron_auto_v3.php');
+sm_cron_fichier('include/blacklist.php');
+sm_cron_fichier('include/bounces.php');
+sm_cron_fichier('include/bounces_update.php');
+sm_cron_fichier('include/bounces_update_liste.php');	
+sm_cron_fichier('include/bounces_delete.php');
+sm_cron_fichier('include/cron_license.php');
+sm_cron_fichier('include/cron_stats.php');
 
-	
 ?>

@@ -35,7 +35,7 @@ if(isset($_POST["action"])){
 		if($user_role !='administrator'){
 		    if(ah_service_actif($user_login) == 'server'){
 		
-$infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_server_list."` WHERE login='".$user_login."' LIMIT 1");
+$infossmtp = $wpdb->get_results("SELECT * FROM `".AH_table_server_list."` WHERE login='".$user_login."' AND (status='Actif' OR status='ok' OR status='cancel') LIMIT 1");
 foreach ( $infossmtp as $infossmtps ) 
 {
 	if($infossmtps->version == 'load'){ $port = 27; } else { $port = 25;  }

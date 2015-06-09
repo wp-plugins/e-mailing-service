@@ -1,8 +1,7 @@
 <?php
+function sm_cron_bounce_update(){
+set_time_limit(0);
 global $wpdb;
-if(!isset($SMINCLUDEOK)){
-include(smPATH . '/include/fonctions_sm.php');
-}
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
 $table_liste= $wpdb->prefix.'sm_liste';
@@ -31,5 +30,6 @@ echo "".__("L'option est au tarifs de 2 euros mois si vous ne disposez pas de se
 		 }
 		_e(' '.$i.' HARD bounces ont ete insere dans la base de donnee',"e-mailing-service");
 		echo "<br>";
+}
 }
 ?>
