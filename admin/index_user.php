@@ -151,9 +151,4 @@ echo '<li>'.__("Avec un serveur dedie, l'interface est illimite , le serveur, le
 </section>
 </div>
 </section>
-<script type="text/javascript">
-        //<!--
-                var anc_onglet = 'snapshot';
-                change_onglet(anc_onglet);
-        //-->
-</script>
+<?php add_action( 'admin_print_scripts', 'sm_onglet_js' );?>

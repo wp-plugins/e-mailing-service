@@ -1,254 +1,216 @@
+ <div id="wrapper">
+        <header id="page-header">
+             <div class="wrapper">
 <?php 
-include(smPATH . '/include/entete.php');
-if(!isset($_GET["sm_lg"])){
-$img_lg =substr(WPLANG, 0, 2);
+if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
+	include(AH_PATH . '/include/entete.php');
 } else {
-$img_lg=$_GET["sm_lg"];	
+	include(smPATH . '/include/entete.php');
 }
-if($img_lg == "fr"){
-$sm_image ="Flat-Design-Pricing-Tables-2_fr.jpg";
-$sm_lg_rep="/";	
-}
-elseif($img_lg == "it"){
-$sm_image ="Flat-Design-Pricing-Tables-2_it.jpg";
-$sm_lg_rep="/it/";			
-}
-elseif($img_lg == "de"){
-$sm_image ="Flat-Design-Pricing-Tables-2_de.jpg";
-$sm_lg_rep="/de/";			
-}
-elseif($img_lg == "pt"){
-$sm_image ="Flat-Design-Pricing-Tables-2_pt.jpg";
-$sm_lg_rep="/pt/";			
-}
-elseif($img_lg == "es"){
-$sm_image ="Flat-Design-Pricing-Tables-2_es.jpg";
-$sm_lg_rep="/es/";			
-}
-else{
-$sm_image ="Flat-Design-Pricing-Tables-2_en.jpg";
-$sm_lg_rep="/en/";			
-}
+extract($_POST);
+extract($_GET);
 ?>
-<p><em><?php _e("Notre script vous garantit la delivrabilites si votre serveur n'est pas blackliste et que votre newsletter correspond au critere editorial de chaque fournisseur d'email","e-mailing-service");?></em></p>
-<p><em><?php _e('Nous garantissons ces resultats que sur nos serveurs SMTP ci-dessous',"e-mailing-service");?></em></p>
-<table><tr>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=fr"><img src="<?php echo smURL;?>/img/France.png" width="48" height="48" border="0"/></a></td>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=de"><img src="<?php echo smURL;?>/img/Germany.png" width="48" height="48" border="0"/></a></td>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=it"><img src="<?php echo smURL;?>/img/Italy.png" width="48" height="48" border="0"/></a></td>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=pt"><img src="<?php echo smURL;?>/img/Portugal.png" width="48" height="48" border="0"/></a></td>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=es"><img src="<?php echo smURL;?>/img/Spain.png" width="48" height="48" border="0"/></a></td>
-  <td><a href="?page=e-mailing-service/admin/index.php&sm_lg=en"><img src="<?php echo smURL;?>/img/us.png" width="48" height="48" border="0"/></a></td>
-  </tr></table>
-<img src="<?php echo get_option('siteurl');?>/wp-content/plugins/e-mailing-service/admin/images/<?php echo $sm_image;?>" alt="" name="FlatDesignPricingTables2_fr" width="1025" height="1175" border="0" usemap="#FlatDesignPricingTables2_frMap" id="FlatDesignPricingTables2_fr" />
-<map name="FlatDesignPricingTables2_frMap">
- <area shape="rect" coords="292,1072,470,1116" href="http://www.e-mailing-service.net<?php echo $sm_lg_rep;?>options/?option=srv-mx&log=<?php echo @get_option('sm_login');?>&wplang=<?php echo WPLANG;?>" target="_blank">
-  <area shape="rect" coords="520,1073,713,1117" href="http://www.e-mailing-service.net<?php echo $sm_lg_rep;?>options/?option=srv-smtp&log=<?php echo @get_option('sm_login');?>&wplang=<?php echo WPLANG;?>" target="_blank">
-  <area shape="rect" coords="766,1070,951,1117" href="http://www.e-mailing-service.net<?php echo $sm_lg_rep;?>options/?option=mass-mailing&log=<?php echo @get_option('sm_login');?>&wplang=<?php echo WPLANG;?>" target="_blank">
-  <area shape="rect" coords="298,495,484,543" href="?page=e-mailing-service/admin/configuration.php" target="_parent" />
-  <area shape="rect" coords="524,495,710,543" href="http://www.e-mailing-service.net<?php echo $sm_lg_rep;?>options/?option=api-premium&log=<?php echo @get_option('sm_login');?>&wplang=<?php echo WPLANG;?>" target="_blank">
-  <area shape="rect" coords="763,494,956,543" href="http://www.e-mailing-service.net<?php echo $sm_lg_rep;?>options/?option=api-mass-mailing&log=<?php echo @get_option('sm_login');?>&wplang=<?php echo WPLANG;?>" target="_blank">
-  <area shape="rect" coords="235,164,256,187" href="#" id="sprytrigger1">
-  <area shape="rect" coords="235,164,256,187" href="#" id="sprytrigger3">
-  <area shape="rect" coords="234,195,259,218" href="#" id="sprytrigger4">
-  <area shape="rect" coords="234,733,259,759" href="#" id="sprytrigger5">
-  <area shape="rect" coords="235,770,258,790" href="#" id="sprytrigger6">
-  <area shape="rect" coords="236,800,257,823" href="#" id="sprytrigger7">
-  <area shape="rect" coords="235,830,259,854" href="#" id="sprytrigger8">
-  <area shape="rect" coords="233,862,258,884" href="#" id="sprytrigger9">
-  <area shape="rect" coords="235,891,259,917" href="#" id="sprytrigger10">
-  <area shape="rect" coords="233,925,260,948" href="#" id="sprytrigger11">
-  <area shape="rect" coords="233,956,260,981" href="#" id="sprytrigger12">
-  <area shape="rect" coords="236,991,259,1010" href="#" id="sprytrigger13">
-  <area shape="rect" coords="233,1016,262,1048" href="#" id="sprytrigger14">
-  <area shape="rect" coords="232,226,260,251" href="#" id="sprytrigger15">
-  <area shape="rect" coords="234,259,259,281" href="#" id="sprytrigger16">
-  <area shape="rect" coords="232,287,257,313" href="#" id="sprytrigger17">
-  <area shape="rect" coords="230,321,261,345" href="#" id="sprytrigger18">
-  <area shape="rect" coords="231,348,261,377" href="#" id="sprytrigger19">
-  <area shape="rect" coords="236,385,259,406" href="#" id="sprytrigger20">
-  <area shape="rect" coords="234,416,259,439" href="#" id="sprytrigger21">
-  <area shape="rect" coords="235,449,258,470" href="#" id="sprytrigger22">
-</map>
-<div class="tooltipContent" id="sprytooltip3">
- <blockquote>
-   <h2><?php _e("Serveur SMTP","e-mailing-service");?></h2>
-   <?php _e("<pre>Vous allez pouvoir parametrer un serveur SMTP qui va vous permettre d'envoyer sans prendre le risque de blacklister votre site principal.Le script fonctionne avec tous les serveurs SMTP.Nous garantissont les resultats inbox de nos scripts que sur nos serveurs SMTP.</pre>","e-mailing-service");?>
- </blockquote>
+                </div>
+        </header>
 </div>
-<div class="tooltipContent" id="sprytooltip4">
-  <blockquote>
-    <h2><?php _e("REWRITING","e-mailing-service");?></h2>
-    <?php _e("<pre><p>Tous les liens sont en reecriture d'url ce qui permet d'avoir des liens courts et de passer les barrieres anti-spam </p>
-    <p>&nbsp;</p></pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip5">
-  <blockquote>
-    <h2><?php _e("Gestion NPAI","e-mailing-service");?></h2>
-    <?php _e("<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il previenne d'un email invalide, un eventuel blacklistage etc...
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("E-mailing service","e-mailing-service");?>
+ </h2>
+                </div>
+         </div>
+                 <section id="content">
+            <div class="wrapper">                <section class="columns">                    
 
-En bref des informations necessaires pour garder une base de donnee propre sans email invalide, et de continuer aconserver un bon pourcentage de delivrabilite.</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip6">
-  <blockquote>
-    <h2><?php _e("Nom de domaine","e-mailing-service");?></h2>
-   <pre> <?php _e("Si l'option est coche , on vous offre un nom de domaine que vous choisissez vous meme apres paiement,  qui sera dedie avos envois de newsletters.
-Meilleur delivrabilite.","e-mailing-service");?></pre>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip7">
-  <blockquote>
-    <h2><?php _e("Gestion NPAI","e-mailing-service");?></h2>
-    <?php _e("<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il previenne d'un email invalide, un eventuel blacklistage etc... 
+        <?php echo "<p>".__("Guide pour bien demarrer","e-mailing-service")."</p>";?>
+                    
+                    <hr />
+                    
+                    
+                    
+<div class="systeme_onglets">
+        <div class="onglets">
+            <span class="onglet_0 onglet" id="onglet_snapshot" onclick="javascript:change_onglet('snapshot');"><?php echo __('Demarrage','e-mailing-service'); ?></span>
+            <span class="onglet_0 onglet" id="onglet_solde" onclick="javascript:change_onglet('solde');">1.<?php echo __('Configurer le plugin','e-mailing-service'); ?></span>
+            <span class="onglet_0 onglet" id="onglet_contact" onclick="javascript:change_onglet('contact');">2.<?php echo __('Creer votre liste de contact','e-mailing-service'); ?></span>
+            <span class="onglet_0 onglet" id="onglet_emails" onclick="javascript:change_onglet('emails');">3.<?php echo __('Ajouter vos contacts','e-mailing-service'); ?></span>
+            <span class="onglet_0 onglet" id="onglet_newsletter" onclick="javascript:change_onglet('newsletter');">4.<?php echo __('Creer votre newsletter','e-mailing-service'); ?></span>
+             <span class="onglet_0 onglet" id="onglet_send" onclick="javascript:change_onglet('send');">5.<?php echo __('Envoyer votre newsletter','e-mailing-service'); ?></span>
+                  <span class="onglet_0 onglet" id="onglet_suivis" onclick="javascript:change_onglet('suivis');">6.<?php echo __('Suivis des campagnes','e-mailing-service'); ?></span>
+                       <span class="onglet_0 onglet" id="onglet_stats" onclick="javascript:change_onglet('stats');">7.<?php echo __('Analyse des statistiques','e-mailing-service'); ?></span>
+        </div>
+        <div class="contenu_onglets">
+            <div class="contenu_onglet" id="contenu_onglet_snapshot">
+                <h1><?php echo __('Les differentes etapes a effectuer pour envoyer votre newsletter','e-mailing-service'); ?></h1>
 
-En bref des informations necessaires pour garder une base de donnee propre sans email invalide, et de continuer aconserver un bon pourcentage de delivrabilite.
+              <ol>
+              <li><?php echo ''.__('Configurer le plugin avec vos informations SMTP','e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/setting.php">'.__('Setting', 'e-mailing-service').'</a> )';?> </li>
+          <li><?php echo ''.__('Creer votre liste de contact','e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/listes.php">'.__('Destinataires', 'e-mailing-service').'</a> )';?> </li>
+         <li><?php echo ''.__('Ajouter vos contacts','e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/listes.php">'.__('Destinataires', 'e-mailing-service').'</a> )';?> </li>
+         <li><?php echo ''.__('Creer votre newsletter','e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/create.php">'.__('Assistant Creation', 'e-mailing-service').'</a> )';?> </li>
+      <li><?php echo ''.__('Envoyer votre newsletter','e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/send_user.php">'.__('Envois Newsletter', 'e-mailing-service').'</a> )';?> </li>
+     <li><?php echo ''.__("Suivre l'avancement de vos envois",'e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/send_user.php">'.__('Suivis des campagnes', 'e-mailing-service').'</a> )';?> </li>
+     <li><?php echo ''.__("Analyser les resultats de votre campagne",'e-mailing-service').' ( '.__('menu','e-mailing-service').'  <a href="?page=e-mailing-service/admin/listes_newsletter.php">'.__('Liste Newsetter', 'e-mailing-service').'</a> )';?> </li>
+              </ol>
+              <p>&nbsp;</p>
+            </div>
+            <div class="contenu_onglet" id="contenu_onglet_solde">
+                <h1><?php echo __('Configurer le plugin','e-mailing-service'); ?></h1>
+<?php
 
-Si vous souscrivez anos serveurs SMTP , le script de gestion des NPAI est offert !</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip8">
-  <blockquote>
-    <h2><?php _e("IP dedie","e-mailing-service");?></h2>
-    <?php echo "<pre>".__("Vous etes seules sur votre IP ce qui permet d'etre sur de la qualite de vos envois, personne ne peut faire blacklister votre serveur par erreur")." ".__("vous etes le seul responsable en cas d'incident, et vous pouvez donc gerer la desinscription au cas ou vous etiez inscrit sur une liste anti-spam.")."
-	".__("Indispensable pour une delivrabilite maximum","e-mailing-service").".</pre>";?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip9">
-  <blockquote>
-    <h2><?php _e("Script Multi-SMTP","e-mailing-service");?></h2>
-    <?php _e("<pre>Si vous souscrivez al'offre mass mailing , le script multi-smtp est offert, des serveurs MX avec ip dedie et serveur dedie vous sont fournis suivant vos besoins 
-et le script SMTP va envoyer atour de role sur les differents serveurs SMTP .
+echo ''.__("Avez vous un serveur SMTP ?","e-mailing-service").' : ';
+echo '<ul><li>'.__("Si vous n'avez pas de serveur SMTP, vous pouvez choisir une formule parmis nos offres","e-mailing-service").' (<a href="http://www.e-mailing-service.net/options/">'.__('voir les offres SMTP','e-mailing-service').'</a>)<br>';
+echo ''.__("Dans ce cas la configuration du plugin avec notre service SMTP est automatique aprés paiement, aucune connaissance n'est necessaire","e-mailing-service").'<br>';
+echo ''.__("Nos formules sont conseilles pour eviter de faire blacklisté votre site","e-mailing-service").'<br> </li></ul>';
+_e("Si vous possedez deja un serveur SMTP, vous devez donc renseigner le formulaire et donc possedez les informations necessaires (serveur, email, port, login et mot de passe)","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Pour les options, ce que vous devez savoir :","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Affichage texte en haut , texte de desabonnement et affiliation servent a parametrer les informations importante de votre newsletter , sans avoir a toujours les indiquer sur votre template","e-mailing-service");
+echo '<br>';
+_e("Attention a la variable [lien_desabo] , si elle n'est pas presente sur votre template et que vous avez desactiver le lien de desabonnement , votre newsletter ne partiras pas, car retirer le lien de desabonnement est considere comme du spam !","e-mailing-service");
+echo '<br>';
+_e("Vous pouvez connaitre facilement toutes les variables disponible dans le menu variables","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Si vous cocher la case 'Envoi automatique des nouveaux posts et nouvelles pages' , a chaque fois que vous publier une nouvelle newsletter ou un nouveau post , le lien est envoye a votre liste par defaut","e-mailing-service");
+echo '<br>';
+_e("Vous pouvez modifier le modele ou creer un nouveau modele a partir de la liste de modeles","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Le temps pause est le delai d'attente entre chaque email envoyes , plus le temps de pause est court plus , votre newsletter sera envoye rapidement.","e-mailing-service");
+echo '<br>';
+_e("Si vous envoyez trop vite , votre serveur pourra etre bloque ou blackliste par les fournisseurs d'email.","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Possibilite de mettre les campagnes en pause : vous pouvez l'activer ou le desactiver en cours d'envoi , pour le mettre en place que si vous en avez vraiment besoin , car sinon ralentit le script","e-mailing-service");
+echo '<br>';
+echo '<br>';
+_e("Changement de configuration en cours d'envoi , il est possible de changer la configuration en cours d'envoi , cela changera votre serveur SMTP sur le script d'envoi","e-mailing-service");
+echo '<br>';
+echo '<br>';
+?>
+<br /><br /><a href="?page=e-mailing-service/admin/solde.php"><img src="<?php echo smURL;?>/screenshot-10.png" width="750" border="0"/></a>
+<br /><br /><br /><br /></div>
+            <div class="contenu_onglet" id="contenu_onglet_contact">
+                <h1><?php echo __('Creer votre liste de contact','e-mailing-service'); ?></h1>
+           <?php
+		   echo ''.__("La liste permet de definir plusieurs categorie de contact, la desinscription est individuel par liste","e-mailing-service").'';?>   
+           <br /><br /><a href="?page=e-mailing-service/admin/liste.php"><img src="<?php echo smURL;?>/screenshot-11.png" width="750" border="0"/></a><br />
+                 
 
-Fortement conseille si vous envoyer plus de 60 000 emails  par jours.</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip10">
-  <blockquote>
-    <h2><?php _e("Alias d'email","e-mailing-service");?></h2>
-    <?php _e("<pre>Ce que l'on appelle alias d'email et le nom de votre email par exemple alias@monnom.com
-Si vous ne prenez pas une offre avec nom de domaine , l'alias vous sera fournit automatiquement , vous ne pourrez pas la choisir</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip11">
-  <blockquote>
-    <h2><?php _e("Statistiques des liens","e-mailing-service");?></h2>
-    <?php _e("<pre>Vous avez des statistiques d'envoi, d'ouverture , de clic , clic email dans navigateur ( vous ne visualisez pas cet email ), les desinscriptions.
+            </div>
+               <div class="contenu_onglet" id="contenu_onglet_emails">
+                <h1><?php echo __('Ajouter vos contacts','e-mailing-service'); ?></h1>
+                
+                <?php
+		   echo ''.__("Une fois votre liste cree, vous pouvez ajouter des emails manuellement ou importer vos fichiers emails en .csv ou .txt","e-mailing-service").'';?> 
+             <br /><br /><a href="?page=e-mailing-service/admin/liste.php"><img src="<?php echo smURL;?>/screenshot-12.png" width="750" border="0"/></a><br />
+             <?php echo '<table width="700" border="1">
+  <tr>
+    <th scope="row"> '.__('Ajouter vos emails','e-mailing-service').'</th>
+    <td><img src="'.smURL.'img/doc_add.png" width="32" height="32" border="0" title="'.__("Ajouter des emails","e-mailing-service").'"/></a></td>
+    <td>'.__("Permet d'ajouter des emails",'e-mailing-service').'</td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>';
 
-Le classement est possible , par jour , par FAI , par tracking, par url , par serveur</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip12">
-  <blockquote>
-    <h2><?php _e("Statistiques serveurs","e-mailing-service");?></h2>
-    <?php _e("<pre>Statistiques sur les fichiers log du serveur SMTP, emails delivres ,emails mis spam , bounces .... </pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip13">
-  <blockquote>
-    <h2><?php _e("Blacklist et Spam Score","e-mailing-service");?></h2>
-    <?php _e("<pre>Remontes journaliers :</pre>","e-mailing-service");?>
-<ul>
-<li><?php _e("<pre>du nombre d'inscription sur les listes anti-spam (blacklist), avec liens pour vous desinscrire au cas ou. </pre>","e-mailing-service");?></li>   
-<li><?php _e("<pre>du spam score (note de qualite des emailing la note est sur 100 , la meilleur note etant 100) importante notemment pour hotmail.</pre>","e-mailing-service");?></li>
-</ul>
-</blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip14">
-  <blockquote>
-    <h2><?php _e("Limite d'envois","e-mailing-service");?></h2>
-    <?php _e("<pre>Vous pouvez choisir la vitesse d'envois , mais si vous arrivez au bout de votre limite journaliere, le script s'arretera et reprendra le lendemain matin a 0h01.</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip15">
-  <blockquote>
-    <h2><?php _e("Gestion NPAI","e-mailing-service");?></h2>
-    <?php _e("<pre>Les NPAI sont les email en reponse avotre envoi,  en general , il previenne d'un email invalide, un eventuel blacklistage etc... 
 
-En bref des informations necessaires pour garder une base de donnee propre sans email invalide, et de continuer aconserver un bon pourcentage de delivrabilite.
+_e("Dans le menu widget de votre wordpress , vous devez activer notre widget , pour ajouter le formulaire d'inscription sur votre site. ","e-mailing-service");
+echo '<br><br>';
+_e("Si vous avez l'option NPAI (bounces) est active sur votre license, les email invalide (hard bounces) serons desactive de vos listes","e-mailing-service");
+echo '<br>';
+echo '<br>';
+echo '<h2>'.__("Menu","e-mailing-service").' '.__("Importation d'email","e-mailing-service").'</h2><br>';
+_e("Vous devez avoir le dossier /e-mailing-service/post avec l'autorisation sur le dossier (CHMOD 777) pour pouvoir importer des fichiers emails, une fois importer vos fichiers sont supprimes","e-mailing-service");
+echo '<br>';
+_e("Pas defaut en general vous pouvez importer un fichier de 2mo, pour augmenter celui-ci , il faut rajouter dans votre fichier .htaccess","e-mailing-service");
+echo ": <br><textarea name=\"\" cols=\"50\" rows=\"3\">
+php_flag post_max_size 50M
+php_flag upload_max_filesize 50M
+php_flag upload_max_size 50M</textarea>";
+echo '<br>';
+echo '<br>';?>
 
-Si vous souscrivez anos serveurs SMTP , le script de gestion des NPAI est offert !</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip16">
-  <blockquote>
-    <h2><?php _e("Importation de modeles","e-mailing-service");?></h2>
-    <?php _e("<pre>Script d'importation de modeles en fichier zip ou url.
-Votre modeles est alors installe automatiquement.
 
-Il vous suffit alors de choisir un modele lors de la creation de votre newsletter et celui-ci ce met en place tous seul.
-</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip17">
-  <blockquote>
-    <h2><?php _e("Script Multi-SMTP","e-mailing-service");?></h2>
-    <?php _e("<pre>Si vous choisissez l'offre mass mailing , vous pouvez parametrer plusieurs SMTP 
-et le script effctuera une rotation reguliere entre les differents SMTP pour repartir la charge d'envoi.
-Les deux premiers sont offerts a la souscription, 3 euros 50 par SMTP supplementaire.
-</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip18">
-  <blockquote>
-    <h2><?php _e("Gestion destinataires","e-mailing-service");?></h2>
-    <?php _e("<pre>Avec le script vous allez facilement pouvoir gerer une aplusieurs liste de contact (inscrire,modifier,supprimer,desinscrire) </pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip19">
-  <blockquote>
-    <h2><?php _e("Statistiques des liens","e-mailing-service");?></h2>
-    <?php _e("<pre>Vous avez des statistiques d'envoi, d'ouverture , de clic , clic email dans navigateur ( vous ne visualisez pas cet email ), les desinscriptions.
+            </div>
+               <div class="contenu_onglet" id="contenu_onglet_newsletter">
+                <h1><?php echo __('Creer votre newsletter','e-mailing-service'); ?></h1>
+                                <?php
+		   echo '<p>'.__("Choisissez un modele, si vous en avez besoin, sinon mettez seulement le titre qui sera le sujet de la newsletter et cliquez sur suivant","e-mailing-service").'</p>';
+		    echo '<p>'.__("Pour visonner les modeles,choisir le nom dans le menu deroulant","e-mailing-service").'</p>'; 
+		   ?> 
+             <br /><br /><a href="?page=e-mailing-service/admin/liste.php"><img src="<?php echo smURL;?>/screenshot-13.png" width="750" border="0"/></a><br /><br /><br />
+             
+             <?php
+			 			echo '<h2>'.__("Menu","e-mailing-service").' '.__("Importation de modele","e-mailing-service").'</h2><br>';
+_e("Vous devez avoir le dossier /e-mailing-service/post avec l'autorisation sur le dossier (CHMOD 777) pour pouvoir importer des fichier .zip","e-mailing-service");
+echo "<br>";
+_e("Le plugin a ete teste avec les design pour le marketing par email : ","e-mailing-service");
+echo  '<a href="http://themeforest.net/category/marketing/email-templates?ref=tous1site" target="_blank">Themeforest</a>';
+echo '<br>';
+_e("Pas defaut en general vous pouvez importer un fichier de 2mo, pour augmenter celui-ci , il faut rajouter dans votre fichier .htaccess","e-mailing-service");
+echo ": <br><textarea name=\"\" cols=\"50\" rows=\"5\">
+php_flag post_max_size 50M
+php_flag upload_max_filesize 50M
+php_flag upload_max_size 50M</textarea>";
+echo '<br>';
+echo '<br>';
+?>
+            </div>
+            
+              <div class="contenu_onglet" id="contenu_onglet_send">
+                <h1><?php echo __('Envoyer votre newsletter','e-mailing-service'); ?></h1>
+                                <?php
+		   echo '<p>'.__("Pour envoyer votre newsletter, il suffit de choisir votre newsletter, votre liste de contact et de cliquez sur envoyer","e-mailing-service").'</p>';
+		    echo '<p>'.__("Le tracking ne sert qu'aux clients qui travaillent avec des sites d'affiliation et veulent tracer leur revenu","e-mailing-service").'</p>'; 
+			  echo '<p>'.__("Le temps de pause determine la vitesse d'envoi de votre newsletter 10 correspond a 1 mail toutes les 10 secondes","e-mailing-service").'</p>'; 
+		   ?> 
+             <br /><br /><a href="?page=e-mailing-service/admin/send_user.php"><img src="<?php echo smURL;?>/screenshot-14.png" width="750" border="0"/></a><br />
+            </div>
+            
+              <div class="contenu_onglet" id="contenu_onglet_suivis">
+                <h1><?php echo __('Suivis des campagnes','e-mailing-service'); ?></h1>
+                                <?php
+		   echo '<p>'.__("Ce menu permet de suivre ll'avancement de vos envois, si le status est en attente , c'est que votre newsletter n'est pas encore partis","e-mailing-service").'</p>';
+		   ?> 
+             <br /><br /><a href="?page=e-mailing-service/admin/send_user.php"><img src="<?php echo smURL;?>/screenshot-15.png" width="750" border="0"/></a><br />
+            </div>
+            
+              <div class="contenu_onglet" id="contenu_onglet_stats">
+                <h1><?php echo __('Analyse des statistiques','e-mailing-service'); ?></h1>
+                                <?php
+		   echo '<p>'.__("Permet de connaitre le taux d'ouverture et de clics sur votre newsletter","e-mailing-service").'</p>';
+		    echo '<p>'.__("Vous avez egalement la possibilite d'exporter les statistiques","e-mailing-service").'</p>'; 
+		   ?> 
+             <br /><br /><a href="?page=e-mailing-service/admin/send_user.php"><img src="<?php echo smURL;?>/screenshot-16.png" width="750" border="0"/></a><br />
+            </div>
+            
+            
+            
+        </div>
+    </div>&nbsp;
+    
 
-Le classement est possible , par jour , par FAI , par tracking, par url , par serveur</pre>","e-mailing-service");?>
-  </blockquote>
+                    
+                    
+                    
+                    
+                    
+               
+</section>
 </div>
-<div class="tooltipContent" id="sprytooltip20">
-  <blockquote>
-    <h2><?php _e("Statistiques serveurs","e-mailing-service");?></h2>
-    <?php _e("<pre>Statistiques sur les fichiers log du serveur SMTP, emails delivres ,emails mis spam , bounces .... </pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip21">
-  <blockquote>
-    <h2><?php _e("Blacklist et Spam Score","e-mailing-service");?></h2>
-    <?php _e("<pre>Remontes journaliers :</pre>","e-mailing-service");?>
-    <ul>
-      <li>
-        <?php _e("<pre>du nombre d'inscription sur les listes anti-spam (blacklist), avec liens pour vous desinscrire au cas ou. </pre>","e-mailing-service");?>
-      </li>
-      <li><?php _e("<pre>du spam score (note de qualite des emailing la note est sur 100 , la meilleur note etant 100) importante notemment pour hotmail.</pre>","e-mailing-service");?></li>
-     
-    </ul>
-    <strong><?php _e("Disponible en option au tarifs de 2 euros /mois</pre>","e-mailing-service");?></strong>
-  </blockquote>
-</div>
-<div class="tooltipContent" id="sprytooltip22">
-  <blockquote>
-    <h2><?php _e("Limite d'envois","e-mailing-service");?></h2>
-    <?php _e("<pre>Vous pouvez choisir la vitesse d'envois , mais si vous arrivez au bout de votre limite journaliere, le script s'arretera et reprendra le lendemain matin a 0h01.</pre>","e-mailing-service");?>
-  </blockquote>
-</div>
-<script type="text/javascript">
-var sprytooltip3 = new Spry.Widget.Tooltip("sprytooltip3", "#sprytrigger3", {useEffect:"blind"});
-var sprytooltip4 = new Spry.Widget.Tooltip("sprytooltip4", "#sprytrigger4", {useEffect:"blind"});
-var sprytooltip5 = new Spry.Widget.Tooltip("sprytooltip5", "#sprytrigger5", {useEffect:"blind"});
-var sprytooltip6 = new Spry.Widget.Tooltip("sprytooltip6", "#sprytrigger6", {useEffect:"blind"});
-var sprytooltip7 = new Spry.Widget.Tooltip("sprytooltip7", "#sprytrigger7", {useEffect:"blind"});
-var sprytooltip8 = new Spry.Widget.Tooltip("sprytooltip8", "#sprytrigger8", {useEffect:"blind"});
-var sprytooltip9 = new Spry.Widget.Tooltip("sprytooltip9", "#sprytrigger9", {useEffect:"blind"});
-var sprytooltip10 = new Spry.Widget.Tooltip("sprytooltip10", "#sprytrigger10", {useEffect:"blind"});
-var sprytooltip11 = new Spry.Widget.Tooltip("sprytooltip11", "#sprytrigger11", {useEffect:"blind"});
-var sprytooltip12 = new Spry.Widget.Tooltip("sprytooltip12", "#sprytrigger12", {useEffect:"blind"});
-var sprytooltip13 = new Spry.Widget.Tooltip("sprytooltip13", "#sprytrigger13", {useEffect:"blind"});
-var sprytooltip14 = new Spry.Widget.Tooltip("sprytooltip14", "#sprytrigger14", {useEffect:"blind"});
-var sprytooltip15 = new Spry.Widget.Tooltip("sprytooltip15", "#sprytrigger15", {useEffect:"blind"});
-var sprytooltip16 = new Spry.Widget.Tooltip("sprytooltip16", "#sprytrigger16", {useEffect:"blind"});
-var sprytooltip17 = new Spry.Widget.Tooltip("sprytooltip17", "#sprytrigger17", {useEffect:"blind"});
-var sprytooltip18 = new Spry.Widget.Tooltip("sprytooltip18", "#sprytrigger18", {useEffect:"blind"});
-var sprytooltip19 = new Spry.Widget.Tooltip("sprytooltip19", "#sprytrigger19", {useEffect:"blind"});
-var sprytooltip20 = new Spry.Widget.Tooltip("sprytooltip20", "#sprytrigger20", {useEffect:"blind"});
-var sprytooltip21 = new Spry.Widget.Tooltip("sprytooltip21", "#sprytrigger21", {useEffect:"blind"});
-var sprytooltip22 = new Spry.Widget.Tooltip("sprytooltip22", "#sprytrigger22", {useEffect:"blind"});
-</script>
+</section>
+<?php add_action( 'admin_print_scripts', 'sm_onglet_js' );?>

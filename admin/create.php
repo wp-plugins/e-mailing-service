@@ -81,12 +81,9 @@ echo "<br><h1>".__("Creation de votre newsletter","e-mailing-service")."</h1>";
 echo "<h2>".__("Premiere etape , choisir le sujet et le modele","e-mailing-service")."</h2>";
 echo '<form action="?page=e-mailing-service/admin/create.php" method="post">
 <input name="action" type="hidden" value="editor" />
+<input name="editeur" type="hidden" value="wordpress" />
     <form>
     <table>
-	<tr><td>'.__("Choisissez un editeur","e-mailing-service").'&nbsp;&nbsp;<td><p>
-  <label><input name="editeur" type="radio" id="editeur_0" value="wordpress" checked="checked" />wordpress</label>
-  <label><input type="radio" name="editeur" value="autre" id="editeur_1" />autre</label>
-</td></tr>
     <tr><td>'.__("Sujet","e-mailing-service").'<td><input name="subject" type="text" size="100"/>&nbsp;&nbsp;</td></tr>
     <tr><td>'.__("Choisissez un modele","e-mailing-service").'&nbsp;&nbsp;</td>
     <td>
