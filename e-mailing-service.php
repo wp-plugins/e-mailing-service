@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 9.8
+Version: 9.9
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -34,7 +34,7 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
-define( 'smVERSION', '9.8' );
+define( 'smVERSION', '9.9' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -74,7 +74,7 @@ function register_sm_menu_page() {
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Liste Newsetter', 'e-mailing-service'), __('Liste Newsetter', 'e-mailing-service'), 'manage_options',   smPATH . 'admin/listes_newsletter.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send_user.php', NULL);
 	   add_submenu_page( '', __('Envoyer une newsletter', 'e-mailing-service'), __('Envoyer une newsletter', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/send.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Campaign', 'e-mailing-service'), __('Campaign', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('Suivis des campagnes', 'e-mailing-service'), __('Suivis des campagnes', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/live_user.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Statistiques', 'e-mailing-service'), __('Statistiques', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/stats_user.php', NULL);
    add_submenu_page( 'e-mailing-service/admin/index.php', __('Variables', 'e-mailing-service'), __('Variables', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/variables.php', NULL);
 
@@ -87,21 +87,12 @@ function register_sm_menu_page() {
     add_submenu_page( 'e-mailing-service/admin/index.php', __('Blacklist', 'e-mailing-service'), __('Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/blacklist.php', NULL);
     add_submenu_page( 'e-mailing-service/admin/index.php', __('Gestion des alertes', 'e-mailing-service'), __('Gestion des alertes', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/alerte.php', NULL);
      add_submenu_page( 'e-mailing-service/admin/index.php', __('Setting', 'e-mailing-service'), __('Setting', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/setting.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('License et option', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);   
+   add_submenu_page( 'e-mailing-service/admin/index.php', __('License et options', 'e-mailing-service'), __('License et options', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/configuration.php', NULL);   
 
-	add_submenu_page( 'e-mailing-service/admin/index.php', __('Aide', 'e-mailing-service'), __('Aide', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/aide.php', NULL); 
     add_submenu_page( 'e-mailing-service/admin/index.php', __('Support', 'e-mailing-service'), __('Support', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/support.php', NULL); 
     add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug', 'e-mailing-service'), __('Debug', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/debug.php', NULL);
-	    add_submenu_page( smPATH . 'admin/debug.php', __('Status de services', 'e-mailing-service'), __('Status de services', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/etat.php', NULL);  
-   if(get_option('sm_debug')=='oui'){
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Update license', 'e-mailing-service'), __('Update license', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_license.php', NULL);
-      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send', 'e-mailing-service'), __('Debug send', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug send auto', 'e-mailing-service'), __('Debug send auto', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_auto.php', NULL);
-     add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Blacklist', 'e-mailing-service'), __('Debug Blacklist', 'e-mailing-service'), 'manage_options',  smPATH . 'include/blacklist.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug alerte', 'e-mailing-service'), __('Debug alerte', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_alerte.php', NULL);
-   add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug Vitesse', 'e-mailing-service'), __('Debug vitesse', 'e-mailing-service'), 'manage_options',  smPATH . 'include/test.php', NULL); 
-      add_submenu_page( 'e-mailing-service/admin/index.php', __('Debug stats', 'e-mailing-service'), __('Debug stats', 'e-mailing-service'), 'manage_options',  smPATH . 'include/cron_stats.php', NULL); 
-   }
+	add_submenu_page( smPATH . 'admin/debug.php', __('Status de services', 'e-mailing-service'), __('Status de services', 'e-mailing-service'), 'manage_options',  smPATH . 'admin/etat.php', NULL);  
+
 
 }
 function register_sm_menu_page_client() {
@@ -172,11 +163,17 @@ wp_enqueue_script( 'e-mailing-service-js14',''.smURL.'SpryAssets/SpryTooltip.js'
 //form preview
 wp_enqueue_script( 'e-mailing-service-js15',''.smURL.'js/preview.min.js');
 
+wp_enqueue_script( 'e-mailing-service-js16',''.smURL.'js/sm_onglet.js',false,'',true);
+
+
+
+						}
+
+
      }
           }
 
-}
-//add_action( 'admin_init', 'sm_js_ini' );
+
 add_action( 'admin_enqueue_scripts', 'sm_js_init' );
 
 
@@ -194,6 +191,7 @@ function sm_enque_css() {
 	wp_enqueue_style( 'e-mailing-service-ie8', ''.smURL.'css/ie8.css' ,'','','screen');
 	wp_enqueue_style( 'e-mailing-service-ie', ''.smURL.'css/ie.css' ,'','','screen');
 	wp_enqueue_style( 'e-mailing-service-spry', ''.smURL.'SpryAssets/SpryTooltip.css' ,'','','screen');
+
 }
 
 add_action( 'admin_enqueue_scripts', 'sm_enque_css' );

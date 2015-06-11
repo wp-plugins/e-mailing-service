@@ -29,11 +29,7 @@ extract($_GET);
                     
                     <div class="grid_8"><?php
 extract($_POST);
-if(!isset($_GET["manuel"])){
-$manuel="manuel";	
-} else {
-$manuel="auto";	
-}
+
 ?>
 	<div class="wrap" id="sm_div">
 <?php
@@ -183,7 +179,11 @@ if($licen=="srv-smtp"){
 		$cgi_server=$row[10];
         }
 }
-echo "<br><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=auto\" target=\"_parent\">".__("Parametre manuel")."</a>";
+if(isset($manuel) && $manuel == 'auto' ) {
+echo "<br><b><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=manuel\" target=\"_parent\">".__("Parametre manuel")."</a></b><br>";
+} else {
+echo "<br><b><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=auto\" target=\"_parent\">".__("Parametre automatic")."</a></b><br>";	
+}
 ?>	
 <form action="admin.php?page=e-mailing-service/admin/setting.php" method="post">
 <input type="hidden" name="action" value="update" size="75" />
@@ -191,14 +191,14 @@ echo "<br><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=au
 <input type="hidden" name="sm_license" value="<?php echo "$licen"; ?>" size="75" />
 <div class="systeme_onglets">
         <div class="onglets">
-            <span class="onglet_0 onglet" id="onglet_infos" onclick="javascript:change_onglet('infos');"><?php echo __('Information','e-mailing-service'); ?></span>
+            <span class="onglet_0 onglet" id="onglet_snapshot" onclick="javascript:change_onglet('snapshot');"><?php echo __('Information','e-mailing-service'); ?></span>
             <span class="onglet_0 onglet" id="onglet_smtp" onclick="javascript:change_onglet('smtp');"><?php echo __('SMTP setting','e-mailing-service'); ?></span>
             <span class="onglet_0 onglet" id="onglet_pop3" onclick="javascript:change_onglet('pop3');"><?php echo __('POP3 Setting','e-mailing-service'); ?></span>
             <span class="onglet_0 onglet" id="onglet_user" onclick="javascript:change_onglet('user');"><?php echo __('General Setting','e-mailing-service'); ?></span>
             <span class="onglet_0 onglet" id="onglet_smtp_alert" onclick="javascript:change_onglet('smtp_alert');"><?php echo __('SMTP setting for alert','e-mailing-service'); ?></span>
         </div>
         <div class="contenu_onglets">
-            <div class="contenu_onglet" id="contenu_onglet_infos">
+            <div class="contenu_onglet" id="contenu_onglet_snapshot">
                 <h3 class="hndle"><span><?php _e('Configuration Wordress',"e-mailing-service");?></span></h3>
 				<?php				
 				echo "<p>".__("Plugin Version","e-mailing-service")." : ".get_option('sm_version')."</p>";				
@@ -221,23 +221,23 @@ echo "<br><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=au
 <table>
 <tr>
   <td><?php _e("Email de l'expediteur","e-mailing-service");?></td>
-  <td><input type="text" name="sm_email_exp"  value="<?php if($manuel=='auto') { echo $cgi_smtp_login; } else { echo get_option('sm_email_exp_1'); } ?>" size="75"/></td>
+  <td><input type="text" name="sm_email_exp"  value="<?php if($manuel=='auto') { echo @$cgi_smtp_login; } else { echo get_option('sm_email_exp_1'); } ?>" size="75"/></td>
 </tr>
 <tr>
   <td><?php _e("Email reponse","e-mailing-service");?></td>
-  <td><input type="text" name="sm_email_ret" value="<?php if($manuel=='auto') { echo $cgi_smtp_login; } else { echo get_option('sm_email_ret_1'); }?>" size="75" /></td>
+  <td><input type="text" name="sm_email_ret" value="<?php if($manuel=='auto') { echo @$cgi_smtp_login; } else { echo get_option('sm_email_ret_1'); }?>" size="75" /></td>
 </tr>
 <tr>
   <td><?php _e("SMTP SERVER","e-mailing-service");?></td>
-  <td><input type="text" name="sm_smtp_server" value="<?php if($manuel=='auto') { echo $cgi_smtp_server; } else { echo get_option('sm_smtp_server_1'); }  ?>" size="75" /></td>
+  <td><input type="text" name="sm_smtp_server" value="<?php if($manuel=='auto') { echo @$cgi_smtp_server; } else { echo get_option('sm_smtp_server_1'); }  ?>" size="75" /></td>
 </tr>
 <tr>
   <td><?php _e("Port","e-mailing-service");?></td>
-  <td><input type="text" name="sm_smtp_port" value="<?php if($manuel=='auto') {  echo $cgi_smtp_port; } else { echo get_option('sm_smtp_port_1'); } ?>" size="75" /></td>
+  <td><input type="text" name="sm_smtp_port" value="<?php if($manuel=='auto') {  echo @$cgi_smtp_port; } else { echo get_option('sm_smtp_port_1'); } ?>" size="75" /></td>
 </tr>
 <tr>
   <td><?php _e("Avec ou sans authentification par mot de passe","e-mailing-service");?></td>
-  <td><?php if($manuel=='auto') {  $auth=$cgi_authentification; } else { $auth=get_option('sm_smtp_authentification_1'); } if($auth=='oui'){?>
+  <td><?php if($manuel=='auto') {  $auth= @$cgi_authentification; } else { $auth=get_option('sm_smtp_authentification_1'); } if($auth=='oui'){?>
 <p><label>
     <input name="sm_smtp_authentification" type="radio" id="type_envoi_0" value="oui" checked="checked" size="75" />
     <?php _e("avec authentification ?","e-mailing-service");?> <?php _e("oui","e-mailing-service");?></label>
@@ -257,11 +257,11 @@ echo "<br><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=au
 </tr>
 <tr>
   <td><?php _e("Si avec authentification precisez le login","e-mailing-service");?></td>
-  <td><input type="text" name="sm_smtp_login" value="<?php if($manuel=='auto') { echo $cgi_smtp_login;  } else { echo get_option('sm_smtp_login_1'); }?>" size="75" /></td>
+  <td><input type="text" name="sm_smtp_login" value="<?php if($manuel=='auto') { echo @$cgi_smtp_login;  } else { echo get_option('sm_smtp_login_1'); }?>" size="75" /></td>
 </tr>
 <tr>
   <td><?php _e("Si avec authentification precisez le mot de passe","e-mailing-service");?></td>
-  <td><input type="password" name="sm_smtp_pass" value="<?php if($manuel=='auto') { echo $cgi_smtp_pass;  } else { echo get_option('sm_smtp_pass_1'); }?>" size="75" /></td>
+  <td><input type="password" name="sm_smtp_pass" value="<?php if($manuel=='auto') { echo @$cgi_smtp_pass;  } else { echo get_option('sm_smtp_pass_1'); }?>" size="75" /></td>
 </tr>
 </table>
                
@@ -271,19 +271,19 @@ echo "<br><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=au
 <table>
 <tr>
   <td><?php _e('Serveur NPAI',"e-mailing-service");?></td>
-  <td><input type="text" name="sm_npai_serveur" value="<?php if($manuel=='auto') { echo $cgi_npai_server;  } else { echo get_option('sm_npai_serveur_1'); } ?>"    size="75" /></td>
+  <td><input type="text" name="sm_npai_serveur" value="<?php if($manuel=='auto') { echo @$cgi_npai_server;  } else { echo get_option('sm_npai_serveur_1'); } ?>"    size="75" /></td>
 </tr>
 <tr>
   <td><?php _e('Port NPAI',"e-mailing-service");?></td>
-  <td><input type="text" name="sm_npai_port" value="<?php if($manuel=='auto') { echo $cgi_npai_port;  } else { echo get_option('sm_npai_port_1'); } ?>"    size="75" /></td>
+  <td><input type="text" name="sm_npai_port" value="<?php if($manuel=='auto') { echo @$cgi_npai_port;  } else { echo get_option('sm_npai_port_1'); } ?>"    size="75" /></td>
 </tr>
 <tr>
   <td><?php _e('Login NPAI',"e-mailing-service");?></td>
-  <td><input type="text" name="sm_npai_login" value="<?php if($manuel=='auto') { echo $cgi_npai_login;  } else { echo get_option('sm_npai_login_1'); } ?>"    size="75" /></td>
+  <td><input type="text" name="sm_npai_login" value="<?php if($manuel=='auto') { echo @$cgi_npai_login;  } else { echo get_option('sm_npai_login_1'); } ?>"    size="75" /></td>
 </tr>
 <tr>
   <td><?php _e('Pass NPAI',"e-mailing-service");?></td>
-  <td><input type="password" name="sm_npai_pass" value="<?php if($manuel=='auto') { echo $cgi_npai_pass;  } else { echo get_option('sm_npai_pass_1'); } ?>"    size="75" /></td>
+  <td><input type="password" name="sm_npai_pass" value="<?php if($manuel=='auto') { echo @$cgi_npai_pass;  } else { echo get_option('sm_npai_pass_1'); } ?>"    size="75" /></td>
 </tr>
 </table>             
 
@@ -492,11 +492,11 @@ echo "</select>";
 </tr>
 <tr>
   <td><?php _e("Si avec authentification precisez le login","e-mailing-service");?></td>
-  <td><input type="text" name="sm_smtp_alert_login" value="<?php if($manuel=='auto') { echo $cgi_smtp_login;  } else { echo get_option('sm_smtp_alert_login'); }?>" size="75" /></td>
+  <td><input type="text" name="sm_smtp_alert_login" value="<?php if($manuel=='auto') { echo @$cgi_smtp_login;  } else { echo get_option('sm_smtp_alert_login'); }?>" size="75" /></td>
 </tr>
 <tr>
   <td><?php _e("Si avec authentification precisez le mot de passe","e-mailing-service");?></td>
-  <td><input type="password" name="sm_smtp_alert_pass" value="<?php if($manuel=='auto') { echo $cgi_smtp_pass;  } else { echo get_option('sm_smtp_alert_pass'); }?>" size="75" /></td>
+  <td><input type="password" name="sm_smtp_alert_pass" value="<?php if($manuel=='auto') { echo @$cgi_smtp_pass;  } else { echo get_option('sm_smtp_alert_pass'); }?>" size="75" /></td>
 </tr>
 </table>
                
@@ -511,9 +511,3 @@ echo "</select>";
 
 <?php } ?>
 </div>
-<script type="text/javascript">
-        //<!--
-                var anc_onglet = 'infos';
-                change_onglet(anc_onglet);
-        //-->
-</script>
