@@ -34,14 +34,16 @@ function SM_rewrite()
 {
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
+$upload_dir = wp_upload_dir();
 define( 'smVERSION', '9.9' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
 define( 'smURL', plugin_dir_url(dirname(__FILE__)) . smDIR );
 define( 'smCONTENT',str_replace('/plugins/e-mailing-service/','',smPATH));
-define( 'smPOST', smCONTENT .'/uploads/sm-post/');
-define( 'smPOSTURL', ''.get_option('siteurl').'/wp-content/uploads/sm-post/'); 
+define( 'smPOST', ''.$upload_dir['basedir'].'/sm-post/');
+define( 'smPOSTURL', ''.$upload_dir['baseurl'].'/sm-post/'); 
+
 
 /*
 function sm_load_textdomain() {
@@ -2166,5 +2168,5 @@ sm_cron_fichier('include/bounces_update_liste.php');
 sm_cron_fichier('include/bounces_delete.php');
 sm_cron_fichier('include/cron_license.php');
 sm_cron_fichier('include/cron_stats.php');
-
+sm_cron_fichier('include/export.php');
 ?>

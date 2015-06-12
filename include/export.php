@@ -1,7 +1,26 @@
 <?php
-include("../../../../wp-config.php");
-@mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("<br /> Excusez nous mais la connection est interrompue pour quelques instants.");
+add_action('template_redirect','sm_export');
+function sm_export(){
+global $wpdb;
 extract($_GET);
+
+$table_options= $wpdb->prefix.'options';
+$table_envoi= $wpdb->prefix.'sm_historique_envoi';
+$table_posts= $wpdb->prefix.'posts';
+$table_liste= $wpdb->prefix.'sm_liste';
+$table_temps= $wpdb->prefix.'sm_temps';
+$table_suite= $wpdb->prefix.'sm_suite';
+$table_log= $wpdb->prefix.'sm_log';
+$table_log_bounces= $wpdb->prefix.'sm_bounces_log';
+$table_bounces_hard= $wpdb->prefix.'sm_bounces_hard';
+$table_bounces_log= $wpdb->prefix.'sm_bounces_log';
+$table_stats_smtp = $wpdb->prefix.'sm_stats_smtp';
+$table_blacklist= $wpdb->prefix.'sm_blacklist';
+$table_spamscore = $wpdb->prefix.'sm_spamscore';
+$table_messageid=$wpdb->prefix.'sm_stats_messageid';
+
+	if(isset($action) && $action == 'export'){
+$user_login = $_SESSION["user_login"];
 if(get_option('sm_license') == 'free' ||get_option('sm_license') == 'api-free'){
 echo __('Vous ne disposez pas de la license pour pouvoir exporter les fichiers','e-mailing-service');
 echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -27,6 +46,7 @@ echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target=
 ';
 exit();	
 }
+
 if($format=="xls_backup"){
 $i=1;
 $csv_output="";
@@ -112,6 +132,7 @@ print $csv_output;
 exit;
 }
 elseif($format=="csv_open_total"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -140,6 +161,7 @@ exit;
 	
 }
 elseif($format=="csv_open_email"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -168,6 +190,7 @@ exit;
 	
 }
 elseif($format=="xls_open_total"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -196,6 +219,7 @@ exit;
 	
 }
 elseif($format=="xls_open_email"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -224,6 +248,7 @@ exit;
 	
 }
 elseif($format=="csv_link_total"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -252,6 +277,7 @@ exit;
 	
 }
 elseif($format=="csv_link_email"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -280,6 +306,7 @@ exit;
 	
 }
 elseif($format=="xls_link_total"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -308,6 +335,7 @@ exit;
 	
 }
 elseif($format=="xls_link_email"){
+$csv_output="";
 $array =array (
 		"site" => get_option('sm_domain'),
 		"license_key" => get_option('sm_license_key'), 
@@ -477,5 +505,8 @@ exit;
 }
  else {
 _e("Le format n'est pas corret","e-mailing-service");	
+}
+exit();
+}
 }
 ?>

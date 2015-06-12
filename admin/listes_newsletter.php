@@ -77,10 +77,6 @@ $tab .='<td>
 <a href="post.php?post='.$fivesdraft->ID.'&action=edit" target="_parent"><img src="'.smURL.'img/wordpress.png" width="32" height="32" border="0" title="'.__("Edit whith wordpress editor","e-mailing-service").'"/></a>
 </td>
 <td>
-<a href="?page=e-mailing-service/admin/editor.php&action=edit&id='.$fivesdraft->ID.'" target="_parent">
-<img src="'.smURL.'img/doc_edit.png" width="32" height="32" border="0" title="'.__("edit wift elrte editor","e-mailing-service").'"/></a>
-</td>
-<td>
 <a href="?page=e-mailing-service/admin/send_user.php&newsletter='.$fivesdraft->ID.'" target="_parent"><img src="'.smURL.'img/send_mail.png" width="32" height="32" border="0" title="'.__("Send newsletter","e-mailing-service").'" /></a>
 </td>
 <td>

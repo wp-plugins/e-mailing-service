@@ -183,6 +183,7 @@ if(isset($manuel) && $manuel == 'auto' ) {
 echo "<br><b><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=manuel\" target=\"_parent\">".__("Parametre manuel")."</a></b><br>";
 } else {
 echo "<br><b><a href=\"admin.php?page=e-mailing-service/admin/setting.php&manuel=auto\" target=\"_parent\">".__("Parametre automatic")."</a></b><br>";	
+$manuel='manuel';
 }
 ?>	
 <form action="admin.php?page=e-mailing-service/admin/setting.php" method="post">

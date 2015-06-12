@@ -44,7 +44,8 @@ $user_id=$current_user->ID;
 $user_email=$current_user->email;
 $user_info = get_userdata($current_user->ID);
 $user_role =implode(', ', $user_info->roles);
-
+$_SESSION["user_login"] = $user_login;
+$_SESSION["user_id"] = $user_id;
 
  
 if(!get_option('ah_company_marque')){
