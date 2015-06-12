@@ -1,3 +1,0 @@
-/*
-Here you can place all your custom JavaScript code.
-*/
