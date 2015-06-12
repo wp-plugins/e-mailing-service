@@ -164,7 +164,6 @@ wp_enqueue_script( 'e-mailing-service-js14',''.smURL.'SpryAssets/SpryTooltip.js'
 
 //form preview
 wp_enqueue_script( 'e-mailing-service-js15',''.smURL.'js/preview.min.js');
-
 wp_enqueue_script( 'e-mailing-service-js16',''.smURL.'js/sm_onglet.js',false,'',true);
 
 
