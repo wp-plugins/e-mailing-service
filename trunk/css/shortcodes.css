@@ -1,0 +1,157 @@
+/*
+Css for styling shortcode-generated content
+*/
+
+
+/*
+Tabs shortcode
+*/
+.sh-tabs.ui-tabs {
+	border:none;
+	border-radius:0;
+	font-size:12px;
+}
+
+.sh-tabs.ui-tabs  a {
+	outline:none !important;
+}
+.sh-tabs.ui-tabs  .ui-tabs-panel {
+	border:1px solid #eeeeee;
+	border-radius:0;
+}
+
+
+.sh-tabs.ui-tabs .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background:#f6f6f6;
+	margin:0;
+	border-radius:0;
+	border:1px solid #eeeeee;
+	border-bottom-width:0;
+	border-left-width:0;
+}
+.sh-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	margin:0;
+	padding:0;
+	background:#fff;
+}
+
+.sh-tabs.ui-tabs .ui-state-active {
+	border-bottom-width:0;
+}
+
+.sh-tabs.ui-tabs .ui-state-default:first-child , .ui-widget-content .ui-state-default:first-child, .ui-widget-header .ui-state-default:first-child {
+	border-left-width:1px;
+}
+
+.sh-tabs.ui-tabs .ui-tabs-nav {
+	padding:0;
+	background:none;
+	border:0;
+}
+
+/*
+Accordion shortcodes
+*/
+
+.sh-accordion.ui-accordion{
+	font-size:12px;
+	position:relative;
+}
+
+.sh-accordion.ui-accordion  .ui-state-default {
+	background:#ffffff;
+	
+}
+
+.sh-accordion.ui-accordion.ui-widget.ui-helper-reset h3.ui-accordion-header, .sh-accordion.ui-accordion.ui-widget.ui-helper-reset div.ui-accordion-content{
+	border-left-width:0px;
+	border-right-width:0px;
+	
+	border-radius:0;
+	background:none;
+}
+.sh-accordion.ui-accordion.ui-widget.ui-helper-reset h3.ui-accordion-header {
+	border-top-width:1px;
+	border-bottom-width:0px;
+	border-color:#eeeeee;
+	color:#000000;
+	font-size:14px;
+	padding:12px 12px 12px 30px;
+}
+.sh-accordion.ui-accordion.ui-widget.ui-helper-reset h3.ui-accordion-header:first-child { border-top-width:0; }
+.sh-accordion.ui-accordion.ui-widget.ui-helper-reset div.ui-accordion-content{ 
+	border-top-width:0px;
+	border-bottom-width:0px;
+	border-color:#eeeeee;
+	color:#757B7F;
+	padding:0px 15px 15px 30px;
+}
+
+.sh-accordion.ui-accordion.ui-widget.ui-helper-reset div:last-child {
+	/*border-bottom-width:1px;
+	border-color:#eeeeee;*/
+}
+
+
+.sh-accordion.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+	left:0;
+	width:20px;
+	height:20px;
+	background:#323232 url(../images/accordion-icons.png) no-repeat;
+	background-position: left bottom;
+	border-radius:3px;
+	margin-top:-10px;
+	
+}
+.sh-accordion.ui-accordion h3.ui-accordion-header.ui-accordion-header-active .ui-accordion-header-icon {
+	background-position:left top;
+}
+
+
+/*
+Block of text
+*/
+blockquote {
+	border-left:5px solid #e7e7e7;
+	margin-left:0px; padding-left:20px;
+}
+
+/*
+Notify box
+*/
+.sh-notify { background:#f7f7f7; border:1px solid #f3f3f3; padding:30px; }
+.sh-notify-title { color:#4c4c4c; font-size:36px; font-weight:normal; padding:0; margin:0; }
+.sh-notify-content { padding:20px 0 30px 0;}
+.sh-notify-url { }
+
+/*
+Buttons
+*/
+a.button.sh-button {
+	margin:2px 0;
+}
+a.button.sh-with-icon, a.button.sh-with-icon:hover {
+	background-image:url(../images/arrow-active.png);
+	background-position:10px 10px;
+	background-repeat:no-repeat;
+	padding-left:35px;
+}
+
+/*
+Notice boxes
+*/
+div.sh-message {
+	padding:20px;
+	border:1px solid;
+	border-radius:5px;
+}
+
+div.sh-message.sh-success { color:#5f9025; background:#e8f5dc; border-color:#5f9025; }
+div.sh-message.sh-notice { color:#4d86ba; background:#e8f7fe; border-color:#b6d7e8; }
+div.sh-message.sh-warn { color:#aba23e; background:#faf9d8; border-color:#aba23e; }
+div.sh-message.sh-error { color:#e45959; background:#ffe6e6; border-color:#e45959; }
+
+/* Colors */
+.sh-tabs.ui-tabs .ui-state-default a, .ui-widget-content .ui-state-default a, .ui-widget-header .ui-state-default a {
+	color:#7e8487;
+}
