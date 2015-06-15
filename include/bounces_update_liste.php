@@ -1,6 +1,7 @@
 <?php
 function sm_cron_bounce_update_liste(){
 set_time_limit(0);
+global $wpdb;
 $table_envoi= $wpdb->prefix.'sm_historique_envoi';
 $table_posts= $wpdb->prefix.'posts';
 $table_liste= $wpdb->prefix.'sm_liste';

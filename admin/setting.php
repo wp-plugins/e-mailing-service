@@ -36,7 +36,7 @@ extract($_POST);
 echo "<h1>".__("Parametres E-mailing Service")."</h1>";
 if(isset($action)){
 	if($action =="update"){
-$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".trim($sm_serveur)."' WHERE `option_name`='sm_serveur'");
+//$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='".trim($sm_serveur)."' WHERE `option_name`='sm_serveur'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_license' WHERE `option_name`='sm_license'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_type_envoi' WHERE `option_name`='sm_type_envoi'");
 
@@ -118,7 +118,7 @@ $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_affiche_txt_af
 
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_debug' WHERE `option_name`='sm_debug'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_charset' WHERE `option_name`='sm_charset'");
-$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_nbl' WHERE `option_name`='sm_nbl'");
+//$wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_nbl' WHERE `option_name`='sm_nbl'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_auto' WHERE `option_name`='sm_auto'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_auto_id_liste' WHERE `option_name`='sm_auto_id_liste'");
 $wpdb -> query("UPDATE `$table_options`  SET  `option_value`='$sm_auto_pause' WHERE `option_name`='sm_auto_pause'");
@@ -202,7 +202,7 @@ $manuel='manuel';
             <div class="contenu_onglet" id="contenu_onglet_snapshot">
                 <h3 class="hndle"><span><?php _e('Configuration Wordress',"e-mailing-service");?></span></h3>
 				<?php				
-				echo "<p>".__("Plugin Version","e-mailing-service")." : ".get_option('sm_version')."</p>";				
+				echo "<p>".__("Plugin Version","e-mailing-service")." : ".smVERSION."</p>";				
 				echo "<p>".__("Serveur OS","e-mailing-service")." : ".PHP_OS."</p>";				
 				echo "<p>".__("Plugin fonctionne avec PHP Version: 5.0+","e-mailing-service")."<br>";
 				echo "<p>".__("Votre version de PHP","e-mailing-service")." : " . phpversion() . "</p>";							

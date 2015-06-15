@@ -1,59 +1,84 @@
- <div id="wrapper">
+<div id="wrapper">
         <header id="page-header">
              <div class="wrapper">
-<?php 
+               <?php 
 if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
 	include(AH_PATH . '/include/entete.php');
 } else {
 	include(smPATH . '/include/entete.php');
+}?>
+                          <div id="main-nav">
+                    <ul class="clearfix">    
+                    <?php
+if(!isset($_GET['section'])){
+$active_page='smtp';
+}	else {
+$active_page=$_GET['section'];	
 }
-extract($_POST);
-extract($_GET);
-?>
+					?>        
+<li <?php if($active_page=="smtp"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php"><?php _e('Tester le serveur SMTP','admin-hosting');?></a></li>
+<li <?php if($active_page=="upload"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=upload"><?php _e("Verifier le dossier Upload",'admin-hosting');?></a></li>
+<li <?php if($active_page=="vitesse"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=vitesse"><?php _e("Verifier la vitesse d'envoi",'admin-hosting');?></a></li>
+<li <?php if($active_page=="envoi_article"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=envoi_article"><?php _e("Envoyer les articles",'admin-hosting');?></a></li>
+<li <?php if($active_page=="envoi_newsletter"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=envoi_newsletter"><?php _e("Envoyer la newsletter",'admin-hosting');?></a></li>
+
+                    </ul>
+ </div>
+             </div>
+             
+
+             <div id="page-subheader">
+                <div class="wrapper">
+ <h2>
+<?php _e("Debug","e-mailing-service");?>
+
+ </h2>
+              <!--  <input placeholder="Search..." type="text" name="q" value="" />-->
                 </div>
+         </div>
         </header>
 </div>
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
-<?php _e("Reglage de vos alertes","e-mailing-service");?>
+<?php _e("Support","e-mailing-service");?>
+
  </h2>
                 </div>
          </div>
                  <section id="content">
-            <div class="wrapper">                <section class="columns">                    
+            <div class="wrapper">                                     
+                                
 
-        <?php echo "<p>".__("Vous avez un probleme avec le plugin, cette section peu vous aider a trouver la solution","e-mailing-service")."</p>";?>
+        <?php 
+		if($active_page == 'upload'){
+		echo "<p>".__("Verifier le dossier upload pour les images","e-mailing-service")."</p>";
+		}
+		elseif($active_page == 'vitesse'){
+		echo "<p>".__("Verifiez la vitesse de votre wordpress","e-mailing-service")."</p>";
+		}
+				elseif($active_page == 'envoi_article'){
+		echo "<p>".__("Lancer le cron d'envoi de la newsletter manuellement, permet de suivre les envois en direct","e-mailing-service")."</p>";
+		}
+				elseif($active_page == 'envoi_newsletter'){
+		echo "<p>".__("Lancer le cron d'envoi de la newsletter manuellement, permet de suivre les envois en direct","e-mailing-service")."</p>";
+		}
+		else {
+		echo "<p>".__("Verifiez votre serveur SMTP","e-mailing-service")."</p>";				
+		}
+		?>
+        
                     
                     <hr />
-                    
-                    <div class="grid_8">
 
-<div class="wrap">
-	<div id="icon-options-general" class="icon32"><br></div>
-	<h2 class="nav-tab-wrapper">
-        <a href="?page=e-mailing-service/admin/debug.php" title="<?php _e("Verifie les serveurs SMTP", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
-			<?php _e('Status serveur SMTP',"e-mailing-service"); ?>
-		</a>
-    <a href="?page=e-mailing-service/admin/debug.php&section=upload" title="<?php _e("Verifie le dossier Upload pour importer les templates et images pour vos newsletters", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
-			<?php _e('Upload',"e-mailing-service"); ?>
-		</a>
-		<a href="?page=e-mailing-service/admin/debug.php&section=vitesse" title="<?php _e("Verifier la vitesse d'envoi de votre newsletter", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
-			<?php _e("Vitesse d'envoi","e-mailing-service"); ?>
-		</a>
-	</h2>
    <?php
- if(isset($_REQUEST['section'])){
-	
-		if ($_REQUEST['section'] == 'upload') include(smPATH.'include/upload.php');
-		if ($_REQUEST['section'] == 'envoi_article') include(smPATH.'include/cron_auto.php');
-		if ($_REQUEST['section'] == 'envoi_newsletter') {  include(smPATH.'include/cron.php');}
-		if ($_REQUEST['section'] == 'vitesse') {  include(smPATH.'include/cron_blocage.php');}
 
-		
 	
-	
-} else {
+		if ($active_page == 'upload') include(smPATH.'include/upload.php');
+		elseif ($active_page == 'envoi_article') { sm_send_article(); }
+		elseif ($active_page == 'envoi_newsletter') {  sm_send_newsletter();}
+		elseif ($active_page == 'vitesse') {  sm_cron_blocage();}
+        else {
 	
 if(!isset($action)){
 $action="null";	
@@ -81,9 +106,8 @@ echo "
 <tr><td></td><td><input name=\"envoyer\" type=\"submit\" value=\"".__("envoyer")."\"/></td></tr>
 </table>
 ";	
-	
-}
-echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
+	}
+	else {
     $tbaleau_insert="";
     $tbaleau_insert .= '<table class="widefat">
                          <thead>';
@@ -101,26 +125,7 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
     $tbaleau_insert .= '</tr>           
         </thead>
         <tbody>';
-   if(get_option('sm_license') == 'mass-mailing' || get_option('sm_license') == 'api_mass-mailing' ){
-   for($num=1;$num<get_option('sm_multi_nb')+1;$num++){
-    $tbaleau_insert .= "<tr>
-	<td><blockquote>".get_option('sm_smtp_server_'.$num.'')."</blockquote></td>
-	<td><blockquote>".gethostbyname(get_option('sm_smtp_server_'.$num.''))."</blockquote></td>
-	<td><blockquote><a href=\"?page=e-mailing-service/admin/etat.php&action=tester&num=".$num."\" target=\"_blank\">".__('Tester le serveur','e-mailing-service')."</a></blockquote></td>
-	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"25")."</blockquote></td>
-	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"587")."</blockquote></td>
-	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"80")."</blockquote></td>
-	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"53")."</blockquote></td>
-	<td><blockquote>".sm_spamscore(get_option('sm_smtp_server_'.$num.''))."</blockquote></td>
-	<td><blockquote>".sm_blacklist(gethostbyname(get_option('sm_smtp_server_'.$num.'')))."</blockquote></td>";
-	if(get_option('sm_smtp_actif_'.$num.'') =="oui"){
-	$tbaleau_insert .= "<td><blockquote><span class=\"sm_table_vert\">&nbsp;&nbsp;".__("Actif")."&nbsp;&nbsp;</span></blockquote></td>";
-	} else {
-	$tbaleau_insert .= "<td><blockquote><span class=\"sm_table_rouge\">&nbsp;&nbsp;".__("Inactif")."&nbsp;&nbsp;</span></blockquote></td>";	
-	}
-    $tbaleau_insert .= '</tr>';
-    }
-    } else {
+  
 	$num=1;
     $tbaleau_insert .= "<tr>
     <td><blockquote>".get_option('sm_smtp_server_'.$num.'')."</blockquote></td>
@@ -132,12 +137,11 @@ echo "<h1>".__("Status serveur SMTP","e-mailing-service")."</h1>";
 	<td><blockquote>".sm_getStatus(get_option('sm_smtp_server_'.$num.''),"53")."</blockquote></td>
 	<td><blockquote>".sm_spamscore(get_option('sm_smtp_server_'.$num.''))."</blockquote></td>
 	<td><blockquote>".sm_blacklist(gethostbyname(get_option('sm_smtp_server_'.$num.'')))."</blockquote></td>
-	<td><blockquote><span class=\"sm_table_vert\">&nbsp;&nbsp;".__("Actif")."&nbsp;&nbsp;</span></blockquote></td></tr>";
+	<td><blockquote><span class=\"sm_table_vert\">&nbsp;&nbsp;".__("Actif","e-mailing-service")."&nbsp;&nbsp;</span></blockquote></td></tr>";
 $tbaleau_insert .= '</tbody></table>';
-	}
 	echo $tbaleau_insert ;
-}
- 
+	}
+		}
    
    ?>
 </div>
