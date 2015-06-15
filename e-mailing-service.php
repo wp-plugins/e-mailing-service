@@ -2155,6 +2155,7 @@ function button_js() {
 
 function sm_serveur_non_ok(){
 	if ( is_admin() ) {
+		if( is_super_admin() ){
 if(sm_getStatus(get_option('sm_smtp_server_1'),"25","1") !='1' && sm_getStatus(get_option('sm_smtp_server_1'),"587","1") !='1'){
 echo '<div class="updated"><p>'.__('Attention smtp server is not active ! "E-mailing service" does not work properly if the smtp server is not active','e-mailing-service').' <br> 
 <a href="http://www.e-mailing-service.net">'.__('Commander un serveur SMTP','e-mailing-service').'</a></p></div>';	
@@ -2162,6 +2163,7 @@ echo '<div class="updated"><p>'.__('Attention smtp server is not active ! "E-mai
 if(!get_option('sm_license_key')|| get_option('sm_license') =="free") { 
 echo '<div class="updated"><p>'.__("Your license is not active ! FREE, activate your license allows you to have detailed statistics",'e-mailing-service').' <br> 
 <a href="?page=e-mailing-service/admin/configuration.php">'.__('FREE, activate your license','e-mailing-service').'</a></p></div>';	
+}
 }
 }
 }
