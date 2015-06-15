@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 9.9
+Version: 10.0
 Plugin URI: http://www.e-mailing-service.net
-Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewritting on activation of the Free API
+Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
 */
 if(function_exists('session_status')){
@@ -35,7 +35,7 @@ function SM_rewrite()
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
 $upload_dir = wp_upload_dir();
-define( 'smVERSION', '9.9' );
+define( 'smVERSION', '10.0' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -2153,7 +2153,19 @@ function button_js() {
         </script>';
 }
 
-
+function sm_serveur_non_ok(){
+	if ( is_admin() ) {
+if(sm_getStatus(get_option('sm_smtp_server_1'),"25","1") !='1' && sm_getStatus(get_option('sm_smtp_server_1'),"587","1") !='1'){
+echo '<div class="updated"><p>'.__('Attention smtp server is not active ! "E-mailing service" does not work properly if the smtp server is not active','e-mailing-service').' <br> 
+<a href="http://www.e-mailing-service.net">'.__('Commander un serveur SMTP','e-mailing-service').'</a></p></div>';	
+}
+if(!get_option('sm_license_key')|| get_option('sm_license') =="free") { 
+echo '<div class="updated"><p>'.__("Your license is not active ! FREE, activate your license allows you to have detailed statistics",'e-mailing-service').' <br> 
+<a href="?page=e-mailing-service/admin/configuration.php">'.__('FREE, activate your license','e-mailing-service').'</a></p></div>';	
+}
+}
+}
+add_action('admin_notices', 'sm_serveur_non_ok');
 
 include(smPATH . '/include/fonctions_sm.php');
 require_once(dirname(__FILE__)."/sm_widget.php");

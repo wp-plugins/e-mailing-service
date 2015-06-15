@@ -299,7 +299,7 @@ foreach ( $req_serveurs as $req_serveur )
 $fivesdrafts = $wpdb->get_results("SELECT * FROM `".AH_table_server_ip."` WHERE serveur like '".$req_serveur->serveur."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
-echo "<h1>".__("Statistiques SMTP du serveur")." ".$fivesdraft->smtp_server."</h1>";
+echo "<h1>".__("Statistiques SMTP du serveur",'e-mailing-service')." ".$fivesdraft->smtp_server."</h1>";
 ?>
 <center>
 <img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_smtp_v2.php?smtp=<?php echo $fivesdraft->smtp_server;?>&domaine_client=<?php echo $host;?>&login=<?php echo $user_login;?>&key=<?php echo get_option('sm_license_key');?>" width="40%"  alt="" />
@@ -330,10 +330,14 @@ $total_envoi = $wpdb->get_var("SELECT SUM( nb_envoi ) AS total FROM  `".$table_e
 $xml2=lit_xml_data('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_detaille.php?action=newsletter&id='.$_GET["id"].'&login='.$user_login.'&domaine_client='.$host.'&key='.get_option('sm_license_key').'','item',array('resultat','id','titre','lecture','clic','clic_page','clic_affiliation','desinscription','bounces'));
 if($xml2!='') {
     foreach($xml2 as $row) {
-$pourcent_lecture=round(100 * $row[3] / $total_envoi,2 );
-$pourcent_clic=round(100 * $row[4] / $total_envoi,2 );
+
 	}
 }
+if(isset($row[3])){
+	
+$pourcent_lecture=round(100 * $row[3] / $total_envoi,2 );
+$pourcent_clic=round(100 * $row[4] / $total_envoi,2 );
+
 ?>
 <img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_pie_v2.php?domaine_client=<?php echo $host;?>&key=<?php echo get_option('sm_license_key');?>&nb_env=<?php echo $total_envoi;?>&nb_bounces=<?php echo $row[8];?>&nb_ouvert=<?php echo $row[3];?>" alt="" align="right" hspace="50"  vspace="50"/>
 <ul>
@@ -348,7 +352,10 @@ $pourcent_clic=round(100 * $row[4] / $total_envoi,2 );
 <li><?php echo __('Unsuscribe','e-mailing-service'); ?>  :  <?php echo $row[5];?></li>
 <li><?php echo __('Bounced','e-mailing-service'); ?>  :  <?php echo $row[8];?></li>
 </ul>
-
+<?php } else { 
+echo __("Cette newsletter n'a jamais ete envoye",'e-mailing-service');
+$news='null';
+}?>
 <br /><br /><br />
 <br /><br /><br />
 <br /><br /><br />
@@ -359,6 +366,9 @@ $pourcent_clic=round(100 * $row[4] / $total_envoi,2 );
             <div class="contenu_onglet" id="contenu_onglet_open">
                 <h1><?php echo __('Open statistics','e-mailing-service'); ?></h1>
                 <?php
+if(isset($news)){
+echo __("Cette newsletter n'a jamais ete envoye",'e-mailing-service');
+} else {
 if(isset($graph)){
 	if($graph == 'days7'){
 echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_days.php?domaine_client='.$host.'&key='.get_option('sm_license_key').'&login='.$user_login.'&idc='.$_GET["id"].'&action=open" alt="" align="right" hspace="50"  vspace="50" height="500" width="850"/>';	
@@ -417,15 +427,18 @@ $tbaleau_insert1 .="</tr> </thead>
 
 		}
 		$tbaleau_insert1 .= '</tbody></table>';	
-		echo $tbaleau_insert1;
-		}
 
+		}
+}
 ?>
 
             </div>
             <div class="contenu_onglet" id="contenu_onglet_link">
                 <h1><?php echo __('Link statistics','e-mailing-service'); ?></h1>
                 <?php
+if(isset($news)){
+echo __("Cette newsletter n'a jamais ete envoye",'e-mailing-service');
+} else {
 if(isset($graph)){
 	if($graph == 'days7'){
 echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_days.php?domaine_client='.$host.'&key='.get_option('sm_license_key').'&login='.$user_login.'&idc='.$_GET["id"].'&action=clic" alt="" align="right" hspace="50"  vspace="50" height="500" width="850"/>';	
@@ -482,12 +495,15 @@ $tbaleau_insert .="</tr> </thead>
 		$tbaleau_insert .= '</tbody></table>';	
 		echo $tbaleau_insert;
 		}
-
+}
 ?>
             </div>
                <div class="contenu_onglet" id="contenu_onglet_bounces">
                 <h1><?php echo __('Bounced statistics','e-mailing-service'); ?></h1>
  <?php
+ if(isset($news)){
+echo __("Cette newsletter n'a jamais ete envoye",'e-mailing-service');
+} else {
 $requete = "";
 $i=0;
 
@@ -546,10 +562,17 @@ foreach ( $fivesdrafts as $fivesdraft )
 
 $tbaleau_insert .= '</tbody></table>';	
 echo $tbaleau_insert;
+}
 ?>
             </div>
                <div class="contenu_onglet" id="contenu_onglet_unsuscribe">
                 <h1><?php echo __('Unsubscribe statistics','e-mailing-service'); ?></h1>
+                
+ <?php
+ if(isset($news)){
+echo __("Cette newsletter n'a jamais ete envoye",'e-mailing-service');
+} else {
+	?>
 <img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_pie_v2.php?domaine_client=<?php echo $host;?>&key=<?php echo get_option('sm_license_key');?>&nb_env=<?php echo $total_envoi;?>&nb_unsuscribe=<?php echo $row[7];?>&action=unsuscribe" alt="" align="right" hspace="50"  vspace="50"/>
 <ul>
 <li><a href="<?php echo get_option('siteurl')?>/?p=<?php echo $_GET["id"];?>" target="_blank"><?php echo __('View online','e-mailing-service'); ?> </a></li>
@@ -594,7 +617,7 @@ $tbaleau_insert .="</tr> </thead>
 		$tbaleau_insert .= '</tbody></table>';	
 		echo $tbaleau_insert;
 		}
-
+}
 ?>
             </div>
         </div>

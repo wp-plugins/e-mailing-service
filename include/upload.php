@@ -11,15 +11,36 @@ $table_temps= $wpdb->prefix.'sm_temps';
 $table_suite= $wpdb->prefix.'sm_suite';
 $table_log= $wpdb->prefix.'sm_log';
 if(!isset($_GET["id"])){
-$id=1;	
+$id='null';	
 } else { $id=$_GET["id"]; }
-echo '<h2>'.__("Test importation d'image sur l'envoi numero","e-mailing-service").' '.$id.'</h2><br>';
-echo '<p>'.__("Pour tester sur un autre envoi rentrer son identifiant dans le formulaire ci-dessous","e-mailing-service").'</p><br>';
+
+
+
+if(is_dir(smPOST)){
+} else {	
+@mkdir(smPOST, 0777);
+}
+if(is_dir(smPOST)){
+} else {	
+echo ''.__("Dossier upload absent, nous n'avons pas reussit à le creer, verifier que le dossier upload est les droits a 0777",'e-mailing-service').' : '.$upload_dir['basedir'].' <br>';	
+echo ''.__("Creer le dossier manuellement et donner lui les droits 0777",'e-mailing-service').' : '.smPOST.' <br>';	
+}
+
+
 echo '<form action="admin.php?page=e-mailing-service/admin/debug.php&section=upload" method="get" target="_parent">
-<input type="text" name="id" value="" />
+<select name="id">';
+$fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,serveur,mode FROM `".$table_envoi."`");
+foreach ( $fivesdrafts as $fivesdraft ) 
+{
+	    $titre=get_post_field('post_title', $fivesdraft->id_newsletter);
+echo "<option value=\"".$fivesdraft->hie."\" selected=\"selected\">".$titre."</option>";
+}
+echo '</select>
 <input type="hidden" name="page" value="e-mailing-service/admin/debug.php" />
 <input type="hidden" name="section" value="upload" />
 <input name="envoyer" type="submit" value="'.__("envoyer").'"/></form><br>';
+
+if($id !== 'null'){
 $fivesdrafts = $wpdb->get_results("SELECT id AS hie,id_newsletter,id_liste,pause,status,serveur,mode FROM `".$table_envoi."` WHERE id='".$id."'");
 foreach ( $fivesdrafts as $fivesdraft ) 
 {
@@ -91,8 +112,7 @@ $extension=".bmp";
 @file_put_contents(''.$repertoire_path.'/'.$i.''.$extension.'', file_get_contents($images[1][$i]));
 @chmod(''.$repertoire_path.'/'.$i.''.$extension.'',0644);
 $post_content=str_replace($images[1][$i],''.$repertoire.'/'.$i.''.$extension.'',$post_content);
- if(get_option('sm_debug')=="oui")
-    {
+
 echo 'upload : '.$repertoire.'/'.$i.''.$extension.'<br>';
 if(is_dir($repertoire1)){
 } else {
@@ -112,9 +132,10 @@ echo ''.__('upload','e-mailing-service').' : '.__('correct','e-mailing-service')
 echo ''.__('upload','e-mailing-service').' : '.__('impossible verifier les droit 0777 sur le dossier','e-mailing-service').' '.$repertoire.' <br>';	
 }
 	}
-}
+
 	}
  
 
+}
 }
 ?>

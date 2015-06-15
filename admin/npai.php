@@ -1,31 +1,65 @@
- <div id="wrapper">
+<div id="wrapper">
         <header id="page-header">
              <div class="wrapper">
-<?php 
+               <?php 
 if ( is_plugin_active( 'admin-hosting/admin-hosting.php' ) ) {
 	include(AH_PATH . '/include/entete.php');
 } else {
 	include(smPATH . '/include/entete.php');
+}?>
+                          <div id="main-nav">
+                    <ul class="clearfix">    
+                    <?php
+if(!isset($_GET['section'])){
+$active_page='npai';
+}	else {
+$active_page=$_GET['section'];	
 }
-extract($_POST);
-extract($_GET);
-?>
+						
+					?> 
+<li <?php if($active_page=="npai"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=npai"><?php _e('Liste des NPAI','admin-hosting');?></a></li>       
+<li <?php if($active_page=="bounces_fai"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=bounces_fai"><?php _e('Reponses FAI','admin-hosting');?></a></li>
+<li <?php if($active_page=="hard_bounces"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=hard_bounces"><?php _e("Hard Bounces ",'admin-hosting');?></a></li>
+<li <?php if($active_page=="bounces_import"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=bounces_import"><?php _e("Importer NPAI",'admin-hosting');?></a></li>
+<li <?php if($active_page=="bounces_update"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=bounces_update"><?php _e("Retirer des listes les Hard bounces non traites",'admin-hosting');?></a></li>
+<li <?php if($active_page=="bounces_update_reset"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/npai.php&section=bounces_update_reset"><?php _e("Verifier les Hard bounces deja traites",'admin-hosting');?></a></li>	
+                    </ul>
                 </div>
-        </header>
-</div>
+             </div>
+             
+
+                  <!--  <input placeholder="Search..." type="text" name="q" value="" />-->
+              
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
 <?php _e("NPAI","e-mailing-service");?>
- </h2>
-                </div>
-         </div>
-                 <section id="content">
-            <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Email retour indiquant d'eventuel probleme de delivrabilite","e-mailing-service")."</p>";?>
+ </h2>
+   </div>
+         </div>
+        </header>
+
+                 <section id="content">
+            <div class="wrapper">                                   
+
+        <?php 
+   if(isset($_REQUEST['section'])){
+		if ($_REQUEST['section'] == 'npai')	{ echo "<p>".__("Liste des emails retour, permet de comprendre la raison quand un email n'est pas arrive chez votre contact","e-mailing-service")."</p>";}
+		if ($_REQUEST['section'] == 'bounces_fai') { echo "<p>".__("Information ISP","e-mailing-service")."</p>"; }
+		if ($_REQUEST['section'] == 'hard_bounces'){  echo "<p>".__("Email invalide, ils sont desactivés de vos listes de contact automatiquement","e-mailing-service")."</p>"; }
+		if ($_REQUEST['section'] == 'bounces_import') { echo "<p>".__("Lancer le cron d'importation des emails invalide manuellement","e-mailing-service")."</p>";}
+		if ($_REQUEST['section'] == 'bounces_update') { echo "<p>".__("Mettre à jour vos listes manuellement","e-mailing-service")."</p>"; }
+		if ($_REQUEST['section'] == 'bounces_update_reset') { echo "<p>".__("Verifier si vos listes ne contiennent pas des hard bounces deja traite","e-mailing-service")."</p>"; }
+	} else {
+	echo "<p>".__("Email retour indiquant d'eventuel probleme de delivrabilite","e-mailing-service")."</p>";
+	}
+		
+?>
+        
                     
-                    <hr />
+                    <hr />             
+
                     
                     <div class="grid_8"><?php
 if(cgi_bounces() == 'non'){
@@ -35,35 +69,11 @@ _e("Vous n'avez pas souscrit a l'option qui vous permet de recuperer les bounces
 } else {
 
 
-?>
-<div class="wrap">
-	<div id="icon-options-general" class="icon32"><br></div>
-	<h2 class="nav-tab-wrapper">
-    <a href="?page=e-mailing-service/admin/npai.php" title="<?php _e("Liste des reponses sur vos envois (NPAI)", "e-mailing-service"); ?>" class="nav-tab <?php if(!isset($_REQUEST['section'])){ echo 'nav-tab-active';} ?>">
-			<?php _e('Liste des NPAI',"e-mailing-service"); ?>
-		</a>
-        <a href="?page=e-mailing-service/admin/npai.php&section=bounces_fai" title="<?php _e("Reponse des FAI sur vos envois (une seule reponse par fai) , pour plus de visabilite par fai", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_fai') echo 'nav-tab-active'; }?>">
-			<?php _e("Reponses FAI", "e-mailing-service"); ?>
-		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=hard_bounces"  title="<?php _e("Liste detaille des hard bounces (emails invalides) inscrit par l'API sur vos envois", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'hard_bounces') echo 'nav-tab-active'; }?>">
-			<?php _e("Hard Bounces ", "e-mailing-service"); ?>
-		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_import" title="<?php _e("Une tache planifie effectue deja cette tache , mais si vous voulez verifier que l'Api a mis a jour vos  bounces, vous pouvez l'appeler manuellement", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if ($_REQUEST['section'] == 'bounces_import') echo 'nav-tab-active'; }?>">
-			<?php _e('Importer NPAI',"e-mailing-service"); ?>
-		</a>
-		<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update" title="<?php _e("Une tache planifie effectue deja cette tache , mais si vous voulez verifier ou avez besoin de debuger , vous pouvez le declancher manuellement", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
-			<?php _e("Retirer des listes les Hard bounces non traites", "e-mailing-service"); ?>
-		</a>
-      	<a href="?page=e-mailing-service/admin/npai.php&section=bounces_update_reset" title="<?php _e("Attention , suivant le nombre de Hard bounces que vous avez dans la table mysql, cela peu ralentir votre serveur le temps du traitements.Ce lien est interessant si vous avez importer des nouvelles listes d'emails ", "e-mailing-service"); ?>" class="nav-tab <?php if(isset($_REQUEST['section'])){ if($_REQUEST['section'] == 'bounces_update') echo 'nav-tab-active'; } ?>">
-			<?php _e("Verifier les Hard bounces deja traites", "e-mailing-service"); ?>
-		</a>
-	</h2>
-   <?php
  if(isset($_REQUEST['section'])){
 	
-		if ($_REQUEST['section'] == 'bounces_import') include(smPATH.'include/bounces_update.php');
-		if ($_REQUEST['section'] == 'bounces_update') include(smPATH.'include/bounces_update_liste.php');
-		if ($_REQUEST['section'] == 'bounces_update_reset') { $action="reset"; include(smPATH.'include/bounces_update_liste.php');}
+		if ($_REQUEST['section'] == 'bounces_import') sm_cron_bounce_update();
+		if ($_REQUEST['section'] == 'bounces_update') sm_cron_bounce_update_liste();
+		if ($_REQUEST['section'] == 'bounces_update_reset') { $action="reset"; sm_cron_bounce_update_liste();}
 
 		
 /////debut/////			
@@ -215,7 +225,7 @@ if(isset($_POST["action"])){
 if($_POST["action"] == "empty_bounces"){
 	$sql = "TRUNCATE ".$table_log_bounces.""; 
 	echo '<br><br><h2>'.__("Les NPAI ont bien ete supprimes","e-mailing-service").'</h2>';
-    $result = $wpdb->query($wpdb->prepare($sql,true)); 		
+    $result = $wpdb->query($sql); 		
 }
 }
     $tbaleau_insert="<br><form action=\"?page=e-mailing-service/admin/npai.php\" method=\"post\">

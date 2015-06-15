@@ -49,10 +49,16 @@ $_SESSION["user_id"] = $user_id;
 
  
 if(!get_option('ah_company_marque')){
-echo '<table><tr><td width="132" height="42"><a href="http://www.e-mailing-service.net" target="_blank"><img src="'.smURL.'/include/email_edit2x150.png" width="75" height="42" border="0"/></a></td><td align="center" valign="top"><h2>'.__('E-mailing service',"e-mailing-service").' V'.get_option('sm_version').'</h2></td>
+echo '<table><tr><td width="132" height="42"><a href="http://www.e-mailing-service.net" target="_blank"><img src="'.smURL.'/include/email_edit2x150.png" width="37.5" height="21" border="0" vspace="10px" hspace="10px"/></a></td><td align="center" valign="top"><h2>'.__('E-mailing service',"e-mailing-service").' V'.smVERSION.'</h2></td></tr></table>
 ';
 if (is_super_admin()) {
-if(!get_option('sm_license_key')|| get_option('sm_license') =="free") { echo '<td>&nbsp;&nbsp;&nbsp;</td><td style="background-image:url('.smURL.'/img/bouton.png); background-repeat:no-repeat; color=#000000" width="150" height="42" align="center" valign="center"><a href="?page=e-mailing-service/admin/configuration.php" target="_parent" title="'.__("Avec l'api Gratuite, vous obtenez des statistiques plus precises sans augmenter la charge de wordpress, les liens sont en reecriture, vous avez egalement des graphiques et les alertes de panne, details sur la page options et services",'e-mailing-service').'" class="sm_blanc">'.__("Activer l'api Gratuite",'e-mailing-service').'</a></td>'; }
+if(!get_option('sm_license_key')|| get_option('sm_license') =="free") { 
+
+echo '<table><tr><td width="132" height="42"><a href="http://www.e-mailing-service.net" target="_blank"><img src="'.smURL.'/include/email_edit2x150.png" width="75" height="42" border="0"/></a></td><td align="center" valign="top"><h2>'.__('E-mailing service',"e-mailing-service").' V'.smVERSION.'</h2></td></tr></table>
+';
+
+
+}
 }
 echo '</tr></table>';	
 } else {

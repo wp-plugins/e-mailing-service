@@ -130,7 +130,6 @@ $host=str_replace("www.","",$host);
 $current_user = wp_get_current_user();
 $user_login=$current_user->user_login;
 global $wpdb;
-echo $_GET["page"];
 echo '<img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_clic_v2.php?domaine_client='.$host.'&login='.$user_login.'&key='.get_option('sm_license_key').'&action=tous" width="450" height="450" alt="" />';
 }
 }

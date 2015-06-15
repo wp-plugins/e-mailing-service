@@ -16,14 +16,14 @@ extract($_GET);
              <div id="page-subheader">
                 <div class="wrapper">
  <h2>
-<?php _e("Reglage de vos alertes","e-mailing-service");?>
+<?php _e("License et options","e-mailing-service");?>
  </h2>
                 </div>
          </div>
                  <section id="content">
             <div class="wrapper">                <section class="columns">                    
 
-        <?php echo "<p>".__("Configuration de votre serveur smtp","e-mailing-service")."</p>";?>
+        <?php echo "<p>".__("Activer votre license pour profiter de toutes les options","e-mailing-service")."</p>";?>
                     
                     <hr />
                     
@@ -156,11 +156,16 @@ echo '</div>';
 	
 	else {
 echo '<div class="message success">';
-echo "<br><h3>".__("L'installation du plugin, la creation de compte, la creation de license est automatise , mais dans le cas d'une reinstallation ou d'un probleme divers, vous avez besoin de parametrer ci-desssous","e-mailing-service")."</h3>";
 ?>
 <form action="?page=e-mailing-service/admin/configuration.php" method="post">
 <input type="hidden" name="action" value="update" />
 <table>
+<tr>
+  <td>
+ <?php include(smPATH . '/include/license.php');?> 
+ <br /><br />
+  </td>
+ </tr>
 <tr>
   <td><?php _e("Si vous avez deja un compte sur serveurs-mail.net ou e-mailing-service.com , rentrez votre pseudo ( Attention seulement dans ce cas !!!) ","e-mailing-service");?></td></tr>
 <tr>  <td><input type="text" name="sm_login" value="<?php echo get_option('sm_login');?>" size="75" /></td>
@@ -172,7 +177,7 @@ echo "<br><h3>".__("L'installation du plugin, la creation de compte, la creation
  <td><input type="text" name="sm_license_key" value="<?php echo get_option('sm_license_key');?>" size="75" /></td>
 </tr>
 <tr>
-  <td><br /><button name="submit" type="submit" size="75" class="button button-green"><?php _e("Valider","e-mailing-service");?></button></td>
+  <td><br /><button name="submit" type="submit" size="75" class="button button-green"><?php _e("Mettre a jour","e-mailing-service");?></button></td>
 </tr>
 </table>
 </form>
