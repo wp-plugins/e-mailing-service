@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 10.^3
+Version: 10.3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -2158,7 +2158,7 @@ function sm_serveur_non_ok(){
 		if( is_super_admin() ){
 if(sm_getStatus_numero(get_option('sm_smtp_server_1'),get_option('sm_smtp_port_1')) !='1'){
 echo '<div class="updated"><b>'.__('Attention smtp server is not active ! "E-mailing service" does not work properly if the smtp server is not active','e-mailing-service').'</b><br> 
-<a href="http://www.e-mailing-service.net/en/license/e-mailing-service/>'.__('Commander un serveur SMTP','e-mailing-service').'</a> ('.__('Installation automatique sur votre wordpress','e-mailing-service').')<br>
+<a href="http://www.e-mailing-service.net/en/license/e-mailing-service/" target="_blank">'.__('Commander un serveur SMTP','e-mailing-service').'</a> ('.__('Installation automatique sur votre wordpress','e-mailing-service').')<br>
 <a href="admin.php?page=e-mailing-service/admin/setting.php">'.__('Configure SMTP server','e-mailing-service').'</a><br>
 </div>';	
 }
