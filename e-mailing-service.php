@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 10.0
+Version: 10.1
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -35,7 +35,7 @@ function SM_rewrite()
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
 $upload_dir = wp_upload_dir();
-define( 'smVERSION', '10.0' );
+define( 'smVERSION', '10.1' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -143,7 +143,7 @@ echo '<!-- hook : '.$hook.' -->';
         $occurence = Array("e-mailing-service"); 
         while (list($element, $valeur) = each($occurence)) {
                 $pos = strpos($hook,$valeur);
-                if(is_int($pos)!=false || $hook == 'index.php')
+                if(is_int($pos)!=false)
 						{						 
 
 wp_enqueue_script('jquery');
@@ -2156,13 +2156,16 @@ function button_js() {
 function sm_serveur_non_ok(){
 	if ( is_admin() ) {
 		if( is_super_admin() ){
-if(sm_getStatus(get_option('sm_smtp_server_1'),"25","1") !='1' && sm_getStatus(get_option('sm_smtp_server_1'),"587","1") !='1'){
-echo '<div class="updated"><p>'.__('Attention smtp server is not active ! "E-mailing service" does not work properly if the smtp server is not active','e-mailing-service').' <br> 
-<a href="http://www.e-mailing-service.net">'.__('Commander un serveur SMTP','e-mailing-service').'</a></p></div>';	
+if(sm_getStatus_numero(get_option('sm_smtp_server_1'),get_option('sm_smtp_port_1')) !='1'){
+echo '<div class="updated"><b>'.__('Attention smtp server is not active ! "E-mailing service" does not work properly if the smtp server is not active','e-mailing-service').'</b><br> 
+<a href="http://www.e-mailing-service.net/en/license/e-mailing-service/>'.__('Commander un serveur SMTP','e-mailing-service').'</a> ('.__('Installation automatique sur votre wordpress','e-mailing-service').')<br>
+<a href="admin.php?page=e-mailing-service/admin/setting.php">'.__('Configure SMTP server','e-mailing-service').'</a><br>
+</div>';	
 }
 if(!get_option('sm_license_key')|| get_option('sm_license') =="free") { 
 echo '<div class="updated"><p>'.__("Your license is not active ! FREE, activate your license allows you to have detailed statistics",'e-mailing-service').' <br> 
-<a href="?page=e-mailing-service/admin/configuration.php">'.__('FREE, activate your license','e-mailing-service').'</a></p></div>';	
+<a href="admin.php?page=e-mailing-service/admin/configuration.php">'.__('FREE, activate your license','e-mailing-service').'</a></p>
+</div>';	
 }
 }
 }

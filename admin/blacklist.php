@@ -51,6 +51,7 @@ echo paginate_links( array(
     'total' => ceil($total / $comments_per_page),
     'current' => $page
 ));
+
     $tbaleau_insert="";
     $tbaleau_insert .= '<table class="widefat">
                          <thead>';
