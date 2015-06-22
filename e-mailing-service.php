@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 10.2
+Version: 10.^3
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -35,7 +35,7 @@ function SM_rewrite()
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
 $upload_dir = wp_upload_dir();
-define( 'smVERSION', '10.2' );
+define( 'smVERSION', '10.3' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
