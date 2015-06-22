@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: E-mailing services\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-15 13:03+0100\n"
-"PO-Revision-Date: 2015-06-15 13:04+0100\n"
+"POT-Creation-Date: 2015-06-22 13:14+0100\n"
+"PO-Revision-Date: 2015-06-22 13:15+0100\n"
 "Last-Translator: jooky limited <contact@jooky.eu>\n"
 "Language-Team: Jooky limited <contact@jooky.eu>\n"
 "Language: en_US\n"
@@ -127,7 +127,7 @@ msgstr "Setting alerts"
 msgid "Credits epuises"
 msgstr "Exhausted credits"
 
-#: admin/blacklist.php:19 admin/blacklist.php:60 admin/debug.php:123
+#: admin/blacklist.php:19 admin/blacklist.php:61 admin/debug.php:123
 #: admin/etat.php:76 e-mailing-service.php:89 sm_dashboard.php:53
 msgid "Blacklist"
 msgstr "Blacklist"
@@ -153,7 +153,7 @@ msgstr "&laquo;"
 msgid "&raquo;"
 msgstr "&raquo;"
 
-#: admin/blacklist.php:58 admin/debug.php:116 admin/emails.php:185
+#: admin/blacklist.php:59 admin/debug.php:116 admin/emails.php:185
 #: admin/etat.php:69 admin/listes.php:185 admin/listes.php:340
 #: admin/listes.php:591 admin/listes.php:819 e-mailing-service.php:900
 #: include/export.php:58 include/export.php:78 include/export.php:98
@@ -161,7 +161,7 @@ msgstr "&raquo;"
 msgid "IP"
 msgstr "IP"
 
-#: admin/blacklist.php:59 admin/live.php:88 admin/live_user.php:85
+#: admin/blacklist.php:60 admin/live.php:88 admin/live_user.php:85
 #: admin/npai.php:153 admin/npai.php:243 admin/stats.php:59 admin/stats.php:82
 #: admin/stats.php:105 admin/stats_user.php:92 admin/stats_user.php:115
 #: admin/stats_user.php:138 admin/stats_user.php:542 admin/stats_user.php:543
@@ -169,21 +169,21 @@ msgstr "IP"
 msgid "Type"
 msgstr "Type"
 
-#: admin/blacklist.php:61
+#: admin/blacklist.php:62
 msgid "Lien pour se desinscrire"
 msgstr "Link to unsubscribe"
 
-#: admin/blacklist.php:62 admin/listes.php:770 admin/npai.php:173
+#: admin/blacklist.php:63 admin/listes.php:770 admin/npai.php:173
 #: admin/npai.php:245 admin/npai.php:259 admin/stats_user.php:544
 #: admin/stats_user.php:904 admin/stats_user.php:993
 msgid "Details"
 msgstr "Details"
 
-#: admin/blacklist.php:63
+#: admin/blacklist.php:64
 msgid "Date de mise a jour"
 msgstr "Date of update"
 
-#: admin/blacklist.php:76
+#: admin/blacklist.php:77
 msgid "Delister"
 msgstr "Delist"
 
@@ -3319,7 +3319,7 @@ msgstr "Newsletter ID"
 msgid "campaign ID"
 msgstr "campaign ID"
 
-#: e-mailing-service.php:2159
+#: e-mailing-service.php:2160
 msgid ""
 "Attention smtp server is not active ! \"E-mailing service\" does not work "
 "properly if the smtp server is not active"
@@ -3327,11 +3327,19 @@ msgstr ""
 "Attention smtp server is not active ! E-mailing service does not work "
 "properly if the smtp server is not active"
 
-#: e-mailing-service.php:2160
+#: e-mailing-service.php:2161
 msgid "Commander un serveur SMTP"
 msgstr "Order SMTP server"
 
-#: e-mailing-service.php:2163
+#: e-mailing-service.php:2161
+msgid "Installation automatique sur votre wordpress"
+msgstr "Automatic installation on your wordpress"
+
+#: e-mailing-service.php:2162
+msgid "Configure SMTP server"
+msgstr "Configure SMTP server"
+
+#: e-mailing-service.php:2166
 msgid ""
 "Your license is not active ! FREE, activate your license allows you to have "
 "detailed statistics"
@@ -3339,7 +3347,7 @@ msgstr ""
 "Your license is not active ! FREE, activate your license allows you to have "
 "detailed statistics"
 
-#: e-mailing-service.php:2164
+#: e-mailing-service.php:2167
 msgid "FREE, activate your license"
 msgstr "FREE, activate your license"
 
@@ -3471,11 +3479,11 @@ msgstr "emails sent"
 msgid "Vous n'avez pas de newsletter qui doit tourner actuellement"
 msgstr "You do not have a newsletter that needs to turn now"
 
-#: include/cron_blocage.php:6 include/fonctions_sm.php:707
+#: include/cron_blocage.php:6 include/fonctions_sm.php:710
 msgid "Tester la vitesse d'envoi de votre newsletter"
 msgstr "Test the speed of sending your newsletter"
 
-#: include/cron_blocage.php:10 include/fonctions_sm.php:711
+#: include/cron_blocage.php:10 include/fonctions_sm.php:714
 msgid ""
 "Si votre newsletter envoi moin vite que le reglage que vous avez effectue "
 "lors de l'envoi , c'est que votre Hebergement wordpress est trop lent"
@@ -3483,23 +3491,23 @@ msgstr ""
 "If your newsletter moin send faster than the adjustment you have done when "
 "sending is that your wordpress Accommodation is too slow"
 
-#: include/cron_blocage.php:14 include/fonctions_sm.php:715
+#: include/cron_blocage.php:14 include/fonctions_sm.php:718
 msgid "Nombre en attente"
 msgstr "Number waiting"
 
-#: include/cron_blocage.php:19 include/fonctions_sm.php:720
+#: include/cron_blocage.php:19 include/fonctions_sm.php:723
 msgid "Nombre en attente apres "
 msgstr "Number waiting after "
 
-#: include/cron_blocage.php:20 include/fonctions_sm.php:721
+#: include/cron_blocage.php:20 include/fonctions_sm.php:724
 msgid "secondes"
 msgstr "seconds"
 
-#: include/cron_blocage.php:22 include/fonctions_sm.php:723
+#: include/cron_blocage.php:22 include/fonctions_sm.php:726
 msgid "le status va etre reactiver"
 msgstr "the status will be reactivate"
 
-#: include/cron_blocage.php:28 include/fonctions_sm.php:729
+#: include/cron_blocage.php:28 include/fonctions_sm.php:732
 msgid ""
 "Vous n'avez pas de newsletter qui tourne actuellement, vous ne pouvez donc "
 "pas verifier la vitesse d'envoi"
@@ -3581,11 +3589,11 @@ msgstr "OPT-IN"
 msgid "Le format n'est pas corret"
 msgstr "The format is not correct"
 
-#: include/fonctions_sm.php:596
+#: include/fonctions_sm.php:592
 msgid "offline"
 msgstr "offline"
 
-#: include/fonctions_sm.php:597
+#: include/fonctions_sm.php:593
 msgid "online"
 msgstr "online"
 
