@@ -16,7 +16,8 @@ $table_log= $wpdb->prefix.'sm_log';
 $table_messageid=$wpdb->prefix.'sm_stats_messageid';
 $hie=0;
 
-
+@mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("<br /> Pas de connexion chez le client bd_ip");
+@mysql_select_db(DB_NAME)or die("<br /> Excusez nous mais la connection est interrompue pour quelques instants.");
 
 echo "<h2>".__("Envoi de votre newsletter","e-mailing-service")." ".$now."</h2>";	
 $q31=mysql_query("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode,login,attachments,sujet AS bd_sujet,corps AS bd_corps,txth AS bd_txth,txtb AS bd_txtb,txta AS bd_txta,user_id FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux' OR status='failed') AND date_envoi < '".$now."' AND type ='post' ORDER BY date_envoi desc LIMIT 1") or die (mysql_error());
