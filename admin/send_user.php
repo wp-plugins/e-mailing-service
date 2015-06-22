@@ -243,7 +243,7 @@ add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
 if($user_role == 'administrator'){
 echo '<div class="message info">';
 echo "<br><h1>".__("Envoyer un article ou une page avec un serveur au choix","e-mailing-service")."</h1>";
-echo '<form action="admin.php?page=e-mailing-service/admin/send.php" method="post" target="_parent">
+echo '<form action="admin.php?page=e-mailing-service/admin/send_user.php" method="post" target="_parent">
 <input type="hidden" name="action" value="envoi_article" />';
 echo '<table width="500">';
 echo "<tr><td><blockquote><b>".__("Choisir une liste","e-mailing-service")."</b></blockquote></td>
