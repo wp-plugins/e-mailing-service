@@ -294,7 +294,7 @@ echo "</select></blockquote></td>
 echo "</div>";	
 }
 
-if(ah_service_actif($user_login) !='server'){
+if(ah_service_actif($user_login) !='server' && $user_role != 'administrator'){
  $all_meta_for_user = get_user_meta( $user_id );
 echo '<div class="message warning">';
 echo '<h1>'.ah_credit($user_login).' '.get_option('ah_curency1').'</h1>';
