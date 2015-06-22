@@ -586,16 +586,19 @@ return $nbc;
 }
 
 if(!function_exists('sm_getStatus' )) { 
-function sm_getStatus($smtp,$port,$style=0){
+function sm_getStatus($smtp,$port){
 $ip = gethostbyname($smtp);
    $socket = @fsockopen($ip, $port, $errorNo, $errorStr, 3);
-   if($style=='1'){
-	 if(!$socket) return 0;
-	 else return 1;   
-   } else {
    if(!$socket) return '<span class="sm_table_rouge">&nbsp;&nbsp;'.__("offline","e-mailing-service").'&nbsp;&nbsp;</span>';
      else return '<span class="sm_table_vert">&nbsp;&nbsp;'.__("online","e-mailing-service").'&nbsp;&nbsp;</span>';
-   }
+}
+}
+if(!function_exists('sm_getStatus_numero' )) { 
+function sm_getStatus_numero($smtp,$port){
+$ip = gethostbyname($smtp);
+   $socket = @fsockopen($ip, $port, $errorNo, $errorStr, 3);
+if(!$socket) { return 0; } else { return 1; }   
+  
 }
 }
 if(!function_exists('sm_optimisation_fai' )) { 
