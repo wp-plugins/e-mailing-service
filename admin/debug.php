@@ -21,7 +21,14 @@ $active_page=$_GET['section'];
 <li <?php if($active_page=="vitesse"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=vitesse"><?php _e("Verifier la vitesse d'envoi",'admin-hosting');?></a></li>
 <li <?php if($active_page=="envoi_article"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=envoi_article"><?php _e("Envoyer les articles",'admin-hosting');?></a></li>
 <li <?php if($active_page=="envoi_newsletter"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=envoi_newsletter"><?php _e("Envoyer la newsletter",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_stats"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_stats"><?php _e("Statistics",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_user_wordpress"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_user_wordpress"><?php _e("User",'admin-hosting');?></a></li>
 
+<li <?php if($active_page=="crontab_blacklist"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_blacklist"><?php _e("Blacklist",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_bounces"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_bounces"><?php _e("Bounces",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_bounces_update"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_bounces_update"><?php _e("Bounces update",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_bounces_list"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_bounces_list"><?php _e("Update list",'admin-hosting');?></a></li>
+<li <?php if($active_page=="crontab_bounces_delete"){ echo 'class="active"';} ?> ><a href="?page=e-mailing-service/admin/debug.php&section=crontab_bounces_delete"><?php _e("Bounces delete",'admin-hosting');?></a></li>
                     </ul>
  </div>
              </div>
@@ -63,6 +70,27 @@ $active_page=$_GET['section'];
 				elseif($active_page == 'envoi_newsletter'){
 		echo "<p>".__("Lancer le cron d'envoi de la newsletter manuellement, permet de suivre les envois en direct","e-mailing-service")."</p>";
 		}
+		elseif($active_page == 'crontab_blacklist'){
+		echo "<p>".__("Start cron that updates blacklists","e-mailing-service")."</p>";
+		}
+				elseif($active_page == 'crontab_bounces'){
+		echo "<p>".__("Start cron import bounces","e-mailing-service")."</p>";
+		}
+				elseif($active_page == 'crontab_bounces_update'){
+		echo "<p>".__("Start cron update Hard Bounces","e-mailing-service")."</p>";
+		}
+				elseif($active_page == 'crontab_bounces_list'){
+		echo "<p>".__("Start cron update contact list","e-mailing-service")."</p>";
+		}
+						elseif($active_page == 'crontab_bounces_delete'){
+		echo "<p>".__("Start cron delete bounces","e-mailing-service")."</p>";
+		}
+								elseif($active_page == 'crontab_stats'){
+		echo "<p>".__("Start cron update statistics","e-mailing-service")."</p>";
+		}
+			elseif($active_page == 'crontab_user_wordpress'){
+		echo "<p>".__("Start cron update user wordpress in the contact list wordpress_user","e-mailing-service")."</p>";
+		}
 		else {
 		echo "<p>".__("Verifiez votre serveur SMTP","e-mailing-service")."</p>";				
 		}
@@ -78,6 +106,14 @@ $active_page=$_GET['section'];
 		elseif ($active_page == 'envoi_article') { sm_send_article(); }
 		elseif ($active_page == 'envoi_newsletter') {  sm_send_newsletter();}
 		elseif ($active_page == 'vitesse') {  sm_cron_blocage();}
+		elseif ($active_page == 'crontab_blacklist') {  sm_cron_blacklist();}
+		elseif ($active_page == 'crontab_bounces_update') {  sm_cron_bounce_update();}
+		elseif ($active_page == 'crontab_bounces_list') {  sm_cron_bounce_update_liste();}
+		elseif ($active_page == 'crontab_bounces') {  sm_cron_bounce();}
+		elseif ($active_page == 'crontab_bounces_delete') {  sm_cron_bounces_delete(); }
+		elseif ($active_page == 'crontab_stats') {  sm_cron_stats();}
+		elseif ($active_page == 'crontab_license') {  sm_cron_license();}
+		elseif ($active_page == 'crontab_user_wordpress') {  sm_userwordpress_update();}
         else {
 	
 if(!isset($action)){

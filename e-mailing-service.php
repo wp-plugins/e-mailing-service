@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 10.3
+Version: 10.4
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -35,7 +35,7 @@ function SM_rewrite()
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
 $upload_dir = wp_upload_dir();
-define( 'smVERSION', '10.3' );
+define( 'smVERSION', '10.4' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -1763,7 +1763,9 @@ global $wpdb;
 $table_user_wordpress = $wpdb->prefix.'wordpress_user';
 $blogusers = get_users( 'blog_id='.$GLOBALS['blog_id'].'' );
 foreach ( $blogusers as $user ) {
-$wpdb->query("INSERT IGNORE INTO ".$table_user_wordpress." FROM   `email`='".esc_html( $user->user_email )."',  `nom`  = '".esc_html( $user->display_name )."',`lg`= '".$_SERVER['HTTP_ACCEPT_LANGUAGE']."',`cle` = ".key_generate()."'");			  
+	echo $user->user_nicename;
+	echo '<br>------<br>';
+$wpdb->query("INSERT IGNORE INTO `".$table_user_wordpress."`  (`id`, `email`,`nom`, `lg`, `valide`, `bounces`, `optin`,`cle`) VALUES ('','".esc_html( $user->user_email )."', '".esc_html( $user->user_nicename )."','".WPLANG."', '1', '1', '0', '".key_generate()."')");			  
 }
 	
 }

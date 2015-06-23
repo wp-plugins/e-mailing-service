@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: E-mailing services\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-22 13:12+0100\n"
-"PO-Revision-Date: 2015-06-22 13:14+0100\n"
+"POT-Creation-Date: 2015-06-23 11:28+0100\n"
+"PO-Revision-Date: 2015-06-23 11:31+0100\n"
 "Last-Translator: jooky limited <contact@jooky.eu>\n"
 "Language-Team: Jooky limited <contact@jooky.eu>\n"
 "Language: fr_FR\n"
@@ -132,8 +132,9 @@ msgstr "Réglage des alertes"
 msgid "Credits epuises"
 msgstr "Crédits épuisés"
 
-#: admin/blacklist.php:19 admin/blacklist.php:61 admin/debug.php:123
-#: admin/etat.php:76 e-mailing-service.php:89 sm_dashboard.php:53
+#: admin/blacklist.php:19 admin/blacklist.php:61 admin/debug.php:27
+#: admin/debug.php:159 admin/etat.php:76 e-mailing-service.php:89
+#: sm_dashboard.php:53
 msgid "Blacklist"
 msgstr "Blacklist"
 
@@ -159,7 +160,7 @@ msgstr "&laquo;"
 msgid "&raquo;"
 msgstr "&raquo;"
 
-#: admin/blacklist.php:59 admin/debug.php:116 admin/emails.php:185
+#: admin/blacklist.php:59 admin/debug.php:152 admin/emails.php:185
 #: admin/etat.php:69 admin/listes.php:185 admin/listes.php:340
 #: admin/listes.php:591 admin/listes.php:819 e-mailing-service.php:900
 #: include/export.php:58 include/export.php:78 include/export.php:98
@@ -296,7 +297,7 @@ msgstr "Pseudo"
 msgid "Mot de passe"
 msgstr "Mot de passe"
 
-#: admin/configuration.php:147 admin/debug.php:103 admin/emails.php:82
+#: admin/configuration.php:147 admin/debug.php:139 admin/emails.php:82
 #: admin/emails.php:176 admin/emails.php:288 admin/etat.php:55
 #: admin/listes.php:183 admin/listes.php:274 admin/listes.php:338
 #: admin/listes.php:589 admin/listes.php:817 admin/multi.php:146
@@ -356,7 +357,7 @@ msgstr "Création de votre newsletter"
 msgid "Premiere etape , choisir le sujet et le modele"
 msgstr "Premiere etape , choisir le sujet et le modèle"
 
-#: admin/create.php:87 admin/debug.php:104 admin/etat.php:56
+#: admin/create.php:87 admin/debug.php:140 admin/etat.php:56
 #: admin/message.php:35 admin/npai.php:154 admin/npai.php:244
 #: e-mailing-service.php:968 tuto/ticket.php:19 tuto/ticket_liste.php:77
 msgid "Sujet"
@@ -398,23 +399,49 @@ msgstr "Envoyer les articles"
 msgid "Envoyer la newsletter"
 msgstr "Envoyer la newsletter"
 
-#: admin/debug.php:33 admin/multi.php:387 e-mailing-service.php:95
+#: admin/debug.php:24 admin/live.php:103 admin/live_user.php:100
+#: sm_dashboard.php:107
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: admin/debug.php:25 admin/listes_newsletter.php:47 admin/live.php:86
+msgid "User"
+msgstr "utilisateur"
+
+#: admin/debug.php:28 include/export.php:58 include/export.php:78
+#: include/export.php:98 include/export.php:121
+msgid "Bounces"
+msgstr "Bounces"
+
+#: admin/debug.php:29
+msgid "Bounces update"
+msgstr "mise à jour des bounces"
+
+#: admin/debug.php:30
+msgid "Update list"
+msgstr "Mise à jour des contacts"
+
+#: admin/debug.php:31
+msgid "Bounces delete"
+msgstr "Supprime les bounces"
+
+#: admin/debug.php:40 admin/multi.php:387 e-mailing-service.php:95
 msgid "Debug"
 msgstr "Debug"
 
-#: admin/debug.php:44 admin/support.php:32 e-mailing-service.php:94
+#: admin/debug.php:51 admin/support.php:32 e-mailing-service.php:94
 msgid "Support"
 msgstr "Support"
 
-#: admin/debug.php:55
+#: admin/debug.php:62
 msgid "Verifier le dossier upload pour les images"
 msgstr "Verifier le dossier upload pour les images"
 
-#: admin/debug.php:58
+#: admin/debug.php:65
 msgid "Verifiez la vitesse de votre wordpress"
 msgstr "Verifiez la vitesse de votre wordpress"
 
-#: admin/debug.php:61 admin/debug.php:64
+#: admin/debug.php:68 admin/debug.php:71
 msgid ""
 "Lancer le cron d'envoi de la newsletter manuellement, permet de suivre les "
 "envois en direct"
@@ -422,77 +449,106 @@ msgstr ""
 "Lancer le cron d'envoi de la newsletter manuellement, permet de suivre les "
 "envois en direct"
 
-#: admin/debug.php:67
+#: admin/debug.php:74
+msgid "Start cron that updates blacklists"
+msgstr "Fait tourner le script de mise à jour des blacklists"
+
+#: admin/debug.php:77
+msgid "Start cron import bounces"
+msgstr "Fait tourner le script d'importation des bounces"
+
+#: admin/debug.php:80
+msgid "Start cron update Hard Bounces"
+msgstr "Fait tourner le script de mise à jour des Hard bounces"
+
+#: admin/debug.php:83
+msgid "Start cron update contact list"
+msgstr "Fait tourner le script de mise à jour des contacts"
+
+#: admin/debug.php:86
+msgid "Start cron delete bounces"
+msgstr "Fait tourner le script qui supprime les anciens bounces"
+
+#: admin/debug.php:89
+msgid "Start cron update statistics"
+msgstr "Fait tourner le script de mise à jour des statistiques"
+
+#: admin/debug.php:92
+msgid "Start cron update user wordpress in the contact list wordpress_user"
+msgstr ""
+"Fait tourner le script de mise à jour de la liste de contact wordpress_user"
+
+#: admin/debug.php:95
 msgid "Verifiez votre serveur SMTP"
 msgstr "Verifiez votre serveur SMTP"
 
-#: admin/debug.php:90 admin/etat.php:42 include/cron.php:301
-#: include/cron_auto_v3.php:393 include/cron_v5.php:389
+#: admin/debug.php:126 admin/etat.php:42 include/cron.php:301
+#: include/cron_auto_v3.php:394 include/cron_v5.php:390
 msgid "Reponse"
 msgstr "Réponse"
 
-#: admin/debug.php:96 admin/etat.php:48
+#: admin/debug.php:132 admin/etat.php:48
 msgid "Tester votre serveur SMTP"
 msgstr "Tester votre serveur SMTP"
 
-#: admin/debug.php:104 admin/etat.php:56
+#: admin/debug.php:140 admin/etat.php:56
 msgid "test smtp"
 msgstr "test smtp"
 
-#: admin/debug.php:105 admin/etat.php:57 admin/message.php:18
+#: admin/debug.php:141 admin/etat.php:57 admin/message.php:18
 #: admin/message.php:36 e-mailing-service.php:262 e-mailing-service.php:264
 #: e-mailing-service.php:969 tuto/ticket.php:23 tuto/ticket_liste.php:29
 msgid "Message"
 msgstr "Message"
 
-#: admin/debug.php:105 admin/etat.php:57
+#: admin/debug.php:141 admin/etat.php:57
 msgid "test ok ?"
 msgstr "test ok ?"
 
-#: admin/debug.php:106 admin/etat.php:58 admin/send.php:137 admin/send.php:189
+#: admin/debug.php:142 admin/etat.php:58 admin/send.php:137 admin/send.php:189
 #: admin/send_user.php:291 admin/send_user.php:378 include/upload.php:41
 msgid "envoyer"
 msgstr "envoyer"
 
-#: admin/debug.php:115 admin/etat.php:68
+#: admin/debug.php:151 admin/etat.php:68
 msgid "Serveur SMTP"
 msgstr "Serveur SMTP"
 
-#: admin/debug.php:117 admin/etat.php:70
+#: admin/debug.php:153 admin/etat.php:70
 msgid "Tester"
 msgstr "Tester"
 
-#: admin/debug.php:118 admin/etat.php:71
+#: admin/debug.php:154 admin/etat.php:71
 msgid "Port 25"
 msgstr "Port 25"
 
-#: admin/debug.php:119 admin/etat.php:72
+#: admin/debug.php:155 admin/etat.php:72
 msgid "Port 587"
 msgstr "Port 587"
 
-#: admin/debug.php:120 admin/etat.php:73
+#: admin/debug.php:156 admin/etat.php:73
 msgid "Port 80"
 msgstr "Port 80"
 
-#: admin/debug.php:121 admin/etat.php:74
+#: admin/debug.php:157 admin/etat.php:74
 msgid "Port 53"
 msgstr "Port 53"
 
-#: admin/debug.php:122 admin/etat.php:75 sm_dashboard.php:52
+#: admin/debug.php:158 admin/etat.php:75 sm_dashboard.php:52
 msgid "Spamscore"
 msgstr "Spamscore"
 
-#: admin/debug.php:124 admin/etat.php:77 admin/live.php:94
+#: admin/debug.php:160 admin/etat.php:77 admin/live.php:94
 #: admin/live_user.php:91 admin/multi.php:216 sm_dashboard.php:104
 #: tuto/ticket_liste.php:79
 msgid "Status"
 msgstr "Statut"
 
-#: admin/debug.php:133 admin/etat.php:86 admin/etat.php:105
+#: admin/debug.php:169 admin/etat.php:86 admin/etat.php:105
 msgid "Tester le serveur"
 msgstr "Tester le serveur"
 
-#: admin/debug.php:140 admin/emails.php:130 admin/emails.php:134
+#: admin/debug.php:176 admin/emails.php:130 admin/emails.php:134
 #: admin/emails.php:314 admin/etat.php:94 admin/etat.php:113
 #: admin/multi.php:220
 msgid "Actif"
@@ -1461,15 +1517,11 @@ msgstr "Titre"
 
 #: admin/listes_newsletter.php:45 admin/message.php:34
 #: admin/stats_user.php:992 admin/stats_user.php:1189 admin/variables.php:272
-#: admin/variables_user.php:277 e-mailing-service.php:2135 tuto/faq.php:16
+#: admin/variables_user.php:277 e-mailing-service.php:2137 tuto/faq.php:16
 #: tuto/faq.php:72 tuto/suggestion.php:16 tuto/ticket_liste.php:31
 #: tuto/ticket_liste.php:78
 msgid "Date"
 msgstr "Date"
-
-#: admin/listes_newsletter.php:47 admin/live.php:86
-msgid "User"
-msgstr "utilisateur"
 
 #: admin/listes_newsletter.php:74
 msgid "view"
@@ -1551,10 +1603,6 @@ msgstr "Réactiver"
 #: admin/live.php:102 admin/live_user.php:99
 msgid "Log"
 msgstr "Log"
-
-#: admin/live.php:103 admin/live_user.php:100 sm_dashboard.php:107
-msgid "Statistics"
-msgstr "Statistiques"
 
 #: admin/live.php:130 admin/live.php:226 admin/live.php:242
 #: admin/live_user.php:124 admin/live_user.php:181 admin/live_user.php:197
@@ -2390,7 +2438,7 @@ msgstr "Statistiques générales"
 
 #: admin/stats_user.php:344 admin/stats_user.php:382 admin/stats_user.php:453
 #: admin/stats_user.php:528 admin/stats_user.php:578
-#: e-mailing-service.php:2108
+#: e-mailing-service.php:2110
 msgid "View online"
 msgstr "Vue en directe"
 
@@ -2433,7 +2481,7 @@ msgstr "Clic sur lien affilié"
 
 #: admin/stats_user.php:352 admin/stats_user.php:390 admin/stats_user.php:461
 #: admin/stats_user.php:697 admin/stats_user.php:735 admin/stats_user.php:816
-#: e-mailing-service.php:2107
+#: e-mailing-service.php:2109
 msgid "Unsuscribe"
 msgstr "S\"abonner"
 
@@ -3249,119 +3297,119 @@ msgstr ""
 msgid "Cochez pour envoyer le lien a votre liste de destinataires"
 msgstr "Cochez pour envoyer le lien a votre liste de destinataires"
 
-#: e-mailing-service.php:2040
+#: e-mailing-service.php:2042
 msgid "mise a jour de la base de donnee du plugin e-mailing service"
 msgstr "mise a jour de la base de donnée du plugin e-mailing service"
 
-#: e-mailing-service.php:2106
+#: e-mailing-service.php:2108
 msgid "Shortcode for newsletter"
 msgstr "code pour la newsletter"
 
-#: e-mailing-service.php:2107
+#: e-mailing-service.php:2109
 msgid "Link unsuscribe"
 msgstr "lien de désinscription"
 
-#: e-mailing-service.php:2108
+#: e-mailing-service.php:2110
 msgid "Link view online"
 msgstr "Vue des liens en directe"
 
-#: e-mailing-service.php:2109
+#: e-mailing-service.php:2111
 msgid "Send a newsltter"
 msgstr "Envoyer une newsltter"
 
-#: e-mailing-service.php:2109
+#: e-mailing-service.php:2111
 msgid "Link affiliate"
 msgstr "Lien d'affiliation"
 
-#: e-mailing-service.php:2110
+#: e-mailing-service.php:2112
 msgid "Title of article"
 msgstr "Titre de l'article"
 
-#: e-mailing-service.php:2111
+#: e-mailing-service.php:2113
 msgid "Link to the article "
 msgstr "lien vers l'article"
 
-#: e-mailing-service.php:2112
+#: e-mailing-service.php:2114
 msgid "Automatic shortcode on your information"
 msgstr "code automatique sur vos informations"
 
-#: e-mailing-service.php:2113
+#: e-mailing-service.php:2115
 msgid "Your name"
 msgstr "votre nom"
 
-#: e-mailing-service.php:2114
+#: e-mailing-service.php:2116
 msgid "Adress"
 msgstr "Adresse"
 
-#: e-mailing-service.php:2115
+#: e-mailing-service.php:2117
 msgid "your Phone"
 msgstr "votre téléphone"
 
-#: e-mailing-service.php:2116
+#: e-mailing-service.php:2118
 msgid "Your fax"
 msgstr "votre fax"
 
-#: e-mailing-service.php:2117
+#: e-mailing-service.php:2119
 msgid "Facebook link"
 msgstr "Lien Facebook"
 
-#: e-mailing-service.php:2118
+#: e-mailing-service.php:2120
 msgid "Google+ link"
 msgstr "Lien Google+ "
 
-#: e-mailing-service.php:2119
+#: e-mailing-service.php:2121
 msgid "Twitter link"
 msgstr "Lien Twitter"
 
-#: e-mailing-service.php:2120
+#: e-mailing-service.php:2122
 msgid "Linkedin link"
 msgstr "Lien Linkedin"
 
-#: e-mailing-service.php:2121
+#: e-mailing-service.php:2123
 msgid "Tracking code"
 msgstr "code de suivi"
 
-#: e-mailing-service.php:2122
+#: e-mailing-service.php:2124
 msgid "Automatic shortcode on contact list"
 msgstr "code automatique sur la liste des contacts"
 
-#: e-mailing-service.php:2123
+#: e-mailing-service.php:2125
 msgid "Email customer"
 msgstr "Emailing service"
 
-#: e-mailing-service.php:2124
+#: e-mailing-service.php:2126
 msgid "Name customer"
 msgstr "Nom du client"
 
-#: e-mailing-service.php:2125 e-mailing-service.php:2126
 #: e-mailing-service.php:2127 e-mailing-service.php:2128
 #: e-mailing-service.php:2129 e-mailing-service.php:2130
 #: e-mailing-service.php:2131 e-mailing-service.php:2132
-#: e-mailing-service.php:2133
+#: e-mailing-service.php:2133 e-mailing-service.php:2134
+#: e-mailing-service.php:2135
 msgid "Row"
 msgstr "rangée"
 
-#: e-mailing-service.php:2134
+#: e-mailing-service.php:2136
 msgid "Automatic shortcode on your campaign"
 msgstr "code automatique de votre campagne"
 
-#: e-mailing-service.php:2136
+#: e-mailing-service.php:2138
 msgid "Server ID"
 msgstr "ID serveur"
 
-#: e-mailing-service.php:2137
+#: e-mailing-service.php:2139
 msgid "Displays (your server) - (id of the campaign) - (id sends)"
 msgstr "Affiche (votre serveur)-(id de la campagne)- (id envoie)"
 
-#: e-mailing-service.php:2138
+#: e-mailing-service.php:2140
 msgid "Newsletter ID"
 msgstr "Newsletter"
 
-#: e-mailing-service.php:2139
+#: e-mailing-service.php:2141
 msgid "campaign ID"
 msgstr "Campagne"
 
-#: e-mailing-service.php:2160
+#: e-mailing-service.php:2162
 msgid ""
 "Attention smtp server is not active ! \"E-mailing service\" does not work "
 "properly if the smtp server is not active"
@@ -3369,19 +3417,19 @@ msgstr ""
 "Attention votre serveur SMTP est mal configuré ! E-mailing service ne "
 "fonctionne pas correctement si votre serveur SMTP est mal configuré"
 
-#: e-mailing-service.php:2161
+#: e-mailing-service.php:2163
 msgid "Commander un serveur SMTP"
 msgstr "Commander un serveur SMTP"
 
-#: e-mailing-service.php:2161
+#: e-mailing-service.php:2163
 msgid "Installation automatique sur votre wordpress"
 msgstr "Installation automatique sur votre wordpress"
 
-#: e-mailing-service.php:2162
+#: e-mailing-service.php:2164
 msgid "Configure SMTP server"
 msgstr "Configurer votre SMTP serveur"
 
-#: e-mailing-service.php:2166
+#: e-mailing-service.php:2168
 msgid ""
 "Your license is not active ! FREE, activate your license allows you to have "
 "detailed statistics"
@@ -3389,7 +3437,7 @@ msgstr ""
 "Votre license n'est pas active ! GRATUIT , activer votre license pour "
 "obtenir des statistiques detaillés"
 
-#: e-mailing-service.php:2167
+#: e-mailing-service.php:2169
 msgid "FREE, activate your license"
 msgstr "GRATUIT, activer votre license"
 
@@ -3478,49 +3526,49 @@ msgstr " "
 msgid "update list"
 msgstr "Mise à jour liste"
 
-#: include/cron.php:16 include/cron_auto_v3.php:21 include/cron_v5.php:20
+#: include/cron.php:16 include/cron_auto_v3.php:22 include/cron_v5.php:21
 msgid "Envoi de votre newsletter"
 msgstr "Envoi de votre newsletter"
 
-#: include/cron.php:36 include/cron.php:365 include/cron_auto_v3.php:156
-#: include/cron_auto_v3.php:443 include/cron_v5.php:152
-#: include/cron_v5.php:439
+#: include/cron.php:36 include/cron.php:365 include/cron_auto_v3.php:157
+#: include/cron_auto_v3.php:444 include/cron_v5.php:153
+#: include/cron_v5.php:440
 msgid "Newsletter numero"
 msgstr "Newsletter numero"
 
-#: include/cron.php:36 include/cron_auto_v3.php:156 include/cron_v5.php:152
+#: include/cron.php:36 include/cron_auto_v3.php:157 include/cron_v5.php:153
 msgid "est en cours d'envois"
 msgstr "est en cours d'envoi"
 
-#: include/cron.php:45 include/cron_auto_v3.php:164 include/cron_v5.php:160
+#: include/cron.php:45 include/cron_auto_v3.php:165 include/cron_v5.php:161
 msgid "envoi newsletter n "
 msgstr "envoi newsletter n "
 
-#: include/cron.php:46 include/cron_auto_v3.php:165 include/cron_v5.php:161
+#: include/cron.php:46 include/cron_auto_v3.php:166 include/cron_v5.php:162
 msgid "liste n "
 msgstr "liste n° "
 
-#: include/cron.php:159 include/cron_auto_v3.php:78 include/cron_v5.php:74
+#: include/cron.php:159 include/cron_auto_v3.php:79 include/cron_v5.php:75
 msgid "Tout s'est bien deroule"
 msgstr "Tout s'est bien deroulé"
 
-#: include/cron.php:363 include/cron_auto_v3.php:441 include/cron_v5.php:437
+#: include/cron.php:363 include/cron_auto_v3.php:442 include/cron_v5.php:438
 msgid "envoi numero"
 msgstr "envoi numero"
 
-#: include/cron.php:363 include/cron_auto_v3.php:441 include/cron_v5.php:437
+#: include/cron.php:363 include/cron_auto_v3.php:442 include/cron_v5.php:438
 msgid "termine"
 msgstr "terminé"
 
-#: include/cron.php:365 include/cron_auto_v3.php:443 include/cron_v5.php:439
+#: include/cron.php:365 include/cron_auto_v3.php:444 include/cron_v5.php:440
 msgid "envoi termine"
 msgstr "envoi terminé"
 
-#: include/cron.php:365 include/cron_auto_v3.php:443 include/cron_v5.php:439
+#: include/cron.php:365 include/cron_auto_v3.php:444 include/cron_v5.php:440
 msgid "emails envoyes"
 msgstr "emails envoyés"
 
-#: include/cron.php:376 include/cron_auto_v3.php:453 include/cron_v5.php:449
+#: include/cron.php:376 include/cron_auto_v3.php:454 include/cron_v5.php:450
 msgid "Vous n'avez pas de newsletter qui doit tourner actuellement"
 msgstr "Vous n'avez pas de newsletter qui doit tourner actuellement"
 
@@ -3619,11 +3667,6 @@ msgstr "API Sans Options : 10.00 EUR - mois"
 #: include/export.php:121
 msgid "nom"
 msgstr "nom"
-
-#: include/export.php:58 include/export.php:78 include/export.php:98
-#: include/export.php:121
-msgid "Bounces"
-msgstr "Bounces"
 
 #: include/export.php:58 include/export.php:78 include/export.php:98
 #: include/export.php:121
