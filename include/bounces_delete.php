@@ -18,7 +18,7 @@ echo "".__("L'option est au tarif de 2 euros mois si vous ne disposez pas de ser
              $datelimite = date("Y-m-d", mktime(0,0,0,date("m"),date("d")-2,date("Y"))); 
              _e('Les bounces dont la date est inferieur a '.$datelimite.' ont ete supprime');
 	         $sql ="DELETE FROM `".$table_log_bounces."` WHERE `date_insert` < '".$datelimite."'";
-             $result = $wpdb->query($wpdb->prepare($sql,true)); 
+             $result = $wpdb->query($sql); 
 }
 }
 
