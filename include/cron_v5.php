@@ -15,7 +15,8 @@ $table_log= $wpdb->prefix.'sm_log';
 $table_messageid=$wpdb->prefix.'sm_stats_messageid';
 $hie=0;
 
-
+@mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("<br /> Pas de connexion chez le client bd_ip");
+@mysql_select_db(DB_NAME)or die("<br /> Excusez nous mais la connection est interrompue pour quelques instants.");
 
 echo "<h2>".__("Envoi de votre newsletter","e-mailing-service")." ".$now."</h2>";	
 $q31=mysql_query("SELECT id AS hie,id_newsletter,id_liste,pause,status,track1,track2,serveur,mode,login,attachments,sujet AS bd_sujet,corps AS bd_corps,txth AS bd_txth,txtb AS bd_txtb,txta AS bd_txta,user_id,fromname,reply_to FROM `".$table_envoi."` WHERE (status='En attente' OR  status='Limite' OR  status='reactiver' OR status='suite' OR status='erreur_flux' OR status='failed') AND date_envoi < '".$now."' AND type ='newsletter' ORDER BY date_envoi desc LIMIT 1") or die (mysql_error());
@@ -35,6 +36,14 @@ extract($r31);
 	$post_content2 = get_post_field('post_content', $id_newsletter);
 	$post_content = "".$post_content2."<br><img src=\"".smURL."/img/suivis.jpg\" border=\"0\"/>";
     $post_id=$id_newsletter;
+	
+	$smliste = mysql_query("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$id_liste."");
+    while ($r2 = mysql_fetch_array($smliste))
+    {
+	extract($r2);
+	$table_email= $liste_bd;
+	$liste_nom= $liste_nom;	
+	}
 		 
 	if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 	$txth=sm_schortode_txt(get_option('sm_txt_haut'),$id_newsletter,$hie);
@@ -137,13 +146,7 @@ extract($r31);
 	$contenu_original=$contenu; 
 	 
 	   	
-	$smliste = mysql_query("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$id_liste."");
-    while ($r2 = mysql_fetch_array($smliste))
-    {
-	extract($r2);
-	$table_email= $liste_bd;
-	$liste_nom= $liste_nom;	
-	}
+
 	if($status == "En attente"){
 	mysql_query("INSERT IGNORE INTO  `".$table_temps."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 0,10000");
     mysql_query("INSERT IGNORE INTO  `".$table_suite."` (email_id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,hie,cle) SELECT id,email,nom,ip,lg,date_creation,champs1,champs2,champs3,champs4,champs5,champs6,champs7,champs8,champs9,".$hie.",cle FROM `".$table_email."` WHERE valide='1' AND bounces='1' LIMIT 10001,10000000");
