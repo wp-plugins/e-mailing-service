@@ -45,14 +45,7 @@ $active_page=$_GET['section'];
          </div>
         </header>
 </div>
-             <div id="page-subheader">
-                <div class="wrapper">
- <h2>
-<?php _e("Support","e-mailing-service");?>
-
- </h2>
-                </div>
-         </div>
+           
                  <section id="content">
             <div class="wrapper">                                     
                                 

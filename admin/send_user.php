@@ -179,6 +179,7 @@ update_user_meta( $user_id, 'sm_reply',$reply_to);
 			'reply_to' => $reply_to,
        ));
 	      $hie = $wpdb->insert_id;
+		    if(is_plugin_active('admin-hosting/admin-hosting.php') ) {
 		    if(ah_service_actif($user_login) == 'null'){
 		  	$wpdb->insert(AH_table_financial_credit, array(
             'membre_login' => $user_login,  
@@ -186,6 +187,7 @@ update_user_meta( $user_id, 'sm_reply',$reply_to);
 			'type' => __('solde','admin-hosting'),
             'information' =>  ''.__('Debit campagne numero','admin-hosting').' : '.$hie.''
             ));
+			}
 			}
 if(get_user_meta( $user_id, 'sm_host',true) == ''){
 add_user_meta( $user_id, 'sm_host',get_option('sm_smtp_server_1'),true);
@@ -231,6 +233,28 @@ add_user_meta( $user_id, 'sm_pass',get_option('sm_smtp_pass_1'),true);
             'date_envoi' => $date_envoi,
 			'serveur' => $serveur,
 			'mode' => $mode,	
+       ));
+	    $hie = $wpdb->insert_id;
+		
+	    _e("Votre mailing va bientot demarrer","e-mailing-service");
+		echo '<meta http-equiv="refresh" content="1; url=admin.php?page=e-mailing-service/admin/live_user.php">';
+	}
+	
+	elseif($action == "envoi_article"){
+		list($ID,$POSTTYPE)=explode("|",$campagne);
+	   $wpdb->insert("".$wpdb->prefix."sm_historique_envoi", array(  
+            'id_newsletter' => $ID,  
+            'id_liste' => $liste,
+			'pause' => $pause,
+			'status' => 'En attente',
+			'type' => $POSTTYPE,
+			'track1' => $track1,
+			'track2' => $track2,
+            'date_envoi' => $date_envoi,
+			'mode' => $mode,
+			'login' => $user_login,
+			'attachments' => '',
+			'user_id' => $user_id,
        ));
 	    $hie = $wpdb->insert_id;
 		
@@ -293,7 +317,7 @@ echo "</select></blockquote></td>
 </tr></tbody></table></form>";
 echo "</div>";	
 }
-
+if(is_plugin_active('admin-hosting/admin-hosting.php') ) {
 if(ah_service_actif($user_login) !='server' && $user_role != 'administrator'){
  $all_meta_for_user = get_user_meta( $user_id );
 echo '<div class="message warning">';
@@ -308,7 +332,7 @@ echo '</div>';
  exit();
   } 
 } 
-
+}
 echo '<div class="message success">';
 echo "<br><h1>".__("Envoyer votre newsletter","e-mailing-service")."</h1>";
 
