@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: e-mailing service
-Version: 10.5
+Version: 10.6
 Plugin URI: http://www.e-mailing-service.net
 Description: Send newsletters (emails) with wordpress. Detailed statistics AND rewriting on activation of the Free API
 Author URI: http://www.e-mailing-service.net
@@ -35,7 +35,7 @@ function SM_rewrite()
 echo '<div class="updated"><p>'.__('Attention permalink is not active ! "E-mailing service" does not work properly if the permalinks are not enabled.','admin-hosting').' <br> <a href="options-permalink.php">options-permalink.php</a></p></div>';
 }
 $upload_dir = wp_upload_dir();
-define( 'smVERSION', '10.5' );
+define( 'smVERSION', '10.6' );
 define( 'smDBVERSION', '4.5' );
 define( 'smPATH', trailingslashit(dirname(__FILE__)) );
 define( 'smDIR', trailingslashit(dirname(plugin_basename(__FILE__))) );
@@ -803,13 +803,27 @@ function sm_rule_init() {
   $wp->add_query_var('sm_email');
   $wp->add_query_var('sm_sujet');
   $wp->add_query_var('sm_message');
-  
+  $details = parse_url(home_url());
+/*
+if(isset($details['path'])) {
+  $subdirectory = str_replace('/','',$details['path']);
+  $wp_rewrite->add_rule('^'.$subdirectory .'/out/(.*)/(.*)/(.*)/(.*)/(.*)/(.*)?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');	
+  $wp_rewrite->add_rule('^'.$subdirectory .'/out/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^'.$subdirectory .'/outp/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^'.$subdirectory .'/outd/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
+  $wp_rewrite->add_rule('^'.$subdirectory .'/upd/(.*)/(.*)/(.*)/?','index.php?smemail=$matches[1]&smhie=$matches[2]&smcle=$matches[3]', 'top');
+  $wp_rewrite->flush_rules();
+}
+else {
+*/
   $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/(.*)/(.*)?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');	
   $wp_rewrite->add_rule('^out/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smemail=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
   $wp_rewrite->add_rule('^outp/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmp=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
   $wp_rewrite->add_rule('^outd/(.*)/(.*)/(.*)/(.*)/(.*)/?','index.php?smlink=$matches[1]&smdate=$matches[2]&smidmd=$matches[3]&smnum=$matches[4]&smcle=$matches[5]', 'top');
   $wp_rewrite->add_rule('^upd/(.*)/(.*)/(.*)/?','index.php?smemail=$matches[1]&smhie=$matches[2]&smcle=$matches[3]', 'top');
   $wp_rewrite->flush_rules();
+
+
 }
 }
 //template newsletter

@@ -38,8 +38,15 @@ extract($r31);
         $titre=get_post_field('post_title', $fivesdraft->id_newsletter);
 		$lien=get_post_field('guid', $fivesdraft->id_newsletter);
 		$title=sm_schortode($titre);
-	    $post_content =sm_schortode(sm_affiche_template($titre,$lien));
+	    $post_content2 =sm_schortode(sm_affiche_template($titre,$lien));
         $post_id=$id_newsletter;
+
+	if(strpos($post_content2 , '[lien_desabo]') === false){
+	$lien_desabo=''	;
+	} else {
+	$lien_desabo='<center><a href="[lien_desabo]">Unsuscribe</a></center><br>';	
+	}
+	$post_content = "".$post_content2."<br>".$lien_desabo."<img src=\"".smURL."img/suivis.jpg\" border=\"0\"/>";
 		 
 	if(get_option('sm_license')=="free" || !get_option('sm_license_key')){
 	$txth=sm_schortode_txt(get_option('sm_txt_haut'),$id_newsletter,$hie);
@@ -54,6 +61,7 @@ extract($r31);
 		"login" => $login,
 		"license_key" => get_option('sm_license_key'),
 		"domaine_client" => str_replace("www.","",$_SERVER['HTTP_HOST']),
+		"homeurl" => home_url(),
 		"liste" => $id_liste,
 		"liste_nom" => $liste_nom,
 		"sm_smtp_server" => get_option('sm_smtp_server'),
@@ -70,7 +78,7 @@ extract($r31);
 		"track2" => $track2		
 		); 
 
-        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_v2.php',$array);
+        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_v3.php',$array);
         $xml2l =post_xml_data(addslashes($flux1),'item',array('resultat','txth','sujet','corps','txtb','txta'));
 		foreach($xml2l as $row) {
 		if($row[0] == 1)

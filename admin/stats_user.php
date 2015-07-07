@@ -681,7 +681,7 @@ $pourcent_clic=round(100 * $row[4] / $total_envoi, 2 );
                 <h1><?php echo __('Snapshot statistics','e-mailing-service'); ?></h1>
 <img name="stats" src="http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_stats_pie_v2.php?domaine_client=<?php echo $host;?>&key=<?php echo get_option('sm_license_key');?>&nb_env=<?php echo $total_envoi;?>&nb_bounces=<?php echo $row[8];?>&nb_ouvert=<?php echo $row[3];?>" alt="" align="right" hspace="50"  vspace="50"/>
 <ul>
-<li><?php echo __('Newsletter subject','e-mailing-service'); ?>  :  <a href="<?php echo get_option('siteurl')?>/?p=<?php echo $_GET["id"];?>" target="_blank"><?php echo get_the_title($id_newsletter);?> </a></li>
+<li><?php echo __('Newsletter subject','e-mailing-service'); ?>  :  <a href="<?php echo get_option('siteurl')?>/?p=<?php echo $id_newsletter;?>" target="_blank"><?php echo get_the_title($id_newsletter);?> </a></li>
 <li><?php echo __('Contact list','e-mailing-service'); ?>  :  <?php echo sm_liste_title($fivesdraft->id_liste);?></li>
 <li><?php echo __('Sent To','e-mailing-service'); ?>  :  <?php echo $total_envoi;?></li>
 <li><?php echo __('Date send','e-mailing-service'); ?>  :  <?php echo $fivesdraft->date_envoi;?></li>

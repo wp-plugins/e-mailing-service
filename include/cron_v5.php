@@ -34,7 +34,12 @@ extract($r31);
 
 
 	$post_content2 = get_post_field('post_content', $id_newsletter);
-	$post_content = "".$post_content2."<br><img src=\"".smURL."/img/suivis.jpg\" border=\"0\"/>";
+	if(strpos($post_content2 , '[lien_desabo]') === false){
+	$lien_desabo=''	;
+	} else {
+	$lien_desabo='<center><a href="[lien_desabo]">Unsuscribe</a></center><br>';	
+	}
+	$post_content = "".$post_content2."<br>".$lien_desabo."<img src=\"".smURL."img/suivis.jpg\" border=\"0\"/>";
     $post_id=$id_newsletter;
 	
 	$smliste = mysql_query("SELECT liste_bd,liste_nom  FROM `".$table_liste."` WHERE id= ".$id_liste."");
@@ -58,6 +63,7 @@ extract($r31);
 		"login" => $login,
 		"license_key" => get_option('sm_license_key'),
 		"domaine_client" => str_replace("www.","",$_SERVER['HTTP_HOST']),
+		"homeurl" => home_url(),
 		"liste" => $id_liste,
 		"liste_nom" => $liste_nom,
 		"sm_smtp_server" => get_option('sm_smtp_server'),
@@ -74,7 +80,7 @@ extract($r31);
 		"track2" => $track2		
 		); 
 
-        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_v2.php',$array);
+        $flux1 =xml_server_api('http://www.serveurs-mail.net/wp-code/cgi_wordpress_api_v3.php',$array);
         $xml2l =post_xml_data(addslashes($flux1),'item',array('resultat','txth','sujet','corps','txtb','txta'));
 		foreach($xml2l as $row) {
 		if($row[0] == 1)
